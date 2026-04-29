@@ -138,7 +138,7 @@ export function MassImport() {
   const handleDownloadTemplate = () => {
     // Mock CSV template download
     const csvContent =
-      'Vorname;Nachname;E-Mail;Geburtsdatum;Abteilung;Personalnummer;Budget\nMax;Mustermann;max@firma.de;01.01.1990;IT;12345;1000';
+      'Personennummer,Name,Abteilung,Email,Geburtstag,Location\n12345,Mustermann Max,IT,max@firma.de,01.01.1990,Berlin';
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -214,6 +214,33 @@ export function MassImport() {
       </div>
 
       <div className="px-8 py-8 max-w-6xl">
+        {/* HELP TEXT SECTION */}
+        <div className="mb-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-[#273A5F] mb-3">Massenimport von Riso-Mitarbeitern</h3>
+          <ul className="space-y-2 text-[#273A5F]">
+            <li className="flex gap-2">
+              <span className="mt-1">•</span>
+              <span>Bestandteil des CSV-Import für Mitarbeiter — speichert neue und aktualisiert bestehende Einträge.</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="mt-1">•</span>
+              <span>Speichere die Datei als CSV-Format (UTF-8 Encoding). Umlaute werden unterstützt.</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="mt-1">•</span>
+              <span>Die CSV-Datei muss diese Spalten enthalten: Personennummer, Name, Abteilung, Email, Geburtstag, Location</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="mt-1">•</span>
+              <span>Fehler und Fehlermeldungen werden nach dem Upload angezeigt. Du kannst die Fehler korrigieren und nochmal hochladen.</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="mt-1">•</span>
+              <span>Solltest du weitere Fragen haben, schreib uns: <a href="mailto:support@riso-app.de" className="text-[#0F429F] underline">support@riso-app.de</a> oder nutze den Chat-Support unten rechts.</span>
+            </li>
+          </ul>
+        </div>
+
         {/* SECTION 1: DATEN HOCHLADEN */}
         <div className="mb-8">
           <h2 className="text-xl font-bold text-[#273A5F] mb-4">Daten hochladen</h2>

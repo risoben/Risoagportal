@@ -1,240 +1,439 @@
 import { useState } from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
+import { BenefitIconComponent } from './BenefitIconComponent';
+
+interface Location {
+  id: string;
+  name: string;
+  limit: string;
+  employeeCount: number;
+  enabled: boolean;
+}
 
 export function BenefitSettings() {
-  const [settings, setSettings] = useState({
-    name: 'Essenszuschuss',
-    description: 'Täglicher Zuschuss für Mittagessen',
-    benefitType: 'Sachbezug',
-    yearlyBudget: '€1.200',
-    monthlyLimit: '€100',
-    autoAssign: true,
-    autoAssignDepartments: 'alle',
-    status: 'aktiv',
-  });
+  const [isActive, setIsActive] = useState(true);
+  const [showLimitModal, setShowLimitModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [editingLocation, setEditingLocation] = useState<Location | null>(null);
+  const [limitValue, setLimitValue] = useState('');
+  const [limitError, setLimitError] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-    const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
-    setSettings(prev => ({ ...prev, [name]: val }));
-  };
+  const benefitName = 'Mittagessen';
+  const benefitIcon = '🍽️';
+  const benefitIconColor = '#F4B860';
+  const benefitDescription =
+    'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Kantinenzuschüssen.';
 
-  const handleSave = () => {
-    console.log('Saving settings:', settings);
-    alert('Einstellungen gespeichert!');
+  const [locations, setLocations] = useState<Location[]>([
+    { id: '1', name: 'München', limit: '100€/Monat', employeeCount: 34, enabled: true },
+    { id: '2', name: 'Heddesheim', limit: '100€/Monat', employeeCount: 15, enabled: true },
+    { id: '3', name: 'Berlin', limit: '85€/Monat', employeeCount: 8, enabled: true },
+    { id: '4', name: 'Viernheim', limit: '100€/Monat', employeeCount: 5, enabled: false },
+  ]);
+
+  const stats = {
+    employeesWithAccess: 62,
+    budgetThisMonth: 4200,
+    usedThisMonth: 3100,
   };
 
   const goBack = () => {
-    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits' } }));
+    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-management' } }));
+  };
+
+  const handleEditLimit = (location: Location) => {
+    setEditingLocation(location);
+    setLimitValue(location.limit.replace('€/Monat', '').trim());
+    setLimitError('');
+    setShowLimitModal(true);
+  };
+
+  const handleSaveLimit = () => {
+    // Validation
+    if (!limitValue.trim()) {
+      setLimitError('Feld erforderlich');
+      return;
+    }
+
+    const numValue = parseFloat(limitValue);
+    if (isNaN(numValue)) {
+      setLimitError('Nur Zahlen erlaubt');
+      return;
+    }
+
+    if (numValue < 0) {
+      setLimitError('Betrag kann nicht negativ sein');
+      return;
+    }
+
+    // Update location
+    if (editingLocation) {
+      setLocations(
+        locations.map((loc) =>
+          loc.id === editingLocation.id ? { ...loc, limit: `${limitValue}€/Monat` } : loc
+        )
+      );
+    }
+
+    setShowLimitModal(false);
+    setEditingLocation(null);
+    setLimitValue('');
+  };
+
+  const handleToggleLocation = (locationId: string) => {
+    setLocations(locations.map((loc) => (loc.id === locationId ? { ...loc, enabled: !loc.enabled } : loc)));
+  };
+
+  const handleDelete = () => {
+    console.log('Deleting benefit...');
+    setShowDeleteModal(false);
+    goBack();
+  };
+
+  const handleSave = () => {
+    console.log('Saving changes...');
+    alert('Änderungen gespeichert!');
   };
 
   return (
-    <div className="flex-1 bg-white overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
+    <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
+      {/* Back Link */}
+      <div className="bg-white px-8 pt-6 pb-4">
+        <button
+          onClick={goBack}
+          className="flex items-center text-[#0F429F] text-[12px] hover:underline transition"
+          style={{ fontFamily: 'Roboto, sans-serif' }}
+        >
+          <ArrowLeft size={16} className="mr-1" />
+          Zurück zu Benefits verwalten
+        </button>
+      </div>
+
       {/* Header */}
-      <div className="bg-white border-b border-[#E5E7EB] sticky top-0 z-10">
-        <div className="px-8 py-4">
-          <button
-            onClick={goBack}
-            className="flex items-center text-[#0F429F] hover:text-[#0d3680] mb-4 transition"
-          >
-            <ChevronLeft size={20} />
-            <span className="ml-2">Zurück zu Benefits</span>
-          </button>
+      <div className="bg-white border-b border-[#E0E0E0] px-8 pb-6">
+        <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
-            <div className="text-5xl">🍽️</div>
-            <div>
-              <h1 className="text-3xl font-bold text-[#273A5F]">{settings.name}</h1>
-              <p className="text-[#6B7280]">Konfiguration & Einstellungen</p>
+            <div style={{ width: '48px', height: '48px', fontSize: '48px', lineHeight: '48px' }}>
+              {benefitIcon}
             </div>
+            <div>
+              <h1 className="text-[32px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                {benefitName}
+              </h1>
+            </div>
+          </div>
+
+          {/* Status Toggle */}
+          <div className="text-right">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[13px] text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Status
+              </span>
+              <button
+                onClick={() => setIsActive(!isActive)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  isActive ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    isActive ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+              <span
+                className={`text-[13px] font-medium ${isActive ? 'text-[#4CAF50]' : 'text-[#9E9E9E]'}`}
+                style={{ fontFamily: 'Roboto, sans-serif' }}
+              >
+                {isActive ? 'Aktiv' : 'Inaktiv'}
+              </span>
+            </div>
+            <p className="text-[11px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Status-Änderung gilt ab 1. nächsten Monat
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="px-8 py-8 max-w-2xl">
-        {/* Basic Information */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold text-[#273A5F] mb-6">Grundinformationen</h2>
-          <div className="bg-gray-50 p-6 rounded-lg space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-[#273A5F] mb-2">Benefit Name</label>
-              <input
-                type="text"
-                name="name"
-                value={settings.name}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
-              />
-            </div>
+      <div className="px-8 py-6">
+        {/* Section 1: Benefit-Informationen */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            Benefit-Informationen
+          </h2>
+          <div>
+            <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Beschreibung
+            </label>
+            <p className="text-[14px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
+              {benefitDescription}
+            </p>
+          </div>
+        </div>
 
-            <div>
-              <label className="block text-sm font-medium text-[#273A5F] mb-2">Beschreibung</label>
-              <textarea
-                name="description"
-                value={settings.description}
-                onChange={handleInputChange}
-                rows={3}
-                className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
-              />
-            </div>
+        {/* Section 2: Limits pro Location */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            Limits pro Standort
+          </h2>
 
-            <div>
-              <label className="block text-sm font-medium text-[#273A5F] mb-2">Benefit Typ</label>
-              <select
-                name="benefitType"
-                value={settings.benefitType}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-[#F0F4FF]" style={{ height: '40px' }}>
+                  <th
+                    className="text-left px-4 py-3 text-[11px] font-normal text-[#666666] uppercase"
+                    style={{ fontFamily: 'Roboto, sans-serif', width: '200px' }}
+                  >
+                    STANDORT
+                  </th>
+                  <th
+                    className="text-left px-4 py-3 text-[11px] font-normal text-[#666666] uppercase"
+                    style={{ fontFamily: 'Roboto, sans-serif', width: '150px' }}
+                  >
+                    LIMIT
+                  </th>
+                  <th
+                    className="text-left px-4 py-3 text-[11px] font-normal text-[#666666] uppercase"
+                    style={{ fontFamily: 'Roboto, sans-serif', width: '100px' }}
+                  >
+                    AKTION
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {locations.map((location, index) => (
+                  <tr
+                    key={location.id}
+                    className={index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'}
+                    style={{ height: '40px', borderBottom: '1px solid #F0F0F0' }}
+                  >
+                    <td className="px-4 py-2 text-[12px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                      {location.name}
+                    </td>
+                    <td className="px-4 py-2 text-[12px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                      {location.limit}
+                    </td>
+                    <td className="px-4 py-2">
+                      <button
+                        onClick={() => handleEditLimit(location)}
+                        className="px-4 py-2 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-2xl hover:bg-[#F0F4FF] transition"
+                        style={{ fontFamily: 'Roboto, sans-serif' }}
+                      >
+                        Bearbeiten
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Section 3: Verfügbare Standorte */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            Verfügbar für diese Standorte
+          </h2>
+
+          <div className="space-y-2">
+            {locations.map((location) => (
+              <label
+                key={location.id}
+                className="flex items-center gap-3 px-3 py-3 hover:bg-[#F0F4FF] rounded cursor-pointer transition group"
+                style={{ height: '40px' }}
               >
-                <option>Sachbezug</option>
-                <option>Dienstleistung</option>
-                <option>Versicherung</option>
-                <option>Sonstiges</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Budget Configuration */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold text-[#273A5F] mb-6">Budget & Limits</h2>
-          <div className="bg-gray-50 p-6 rounded-lg space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-[#273A5F] mb-2">Jährliches Budget pro Mitarbeiter</label>
-              <input
-                type="text"
-                name="yearlyBudget"
-                value={settings.yearlyBudget}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
-              />
-              <p className="text-xs text-[#6B7280] mt-1">Das Budget wird jährlich am 01. Januar zurückgesetzt</p>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-[#273A5F] mb-2">Monatliches Limit</label>
-              <input
-                type="text"
-                name="monthlyLimit"
-                value={settings.monthlyLimit}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
-              />
-              <p className="text-xs text-[#6B7280] mt-1">Das Budget wird automatisch am Monatsende zurückgesetzt</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Auto Assignment */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold text-[#273A5F] mb-6">Automatische Zuweisung</h2>
-          <div className="bg-gray-50 p-6 rounded-lg space-y-4">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                name="autoAssign"
-                checked={settings.autoAssign}
-                onChange={handleInputChange}
-                className="w-4 h-4 rounded border-[#E5E7EB] text-[#0F429F] focus:ring-[#0F429F]"
-              />
-              <label className="ml-3 text-sm font-medium text-[#273A5F]">
-                Neue Mitarbeiter automatisch hinzufügen
-              </label>
-            </div>
-
-            {settings.autoAssign && (
-              <div>
-                <label className="block text-sm font-medium text-[#273A5F] mb-2">Für folgende Abteilungen:</label>
-                <select
-                  name="autoAssignDepartments"
-                  value={settings.autoAssignDepartments}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
-                >
-                  <option value="alle">Alle Abteilungen</option>
-                  <option value="vertrieb">Vertrieb</option>
-                  <option value="it">IT</option>
-                  <option value="hr">HR</option>
-                </select>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Status */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold text-[#273A5F] mb-6">Status</h2>
-          <div className="bg-gray-50 p-6 rounded-lg space-y-4">
-            <div className="space-y-3">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="status"
-                  value="aktiv"
-                  checked={settings.status === 'aktiv'}
-                  onChange={handleInputChange}
-                  className="w-4 h-4 text-[#0F429F] border-[#E5E7EB] focus:ring-[#0F429F]"
-                />
-                <span className="ml-3 text-sm text-[#273A5F]">
-                  <span className="font-medium">Aktiv</span> - Benefit ist für Mitarbeiter verfügbar
+                <div className="relative flex items-center justify-center">
+                  <input
+                    type="checkbox"
+                    checked={location.enabled}
+                    onChange={() => handleToggleLocation(location.id)}
+                    className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer group-hover:border-[#246AFF] transition-colors"
+                  />
+                  {location.enabled && (
+                    <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
+                  )}
+                </div>
+                <span className="text-[14px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  {location.name} ({location.employeeCount} Mitarbeiter)
                 </span>
               </label>
+            ))}
+          </div>
 
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="status"
-                  value="inaktiv"
-                  checked={settings.status === 'inaktiv'}
-                  onChange={handleInputChange}
-                  className="w-4 h-4 text-[#0F429F] border-[#E5E7EB] focus:ring-[#0F429F]"
-                />
-                <span className="ml-3 text-sm text-[#273A5F]">
-                  <span className="font-medium">Inaktiv</span> - Benefit ist für neue Mitarbeiter nicht verfügbar
-                </span>
-              </label>
+          <p className="text-[12px] text-[#666666] mt-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            Ein Benefit ist für einen Standort verfügbar, wenn mindestens ein Limit gesetzt ist. Mitarbeiter dieser
+            Standorte erhalten das Benefit automatisch ab 1. nächsten Monat.
+          </p>
+        </div>
 
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="status"
-                  value="geplant"
-                  checked={settings.status === 'geplant'}
-                  onChange={handleInputChange}
-                  className="w-4 h-4 text-[#0F429F] border-[#E5E7EB] focus:ring-[#0F429F]"
-                />
-                <span className="ml-3 text-sm text-[#273A5F]">
-                  <span className="font-medium">Geplant</span> - Benefit wird bald verfügbar sein
-                </span>
-              </label>
+        {/* Section 4: Nutzungsstatistik */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            Nutzungsstatistik
+          </h2>
+
+          <div className="grid grid-cols-3 gap-6">
+            {/* Mitarbeiter mit Zugriff */}
+            <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 text-center">
+              <p className="text-[24px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                {stats.employeesWithAccess}
+              </p>
+              <p className="text-[12px] text-[#666666] mt-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Mitarbeiter mit Zugriff
+              </p>
+            </div>
+
+            {/* Budget diesen Monat */}
+            <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 text-center">
+              <p className="text-[24px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                {stats.budgetThisMonth.toLocaleString('de-DE')}€
+              </p>
+              <p className="text-[12px] text-[#666666] mt-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Budget (diesen Monat)
+              </p>
+            </div>
+
+            {/* Genutzt diesen Monat */}
+            <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 text-center">
+              <p className="text-[24px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                {stats.usedThisMonth.toLocaleString('de-DE')}€
+              </p>
+              <p className="text-[12px] text-[#666666] mt-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Genutzt (diesen Monat)
+              </p>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3 sticky bottom-0 bg-white py-4 border-t border-[#E5E7EB]">
+        <div className="flex justify-between items-center mt-8">
+          <button
+            onClick={() => setShowDeleteModal(true)}
+            className="px-6 py-3 border border-[#F44336] text-[#F44336] font-medium rounded-full hover:bg-[#FFEBEE] transition"
+            style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
+          >
+            Löschen
+          </button>
+
           <button
             onClick={handleSave}
-            className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
-            style={{ borderRadius: '32px' }}
+            className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#246AFF] transition"
+            style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
           >
             Speichern
           </button>
-          <button
-            onClick={goBack}
-            className="px-6 py-3 border border-[#E5E7EB] text-[#273A5F] font-medium rounded-full hover:bg-gray-50 transition"
-            style={{ borderRadius: '32px' }}
-          >
-            Abbrechen
-          </button>
-          <button 
-            className="px-6 py-3 border border-red-300 text-red-600 font-medium rounded-full hover:bg-red-50 transition ml-auto"
-            style={{ borderRadius: '32px' }}
-          >
-            Benefit löschen
-          </button>
         </div>
       </div>
+
+      {/* Modal 1: Limit bearbeiten */}
+      {showLimitModal && editingLocation && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Limit bearbeiten — {benefitName} — {editingLocation.name}
+            </h3>
+
+            <div className="mb-4">
+              <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Limit pro Mitarbeiter
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={limitValue}
+                  onChange={(e) => {
+                    setLimitValue(e.target.value);
+                    setLimitError('');
+                  }}
+                  placeholder="z.B. 100"
+                  className={`flex-1 h-[40px] px-3 py-2 border ${
+                    limitError ? 'border-[#F44336]' : 'border-[#0F429F]'
+                  } rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
+                  style={{ fontFamily: 'Roboto, sans-serif', width: '250px' }}
+                />
+                <span className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  €/Monat
+                </span>
+              </div>
+              {limitError && (
+                <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  {limitError}
+                </p>
+              )}
+            </div>
+
+            <p className="text-[12px] text-[#666666] mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Änderung gilt ab 1. nächsten Monat für alle Mitarbeiter dieses Standorts
+            </p>
+
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => {
+                  setShowLimitModal(false);
+                  setEditingLocation(null);
+                  setLimitValue('');
+                  setLimitError('');
+                }}
+                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
+                style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
+              >
+                Abbrechen
+              </button>
+              <button
+                onClick={handleSaveLimit}
+                className="px-6 py-3 bg-[#0F429F] text-white rounded-full hover:bg-[#246AFF] transition"
+                style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
+              >
+                Speichern
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal 2: Benefit löschen */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <div className="text-center mb-4">
+              <span className="text-[48px]">⚠️</span>
+            </div>
+
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-3 text-center" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Benefit löschen?
+            </h3>
+
+            <p className="text-[14px] text-[#333333] mb-4 text-center" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Möchtest du {benefitName} wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.
+            </p>
+
+            <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2">
+              <span className="text-[16px]">⚠️</span>
+              <p className="text-[12px] text-[#F44336]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf dieses Benefit
+              </p>
+            </div>
+
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
+                style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
+              >
+                Abbrechen
+              </button>
+              <button
+                onClick={handleDelete}
+                className="px-6 py-3 bg-[#F44336] text-white rounded-full hover:bg-[#D32F2F] transition"
+                style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
+              >
+                Löschen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

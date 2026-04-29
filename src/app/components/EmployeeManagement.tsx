@@ -1,0 +1,483 @@
+import { useState } from 'react';
+import { Plus, ChevronLeft, ChevronRight, Search, Upload } from 'lucide-react';
+import { MassImportModal } from './MassImportModal';
+
+type Employee = {
+  id: string;
+  personnelNumber: string;
+  name: string;
+  department: string;
+  status: 'aktiv' | 'inaktiv';
+  budgetMonth: number;
+  budgetYear: number;
+  entryDate: string;
+  location: string;
+  benefits: { benefitId: string; name: string; limit: string; period: 'Monat' | 'Jahr' }[];
+};
+
+const mockEmployees: Employee[] = [
+  {
+    id: '1',
+    personnelNumber: 'MA-2451',
+    name: 'Max Mustermann',
+    department: 'Vertrieb',
+    status: 'aktiv',
+    budgetMonth: 250,
+    budgetYear: 3000,
+    entryDate: '01.01.2026',
+    location: 'Heddesheim',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
+      { benefitId: 'erholungsbeihilfe', name: 'Erholungsbeihilfe', limit: '156€', period: 'Jahr' },
+    ],
+  },
+  {
+    id: '2',
+    personnelNumber: 'MA-2452',
+    name: 'Anna Schmidt',
+    department: 'HR',
+    status: 'aktiv',
+    budgetMonth: 180,
+    budgetYear: 2160,
+    entryDate: '15.03.2025',
+    location: 'Mannheim',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '130€', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+    ],
+  },
+  {
+    id: '3',
+    personnelNumber: 'MA-2453',
+    name: 'Peter Meyer',
+    department: 'IT',
+    status: 'inaktiv',
+    budgetMonth: 0,
+    budgetYear: 0,
+    entryDate: '10.06.2024',
+    location: 'Berlin Tech GmbH',
+    benefits: [],
+  },
+  {
+    id: '4',
+    personnelNumber: 'MA-2454',
+    name: 'Lisa Weber',
+    department: 'Marketing',
+    status: 'aktiv',
+    budgetMonth: 320,
+    budgetYear: 3840,
+    entryDate: '20.02.2026',
+    location: 'Heddesheim',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
+      { benefitId: 'oepnv', name: 'ÖPNV-Ticket-Zuschuss', limit: '70€', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+    ],
+  },
+  {
+    id: '5',
+    personnelNumber: 'MA-2455',
+    name: 'Thomas Becker',
+    department: 'IT',
+    status: 'aktiv',
+    budgetMonth: 200,
+    budgetYear: 2400,
+    entryDate: '05.11.2025',
+    location: 'München',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+    ],
+  },
+  {
+    id: '6',
+    personnelNumber: 'MA-2456',
+    name: 'Sarah Müller',
+    department: 'Vertrieb',
+    status: 'aktiv',
+    budgetMonth: 280,
+    budgetYear: 3360,
+    entryDate: '12.08.2025',
+    location: 'Heddesheim',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
+      { benefitId: 'fahrtkosten', name: 'Fahrtkostenzuschuss', limit: '80€', period: 'Monat' },
+    ],
+  },
+  {
+    id: '7',
+    personnelNumber: 'MA-2457',
+    name: 'Michael Wagner',
+    department: 'Finanzen',
+    status: 'aktiv',
+    budgetMonth: 230,
+    budgetYear: 2760,
+    entryDate: '18.04.2026',
+    location: 'Mannheim',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'oepnv', name: 'ÖPNV-Ticket-Zuschuss', limit: '80€', period: 'Monat' },
+    ],
+  },
+  {
+    id: '8',
+    personnelNumber: 'MA-2458',
+    name: 'Julia Fischer',
+    department: 'HR',
+    status: 'aktiv',
+    budgetMonth: 200,
+    budgetYear: 2400,
+    entryDate: '22.09.2025',
+    location: 'München',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+    ],
+  },
+  {
+    id: '9',
+    personnelNumber: 'MA-2459',
+    name: 'Daniel Klein',
+    department: 'IT',
+    status: 'aktiv',
+    budgetMonth: 300,
+    budgetYear: 3600,
+    entryDate: '30.01.2026',
+    location: 'Berlin Tech GmbH',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+      { benefitId: 'bkv', name: 'BKV', limit: '50€', period: 'Monat' },
+    ],
+  },
+  {
+    id: '10',
+    personnelNumber: 'MA-2460',
+    name: 'Laura Hoffmann',
+    department: 'Marketing',
+    status: 'aktiv',
+    budgetMonth: 260,
+    budgetYear: 3120,
+    entryDate: '14.07.2025',
+    location: 'Heddesheim',
+    benefits: [
+      { benefitId: 'essenszuschuss', name: 'Essenszuschuss', limit: '150€', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
+      { benefitId: 'kindergarten', name: 'Kindergartenzuschuss', limit: '60€', period: 'Monat' },
+    ],
+  },
+];
+
+export function EmployeeManagement() {
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [showMassImportModal, setShowMassImportModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  // Filter employees by search query
+  const filteredEmployees = mockEmployees.filter((employee) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      employee.name.toLowerCase().includes(query) ||
+      employee.personnelNumber.toLowerCase().includes(query)
+    );
+  });
+
+  const totalEmployees = mockEmployees.length;
+  const activeEmployees = mockEmployees.filter((e) => e.status === 'aktiv').length;
+  const inactiveEmployees = mockEmployees.filter((e) => e.status === 'inaktiv').length;
+
+  const paginatedEmployees = filteredEmployees.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
+
+  const formatCurrency = (value: number) => {
+    return value.toLocaleString('de-DE') + '€';
+  };
+
+  const handleShowDetails = (employee: Employee) => {
+    setSelectedEmployee(employee);
+    setShowDetailsModal(true);
+  };
+
+  const handleEdit = (employee: Employee) => {
+    window.dispatchEvent(
+      new CustomEvent('sidebar-navigate', {
+        detail: { itemId: 'mitarbeiter-edit', employeeId: employee.id },
+      })
+    );
+  };
+
+  const handleAddNew = () => {
+    window.dispatchEvent(
+      new CustomEvent('sidebar-navigate', {
+        detail: { itemId: 'mitarbeiter-add' },
+      })
+    );
+  };
+
+
+  return (
+    <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
+      {/* Header */}
+      <div className="px-8 py-6 bg-white border-b border-[#E8E8E8]">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-[#000000] font-bold text-[28px]">Mitarbeiter</h1>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setShowMassImportModal(true)}
+              className="px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
+              style={{ borderRadius: '24px' }}
+            >
+              <Upload className="w-4 h-4" />
+              CSV importieren
+            </button>
+            <button
+              onClick={handleAddNew}
+              className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition flex items-center gap-2"
+              style={{ borderRadius: '24px' }}
+            >
+              <Plus className="w-5 h-5" />
+              Neuen Mitarbeiter hinzufügen
+            </button>
+          </div>
+        </div>
+
+        {/* Search Field */}
+        <div className="mb-6">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#9E9E9E]" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1); // Reset to first page on search
+              }}
+              placeholder="Nach Name, Personalnummer suchen..."
+              className="w-full pl-10 pr-4 py-3 border border-[#E0E0E0] rounded text-sm focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+              style={{ borderRadius: '4px' }}
+            />
+          </div>
+        </div>
+
+        {/* KPI Cards */}
+        <div className="grid grid-cols-3 gap-4">
+          <div
+            className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
+            style={{ borderRadius: '12px' }}
+          >
+            <p className="text-[#0F429F] font-bold text-[32px] mb-1">{totalEmployees}</p>
+            <p className="text-[#9E9E9E] text-[13px]">Gesamt Mitarbeiter</p>
+          </div>
+          <div
+            className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
+            style={{ borderRadius: '12px' }}
+          >
+            <p className="text-[#0F429F] font-bold text-[32px] mb-1">{activeEmployees}</p>
+            <p className="text-[#9E9E9E] text-[13px]">Aktiv Mitarbeiter</p>
+          </div>
+          <div
+            className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
+            style={{ borderRadius: '12px' }}
+          >
+            <p className="text-[#0F429F] font-bold text-[32px] mb-1">{inactiveEmployees}</p>
+            <p className="text-[#9E9E9E] text-[13px]">Inaktiv Mitarbeiter</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Employee Table */}
+      <div className="px-8 py-6">
+        <div className="bg-white border border-[#E0E0E0] rounded-xl overflow-hidden" style={{ borderRadius: '12px' }}>
+          {/* Table Header */}
+          <div className="bg-[#F0F4FF] grid grid-cols-[150px_1fr_150px_120px_150px_200px] h-12 items-center px-4">
+            <div className="text-[#666666] text-xs font-medium uppercase">Personalnummer</div>
+            <div className="text-[#666666] text-xs font-medium uppercase">Name</div>
+            <div className="text-[#666666] text-xs font-medium uppercase">Abteilung</div>
+            <div className="text-[#666666] text-xs font-medium uppercase">Status</div>
+            <div className="text-[#666666] text-xs font-medium uppercase">Budget (Jahr)</div>
+            <div className="text-[#666666] text-xs font-medium uppercase">Aktion</div>
+          </div>
+
+          {/* Table Rows */}
+          {paginatedEmployees.map((employee, index) => (
+            <div
+              key={employee.id}
+              className={`grid grid-cols-[150px_1fr_150px_120px_150px_200px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 hover:bg-[#F8F9FB] hover:shadow-sm transition ${
+                index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
+              }`}
+              style={{ minHeight: '56px' }}
+            >
+              <div className="text-[#666666] text-sm">{employee.personnelNumber}</div>
+              <div className="text-[#000000] text-sm font-medium">{employee.name}</div>
+              <div className="text-[#666666] text-sm">{employee.department}</div>
+              <div>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    employee.status === 'aktiv'
+                      ? 'bg-[#E8F5E9] text-[#4CAF50]'
+                      : 'bg-[#F5F5F5] text-[#9E9E9E]'
+                  }`}
+                >
+                  {employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'}
+                </span>
+              </div>
+              <div className="text-[#000000] text-sm">{formatCurrency(employee.budgetYear)}</div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => handleShowDetails(employee)}
+                  className="text-[#246AFF] text-sm hover:underline"
+                >
+                  Details
+                </button>
+                <button
+                  onClick={() => handleEdit(employee)}
+                  className="text-[#246AFF] text-sm hover:underline"
+                >
+                  Bearbeiten
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="flex items-center justify-center gap-2 mt-6">
+          <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className={`p-2 border rounded-lg transition ${
+              currentPage === 1
+                ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
+                : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
+            }`}
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+
+          <span className="text-[#666666] text-sm">
+            Seite {currentPage} von {totalPages}
+          </span>
+
+          <button
+            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+            disabled={currentPage === totalPages}
+            className={`p-2 border rounded-lg transition ${
+              currentPage === totalPages
+                ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
+                : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
+            }`}
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Details Modal */}
+      {showDetailsModal && selectedEmployee && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setShowDetailsModal(false)}
+        >
+          <div
+            className="bg-white rounded-xl shadow-2xl p-8"
+            style={{ width: '600px', borderRadius: '16px' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-[#000000] font-bold text-[24px] mb-6">
+              Mitarbeiter Details: {selectedEmployee.name}
+            </h2>
+
+            <div className="space-y-4 mb-8">
+              <div className="bg-[#F8F9FB] p-4 rounded-lg">
+                <p className="text-[#666666] text-xs mb-1">Personalnummer</p>
+                <p className="text-[#000000] text-sm font-medium">{selectedEmployee.personnelNumber}</p>
+              </div>
+
+              <div className="bg-[#F8F9FB] p-4 rounded-lg">
+                <p className="text-[#666666] text-xs mb-1">Name</p>
+                <p className="text-[#000000] text-sm font-medium">{selectedEmployee.name}</p>
+              </div>
+
+              <div className="bg-[#F8F9FB] p-4 rounded-lg">
+                <p className="text-[#666666] text-xs mb-1">Abteilung</p>
+                <p className="text-[#000000] text-sm font-medium">{selectedEmployee.department}</p>
+              </div>
+
+              <div className="bg-[#F8F9FB] p-4 rounded-lg">
+                <p className="text-[#666666] text-xs mb-1">Status</p>
+                <span
+                  className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                    selectedEmployee.status === 'aktiv'
+                      ? 'bg-[#E8F5E9] text-[#4CAF50]'
+                      : 'bg-[#F5F5F5] text-[#9E9E9E]'
+                  }`}
+                >
+                  {selectedEmployee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'}
+                </span>
+              </div>
+
+              <div className="bg-[#F8F9FB] p-4 rounded-lg">
+                <p className="text-[#666666] text-xs mb-1">Eintrittsdatum</p>
+                <p className="text-[#000000] text-sm font-medium">{selectedEmployee.entryDate}</p>
+              </div>
+
+              <div className="bg-[#F8F9FB] p-4 rounded-lg">
+                <p className="text-[#666666] text-xs mb-1">Location</p>
+                <p className="text-[#000000] text-sm font-medium">{selectedEmployee.location}</p>
+              </div>
+
+              <div className="bg-[#F8F9FB] p-4 rounded-lg">
+                <p className="text-[#666666] text-xs mb-2">Aktuelle Benefits</p>
+                {selectedEmployee.benefits.length > 0 ? (
+                  <div className="space-y-2">
+                    {selectedEmployee.benefits.map((benefit, idx) => (
+                      <p key={idx} className="text-[#000000] text-sm">
+                        • {benefit.name}: {benefit.limit} ({benefit.period})
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[#9E9E9E] text-sm">Keine Benefits zugeordnet</p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={() => {
+                  setShowDetailsModal(false);
+                  handleEdit(selectedEmployee);
+                }}
+                className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3780] transition"
+                style={{ borderRadius: '24px' }}
+              >
+                Bearbeiten
+              </button>
+              <button
+                onClick={() => setShowDetailsModal(false)}
+                className="px-8 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
+                style={{ borderRadius: '24px' }}
+              >
+                Schließen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mass Import Modal */}
+      {showMassImportModal && <MassImportModal onClose={() => setShowMassImportModal(false)} />}
+    </div>
+  );
+}

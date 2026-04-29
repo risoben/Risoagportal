@@ -1,0 +1,185 @@
+FIGMA DESIGN PROMPT: Benefit Informationen Modal (Customer-View)
+
+SEITE: Modal mit Benefit-Informationen für Mitarbeiter
+ZWECK: Arbeitgeber zeigt Mitarbeitern, welche Benefits verfügbar sind (Marketing-Ton)
+
+---
+
+MODAL-STRUKTUR:
+
+Modal-Größe: ~700px Breite, scrollbar
+Background: Semi-transparent Overlay
+
+---
+
+MODAL-HEADER:
+
+Icon + Titel: [BENEFIT-ICON] "Essenszuschuss" (Roboto Bold, 24px)
+Close-Icon: ✕
+
+---
+
+MODAL-BODY:
+
+SECTION 1: HEADLINE (Marketing)
+
+Großer Text: "Für jeden Lifestyle und jede Essensgewohnheit geeignet."
+(Roboto Medium, 18px, Primary Blue #0F429F)
+
+---
+
+SECTION 2: WHAT IS IT? (Kurz erklären)
+
+Subheading: "Was ist das?" (Roboto Medium, 14px)
+Text: 1-2 Sätze kurz erklären was das Benefit ist (Roboto Regular, 13px)
+
+---
+
+SECTION 3: BENEFITS/VORTEILE (Bullet Points)
+
+Subheading: "Deine Vorteile:" (Roboto Medium, 14px)
+
+Punkte (Roboto Regular, 13px, mit ✓ Häkchen):
+✓ Bis 7,67€ pro Tag
+✓ Steuerfreier Zuschuss
+✓ Einfach Belege einreichen
+✓ Monatlich bis zu 150€
+
+---
+
+SECTION 4: HOW IT WORKS (Prozess)
+
+Subheading: "So funktioniert's:" (Roboto Medium, 14px)
+
+Nummeriert (1, 2, 3):
+1. Essen kaufen und Beleg speichern
+2. In der App hochladen
+3. Geld kommt in nächster Lohnabrechnung
+
+---
+
+SECTION 5: WICHTIG ZU WISSEN (Optional)
+
+Subheading: "Wichtig zu wissen:" (Roboto Medium, 14px, optional)
+Text: 1 Hinweis oder Besonderheit (z.B. bei ÖPNV: "Entweder-oder mit Fahrtkostenzuschuss")
+
+---
+
+MODAL-FOOTER:
+
+Button: "Verstanden" (Primary Green #4CAF50, Radius 24px)
+
+---
+
+===== BENEFIT-SPEZIFISCHE INHALTE (Marketing-Ton) =====
+
+1️⃣ ESSENSZUSCHUSS
+   Headline: "Für jeden Lifestyle und jede Essensgewohnheit geeignet."
+   What: "Finanzielle Unterstützung für deine Mittagspause oder Mahlzeiten am Arbeitsplatz."
+   Vorteile:
+   ✓ Bis 7,67€ pro Tag
+   ✓ Steuerfreier Zuschuss
+   ✓ Einfach Kassenbon hochladen
+   ✓ Monatlich bis zu 150€
+   How: "Beleg von Restaurant/Bäckerei speichern → In Riso-App hochladen → Geld kommt in nächster Lohnabrechnung"
+
+2️⃣ INTERNETZUSCHUSS
+   Headline: "In jede Situation anwendbar und bei jedem Anbieter möglich."
+   What: "Zuschuss zu deinen Internet- und Mobilfunkkosten — egal ob Zuhause oder unterwegs."
+   Vorteile:
+   ✓ Bis 50€ pro Monat
+   ✓ Steuerfreier Zuschuss
+   ✓ Bei jedem Anbieter nutzbar
+   ✓ Flexibel einsetzbar
+   How: "Rechnungsbeleg hochladen → Monatlich automatisch gutgeschrieben"
+
+3️⃣ ERHOLUNGSBEIHILFE
+   Headline: "Für Urlaubswünsche und Erholungsbedürfnisse."
+   What: "Finanzielle Unterstützung für deinen wohlverdienten Urlaub."
+   Vorteile:
+   ✓ Bis 156€ pro Jahr
+   ✓ Für Hotelaufenthalte und Reisen
+   ✓ Steuerfreier Zuschuss
+   ✓ Auch für Familie (Ehepartner, Kinder)
+   How: "Hotelbuchung oder Flugticket hochladen → Geld wird gutgeschrieben"
+
+4️⃣ KINDERGARTENZUSCHUSS
+   Headline: "Unbegrenzter Zuschuss für die Betreuung im Vorschulalter."
+   What: "Finanzielle Unterstützung für Kindergarten, Vorschule oder Kinderbetreuung."
+   Vorteile:
+   ✓ Unbegrenzt
+   ✓ Flexibel für verschiedene Betreuungsarten
+   ✓ Steuerfreier Zuschuss
+   ✓ Entlastung der Familie
+   How: "Betreuungsrechnung hochladen → Monatlich erstattet"
+
+5️⃣ FAHRTKOSTENZUSCHUSS
+   Headline: "Für die Anreise ins Büro."
+   What: "Zuschuss zu deinen Fahrtkosten zur Arbeit."
+   Vorteile:
+   ✓ Flexible Höhe
+   ✓ Steuerfreier Zuschuss
+   ✓ Für Auto, Motorrad, Bahn
+   How: "Belege hochladen → Monatlich erstattet"
+   Wichtig: "Entweder-oder mit ÖPNV-Ticket — du wählst eine Option"
+
+6️⃣ ÖPNV-TICKET-ZUSCHUSS
+   Headline: "Deutschlandticket und weitere ÖPNV Fahrten."
+   What: "Zuschuss für deine umweltfreundliche Anreise mit öffentlichen Verkehrsmitteln."
+   Vorteile:
+   ✓ Bis zu 100€ pro Monat
+   ✓ Steuerfreier Zuschuss
+   ✓ Nachhaltig und entspannt
+   ✓ Deutschlandticket möglich
+   How: "ÖPNV-Ticket hochladen → Automatisch erstattet"
+   Wichtig: "Entweder-oder mit Fahrtkostenzuschuss — du wählst eine Option"
+
+7️⃣ 50€-SACHBEZUG
+   Headline: "Gutscheine jeden Monat. Große Auswahl an Partnern."
+   What: "Monatliche Gutschein-Auswahl für Shopping, Freizeit und mehr."
+   Vorteile:
+   ✓ 50€ pro Monat
+   ✓ Große Partner-Auswahl
+   ✓ Steuerfreier Zuschuss
+   ✓ Jederzeit nutzbar
+   How: "Gutschein in der App wählen → QR-Code oder Code → Einlösen"
+
+8️⃣ GEBURTSTAGSGUTSCHEIN / JUBILÄUM
+   Headline: "Ein besonderer Tag, ein besonderes Dankeschön."
+   What: "Spezielle Gutscheine zu deinem Geburtstag und Jubiläum — ein persönliches Dankeschön."
+   Vorteile:
+   ✓ Besondere Anerkennung
+   ✓ Zu besonderen Anlässen
+   ✓ Steuerfreier Zuschuss
+   ✓ Persönlich und wertschätzend
+   How: "Automatisch zu Geburtstag/Jubiläum → Gutschein in App"
+
+---
+
+DESIGN-KONSISTENZ:
+
+Farben:
+- Headline: Primary Blue #0F429F
+- Subheadings: Roboto Medium
+- Body Text: Roboto Regular, 13px
+- Checkmarks: Grün #4CAF50
+- Links: Secondary Blue #246AFF
+
+Spacing: 16px zwischen Sections, 8px zwischen Bullets
+
+Tone of Voice:
+- Du-Form
+- Positiv, ermutigend
+- Fokus auf Mitarbeiter-Vorteile
+- Kurz und prägnant
+- Keine technischen Details
+
+---
+
+ZUSAMMENFASSUNG:
+✅ Marketing-fokussiert für Mitarbeiter
+✅ Einfache Sprache, Du-Form
+✅ Vorteile klar hervorgehoben
+✅ "Wie funktioniert's" Schritt-für-Schritt
+✅ Emotionale/persönliche Ebene
+✅ Customer-freundlich, nicht technisch

@@ -1,0 +1,161 @@
+RISO — Design Brand Guide (Kurzfassung)
+🎨 FARBEN (Canonical)
+Element	Farbe	Hex	RGB	Verwendung
+Primärblau	Riso Blue	#0F429F	15, 66, 159	CTAs, Buttons, Headlines, Primary UI
+Sekundärblau	Accent Blue	#246AFF	36, 106, 255	Hover-States, Highlights, Accents
+Dunkelblau	Dark Blue	#273A5F	39, 58, 95	Navigation, Footer, dunkle Backgrounds
+Weiß	Background	#FFFFFF	255, 255, 255	Page/Card Background
+Schwarz	Text	#000000	0, 0, 0	Body-Text, Fließtext
+Benefit-Icons: Jedes Benefit hat Signalfarbe (Sachbezug=Pink, Essen=Gold, Internet=Grün, etc.)
+
+🔤 TYPOGRAFIE
+Rolle	Font	Gewicht	Größe	Beispiel
+Headlines H1	Roboto Bold	700	36–48px	Seitentitel
+Headlines H2	Roboto Bold	700	24–32px	Sektion-Titel
+Headlines H3	Roboto Bold	700	18–22px	Unter-Titel
+Body-Text	Roboto Regular	400	14–16px	Fließtext
+UI-Labels	Roboto Medium	500	11–14px	Buttons, Labels, Inputs
+⚠️ WICHTIG: Roboto ist die einzige Schrift. Kein Inter, keine anderen Fonts.
+
+🎯 DESIGN-ELEMENTE
+Buttons
+Primary: Riso Blue bg #0F429F, white text, radius 32px
+Secondary: Outline (border #0F429F, text #0F429F), radius 32px
+Hover: Darker Blue #0A2E7A (oder Secondary Blue #246AFF)
+Cards
+Background: Weiß #FFFFFF
+Border: 1px #E0E0E0
+Radius: 12px
+Tables
+Header: Hellblau bg #F0F4FF, Grau text, Roboto Medium 12px
+Rows (gerade): Weiß #FFFFFF
+Rows (ungerade): Hellgrau #F8F9FB
+Hover: Hellblau #EEF2FF
+Logo
+Standard: Riso Blue #0F429F auf weiß/hell
+Dunkel-Hintergründe: Weiß #FFFFFF
+Keine Effekte: Kein Schatten, kein Gradient, nicht verzerren
+💬 VOICE & SPRACHE
+Anrede: Du-Form (durchgehend, alle Kanäle)
+
+Tonalität:
+
+Easy-going & casual (locker, zugänglich)
+Humane & personal (echter Mensch, kein Konzern)
+Knowledgeable (sachkompetent)
+Direct (kurz, klar, Nutzen)
+Schreibprinzipien:
+
+✅ Aktiv, nicht passiv
+✅ Max. 20 Wörter pro Satz
+✅ Konkrete Beispiele (Beträge, Zeitrahmen)
+❌ Keine Worthülsen ("innovativ", "disruptiv", "agil")
+❌ Keine unerklärbaren Fachbegriffe
+Sprache: Deutsch (primär), Englisch nur für Tech-Docs
+
+🖼️ BILDSPRACHE
+Fotos: Echte Menschen, natürlich, professionell, freundlich (nicht gestellt)
+Illustrationen: Stil wie VectorJuice (Freepik) — warm, modern, menschlich
+Icons: Konsistentes Farbkodierungssystem pro Benefit
+Grafiken: Riso Blue für Datenpunkte, Sekundärblau für Akzente
+✅ DESIGN-CHECKLIST (vor Freigabe)
+ Farben: Nur #0F429F, #246AFF, #273A5F, #FFFFFF, #000000 + Benefit-Icons
+ Schrift: Nur Roboto (Regular/Medium/Bold), kein Inter
+ Button-Radius: Alle Buttons mind. 24px (ideale 32px)
+ Spacing: 8px Grid (8, 16, 24, 32, 48px)
+ Kontrast: Text mindestens 4.5:1 (WCAG AA)
+ Logo: Kein Schatten, Gradient, oder Verzerrung
+ Responsive: Desktop (>1024px), Tablet (768-1024px), Mobile (<768px)
+ Sprache: Deutsch, Du-Form, aktive Sätze
+ Icons: Konsistent mit Benefit-Farbpalette
+🎯 MISSION, VISION, KERNWERTE
+Mission: Steueroptimierte Mitarbeiter-Benefits für KMU — einfach eingerichtet, professionell verwaltet, nachweisbar wirksam.
+
+Vision: Marktführer bei der steuersparenden Gehaltserhöhung für den Mittelstand.
+
+Kernwerte:
+
+Messbarkeit — Nicht behaupten, beweisen
+Rechtssicherheit — Keine Graubereiche
+Einfachheit — Der GF muss nichts verstehen
+Nahbarkeit — Direkter Draht, kein Call-Center
+Translate
+FIGMA DESIGN PROMPT: Reports-Seite mit Benefit-Übersicht (AG-Portal)
+
+SEITE: Reports Liste + Benefit-Verwendungsübersicht
+ZWECK: HR-Admin exportiert Reports + sieht Benefit-Statistiken pro Mitarbeiter/Benefit
+
+
+LAYOUT:
+
+*Section 1: Report-Export (wie ursprünglicher Prompt)*
+- Titel: "Meine Berichte"
+- Suchfeld + Filter-Buttons (Alle, PDF, Excel)
+- Tabelle: 10 Reports pro Seite
+  - Spalten: Checkbox, Datum, Monat, Erstellungsdatum, Version, Dateityp, Dateiname, Aktion
+  - Aktion-Buttons: Secondary "Ansehen" + Primary "Herunterladen"
+- Pagination
+- Empty State: "Noch keine Reports erstellt"
+
+
+*Section 2: Benefit-Verwendungsübersicht (NEU)*
+Titel: "Benefit-Übersicht" oder "Nutzer nach Benefit"
+
+*Format: 8 Benefit-Karten* (Horizontal scrollbar möglich oder Grid 2x4?)
+
+Pro Benefit-Karte zeigen:
+- *Benefit-Icon + Name* (z.B. 🍽️ Essenszuschuss)
+- *Mitarbeiter nutzen:* "45 Mitarbeiter"
+- *Budget (Monat):* 1.250€
+- *Verwendet (diese Monat):* 850€
+- *Verfügbar (Übrig):* 400€
+- *Progress-Bar:* 68% (Hellblau fill, grauer Hintergrund)
+- *Klick-Action:* Link zu Benefits-Seite ("Konfigurieren")
+
+
+DESIGN-DETAILS:
+
+*Cards (Benefit-Übersicht):*
+- Weiß Background, 1px Border #E0E0E0, Radius 12px
+- Padding: 16px
+- Hover: Schatten #00000012
+- Icons: 32px, in Hellblau-Background (#F0F4FF)
+
+*Zahlen-Formatierung (ÜBERALL):*
+- Budget: "1.250€" (Punkt als Tausender, Euro am Ende)
+- Dezimal (falls nötig): "1.250,50€"
+- Prozent: "68%"
+
+*Farben:*
+- Primary Blau (Links): #246AFF
+- Hellblau Accent: #F0F4FF
+- Grau Text (muted): #666
+- Grüner Button (Links zu Benefit-Details): #4CAF50, Radius 24px
+
+*Responsive:*
+- Desktop: 4 Cards nebeneinander (2x2 Grid)
+- Tablet: 3 Cards
+- Mobile: 1-2 Cards (Scroll horizontal)
+
+
+ZUSAMMENFASSUNG OBEN:
+Optional: Eine kleine Statistik-Box
+- "Gesamtbudget (diese Monat): 15.000€"
+- "Gesamtvergeben: 12.500€"
+- "Gesamtverfügbar: 2.500€"
+- "Durchschn. Auslastung: 83%"
+
+
+EMPTY STATE (Reports):
+Falls keine Reports: "Noch keine Reports erstellt. Reports werden automatisch generiert."
+
+EMPTY STATE (Benefits):
+Falls noch keine Benefits konfiguriert: "Konfigurieren Sie zuerst Benefits, um Übersichten zu sehen."
+
+
+ZUSAMMENFASSUNG:
+✅ Section 1: Report-Liste (wie ursprüngliches Prompt)
+✅ Section 2: 8 Benefit-Karten mit Statistiken + Links zu Benefit-Details
+✅ Alle Zahlen im RISO Format (Euro am Ende, Punkt-Komma)
+✅ Responsive Design (Desktop/Tablet/Mobile)
+✅ Farben: Hellblau Header, grüne Action-Buttons

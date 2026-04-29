@@ -240,22 +240,27 @@ export function BenefitsOverview() {
           <div className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm">
             <h2 className="text-[#273A5F] font-bold text-lg mb-4">Budget-Übersicht</h2>
             <div className="flex flex-col items-center">
-              <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                <PieChart width={400} height={240}>
-                  <Pie
-                    data={budgetDonutData}
-                    cx={200}
-                    cy={120}
-                    innerRadius={60}
-                    outerRadius={100}
-                    paddingAngle={2}
-                    dataKey="value"
-                    isAnimationActive={false}
-                  >
-                    <Cell key="cell-used" fill="#0F429F" />
-                    <Cell key="cell-free" fill="#E5E7EB" />
-                  </Pie>
-                </PieChart>
+              <div style={{ width: '100%', height: '240px', minHeight: '240px', minWidth: 0, display: 'flex', justifyContent: 'center' }}>
+                <ResponsiveContainer width="100%" height={240} minWidth={0} minHeight={0}>
+                  <PieChart id="budget-pie-chart">
+                    <Pie
+                      key="pie-budget"
+                      data={budgetDonutData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={100}
+                      paddingAngle={2}
+                      dataKey="value"
+                      isAnimationActive={false}
+                      animationDuration={0}
+                    >
+                      {budgetDonutData.map((entry, index) => (
+                        <Cell key={`cell-${entry.name}-${index}`} fill={index === 0 ? '#0F429F' : '#E5E7EB'} />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
               </div>
               <div className="text-center mt-4">
                 <p className="text-[#0F429F] font-bold text-xl">{usagePercentage}% genutzt</p>
@@ -279,40 +284,40 @@ export function BenefitsOverview() {
                 </button>
               </div>
             </div>
-            <div style={{ width: '100%', overflow: 'auto' }}>
-              <BarChart
-                width={700}
-                height={280}
-                data={monthlyUsageData}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <defs>
-                  <linearGradient id="usageBarGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#0F429F" stopOpacity={1} />
-                    <stop offset="100%" stopColor="#0F429F" stopOpacity={1} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+            <div style={{ width: '100%', height: '280px', minHeight: '280px', minWidth: 0, overflow: 'auto' }}>
+              <ResponsiveContainer width="100%" height={280} minWidth={0} minHeight={0}>
+                <BarChart
+                  id="usage-chart"
+                  data={monthlyUsageData}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                <CartesianGrid key="grid-usage" strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
                 <XAxis
+                  key="xaxis-usage"
                   dataKey="month"
                   tick={{ fontSize: 12, fill: '#6B7280' }}
                   tickLine={false}
                   axisLine={{ stroke: '#E5E7EB' }}
                 />
                 <YAxis
+                  key="yaxis-usage"
                   tick={{ fontSize: 12, fill: '#6B7280' }}
                   tickLine={false}
                   axisLine={{ stroke: '#E5E7EB' }}
                 />
-                <Tooltip />
+                <Tooltip key="tooltip-usage" />
                 <Bar
+                  key="bar-amount"
                   dataKey="amount"
-                  fill="url(#usageBarGradient)"
+                  name="amount"
+                  fill="#0F429F"
                   radius={[4, 4, 0, 0]}
                   isAnimationActive={false}
+                  animationDuration={0}
                   maxBarSize={60}
                 />
               </BarChart>
+              </ResponsiveContainer>
             </div>
             <p className="text-xs text-[#6B7280] mt-2">
               Die Grafik zeigt aggregierte Ausgaben über alle Benefit-Kategorien.
