@@ -294,7 +294,7 @@ export function Dashboard() {
               {/* Table Header */}
               <div
                 className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: 'minmax(150px, 2fr) minmax(60px, 80px) minmax(120px, 1.5fr) minmax(80px, 100px) minmax(100px, 120px) minmax(240px, 2fr)' }}
+                style={{ display: 'grid', gridTemplateColumns: '1.5fr 70px 1fr 80px 100px 1.5fr', gap: '0' }}
               >
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Nr.</div>
@@ -313,7 +313,7 @@ export function Dashboard() {
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: 'minmax(150px, 2fr) minmax(60px, 80px) minmax(120px, 1.5fr) minmax(80px, 100px) minmax(100px, 120px) minmax(240px, 2fr)' }}
+                  style={{ display: 'grid', gridTemplateColumns: '1.5fr 70px 1fr 80px 100px 1.5fr', gap: '0' }}
                 >
                   <div className="text-[#000000] text-sm">{employee.name}</div>
                   <div className="text-[#000000] text-sm">{employee.nr}</div>
@@ -384,7 +384,7 @@ export function Dashboard() {
               {/* Table Header */}
               <div
                 className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: 'minmax(80px, 100px) minmax(100px, 120px) minmax(120px, 1.5fr) minmax(80px, 100px) minmax(100px, 120px) minmax(150px, 2fr) minmax(180px, 1.5fr)' }}
+                style={{ display: 'grid', gridTemplateColumns: '80px 100px 1fr 90px 100px 1.5fr 1.5fr', gap: '0' }}
               >
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Datum</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Monat</div>
@@ -404,7 +404,7 @@ export function Dashboard() {
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: 'minmax(80px, 100px) minmax(100px, 120px) minmax(120px, 1.5fr) minmax(80px, 100px) minmax(100px, 120px) minmax(150px, 2fr) minmax(180px, 1.5fr)' }}
+                  style={{ display: 'grid', gridTemplateColumns: '80px 100px 1fr 90px 100px 1.5fr 1.5fr', gap: '0' }}
                 >
                   <div className="text-[#000000] text-sm">{report.date}</div>
                   <div className="text-[#000000] text-sm">{report.month}</div>
