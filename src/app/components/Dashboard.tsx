@@ -107,7 +107,7 @@ export function Dashboard() {
           {/* Gesamtbudget */}
           <button
             onClick={() => handleNavigate('benefits')}
-            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col text-left"
+            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -126,7 +126,7 @@ export function Dashboard() {
           {/* Registrierte Nutzer */}
           <button
             onClick={() => handleNavigate('mitarbeiter')}
-            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col text-left"
+            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -145,7 +145,7 @@ export function Dashboard() {
           {/* Erstellte Berichte - Gesamtanzahl aller Berichte */}
           <button
             onClick={() => handleNavigate('reports')}
-            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col text-left"
+            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -241,9 +241,9 @@ export function Dashboard() {
 
           <div className="border border-[#E0E0E0] rounded-lg overflow-hidden">
             {/* Table Header */}
-            <div className="bg-[#F0F4FF] grid grid-cols-[80px_180px_120px_100px_60px] h-12 items-center px-4 border-b border-[#E0E0E0]">
+            <div className="bg-[#F0F4FF] grid grid-cols-[100px_1fr_120px_100px_80px] h-12 items-center px-4 border-b border-[#E0E0E0]">
               <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Personennummer
+                Pers.Nr.
               </div>
               <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 Name
@@ -263,7 +263,7 @@ export function Dashboard() {
             {employees.map((employee, index) => (
               <div
                 key={employee.id}
-                className={`grid grid-cols-[80px_180px_120px_100px_60px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
+                className={`grid grid-cols-[100px_1fr_120px_100px_80px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
                   index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
                 }`}
               >
