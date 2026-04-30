@@ -392,7 +392,7 @@ export function Dashboard() {
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Version</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Dateityp</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Dateiname</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktionen</div>
               </div>
 
               {/* Table Rows */}
