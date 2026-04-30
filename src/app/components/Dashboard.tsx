@@ -1,4 +1,5 @@
-import { Users, FileText, Download, Eye, Euro } from 'lucide-react';
+import { useState } from 'react';
+import { Users, FileText, Download, Eye, Euro, Edit2, Upload, Search, ChevronDown } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
 
@@ -22,25 +23,76 @@ const budgetData = generateBudgetData();
 
 // Employee data with longer names for testing ellipsis
 const employees = [
-  { id: '1', nr: 'MA-10234', name: 'Max Mustermann', abteilung: 'IT', status: 'aktiv' },
-  { id: '2', nr: 'MA-10081', name: 'Sarah Weber', abteilung: 'Marketing', status: 'aktiv' },
-  { id: '3', nr: 'MA-10977', name: 'Thomas Becker', abteilung: 'Finanzen', status: 'aktiv' },
-  { id: '4', nr: 'MA-10542', name: 'Dr. Lisa-Marie Müller-Schmidt', abteilung: 'HR', status: 'aktiv' },
-  { id: '5', nr: 'MA-11109', name: 'Michael Schmidt', abteilung: 'IT', status: 'aktiv' },
+  {
+    id: 1,
+    name: 'Anna Smith',
+    nr: '001',
+    abteilung: 'Vertrieb',
+    status: 'Aktiv',
+    budget: '€1.000',
+  },
+  {
+    id: 2,
+    name: 'Max Müller',
+    nr: '002',
+    abteilung: 'IT',
+    status: 'Aktiv',
+    budget: '€950',
+  },
+  {
+    id: 3,
+    name: 'Kim S.',
+    nr: '003',
+    abteilung: 'HR',
+    status: 'Aktiv',
+    budget: '€1.100',
+  },
+  {
+    id: 4,
+    name: 'Sarah Weber',
+    nr: '004',
+    abteilung: 'Marketing',
+    status: 'Aktiv',
+    budget: '€875',
+  },
+  {
+    id: 5,
+    name: 'Thomas Becker',
+    nr: '005',
+    abteilung: 'Finanzen',
+    status: 'Aktiv',
+    budget: '€1.200',
+  },
 ];
 
 // Reports data with long filenames for testing ellipsis
 const reports = [
-  { id: '1', date: '01.04.', month: 'April', createdDate: '01.04.2026', version: 'v2.3', type: 'PDF', name: 'Riso_Report_Benefits_2026_April_Heddesheim.pdf' },
-  { id: '2', date: '31.03.', month: 'März', createdDate: '31.03.2026', version: 'v2.2', type: 'Excel', name: 'Quartalsbericht_Q1_2026_Detailliert.xlsx' },
-  { id: '3', date: '28.03.', month: 'März', createdDate: '28.03.2026', version: 'v2.1', type: 'PDF', name: 'Benefits_Übersicht_März_2026.pdf' },
-  { id: '4', date: '28.02.', month: 'Februar', createdDate: '28.02.2026', version: 'v2.0', type: 'Excel', name: 'Mitarbeiter_Report_Februar_2026.xlsx' },
-  { id: '5', date: '15.02.', month: 'Februar', createdDate: '15.02.2026', version: 'v1.9', type: 'PDF', name: 'Budget_Analyse_Q1_2026_Final.pdf' },
+  { id: '1', date: '01.04.', month: 'April', createdDate: '01.04.2026', version: 'v2.3', fileType: 'PDF', fileName: 'Monatsbericht April' },
+  { id: '2', date: '31.03.', month: 'März', createdDate: '31.03.2026', version: 'v2.2', fileType: 'Excel', fileName: 'Quartalsübersicht Q1' },
+  { id: '3', date: '28.02.', month: 'Februar', createdDate: '28.02.2026', version: 'v2.1', fileType: 'PDF', fileName: 'Monatsbericht Februar' },
+  { id: '4', date: '31.01.', month: 'Januar', createdDate: '31.01.2026', version: 'v2.0', fileType: 'Excel', fileName: 'Jahresübersicht 2025' },
+  { id: '5', date: '15.01.', month: 'Januar', createdDate: '15.01.2026', version: 'v1.9', fileType: 'PDF', fileName: 'Mitarbeiter-Export 2025' },
 ];
 
 export function Dashboard() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedStandort, setSelectedStandort] = useState('Alle');
+  const [selectedStatus, setSelectedStatus] = useState('Alle');
+
   const handleNavigate = (page: string) => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: page } }));
+  };
+
+  const handleImportClick = () => {
+    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'csv-upload' } }));
+  };
+
+  const handleEmployeeEdit = (employeeId: number) => {
+    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'mitarbeiter-edit' } }));
+  };
+
+  const handleEmployeeDetails = (employeeId: number) => {
+    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'mitarbeiter-edit' } }));
   };
 
   const formatCurrency = (value: number) => {
@@ -225,179 +277,205 @@ export function Dashboard() {
         </div>
 
         {/* SECTION 3: Mitarbeiter-Liste */}
-        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[#273A5F] font-bold text-[16px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Mitarbeiter
-            </h2>
-            <button
-              onClick={() => handleNavigate('mitarbeiter')}
-              className="text-[#0F429F] text-[12px] font-normal hover:underline"
-              style={{ fontFamily: 'Roboto, sans-serif' }}
-            >
-              Alle Mitarbeiter anzeigen
-            </button>
-          </div>
-
-          <div className="border border-[#E0E0E0] rounded-lg overflow-hidden">
-            {/* Table Header */}
-            <div className="bg-[#F0F4FF] grid grid-cols-[120px_150px_150px_100px_80px] h-12 items-center px-4 border-b border-[#E0E0E0]">
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Pers.Nr.
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Name
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Abteilung
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Status
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Bearbeiten
-              </div>
-            </div>
-
-            {/* Table Rows */}
-            {employees.map((employee, index) => (
-              <div
-                key={employee.id}
-                className={`grid grid-cols-[120px_150px_150px_100px_80px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
-                  index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
-                }`}
-              >
-                <div className="text-[#333333] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {employee.nr}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl mb-8">
+          {/* Search & Filter Bar */}
+          <div className="px-6 pt-6 pb-6 border-b border-[#E0E0E0]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                {/* Search Field */}
+                <div className="relative" style={{ width: '400px' }}>
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#6B7280]" />
+                  <input
+                    type="text"
+                    placeholder="Suche..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full h-10 pl-10 pr-4 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#273A5F] focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
+                  />
                 </div>
-                <div
-                  className="text-[#333333] text-[12px] truncate"
-                  style={{ fontFamily: 'Roboto, sans-serif' }}
-                  title={employee.name}
+
+                {/* Standort Filter */}
+                <button
+                  className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
+                  style={{ width: '200px' }}
                 >
-                  {employee.name}
-                </div>
-                <div className="text-[#333333] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {employee.abteilung}
-                </div>
-                <div>
-                  <span className="inline-block px-2 py-1 rounded-xl text-[#4CAF50] bg-[#E8F5E9] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                    ● Aktiv
+                  <span className="text-[#273A5F] text-sm flex-1 text-left">
+                    Standort: {selectedStandort}
                   </span>
-                </div>
-                <div>
-                  <button className="text-[#0F429F] text-[12px] hover:underline hover:text-[#246AFF]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                    Bearbeiten
-                  </button>
-                </div>
+                  <ChevronDown className="w-4 h-4 text-[#6B7280]" />
+                </button>
+
+                {/* Status Filter */}
+                <button
+                  className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
+                  style={{ width: '200px' }}
+                >
+                  <span className="text-[#273A5F] text-sm flex-1 text-left">
+                    Status: {selectedStatus}
+                  </span>
+                  <ChevronDown className="w-4 h-4 text-[#6B7280]" />
+                </button>
               </div>
-            ))}
+
+              {/* Import Button */}
+              <button
+                onClick={handleImportClick}
+                className="bg-[#0F429F] text-white px-6 h-10 rounded-lg flex items-center gap-2 hover:bg-[#0d3680] transition-colors font-medium text-sm"
+              >
+                <Upload className="w-4 h-4" />
+                CSV Import
+              </button>
+            </div>
           </div>
 
-          <div className="mt-4">
-            <button
-              onClick={() => handleNavigate('mitarbeiter')}
-              className="text-[#0F429F] text-[12px] hover:underline"
-              style={{ fontFamily: 'Roboto, sans-serif' }}
-            >
-              Alle Mitarbeiter anzeigen
-            </button>
+          {/* Table */}
+          <div className="px-6 pb-6">
+            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+              {/* Table Header */}
+              <div
+                className="bg-[#273A5F] flex items-center px-6 h-12"
+                style={{ display: 'grid', gridTemplateColumns: '200px 80px 150px 100px 120px 240px' }}
+              >
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Nr.</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Abteilung</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktionen</div>
+              </div>
+
+              {/* Table Rows */}
+              {employees.map((employee, index) => (
+                <div
+                  key={employee.id}
+                  className={`
+                    flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                    transition-colors hover:bg-gray-50
+                    ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
+                  `}
+                  style={{ display: 'grid', gridTemplateColumns: '200px 80px 150px 100px 120px 240px' }}
+                >
+                  <div className="text-[#000000] text-sm">{employee.name}</div>
+                  <div className="text-[#000000] text-sm">{employee.nr}</div>
+                  <div className="text-[#000000] text-sm">{employee.abteilung}</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-500">✅</span>
+                    <span className="text-[#000000] text-sm">{employee.status}</span>
+                  </div>
+                  <div className="text-[#000000] text-sm">{employee.budget}</div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEmployeeDetails(employee.id);
+                      }}
+                      className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
+                      style={{ borderRadius: '32px' }}
+                    >
+                      <Eye size={16} />
+                      Details
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEmployeeEdit(employee.id);
+                      }}
+                      className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
+                      style={{ borderRadius: '32px' }}
+                    >
+                      <Edit2 size={16} />
+                      Bearbeiten
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pagination */}
+          <div className="px-6 pb-6 flex justify-end">
+            <div className="text-[#6B7280] text-xs">Seite 1 von 21</div>
           </div>
         </div>
 
         {/* SECTION 4: Berichte-Liste */}
-        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[#273A5F] font-bold text-[16px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Berichte
-            </h2>
-            <button
-              onClick={() => handleNavigate('reports')}
-              className="text-[#0F429F] text-[12px] font-normal hover:underline"
-              style={{ fontFamily: 'Roboto, sans-serif' }}
-            >
-              Alle Berichte anzeigen
-            </button>
-          </div>
-
-          <div className="border border-[#E0E0E0] rounded-lg overflow-hidden">
-            {/* Table Header - NO CHECKBOX */}
-            <div className="bg-[#F0F4FF] grid grid-cols-[80px_100px_120px_100px_100px_1fr_180px] h-12 items-center px-4 border-b border-[#E0E0E0]">
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Datum
+        <div className="bg-white border border-[#E0E0E0] rounded-xl">
+          {/* Header */}
+          <div className="px-6 py-6 border-b border-[#E0E0E0]">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-[#273A5F] font-bold text-[16px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  Berichte
+                </h2>
               </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Monat
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Erstellungsdatum
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Version
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Dateityp
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Dateiname
-              </div>
-              <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Aktion
-              </div>
-            </div>
-
-            {/* Table Rows */}
-            {reports.map((report, index) => (
-              <div
-                key={report.id}
-                className={`grid grid-cols-[80px_100px_120px_100px_100px_1fr_180px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
-                  index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
-                }`}
+              <button
+                onClick={() => handleNavigate('reports')}
+                className="text-[#0F429F] text-[12px] font-normal hover:underline"
+                style={{ fontFamily: 'Roboto, sans-serif' }}
               >
-                <div className="text-[#333333] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {report.date}
-                </div>
-                <div className="text-[#333333] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {report.month}
-                </div>
-                <div className="text-[#333333] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {report.createdDate}
-                </div>
-                <div className="text-[#333333] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {report.version}
-                </div>
-                <div className="text-[#333333] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {report.type}
-                </div>
-                <div
-                  className="text-[#333333] text-[12px] truncate"
-                  style={{ fontFamily: 'Roboto, sans-serif' }}
-                  title={report.name}
-                >
-                  {report.name}
-                </div>
-                <div className="flex gap-2">
-                  <button className="px-3 py-1 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-full hover:bg-[#F0F4FF] hover:opacity-90 transition flex items-center gap-1">
-                    <Eye className="w-3 h-3" />
-                    Ansehen
-                  </button>
-                  <button className="px-3 py-1 bg-[#0F429F] text-white text-[12px] rounded-full hover:opacity-90 transition flex items-center gap-1">
-                    <Download className="w-3 h-3" />
-                    Download
-                  </button>
-                </div>
-              </div>
-            ))}
+                Alle Berichte anzeigen
+              </button>
+            </div>
           </div>
 
-          <div className="mt-4">
-            <button
-              onClick={() => handleNavigate('reports')}
-              className="text-[#0F429F] text-[12px] hover:underline"
-              style={{ fontFamily: 'Roboto, sans-serif' }}
-            >
-              Alle Berichte anzeigen
-            </button>
+          {/* Table */}
+          <div className="px-6 py-6">
+            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+              {/* Table Header */}
+              <div
+                className="bg-[#273A5F] flex items-center px-6 h-12"
+                style={{ display: 'grid', gridTemplateColumns: '100px 120px 140px 100px 120px 1fr 180px' }}
+              >
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Datum</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Monat</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Erstellungsdatum</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Version</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Dateityp</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Dateiname</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+              </div>
+
+              {/* Table Rows */}
+              {reports.map((report, index) => (
+                <div
+                  key={report.id}
+                  className={`
+                    flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                    transition-colors hover:bg-gray-50
+                    ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
+                  `}
+                  style={{ display: 'grid', gridTemplateColumns: '100px 120px 140px 100px 120px 1fr 180px' }}
+                >
+                  <div className="text-[#000000] text-sm">{report.date}</div>
+                  <div className="text-[#000000] text-sm">{report.month}</div>
+                  <div className="text-[#000000] text-sm">{report.createdDate}</div>
+                  <div className="text-[#000000] text-sm">{report.version}</div>
+                  <div className="text-[#000000] text-sm">{report.fileType}</div>
+                  <div className="text-[#000000] text-sm truncate" title={report.fileName}>
+                    {report.fileName}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      className="bg-white text-[#0F429F] px-3 h-8 rounded-full font-medium text-xs hover:bg-[#F0F4FF] transition-colors flex items-center gap-1 border border-[#0F429F]"
+                    >
+                      <Eye size={16} />
+                      Ansehen
+                    </button>
+                    <button
+                      className="bg-[#0F429F] text-white px-3 h-8 rounded-full font-medium text-xs hover:bg-[#0d3680] transition-colors flex items-center gap-1"
+                    >
+                      <Download size={16} />
+                      Download
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pagination */}
+          <div className="px-6 py-6 flex justify-end border-t border-[#E0E0E0]">
+            <div className="text-[#6B7280] text-xs">Seite 1 von 5</div>
           </div>
         </div>
       </div>
