@@ -289,7 +289,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                     <PieChart size={24} className="text-[#0F429F]" />
                   </div>
                 </div>
-                <p className="text-[#666666] text-[12px] mb-1">Auslastung</p>
+                <p className="text-[#666666] text-[12px] mb-1">Nutzungsquote</p>
                 <p className="text-[#273A5F] font-bold text-[24px]">73.8%</p>
               </div>
             </div>

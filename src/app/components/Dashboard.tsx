@@ -45,14 +45,14 @@ export function Dashboard() {
 
   const formatCurrency = (value: number) => {
     return value.toLocaleString('de-DE', {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }) + '€';
   };
 
   const formatYAxisValue = (value: number) => {
     if (value >= 1000000) {
-      return `${(value / 1000000).toFixed(0)}.000.000€`;
+      return `${(value / 1000000).toFixed(2)}.000.000€`;
     }
     return formatCurrency(value);
   };
@@ -114,7 +114,7 @@ export function Dashboard() {
               <div className="flex items-center justify-center bg-[#F0F4FF] rounded-full shrink-0" style={{ width: '48px', height: '48px' }}>
                 <Euro size={24} className="text-[#0F429F]" strokeWidth={2} />
               </div>
-              <p className="text-[#666666] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              <p className="text-[#666666] text-[14px] font-semibold" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 Gesamtbudget
               </p>
             </div>
@@ -133,7 +133,7 @@ export function Dashboard() {
               <div className="flex items-center justify-center bg-[#F0F4FF] rounded-full shrink-0" style={{ width: '48px', height: '48px' }}>
                 <Users size={24} className="text-[#0F429F]" strokeWidth={2} />
               </div>
-              <p className="text-[#666666] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              <p className="text-[#666666] text-[14px] font-semibold" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 Registrierte Nutzer
               </p>
             </div>
@@ -152,7 +152,7 @@ export function Dashboard() {
               <div className="flex items-center justify-center bg-[#F0F4FF] rounded-full shrink-0" style={{ width: '48px', height: '48px' }}>
                 <FileText size={24} className="text-[#0F429F]" strokeWidth={2} />
               </div>
-              <p className="text-[#666666] text-[12px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              <p className="text-[#666666] text-[14px] font-semibold" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 Erstellte Berichte
               </p>
             </div>

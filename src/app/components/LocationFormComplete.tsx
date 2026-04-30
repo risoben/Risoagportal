@@ -467,11 +467,11 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           </div>
         </div>
 
-        {/* SECTION E: Zugeordnete Produkte */}
+        {/* SECTION E: Zugeordnete Benefits */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
-          <h2 className="text-[#273A5F] text-[16px] mb-2">Zugeordnete Produkte</h2>
+          <h2 className="text-[#273A5F] text-[16px] mb-2">Zugeordnete Benefits</h2>
           <p className="text-[#666666] text-[12px] mb-6">
-            Produkte mit täglichen und monatlichen Limits für diesen Standort.
+            Benefits mit täglichen und monatlichen Limits für diesen Standort.
           </p>
 
           <div className="overflow-x-auto">
@@ -557,11 +557,11 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           </button>
         </div>
 
-        {/* SECTION F: Jahres-Limit Produkte */}
+        {/* SECTION F: Jahres-Limit Benefits */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
-          <h2 className="text-[#273A5F] text-[16px] mb-2">Produkte mit Jahres-Limits</h2>
+          <h2 className="text-[#273A5F] text-[16px] mb-2">Benefits mit Jahres-Limits</h2>
           <p className="text-[#666666] text-[12px] mb-6">
-            Produkte mit Limits die pro Jahr unterschiedlich sein können.
+            Benefits mit Limits die pro Jahr unterschiedlich sein können.
           </p>
 
           <div className="overflow-x-auto">

@@ -364,7 +364,7 @@ export function LocationsPage() {
                   <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalAvailable)}</p>
                 </div>
                 <div className="bg-white border border-[#E0E0E0] rounded-xl p-6" style={{ borderRadius: '12px' }}>
-                  <p className="text-[#666666] text-xs mb-2">Auslastung</p>
+                  <p className="text-[#666666] text-xs mb-2">Nutzungsquote</p>
                   <p className="text-[#0F429F] font-bold text-2xl">{utilization}%</p>
                 </div>
               </div>

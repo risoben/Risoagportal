@@ -86,20 +86,20 @@ export function BudgetOverview() {
       </div>
 
       {/* KPI Cards */}
-      <div className="px-6 pt-8 pb-8">
-        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-6">
-          <div className="bg-white border border-[#E0E0E0] rounded-lg p-6">
-            <p className="text-[#666666] text-[12px] mb-2">Gesamtbudget</p>
+      <div className="px-6 pt-8 pb-8 flex justify-center">
+        <div className="w-full max-w-5xl grid grid-cols-3 gap-6">
+          <div className="bg-white border border-[#E0E0E0] rounded-lg p-6 flex flex-col items-center justify-center text-center">
+            <p className="text-[#666666] text-[14px] font-semibold mb-3">Gesamtbudget</p>
             <p className="text-[#273A5F] font-bold text-[32px]">€{totalBudget.toLocaleString()}</p>
           </div>
 
-          <div className="bg-white border border-[#E0E0E0] rounded-lg p-6">
-            <p className="text-[#666666] text-[12px] mb-2">Genutzt</p>
+          <div className="bg-white border border-[#E0E0E0] rounded-lg p-6 flex flex-col items-center justify-center text-center">
+            <p className="text-[#666666] text-[14px] font-semibold mb-3">Genutzt</p>
             <p className="text-[#4CAF50] font-bold text-[32px]">€{usedBudget.toLocaleString()}</p>
           </div>
 
-          <div className="bg-white border border-[#E0E0E0] rounded-lg p-6">
-            <p className="text-[#666666] text-[12px] mb-2">Verfügbar</p>
+          <div className="bg-white border border-[#E0E0E0] rounded-lg p-6 flex flex-col items-center justify-center text-center">
+            <p className="text-[#666666] text-[14px] font-semibold mb-3">Verfügbar</p>
             <p className="text-[#FF9800] font-bold text-[32px]">€{freeBudget.toLocaleString()}</p>
           </div>
         </div>

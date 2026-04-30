@@ -443,7 +443,7 @@ export function ReportsPage() {
               <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalAvailable)}</p>
             </div>
             <div>
-              <p className="text-[#666666] text-xs mb-2">Durchschn. Auslastung</p>
+              <p className="text-[#666666] text-xs mb-2">Durchschn. Nutzungsquote</p>
               <p className="text-[#0F429F] font-bold text-2xl">{avgUtilization}%</p>
             </div>
           </div>
@@ -491,7 +491,7 @@ export function ReportsPage() {
               {/* Progress Bar */}
               <div>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-[#666666]">Auslastung</span>
+                  <span className="text-[#666666]">Nutzungsquote</span>
                   <span className="text-[#0F429F] font-bold">{benefit.percentage}%</span>
                 </div>
                 <div className="w-full h-2 bg-[#E5E7EB] rounded-full overflow-hidden">
