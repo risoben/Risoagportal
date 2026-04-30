@@ -37,7 +37,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
     password: '',
     name: isEditMode ? 'Max' : '',
     surname: isEditMode ? 'Mustermann' : '',
-    gender: isEditMode ? 'Männlich' : '',
+    gender: isEditMode ? 'Keine Angabe' : 'Keine Angabe',
     dateOfBirth: isEditMode ? '1990-05-15' : '',
     phone: isEditMode ? '+49 123 456789' : '',
     employeeNo: isEditMode ? 'EMP-12345' : '',
@@ -164,29 +164,17 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
               />
             </div>
 
-            {/* Password */}
+            {/* Password Reset Button */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">Password <span className="text-[#E53935]">*</span></span>
+                <span className="text-[#666666] text-[13px]">Passwort</span>
               </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={personalData.password}
-                  onChange={(e) => handlePersonalChange('password', e.target.value)}
-                  placeholder="••••••••"
-                  disabled={loadingState}
-                  className="w-full px-3 py-2.5 pr-10 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
-                  style={{ borderRadius: '4px' }}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] hover:text-[#273A5F]"
-                >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                </button>
-              </div>
+              <button
+                type="button"
+                className="w-full px-3 py-2.5 border border-[#0F429F] bg-white text-[#0F429F] rounded text-[13px] font-medium hover:bg-[#F0F4FF] transition"
+              >
+                Passwort-Reset-E-Mail senden
+              </button>
             </div>
 
             {/* Name */}
@@ -604,21 +592,6 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
           >
             Abbrechen
           </button>
-          {isEditMode && (
-            <button
-              onClick={() => {
-                if (confirm('Möchten Sie diesen Mitarbeiter wirklich löschen?')) {
-                  alert('Mitarbeiter wurde gelöscht!');
-                  handleBack();
-                }
-              }}
-              disabled={loadingState}
-              className="px-6 py-3 bg-[#E74C3C] text-white text-[14px] rounded hover:bg-[#C0392B] transition disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
-              style={{ borderRadius: '4px' }}
-            >
-              Löschen
-            </button>
-          )}
         </div>
       </div>
 
