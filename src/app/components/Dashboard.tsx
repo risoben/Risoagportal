@@ -241,7 +241,7 @@ export function Dashboard() {
 
           <div className="border border-[#E0E0E0] rounded-lg overflow-hidden">
             {/* Table Header */}
-            <div className="bg-[#F0F4FF] grid grid-cols-[100px_1fr_120px_100px_80px] h-12 items-center px-4 border-b border-[#E0E0E0]">
+            <div className="bg-[#F0F4FF] grid grid-cols-[120px_150px_150px_100px_80px] h-12 items-center px-4 border-b border-[#E0E0E0]">
               <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 Pers.Nr.
               </div>
@@ -263,7 +263,7 @@ export function Dashboard() {
             {employees.map((employee, index) => (
               <div
                 key={employee.id}
-                className={`grid grid-cols-[100px_1fr_120px_100px_80px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
+                className={`grid grid-cols-[120px_150px_150px_100px_80px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
                   index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
                 }`}
               >
@@ -322,7 +322,7 @@ export function Dashboard() {
 
           <div className="border border-[#E0E0E0] rounded-lg overflow-hidden">
             {/* Table Header - NO CHECKBOX */}
-            <div className="bg-[#F0F4FF] grid grid-cols-[100px_80px_120px_80px_80px_200px_100px] h-12 items-center px-4 border-b border-[#E0E0E0]">
+            <div className="bg-[#F0F4FF] grid grid-cols-[80px_100px_120px_100px_100px_1fr_180px] h-12 items-center px-4 border-b border-[#E0E0E0]">
               <div className="text-[#666666] text-[11px] font-normal uppercase" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 Datum
               </div>
@@ -350,7 +350,7 @@ export function Dashboard() {
             {reports.map((report, index) => (
               <div
                 key={report.id}
-                className={`grid grid-cols-[100px_80px_120px_80px_80px_200px_100px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
+                className={`grid grid-cols-[80px_100px_120px_100px_100px_1fr_180px] items-center px-4 h-10 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition-colors ${
                   index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
                 }`}
               >
