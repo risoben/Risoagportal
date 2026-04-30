@@ -294,10 +294,10 @@ export function Dashboard() {
               {/* Table Header */}
               <div
                 className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: '1.5fr 100px 1fr 80px 100px auto', gap: '0' }}
+                style={{ display: 'grid', gridTemplateColumns: '100px 1.5fr 1fr 80px 100px auto', gap: '0' }}
               >
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Personalnummer</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Pers.Nr.</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Abteilung</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
@@ -313,10 +313,10 @@ export function Dashboard() {
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: '1.5fr 100px 1fr 80px 100px auto', gap: '0' }}
+                  style={{ display: 'grid', gridTemplateColumns: '100px 1.5fr 1fr 80px 100px auto', gap: '0' }}
                 >
-                  <div className="text-[#000000] text-sm">{employee.name}</div>
                   <div className="text-[#000000] text-sm">{employee.nr}</div>
+                  <div className="text-[#000000] text-sm">{employee.name}</div>
                   <div className="text-[#000000] text-sm">{employee.abteilung}</div>
                   <div className="flex items-center gap-2">
                     <span className="text-green-500">✅</span>
