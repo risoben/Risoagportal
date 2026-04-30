@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Users, FileText, Download, Eye, Euro, Edit2, Upload, Search, ChevronDown } from 'lucide-react';
+import { Users, FileText, Download, Eye, Euro, Edit2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
 
@@ -75,16 +74,9 @@ const reports = [
 ];
 
 export function Dashboard() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedStandort, setSelectedStandort] = useState('Alle');
-  const [selectedStatus, setSelectedStatus] = useState('Alle');
 
   const handleNavigate = (page: string) => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: page } }));
-  };
-
-  const handleImportClick = () => {
-    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'csv-upload' } }));
   };
 
   const handleEmployeeEdit = (employeeId: number) => {
@@ -278,58 +270,26 @@ export function Dashboard() {
 
         {/* SECTION 3: Mitarbeiter-Liste */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl mb-8">
-          {/* Search & Filter Bar */}
-          <div className="px-6 pt-6 pb-6 border-b border-[#E0E0E0]">
+          {/* Header */}
+          <div className="px-6 py-6 border-b border-[#E0E0E0]">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                {/* Search Field */}
-                <div className="relative" style={{ width: '400px' }}>
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#6B7280]" />
-                  <input
-                    type="text"
-                    placeholder="Suche..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full h-10 pl-10 pr-4 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#273A5F] focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
-                  />
-                </div>
-
-                {/* Standort Filter */}
-                <button
-                  className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
-                  style={{ width: '200px' }}
-                >
-                  <span className="text-[#273A5F] text-sm flex-1 text-left">
-                    Standort: {selectedStandort}
-                  </span>
-                  <ChevronDown className="w-4 h-4 text-[#6B7280]" />
-                </button>
-
-                {/* Status Filter */}
-                <button
-                  className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
-                  style={{ width: '200px' }}
-                >
-                  <span className="text-[#273A5F] text-sm flex-1 text-left">
-                    Status: {selectedStatus}
-                  </span>
-                  <ChevronDown className="w-4 h-4 text-[#6B7280]" />
-                </button>
+              <div>
+                <h2 className="text-[#273A5F] font-bold text-[16px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  Mitarbeiter
+                </h2>
               </div>
-
-              {/* Import Button */}
               <button
-                onClick={handleImportClick}
-                className="bg-[#0F429F] text-white px-6 h-10 rounded-lg flex items-center gap-2 hover:bg-[#0d3680] transition-colors font-medium text-sm"
+                onClick={() => handleNavigate('mitarbeiter')}
+                className="text-[#0F429F] text-[12px] font-normal hover:underline"
+                style={{ fontFamily: 'Roboto, sans-serif' }}
               >
-                <Upload className="w-4 h-4" />
-                CSV Import
+                Alle Mitarbeiter anzeigen
               </button>
             </div>
           </div>
 
           {/* Table */}
-          <div className="px-6 pb-6">
+          <div className="px-6 py-6">
             <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
               {/* Table Header */}
               <div
@@ -456,13 +416,15 @@ export function Dashboard() {
                   </div>
                   <div className="flex items-center gap-2">
                     <button
-                      className="bg-white text-[#0F429F] px-3 h-8 rounded-full font-medium text-xs hover:bg-[#F0F4FF] transition-colors flex items-center gap-1 border border-[#0F429F]"
+                      className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
+                      style={{ borderRadius: '32px' }}
                     >
                       <Eye size={16} />
                       Ansehen
                     </button>
                     <button
-                      className="bg-[#0F429F] text-white px-3 h-8 rounded-full font-medium text-xs hover:bg-[#0d3680] transition-colors flex items-center gap-1"
+                      className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
+                      style={{ borderRadius: '32px' }}
                     >
                       <Download size={16} />
                       Download
