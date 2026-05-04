@@ -150,46 +150,43 @@ export function BenefitsOverviewNew() {
       </div>
 
       {/* Benefits Grid */}
-      <div className="px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="px-8 py-8 max-w-4xl">
+        <div className="space-y-4">
           {benefits.map(benefit => (
             <div
               key={benefit.id}
               onClick={() => handleCardClick(benefit)}
-              className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-all duration-200 cursor-pointer"
+              className="bg-white border border-[#E0E0E0] rounded-lg p-6 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer"
             >
-              {/* Icon */}
-              <div className="flex justify-center mb-4">
-                <BenefitIconComponent benefitName={benefit.name} size={48} />
-              </div>
+              <div className="flex gap-6 items-start">
+                {/* Icon - Left Side */}
+                <div className="flex-shrink-0">
+                  <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
+                </div>
 
-              {/* Title */}
-              <h3 className="text-[#273A5F] font-medium text-[14px] text-center mb-2">
-                {benefit.name}
-              </h3>
+                {/* Content - Center/Right */}
+                <div className="flex-1">
+                  {/* Title and Description */}
+                  <div className="mb-3">
+                    <h3 className="text-[#273A5F] font-bold text-lg inline">{benefit.name}</h3>
+                    <p className="text-[#666666] text-sm mt-1">{benefit.description}</p>
+                  </div>
 
-              {/* Description */}
-              <p className="text-[#666666] text-[12px] text-center mb-3">
-                {benefit.description}
-              </p>
-
-              {/* Status Badge */}
-              <div className="flex justify-center mb-3">
-                <span
-                  className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-medium text-white"
-                  style={{
-                    backgroundColor: benefit.active ? '#4CAF50' : '#9E9E9E'
-                  }}
-                >
-                  {benefit.active ? '✅ Aktiv' : '⚪ Inaktiv'}
-                </span>
-              </div>
-
-              {/* Link */}
-              <div className="text-center">
-                <span className="text-[#0F429F] text-[12px] hover:text-[#246AFF] hover:underline">
-                  Details ansehen →
-                </span>
+                  {/* Status and Link */}
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-medium text-white"
+                      style={{
+                        backgroundColor: benefit.active ? '#4CAF50' : '#9E9E9E'
+                      }}
+                    >
+                      {benefit.active ? '✓ Aktiv' : 'Inaktiv'}
+                    </span>
+                    <span className="text-[#0F429F] text-sm font-medium hover:text-[#246AFF]">
+                      Details ansehen →
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
