@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AlertCircle, Loader2, Info, X, Check } from 'lucide-react';
+import { BenefitIconComponent } from './BenefitIconComponent';
 
 type EmployeeEditCreateProps = {
   editMode?: boolean;
@@ -403,14 +404,34 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
               <label className="block mb-1.5">
                 <span className="text-[#666666] text-[13px]">Enddatum</span>
               </label>
-              <input
-                type="date"
-                value={companyData.endDate}
-                onChange={(e) => handleCompanyChange('endDate', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
-                style={{ borderRadius: '4px' }}
-              />
+              <div className="flex gap-3">
+                <select
+                  value={companyData.endDate === 'unbefristet' ? 'unbefristet' : 'datum'}
+                  onChange={(e) => {
+                    if (e.target.value === 'unbefristet') {
+                      handleCompanyChange('endDate', 'unbefristet');
+                    } else {
+                      handleCompanyChange('endDate', '');
+                    }
+                  }}
+                  disabled={loadingState}
+                  className="px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                  style={{ borderRadius: '4px', minWidth: '120px' }}
+                >
+                  <option value="datum">Enddatum</option>
+                  <option value="unbefristet">Unbefristet</option>
+                </select>
+                {companyData.endDate !== 'unbefristet' && (
+                  <input
+                    type="date"
+                    value={companyData.endDate}
+                    onChange={(e) => handleCompanyChange('endDate', e.target.value)}
+                    disabled={loadingState}
+                    className="flex-1 px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                    style={{ borderRadius: '4px' }}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -500,7 +521,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                       </div>
                     </td>
                     <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <span className="text-[24px]">{benefit.icon}</span>
+                      <BenefitIconComponent benefitName={benefit.name} size={32} background={false} />
                     </td>
                     <td className="px-3 py-3 text-[13px] text-black border-b border-[#E0E0E0]">{benefit.name}</td>
                     <td className="px-3 py-3 text-[13px] text-[#666666] border-b border-[#E0E0E0]">{benefit.frequency}</td>
