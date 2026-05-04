@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Eye, EyeOff, Plus, Trash2, AlertCircle, Loader2, Info, X, Check } from 'lucide-react';
+import { AlertCircle, Loader2, Info, X, Check } from 'lucide-react';
 
 type EmployeeEditCreateProps = {
   editMode?: boolean;
@@ -98,10 +98,6 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
   const updateBenefitLimit = (id: string, field: 'dailyLimit' | 'monthlyLimit', value: string) => {
     setBenefits(benefits.map(b => b.id === id ? { ...b, [field]: value } : b));
-  };
-
-  const removeBenefit = (id: string) => {
-    setBenefits(benefits.filter(b => b.id !== id));
   };
 
   const handleSave = () => {
@@ -347,7 +343,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
             {/* Status */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">Status <span className="text-[#E53935]">*</span></span>
+                <span className="text-[#666666] text-[13px]">Aktiv <span className="text-[#E53935]">*</span></span>
               </label>
               <div className="flex items-center gap-3 h-[42px]">
                 <label className="flex items-center gap-2 cursor-pointer group">
@@ -548,29 +544,11 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                         <Info size={16} />
                       </button>
                     </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0] text-center">
-                      <button
-                        onClick={() => removeBenefit(benefit.id)}
-                        disabled={loadingState}
-                        className="text-[#E53935] hover:text-[#C62828] disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-
-          <button
-            onClick={() => alert('Weitere Benefit hinzufügen')}
-            disabled={loadingState}
-            className="mt-4 flex items-center gap-2 text-[#0F429F] text-[13px] hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Plus size={16} />
-            Weitere Benefit hinzufügen
-          </button>
         </div>
 
         {/* Action Buttons */}
