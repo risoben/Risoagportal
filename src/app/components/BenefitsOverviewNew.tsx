@@ -151,36 +151,37 @@ export function BenefitsOverviewNew() {
 
       {/* Benefits Grid */}
       <div className="px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {benefits.map(benefit => (
             <div
               key={benefit.id}
               onClick={() => handleCardClick(benefit)}
-              className="bg-white border border-[#E0E0E0] rounded-lg p-5 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer"
+              className="aspect-square bg-white border border-[#E0E0E0] rounded-lg p-4 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer flex flex-col justify-between"
             >
-              <div className="flex gap-4 items-start">
+              <div className="flex gap-3 items-start">
                 {/* Icon - Left Side */}
                 <div className="flex-shrink-0">
-                  <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
+                  <BenefitIconComponent benefitName={benefit.name} size={40} background={true} />
                 </div>
 
                 {/* Content */}
-                <div className="flex-grow-0">
-                  {/* Title and Description */}
-                  <h3 className="text-[#273A5F] font-bold text-base mb-2 leading-tight">{benefit.name}</h3>
-                  <p className="text-[#666666] text-sm mb-3">{benefit.description}</p>
-
-                  {/* Status Badge */}
-                  <span
-                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium text-white"
-                    style={{
-                      backgroundColor: benefit.active ? '#4CAF50' : '#9E9E9E'
-                    }}
-                  >
-                    {benefit.active ? '✓ Aktiv' : 'Inaktiv'}
-                  </span>
+                <div className="min-w-0 flex-grow-0">
+                  {/* Title */}
+                  <h3 className="text-[#273A5F] font-bold text-xs leading-tight truncate">{benefit.name}</h3>
+                  {/* Description */}
+                  <p className="text-[#666666] text-[10px] leading-tight truncate">{benefit.description}</p>
                 </div>
               </div>
+
+              {/* Status Badge - Bottom */}
+              <span
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium text-white w-fit"
+                style={{
+                  backgroundColor: benefit.active ? '#4CAF50' : '#9E9E9E'
+                }}
+              >
+                {benefit.active ? '✓ Aktiv' : 'Inaktiv'}
+              </span>
             </div>
           ))}
         </div>
