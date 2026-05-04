@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, Eye, Download, FileText, FileSpreadsheet, File, Check } from 'lucide-react';
+import { BenefitIconComponent } from './BenefitIconComponent';
 
 type FileType = 'PDF' | 'Excel' | 'CSV';
 
@@ -15,7 +16,6 @@ type Report = {
 
 type Benefit = {
   id: string;
-  icon: string;
   name: string;
   employees: number;
   budgetMonth: number;
@@ -75,7 +75,6 @@ const mockReports: Report[] = [
 const mockBenefits: Benefit[] = [
   {
     id: 'essenszuschuss',
-    icon: '🍽️',
     name: 'Essenszuschuss',
     employees: 45,
     budgetMonth: 1250,
@@ -85,7 +84,6 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'internet',
-    icon: '📡',
     name: 'Internet',
     employees: 38,
     budgetMonth: 950,
@@ -94,9 +92,8 @@ const mockBenefits: Benefit[] = [
     percentage: 76,
   },
   {
-    id: 'mobilitaet',
-    icon: '🚗',
-    name: 'Mobilität',
+    id: 'commuting',
+    name: 'Commuting',
     employees: 28,
     budgetMonth: 2100,
     usedMonth: 1890,
@@ -104,9 +101,8 @@ const mockBenefits: Benefit[] = [
     percentage: 90,
   },
   {
-    id: 'urban-sports',
-    icon: '⚽',
-    name: 'Urban Sports Club',
+    id: 'erholung',
+    name: 'Erholung',
     employees: 52,
     budgetMonth: 1560,
     usedMonth: 1248,
@@ -114,9 +110,8 @@ const mockBenefits: Benefit[] = [
     percentage: 80,
   },
   {
-    id: 'kindergeld',
-    icon: '👶',
-    name: 'Kindergeld',
+    id: 'kindergarten',
+    name: 'Kindergarten',
     employees: 15,
     budgetMonth: 750,
     usedMonth: 525,
@@ -124,9 +119,8 @@ const mockBenefits: Benefit[] = [
     percentage: 70,
   },
   {
-    id: 'weiterbildung',
-    icon: '📚',
-    name: 'Weiterbildung',
+    id: 'danke-bonus',
+    name: 'Danke-Bonus',
     employees: 22,
     budgetMonth: 1800,
     usedMonth: 1440,
@@ -135,7 +129,6 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'sachbezug',
-    icon: '🎁',
     name: 'Sachbezug',
     employees: 67,
     budgetMonth: 3350,
@@ -144,9 +137,8 @@ const mockBenefits: Benefit[] = [
     percentage: 80,
   },
   {
-    id: 'homeoffice',
-    icon: '🏠',
-    name: 'Homeoffice-Ausstattung',
+    id: 'geburtstag',
+    name: 'Geburtstag',
     employees: 41,
     budgetMonth: 1640,
     usedMonth: 1148,
@@ -459,12 +451,7 @@ export function ReportsPage() {
             >
               {/* Icon and Name */}
               <div className="flex items-center gap-3 mb-4">
-                <div
-                  className="w-12 h-12 flex items-center justify-center rounded-lg"
-                  style={{ backgroundColor: '#F0F4FF' }}
-                >
-                  <span className="text-2xl">{benefit.icon}</span>
-                </div>
+                <BenefitIconComponent benefitName={benefit.name} size={32} background={true} />
                 <h3 className="text-[#000000] font-bold text-sm flex-1">{benefit.name}</h3>
               </div>
 

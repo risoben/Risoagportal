@@ -1,8 +1,8 @@
 import { X } from 'lucide-react';
+import { BenefitIconComponent } from './BenefitIconComponent';
 
 type BenefitInfo = {
   id: string;
-  icon: string;
   name: string;
   headline: string;
   what: string;
@@ -13,9 +13,7 @@ type BenefitInfo = {
 
 const benefitInfoData: Record<string, BenefitInfo> = {
   essenszuschuss: {
-    id: 'essenszuschuss',
-    icon: '🍽️',
-    name: 'Essenszuschuss',
+    id: 'essenszuschuss',    name: 'Essenszuschuss',
     headline: 'Für jeden Lifestyle und jede Essensgewohnheit geeignet.',
     what: 'Finanzielle Unterstützung für deine Mittagspause oder Mahlzeiten am Arbeitsplatz.',
     vorteile: [
@@ -31,9 +29,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   internetzuschuss: {
-    id: 'internetzuschuss',
-    icon: '📡',
-    name: 'Internetzuschuss',
+    id: 'internetzuschuss',    name: 'Internetzuschuss',
     headline: 'In jede Situation anwendbar und bei jedem Anbieter möglich.',
     what: 'Zuschuss zu deinen Internet- und Mobilfunkkosten — egal ob Zuhause oder unterwegs.',
     vorteile: [
@@ -48,9 +44,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   erholungsbeihilfe: {
-    id: 'erholungsbeihilfe',
-    icon: '🏖️',
-    name: 'Erholungsbeihilfe',
+    id: 'erholungsbeihilfe',    name: 'Erholungsbeihilfe',
     headline: 'Für Urlaubswünsche und Erholungsbedürfnisse.',
     what: 'Finanzielle Unterstützung für deinen wohlverdienten Urlaub.',
     vorteile: [
@@ -65,9 +59,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   kindergarten: {
-    id: 'kindergarten',
-    icon: '👶',
-    name: 'Kindergartenzuschuss',
+    id: 'kindergarten',    name: 'Kindergartenzuschuss',
     headline: 'Unbegrenzter Zuschuss für die Betreuung im Vorschulalter.',
     what: 'Finanzielle Unterstützung für Kindergarten, Vorschule oder Kinderbetreuung.',
     vorteile: [
@@ -82,9 +74,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   fahrtkosten: {
-    id: 'fahrtkosten',
-    icon: '🚗',
-    name: 'Fahrtkostenzuschuss',
+    id: 'fahrtkosten',    name: 'Fahrtkostenzuschuss',
     headline: 'Für die Anreise ins Büro.',
     what: 'Zuschuss zu deinen Fahrtkosten zur Arbeit.',
     vorteile: [
@@ -100,9 +90,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     wichtig: 'Entweder-oder mit ÖPNV-Ticket — du wählst eine Option',
   },
   oepnv: {
-    id: 'oepnv',
-    icon: '🚌',
-    name: 'ÖPNV-Ticket-Zuschuss',
+    id: 'oepnv',    name: 'ÖPNV-Ticket-Zuschuss',
     headline: 'Deutschlandticket und weitere ÖPNV Fahrten.',
     what: 'Zuschuss für deine umweltfreundliche Anreise mit öffentlichen Verkehrsmitteln.',
     vorteile: [
@@ -118,9 +106,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     wichtig: 'Entweder-oder mit Fahrtkostenzuschuss — du wählst eine Option',
   },
   sachbezug: {
-    id: 'sachbezug',
-    icon: '🎁',
-    name: '50€-Sachbezug',
+    id: 'sachbezug',    name: '50€-Sachbezug',
     headline: 'Gutscheine jeden Monat. Große Auswahl an Partnern.',
     what: 'Monatliche Gutschein-Auswahl für Shopping, Freizeit und mehr.',
     vorteile: [
@@ -136,9 +122,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   geburtstag: {
-    id: 'geburtstag',
-    icon: '🎂',
-    name: 'Geburtstagsgutschein / Jubiläum',
+    id: 'geburtstag',    name: 'Geburtstagsgutschein / Jubiläum',
     headline: 'Ein besonderer Tag, ein besonderes Dankeschön.',
     what: 'Spezielle Gutscheine zu deinem Geburtstag und Jubiläum — ein persönliches Dankeschön.',
     vorteile: [
@@ -153,9 +137,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   danke: {
-    id: 'danke',
-    icon: '🙏',
-    name: 'Danke-Bonus',
+    id: 'danke',    name: 'Danke-Bonus',
     headline: 'Für besondere Leistungen und Erfolge.',
     what: 'Finanzielle Anerkennung für außergewöhnliche Mitarbeiterleistungen.',
     vorteile: [
@@ -170,9 +152,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   bkv: {
-    id: 'bkv',
-    icon: '🏥',
-    name: 'BKV (Betriebliche Krankenversicherung)',
+    id: 'bkv',    name: 'BKV (Betriebliche Krankenversicherung)',
     headline: 'Wohlbefinden und Gesundheit nicht nur am Arbeitsplatz.',
     what: 'Private Zusatzkrankenversicherung mit hohem Leistungsspektrum.',
     vorteile: [
@@ -188,9 +168,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   bav: {
-    id: 'bav',
-    icon: '👴',
-    name: 'BAV (Betriebliche Altersvorsorge)',
+    id: 'bav',    name: 'BAV (Betriebliche Altersvorsorge)',
     headline: 'Finanzielle Sicherheit für die Zeit nach dem Arbeitsleben.',
     what: 'Zusätzliche Altersvorsorge über deinen Arbeitgeber — für einen sorgenfreien Ruhestand.',
     vorteile: [
@@ -230,12 +208,7 @@ export function BenefitInfoModal({ benefitId, onClose }: BenefitInfoModalProps) 
         {/* Modal Header */}
         <div className="px-8 py-6 border-b border-[#E8E8E8] flex items-center justify-between sticky top-0 bg-white z-10">
           <div className="flex items-center gap-4">
-            <div
-              className="w-14 h-14 flex items-center justify-center rounded-lg"
-              style={{ backgroundColor: '#F0F4FF' }}
-            >
-              <span className="text-[36px]">{benefit.icon}</span>
-            </div>
+            <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
             <h2 className="text-[#000000] font-bold text-[24px]">{benefit.name}</h2>
           </div>
           <button

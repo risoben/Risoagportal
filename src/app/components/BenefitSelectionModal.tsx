@@ -6,7 +6,6 @@ interface Benefit {
   id: string;
   name: string;
   description: string;
-  icon: string;
   status: 'active' | 'inactive';
 }
 
@@ -18,59 +17,51 @@ interface BenefitSelectionModalProps {
 
 const allBenefits: Benefit[] = [
   {
-    id: 'mittagessen',
-    name: 'Mittagessen',
+    id: 'essenszuschuss',
+    name: 'Essenszuschuss',
     description: 'Essenszuschuss für Mitarbeiter',
-    icon: '🍽️',
     status: 'active',
   },
   {
     id: 'internet',
     name: 'Internet',
     description: 'Internetzuschuss für Home Office',
-    icon: '📡',
     status: 'active',
   },
   {
     id: 'kindergarten',
     name: 'Kindergarten',
     description: 'Kinderbetreuungs-Zuschuss',
-    icon: '👶',
     status: 'inactive',
   },
   {
     id: 'erholung',
     name: 'Erholung',
     description: 'Erholungsbudget für Mitarbeiter',
-    icon: '🏖️',
     status: 'inactive',
   },
   {
     id: 'oepnv',
     name: 'ÖPNV',
     description: 'Öffentliche Verkehrsmittel',
-    icon: '🚇',
     status: 'inactive',
   },
   {
     id: 'bav',
     name: 'BAV',
     description: 'Betriebliche Altersversorgung',
-    icon: '💰',
     status: 'inactive',
   },
   {
     id: 'sachbezug',
     name: 'Sachbezug',
     description: 'Sachleistungen & Gutscheine',
-    icon: '🎁',
     status: 'inactive',
   },
   {
     id: 'bkv',
     name: 'BKV',
     description: 'Betriebliche Krankenversicherung',
-    icon: '🏥',
     status: 'inactive',
   },
 ];
@@ -146,9 +137,7 @@ export function BenefitSelectionModal({ isOpen, onClose, onSelect }: BenefitSele
                 >
                   {/* Icon */}
                   <div className="flex justify-center mb-4">
-                    <div style={{ width: '48px', height: '48px', fontSize: '48px', lineHeight: '48px' }}>
-                      {benefit.icon}
-                    </div>
+                    <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
                   </div>
 
                   {/* Title */}

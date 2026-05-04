@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Settings, Ban, Info } from 'lucide-react';
 import { BenefitInfoModal } from './BenefitInfoModal';
+import { BenefitIconComponent } from './BenefitIconComponent';
 
 type BenefitGroup = 'Cash Benefits' | 'Sachbezüge';
 
 type Benefit = {
   id: string;
   group: BenefitGroup;
-  icon: string;
   name: string;
   description: string;
   employees: number;
@@ -22,9 +22,7 @@ const mockBenefits: Benefit[] = [
   // GRUPPE 1 — Cash Benefits
   {
     id: 'essenszuschuss',
-    group: 'Cash Benefits',
-    icon: '🍽️',
-    name: 'Essenszuschuss',
+    group: 'Cash Benefits',    name: 'Essenszuschuss',
     description: 'bis 7,67€/Tag',
     employees: 45,
     budgetMonth: 1250,
@@ -35,9 +33,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'internetzuschuss',
-    group: 'Cash Benefits',
-    icon: '📡',
-    name: 'Internetzuschuss',
+    group: 'Cash Benefits',    name: 'Internetzuschuss',
     description: 'bis 50€/Monat',
     employees: 38,
     budgetMonth: 950,
@@ -48,9 +44,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'erholungsbeihilfe',
-    group: 'Cash Benefits',
-    icon: '🏖️',
-    name: 'Erholungsbeihilfe',
+    group: 'Cash Benefits',    name: 'Erholungsbeihilfe',
     description: 'bis 156€/Jahr',
     employees: 28,
     budgetMonth: 650,
@@ -61,9 +55,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'kindergarten',
-    group: 'Cash Benefits',
-    icon: '👶',
-    name: 'Kindergartenzuschuss',
+    group: 'Cash Benefits',    name: 'Kindergartenzuschuss',
     description: 'individuell',
     employees: 12,
     budgetMonth: 850,
@@ -74,9 +66,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'fahrtkosten',
-    group: 'Cash Benefits',
-    icon: '🚗',
-    name: 'Fahrtkostenzuschuss',
+    group: 'Cash Benefits',    name: 'Fahrtkostenzuschuss',
     description: 'exklusiv',
     employees: 34,
     budgetMonth: 1150,
@@ -87,9 +77,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'oepnv',
-    group: 'Cash Benefits',
-    icon: '🚊',
-    name: 'ÖPNV-Ticket-Zuschuss',
+    group: 'Cash Benefits',    name: 'ÖPNV-Ticket-Zuschuss',
     description: 'exklusiv',
     employees: 52,
     budgetMonth: 2100,
@@ -101,9 +89,7 @@ const mockBenefits: Benefit[] = [
   // GRUPPE 2 — Sachbezüge
   {
     id: 'sachbezug',
-    group: 'Sachbezüge',
-    icon: '🎁',
-    name: '50€-Sachbezug',
+    group: 'Sachbezüge',    name: '50€-Sachbezug',
     description: 'monatlich',
     employees: 67,
     budgetMonth: 3350,
@@ -114,9 +100,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'geburtstag',
-    group: 'Sachbezüge',
-    icon: '🎂',
-    name: 'Geburtstagsgutschein',
+    group: 'Sachbezüge',    name: 'Geburtstagsgutschein',
     description: 'Jubiläum',
     employees: 8,
     budgetMonth: 400,
@@ -270,12 +254,7 @@ export function BenefitsOverviewPage() {
                 >
                   {/* Icon */}
                   <div>
-                    <div
-                      className="w-12 h-12 flex items-center justify-center rounded-lg"
-                      style={{ backgroundColor: '#F0F4FF' }}
-                    >
-                      <span className="text-2xl">{benefit.icon}</span>
-                    </div>
+                    <BenefitIconComponent benefitName={benefit.name} size={32} background={true} />
                   </div>
 
                   {/* Name */}

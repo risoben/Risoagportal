@@ -9,15 +9,24 @@ const benefitConfig: Record<string, { svgPath: string; color: string; fallbackEm
   'Essenszuschuss': { svgPath: '/assets/benefit-icons/Mittagessen.svg', color: '#F4B860' },
   'Mittagessen': { svgPath: '/assets/benefit-icons/Mittagessen.svg', color: '#F4B860' },
   'Internet': { svgPath: '/assets/benefit-icons/Internet.svg', color: '#4CAF50' },
+  'Internetzuschuss': { svgPath: '/assets/benefit-icons/Internet.svg', color: '#4CAF50' },
   'Kindergarten': { svgPath: '/assets/benefit-icons/Kindergarten.svg', color: '#FF6B6B' },
+  'Kindergartenzuschuss': { svgPath: '/assets/benefit-icons/Kindergarten.svg', color: '#FF6B6B' },
   'Commuting': { svgPath: '/assets/benefit-icons/Commuting.svg', color: '#4CAF50' },
+  'Fahrtkostenzuschuss': { svgPath: '/assets/benefit-icons/Commuting.svg', color: '#4CAF50' },
   'Erholung': { svgPath: '/assets/benefit-icons/Erholung.svg', color: '#2196F3' },
+  'Erholungsbeihilfe': { svgPath: '/assets/benefit-icons/Erholung.svg', color: '#2196F3' },
   'Sachbezug': { svgPath: '/assets/benefit-icons/Sachbezug.svg', color: '#E91E63' },
+  '50€-Sachbezug': { svgPath: '/assets/benefit-icons/Sachbezug.svg', color: '#E91E63' },
   'Danke-Bonus': { svgPath: '/assets/benefit-icons/Danke-Bonus.svg', color: '#4CAF50' },
   'Geburtstag': { svgPath: '/assets/benefit-icons/Geburtstag.svg', color: '#FFC107' },
+  'Geburtstagsgutschein / Jubiläum': { svgPath: '/assets/benefit-icons/Geburtstag.svg', color: '#FFC107' },
   'ÖPNV': { svgPath: '/assets/benefit-icons/OEPNV.svg', color: '#2196F3' },
+  'ÖPNV-Ticket-Zuschuss': { svgPath: '/assets/benefit-icons/OEPNV.svg', color: '#2196F3' },
   'BKV': { svgPath: '', color: '#0F429F', fallbackEmoji: '🏥' },
-  'BAV': { svgPath: '', color: '#8E44AD', fallbackEmoji: '💼' }
+  'BKV (Betriebliche Krankenversicherung)': { svgPath: '', color: '#0F429F', fallbackEmoji: '🏥' },
+  'BAV': { svgPath: '', color: '#8E44AD', fallbackEmoji: '💼' },
+  'BAV (Betriebliche Altersvorsorge)': { svgPath: '', color: '#8E44AD', fallbackEmoji: '💼' }
 };
 
 export function BenefitIconComponent({
