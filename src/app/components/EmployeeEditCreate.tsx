@@ -51,7 +51,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
     department: isEditMode ? 'IT' : '',
     status: isEditMode ? 'Active' : 'Active',
     startDate: isEditMode ? '2024-01-01' : '',
-    endDate: '',
+    endDate: 'unbefristet',
   });
 
   // Family Situation

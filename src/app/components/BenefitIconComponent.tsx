@@ -6,6 +6,7 @@ interface BenefitIconProps {
 }
 
 const benefitConfig: Record<string, { svgPath: string; color: string; fallbackEmoji?: string }> = {
+  'Essenszuschuss': { svgPath: '/assets/benefit-icons/Mittagessen.svg', color: '#F4B860' },
   'Mittagessen': { svgPath: '/assets/benefit-icons/Mittagessen.svg', color: '#F4B860' },
   'Internet': { svgPath: '/assets/benefit-icons/Internet.svg', color: '#4CAF50' },
   'Kindergarten': { svgPath: '/assets/benefit-icons/Kindergarten.svg', color: '#FF6B6B' },
