@@ -10,8 +10,6 @@ type EmployeeEditCreateProps = {
 type Benefit = {
   id: string;
   name: string;
-  icon: string;
-  color: string;
   frequency: string;
   dailyLimit: string;
   monthlyLimit: string;
@@ -62,17 +60,17 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
   // Benefits
   const [benefits, setBenefits] = useState<Benefit[]>([
-    { id: '1', name: 'Essenszuschuss', icon: '🍽️', color: '#F4B860', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '150.00', selected: isEditMode },
-    { id: '2', name: 'Internet', icon: '📡', color: '#4CAF50', frequency: 'Monatlich', dailyLimit: '50.00', monthlyLimit: '500.00', selected: isEditMode },
-    { id: '3', name: 'Kindergarten', icon: '👶', color: '#FF6B6B', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '100.00', selected: false },
-    { id: '4', name: 'Commuting', icon: '🚗', color: '#4CAF50', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
-    { id: '5', name: 'Erholung', icon: '🏖️', color: '#2196F3', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '156.00', selected: false },
-    { id: '6', name: 'Sachbezug', icon: '🎁', color: '#E91E63', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '50.00', selected: false },
-    { id: '7', name: 'Danke-Bonus', icon: '🙏', color: '#4CAF50', frequency: 'Einmalig', dailyLimit: '', monthlyLimit: '100.00', selected: false },
-    { id: '8', name: 'Geburtstag', icon: '🎂', color: '#FFC107', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '50.00', selected: false },
-    { id: '9', name: 'ÖPNV', icon: '🚌', color: '#2196F3', frequency: 'Monatlich', dailyLimit: '63.00', monthlyLimit: '630.00', selected: isEditMode },
-    { id: '10', name: 'BKV', icon: '🏥', color: '#0F429F', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
-    { id: '11', name: 'BAV', icon: '👴', color: '#8E44AD', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '150.00', selected: false },
+    { id: '1', name: 'Essenszuschuss', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '150.00', selected: isEditMode },
+    { id: '2', name: 'Internet', frequency: 'Monatlich', dailyLimit: '50.00', monthlyLimit: '500.00', selected: isEditMode },
+    { id: '3', name: 'Kindergarten', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '100.00', selected: false },
+    { id: '4', name: 'Commuting', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
+    { id: '5', name: 'Erholung', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '156.00', selected: false },
+    { id: '6', name: 'Sachbezug', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '50.00', selected: false },
+    { id: '7', name: 'Danke-Bonus', frequency: 'Einmalig', dailyLimit: '', monthlyLimit: '100.00', selected: false },
+    { id: '8', name: 'Geburtstag', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '50.00', selected: false },
+    { id: '9', name: 'ÖPNV', frequency: 'Monatlich', dailyLimit: '63.00', monthlyLimit: '630.00', selected: isEditMode },
+    { id: '10', name: 'BKV', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
+    { id: '11', name: 'BAV', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '150.00', selected: false },
   ]);
 
   const availableLocations = companyData.company ? LOCATIONS_MAP[companyData.company] || [] : [];
