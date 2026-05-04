@@ -164,11 +164,11 @@ export function BenefitsOverviewNew() {
                   <BenefitIconComponent benefitName={benefit.name} size={40} background={true} />
                 </div>
 
-                {/* Content - Center/Right */}
-                <div className="flex-1 min-w-0">
+                {/* Content */}
+                <div>
                   {/* Title and Description */}
                   <h3 className="text-[#273A5F] font-bold text-sm mb-1 leading-tight">{benefit.name}</h3>
-                  <p className="text-[#666666] text-xs mb-2 line-clamp-2">{benefit.description}</p>
+                  <p className="text-[#666666] text-xs mb-2">{benefit.description}</p>
 
                   {/* Status Badge */}
                   <span
