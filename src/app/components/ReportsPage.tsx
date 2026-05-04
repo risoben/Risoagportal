@@ -431,19 +431,19 @@ export function ReportsPage() {
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-8" style={{ borderRadius: '12px' }}>
           <div className="grid grid-cols-4 gap-6">
             <div>
-              <p className="text-[#666666] text-xs mb-2">Gesamtbudget (dieser Monat)</p>
+              <p className="text-[#666666] text-sm font-bold mb-2">Gesamtbudget (dieser Monat)</p>
               <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalBudget)}</p>
             </div>
             <div>
-              <p className="text-[#666666] text-xs mb-2">Gesamtvergeben</p>
+              <p className="text-[#666666] text-sm font-bold mb-2">Gesamtvergeben</p>
               <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalUsed)}</p>
             </div>
             <div>
-              <p className="text-[#666666] text-xs mb-2">Gesamtverfügbar</p>
+              <p className="text-[#666666] text-sm font-bold mb-2">Gesamtverfügbar</p>
               <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalAvailable)}</p>
             </div>
             <div>
-              <p className="text-[#666666] text-xs mb-2">Durchschn. Nutzungsquote</p>
+              <p className="text-[#666666] text-sm font-bold mb-2">Durchschn. Nutzungsquote</p>
               <p className="text-[#0F429F] font-bold text-2xl">{avgUtilization}%</p>
             </div>
           </div>
