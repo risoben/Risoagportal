@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { ChevronDown, X, Search } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { BenefitIconComponent } from './BenefitIconComponent';
 
 type Benefit = {
   id: string;
   name: string;
-  icon: string;
-  iconColor: string;
   status: 'active' | 'inactive';
   employeeCount: number;
   totalBudget: number;
@@ -29,8 +28,6 @@ const mockBenefits: BenefitWithCategory[] = [
   {
     id: 'essenszuschuss',
     name: 'Essenszuschuss',
-    icon: '🍽️',
-    iconColor: '#F4B860',
     status: 'active',
     employeeCount: 1024,
     totalBudget: 5000,
@@ -41,8 +38,6 @@ const mockBenefits: BenefitWithCategory[] = [
   {
     id: 'internet',
     name: 'Internet',
-    icon: '📡',
-    iconColor: '#4CAF50',
     status: 'active',
     employeeCount: 978,
     totalBudget: 2500,
@@ -51,10 +46,8 @@ const mockBenefits: BenefitWithCategory[] = [
     category: 'cash',
   },
   {
-    id: 'kindergeld',
-    name: 'Kindergeld',
-    icon: '👶',
-    iconColor: '#FF6B6B',
+    id: 'kindergarten',
+    name: 'Kindergarten',
     status: 'active',
     employeeCount: 324,
     totalBudget: 1500,
@@ -64,10 +57,8 @@ const mockBenefits: BenefitWithCategory[] = [
   },
   // Gutschein-Benefits
   {
-    id: 'mobilitaet',
-    name: 'Mobilität',
-    icon: '🚗',
-    iconColor: '#4CAF50',
+    id: 'commuting',
+    name: 'Commuting',
     status: 'active',
     employeeCount: 856,
     totalBudget: 3000,
@@ -76,10 +67,8 @@ const mockBenefits: BenefitWithCategory[] = [
     category: 'gutschein',
   },
   {
-    id: 'urban-sports',
-    name: 'Urban Sports Club',
-    icon: '⚽',
-    iconColor: '#8B5CF6',
+    id: 'erholung',
+    name: 'Erholung',
     status: 'active',
     employeeCount: 642,
     totalBudget: 2000,
@@ -88,10 +77,8 @@ const mockBenefits: BenefitWithCategory[] = [
     category: 'gutschein',
   },
   {
-    id: 'weiterbildung',
-    name: 'Weiterbildung',
-    icon: '📚',
-    iconColor: '#2196F3',
+    id: 'sachbezug',
+    name: 'Sachbezug',
     status: 'inactive',
     employeeCount: 0,
     totalBudget: 0,
@@ -329,56 +316,45 @@ export function BenefitsOverview() {
         {/* Benefits Cards Grid */}
         <div>
           {/* Cash-Benefits Section */}
-          <div className="mb-8">
-            <h2 className="text-[#273A5F] font-bold text-lg mb-4">Cash-Benefits</h2>
-            <div className="grid grid-cols-3 gap-6">
+          <div className="mb-12">
+            <h2 className="text-[#273A5F] font-bold text-xl mb-6">Cash-Benefits</h2>
+            <div className="space-y-4">
               {mockBenefits.filter(b => b.category === 'cash').map((benefit) => (
                 <button
                   key={benefit.id}
                   onClick={() => handleEdit(benefit.id)}
-                  className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
+                  className="w-full bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
                 >
-                  <div className="flex gap-4 items-start">
-                    {/* Icon - Left Side */}
-                    <div
-                      className="flex items-center justify-center rounded-lg flex-shrink-0"
-                      style={{
-                        width: '64px',
-                        height: '64px',
-                        backgroundColor: `${benefit.iconColor}20`,
-                      }}
-                    >
-                      <span className="text-4xl">{benefit.icon}</span>
+                  <div className="flex gap-6 items-start">
+                    {/* Icon - Left Side (64px) */}
+                    <div className="flex-shrink-0">
+                      <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
                     </div>
 
-                    {/* Content - Center */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline gap-2 mb-2">
-                        <h3 className="text-[#273A5F] font-bold text-lg">{benefit.name}</h3>
-                        <span className="text-[#273A5F] text-lg">bis zu</span>
-                        <p className="text-[#0F429F] font-bold text-lg">€ {benefit.totalBudget.toLocaleString()}</p>
+                    {/* Content - Center/Right */}
+                    <div className="flex-1">
+                      <div className="mb-3">
+                        <h3 className="text-[#273A5F] font-bold text-lg inline">{benefit.name}</h3>
+                        <span className="text-[#273A5F] text-lg ml-3">bis zu</span>
+                        <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString()}</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 mb-4">
                         {benefit.status === 'active' ? (
                           <>
-                            <span className="text-green-500 text-sm">✅</span>
+                            <span className="text-green-600 text-sm">✓</span>
                             <span className="text-[#10B981] text-sm font-medium">Aktiv</span>
                           </>
                         ) : (
                           <>
-                            <span className="text-gray-400 text-sm">❌</span>
+                            <span className="text-gray-400 text-sm">✗</span>
                             <span className="text-[#6B7280] text-sm">Inaktiv</span>
                           </>
                         )}
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom Metrics */}
-                  <div className="mt-4 pt-4 border-t border-[#E5E7EB] text-xs text-[#666666]">
-                    <div className="flex justify-between">
-                      <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
-                      <span>{benefit.usagePercentage}% genutzt</span>
+                      <div className="flex justify-between text-xs text-[#666666]">
+                        <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
+                        <span>{benefit.usagePercentage}% genutzt</span>
+                      </div>
                     </div>
                   </div>
                 </button>
@@ -388,55 +364,44 @@ export function BenefitsOverview() {
 
           {/* Gutschein-Benefits Section */}
           <div className="mb-8">
-            <h2 className="text-[#273A5F] font-bold text-lg mb-4">Gutschein-Benefits</h2>
-            <div className="grid grid-cols-3 gap-6">
+            <h2 className="text-[#273A5F] font-bold text-xl mb-6">Gutschein-Benefits</h2>
+            <div className="space-y-4">
               {mockBenefits.filter(b => b.category === 'gutschein').map((benefit) => (
                 <button
                   key={benefit.id}
                   onClick={() => handleEdit(benefit.id)}
-                  className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
+                  className="w-full bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
                 >
-                  <div className="flex gap-4 items-start">
-                    {/* Icon - Left Side */}
-                    <div
-                      className="flex items-center justify-center rounded-lg flex-shrink-0"
-                      style={{
-                        width: '64px',
-                        height: '64px',
-                        backgroundColor: `${benefit.iconColor}20`,
-                      }}
-                    >
-                      <span className="text-4xl">{benefit.icon}</span>
+                  <div className="flex gap-6 items-start">
+                    {/* Icon - Left Side (64px) */}
+                    <div className="flex-shrink-0">
+                      <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
                     </div>
 
-                    {/* Content - Center */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline gap-2 mb-2">
-                        <h3 className="text-[#273A5F] font-bold text-lg">{benefit.name}</h3>
-                        <span className="text-[#273A5F] text-lg">bis zu</span>
-                        <p className="text-[#0F429F] font-bold text-lg">€ {benefit.totalBudget.toLocaleString()}</p>
+                    {/* Content - Center/Right */}
+                    <div className="flex-1">
+                      <div className="mb-3">
+                        <h3 className="text-[#273A5F] font-bold text-lg inline">{benefit.name}</h3>
+                        <span className="text-[#273A5F] text-lg ml-3">bis zu</span>
+                        <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString()}</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 mb-4">
                         {benefit.status === 'active' ? (
                           <>
-                            <span className="text-green-500 text-sm">✅</span>
+                            <span className="text-green-600 text-sm">✓</span>
                             <span className="text-[#10B981] text-sm font-medium">Aktiv</span>
                           </>
                         ) : (
                           <>
-                            <span className="text-gray-400 text-sm">❌</span>
+                            <span className="text-gray-400 text-sm">✗</span>
                             <span className="text-[#6B7280] text-sm">Inaktiv</span>
                           </>
                         )}
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom Metrics */}
-                  <div className="mt-4 pt-4 border-t border-[#E5E7EB] text-xs text-[#666666]">
-                    <div className="flex justify-between">
-                      <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
-                      <span>{benefit.usagePercentage}% genutzt</span>
+                      <div className="flex justify-between text-xs text-[#666666]">
+                        <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
+                        <span>{benefit.usagePercentage}% genutzt</span>
+                      </div>
                     </div>
                   </div>
                 </button>
