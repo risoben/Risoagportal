@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, ChevronLeft, ChevronRight, Search, Upload } from 'lucide-react';
+import { Plus, ChevronLeft, ChevronRight, Search, Upload, Eye, Edit2 } from 'lucide-react';
 import { MassImportModal } from './MassImportModal';
 
 type Employee = {
@@ -243,7 +243,7 @@ export function EmployeeManagement() {
             </button>
             <button
               onClick={handleAddNew}
-              className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition flex items-center gap-2"
+              className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition flex items-center gap-2"
               style={{ borderRadius: '24px' }}
             >
               <Plus className="w-5 h-5" />
@@ -300,50 +300,55 @@ export function EmployeeManagement() {
       <div className="px-8 py-6">
         <div className="bg-white border border-[#E0E0E0] rounded-xl overflow-hidden" style={{ borderRadius: '12px' }}>
           {/* Table Header */}
-          <div className="bg-[#F0F4FF] grid grid-cols-[150px_1fr_150px_120px_150px_200px] h-12 items-center px-4">
-            <div className="text-[#666666] text-xs font-medium uppercase">Personalnummer</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Name</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Abteilung</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Status</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Budget (Jahr)</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Aktion</div>
+          <div className="bg-[#273A5F] grid grid-cols-[150px_1fr_150px_120px_150px_240px] h-12 items-center px-6">
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Personalnummer</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Abteilung</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Aktionen</div>
           </div>
 
           {/* Table Rows */}
           {paginatedEmployees.map((employee, index) => (
             <div
               key={employee.id}
-              className={`grid grid-cols-[150px_1fr_150px_120px_150px_200px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 hover:bg-[#F8F9FB] hover:shadow-sm transition ${
-                index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
-              }`}
-              style={{ minHeight: '56px' }}
+              className={`
+                flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                transition-colors hover:bg-gray-50
+                ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
+              `}
+              style={{ display: 'grid', gridTemplateColumns: '150px 1fr 150px 120px 150px 240px', gap: '0' }}
             >
-              <div className="text-[#666666] text-sm">{employee.personnelNumber}</div>
-              <div className="text-[#000000] text-sm font-medium">{employee.name}</div>
-              <div className="text-[#666666] text-sm">{employee.department}</div>
-              <div>
-                <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    employee.status === 'aktiv'
-                      ? 'bg-[#E8F5E9] text-[#4CAF50]'
-                      : 'bg-[#F5F5F5] text-[#9E9E9E]'
-                  }`}
-                >
-                  {employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'}
-                </span>
+              <div className="text-[#000000] text-sm">{employee.personnelNumber}</div>
+              <div className="text-[#000000] text-sm">{employee.name}</div>
+              <div className="text-[#000000] text-sm">{employee.department}</div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-500">✅</span>
+                <span className="text-[#000000] text-sm">{employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'}</span>
               </div>
               <div className="text-[#000000] text-sm">{formatCurrency(employee.budgetYear)}</div>
-              <div className="flex gap-3">
+              <div className="flex items-center gap-2">
                 <button
-                  onClick={() => handleShowDetails(employee)}
-                  className="text-[#246AFF] text-sm hover:underline"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShowDetails(employee);
+                  }}
+                  className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
+                  style={{ borderRadius: '32px' }}
                 >
+                  <Eye size={16} />
                   Details
                 </button>
                 <button
-                  onClick={() => handleEdit(employee)}
-                  className="text-[#246AFF] text-sm hover:underline"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleEdit(employee);
+                  }}
+                  className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
+                  style={{ borderRadius: '32px' }}
                 >
+                  <Edit2 size={16} />
                   Bearbeiten
                 </button>
               </div>
