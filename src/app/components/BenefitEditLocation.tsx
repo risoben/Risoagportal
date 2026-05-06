@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeft, Info, Trash2, Calendar, Check } from 'lucide-react';
+import { StatusBadge } from './Table';
 
 type Employee = {
   id: string;
@@ -69,16 +70,15 @@ export function BenefitEditLocation() {
   };
 
   const handleSave = () => {
-    alert(`Benefit gespeichert:\n- Limit: ${monthlyLimit}€\n- Status: ${isActive ? 'Aktiv' : 'Inaktiv'}`);
+    alert(`Benefit gespeichert:\n- Budget: ${monthlyLimit}€\n- Status: ${isActive ? 'Aktiv' : 'Inaktiv'}`);
   };
 
   return (
     <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
-      <div className="bg-white border-b border-[#E8E8E8] px-8 py-6">
+      <div className="bg-white border-b border-[#E8E8E8] px-4 md:px-6 lg:px-8 py-6">
         <button
-          onClick={handleBackToBenefits}
-          className="text-[#246AFF] text-sm font-medium mb-4 hover:underline flex items-center gap-2"
+          onClick={handleBackToBenefits} className="text-[#246AFF] text-sm font-medium mb-4 hover:underline flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
           Zurück zu Benefits
@@ -92,7 +92,7 @@ export function BenefitEditLocation() {
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 max-w-4xl">
+      <div className="px-4 md:px-6 lg:px-8 py-8 max-w-4xl">
         {/* Section 1: Benefit Info (Read-Only) */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6" style={{ borderRadius: '12px' }}>
           <div className="mb-4">
@@ -105,26 +105,24 @@ export function BenefitEditLocation() {
           </div>
         </div>
 
-        {/* Section 2: Monatliches Limit */}
+        {/* Section 2: Monatliches Budget */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6" style={{ borderRadius: '12px' }}>
-          <div
-            className="flex items-start gap-3 p-4 mb-6 rounded-lg"
+          <div className="flex items-start gap-3 p-4 mb-6 rounded-lg"
             style={{ backgroundColor: '#F0F4FF' }}
           >
             <Info className="w-5 h-5 text-[#0F429F] flex-shrink-0 mt-0.5" />
             <p className="text-[#0F429F] text-sm">
-              Änderungen des Limits gelten ab 1. des nächsten Monats
+              Änderungen des Budgets gelten ab 1. des nächsten Monats
             </p>
           </div>
 
           <div>
-            <label className="text-[#000000] font-medium text-sm mb-2 block">Monatliches Limit</label>
+            <label className="text-[#000000] font-medium text-sm mb-2 block">Monatliches Budget</label>
             <div className="relative">
               <input
                 type="text"
                 value={monthlyLimit}
-                onChange={(e) => setMonthlyLimit(e.target.value.replace(/[^0-9]/g, ''))}
-                className="w-full h-12 px-4 pr-12 border border-[#E0E0E0] rounded-lg text-sm focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
+                onChange={(e) => setMonthlyLimit(e.target.value.replace(/[^0-9]/g, ''))} className="w-full h-12 px-4 pr-12 border border-[#E0E0E0] rounded-lg text-sm focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
               />
               <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#666666] text-sm">
                 €
@@ -138,8 +136,7 @@ export function BenefitEditLocation() {
 
         {/* Section 3: Status */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6" style={{ borderRadius: '12px' }}>
-          <div
-            className="flex items-start gap-3 p-4 mb-6 rounded-lg"
+          <div className="flex items-start gap-3 p-4 mb-6 rounded-lg"
             style={{ backgroundColor: '#F0F4FF' }}
           >
             <Info className="w-5 h-5 text-[#0F429F] flex-shrink-0 mt-0.5" />
@@ -152,19 +149,15 @@ export function BenefitEditLocation() {
             <label className="text-[#000000] font-medium text-sm mb-4 block">Status für diese Location</label>
             <div className="flex items-center gap-4 mb-3">
               <button
-                onClick={() => setIsActive(!isActive)}
-                className={`w-16 h-8 rounded-full transition relative ${
+                onClick={() => setIsActive(!isActive)} className={`w-16 h-8 rounded-full transition relative ${
                   isActive ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
                 }`}
               >
-                <div
-                  className="w-7 h-7 bg-white rounded-full absolute top-0.5 transition-all"
+                <div className="w-7 h-7 bg-white rounded-full absolute top-0.5 transition-all"
                   style={{ left: isActive ? '34px' : '2px' }}
                 ></div>
               </button>
-              <span className={`text-sm font-medium ${isActive ? 'text-[#4CAF50]' : 'text-[#9E9E9E]'}`}>
-                {isActive ? '✅ Aktiv' : '⭕ Inaktiv'}
-              </span>
+              <StatusBadge status={isActive ? 'Aktiv' : 'Inaktiv'} type={isActive ? 'success' : 'inactive'} />
             </div>
             <p className="text-[#666666] text-xs">
               Inaktiv = Mitarbeiter können nicht einreichen
@@ -188,8 +181,7 @@ export function BenefitEditLocation() {
             {/* Table Rows */}
             {mockEmployees.map((employee, index) => (
               <div
-                key={employee.id}
-                className={`grid grid-cols-[200px_1fr_150px_80px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 ${
+                key={employee.id} className={`grid grid-cols-[200px_1fr_150px_80px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 ${
                   index % 2 === 0 ? 'bg-white' : 'bg-[#F8F9FB]'
                 }`}
                 style={{ minHeight: '52px' }}
@@ -199,8 +191,7 @@ export function BenefitEditLocation() {
                 <div className="text-[#666666] text-sm">{employee.since}</div>
                 <div>
                   <button
-                    onClick={() => handleRemoveEmployee(employee)}
-                    className="p-2 text-red-500 hover:bg-red-50 rounded transition"
+                    onClick={() => handleRemoveEmployee(employee)} className="p-2 text-red-500 hover:bg-red-50 rounded transition"
                     title="Entfernen"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -214,15 +205,13 @@ export function BenefitEditLocation() {
         {/* Bottom Buttons */}
         <div className="flex gap-4">
           <button
-            onClick={handleSave}
-            className="px-8 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
+            onClick={handleSave} className="px-8 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
             style={{ borderRadius: '24px' }}
           >
             Speichern
           </button>
           <button
-            onClick={handleBackToBenefits}
-            className="px-8 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
+            onClick={handleBackToBenefits} className="px-8 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
             style={{ borderRadius: '24px' }}
           >
             Abbrechen
@@ -233,16 +222,14 @@ export function BenefitEditLocation() {
       {/* Remove Employee Modal */}
       {showRemoveModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div
-            className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+          <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto"
             style={{ borderRadius: '12px' }}
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-[#E8E8E8]">
               <h2 className="text-[#000000] font-bold text-xl">Mitarbeiter entfernen</h2>
               <button
-                onClick={() => setShowRemoveModal(false)}
-                className="text-[#666666] hover:text-[#000000] transition"
+                onClick={() => setShowRemoveModal(false)} className="text-[#666666] hover:text-[#000000] transition"
               >
                 <span className="text-2xl">×</span>
               </button>
@@ -263,8 +250,7 @@ export function BenefitEditLocation() {
                     type="radio"
                     name="removeOption"
                     checked={removeOption === 'immediately'}
-                    onChange={() => setRemoveOption('immediately')}
-                    className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
+                    onChange={() => setRemoveOption('immediately')} className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
                   />
                   <div className="flex-1">
                     <p className="text-[#000000] font-medium text-sm">Sofort deaktivieren</p>
@@ -278,8 +264,7 @@ export function BenefitEditLocation() {
                     type="radio"
                     name="removeOption"
                     checked={removeOption === 'nextMonth'}
-                    onChange={() => setRemoveOption('nextMonth')}
-                    className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
+                    onChange={() => setRemoveOption('nextMonth')} className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
                   />
                   <div className="flex-1">
                     <p className="text-[#000000] font-medium text-sm">Ab 1. nächsten Monat</p>
@@ -293,8 +278,7 @@ export function BenefitEditLocation() {
                     type="radio"
                     name="removeOption"
                     checked={removeOption === 'customDate'}
-                    onChange={() => setRemoveOption('customDate')}
-                    className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
+                    onChange={() => setRemoveOption('customDate')} className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
                   />
                   <div className="flex-1">
                     <p className="text-[#000000] font-medium text-sm mb-3">Anderes Datum (Custom)</p>
@@ -305,15 +289,13 @@ export function BenefitEditLocation() {
                           <input
                             type="date"
                             value={customDate}
-                            onChange={(e) => setCustomDate(e.target.value)}
-                            className="w-full h-10 pl-10 pr-4 border border-[#E0E0E0] rounded-lg text-sm focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
+                            onChange={(e) => setCustomDate(e.target.value)} className="w-full h-10 pl-10 pr-4 border border-[#E0E0E0] rounded-lg text-sm focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
                           />
                         </div>
                         <textarea
                           placeholder="Grund/Notiz (optional)"
                           value={removeNote}
-                          onChange={(e) => setRemoveNote(e.target.value)}
-                          className="w-full h-20 px-4 py-3 border border-[#E0E0E0] rounded-lg text-sm resize-none focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
+                          onChange={(e) => setRemoveNote(e.target.value)} className="w-full h-20 px-4 py-3 border border-[#E0E0E0] rounded-lg text-sm resize-none focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
                         />
                         <div className="flex items-start gap-2 p-3 bg-[#F0F4FF] rounded-lg">
                           <Info className="w-4 h-4 text-[#0F429F] flex-shrink-0 mt-0.5" />
@@ -332,8 +314,7 @@ export function BenefitEditLocation() {
                     type="radio"
                     name="removeOption"
                     checked={removeOption === 'specificEmployees'}
-                    onChange={() => setRemoveOption('specificEmployees')}
-                    className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
+                    onChange={() => setRemoveOption('specificEmployees')} className="w-5 h-5 mt-0.5 text-[#0F429F] focus:ring-[#0F429F]"
                   />
                   <div className="flex-1">
                     <p className="text-[#000000] font-medium text-sm mb-3">Für bestimmte Mitarbeiter</p>
@@ -342,15 +323,13 @@ export function BenefitEditLocation() {
                       <div className="space-y-2 mt-3 max-h-48 overflow-y-auto">
                         {mockEmployees.map((employee) => (
                           <label
-                            key={employee.id}
-                            className="flex items-center gap-3 p-3 hover:bg-white rounded cursor-pointer group"
+                            key={employee.id} className="flex items-center gap-3 p-3 hover:bg-white rounded cursor-pointer group"
                           >
                             <div className="relative flex items-center justify-center">
                               <input
                                 type="checkbox"
                                 checked={selectedEmployees.has(employee.id)}
-                                onChange={() => handleToggleEmployee(employee.id)}
-                                className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer group-hover:border-[#246AFF] transition-colors"
+                                onChange={() => handleToggleEmployee(employee.id)} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer group-hover:border-[#246AFF] transition-colors"
                               />
                               {selectedEmployees.has(employee.id) && (
                                 <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
@@ -371,15 +350,13 @@ export function BenefitEditLocation() {
             {/* Modal Footer */}
             <div className="flex items-center justify-end gap-3 p-6 border-t border-[#E8E8E8]">
               <button
-                onClick={() => setShowRemoveModal(false)}
-                className="px-6 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
+                onClick={() => setShowRemoveModal(false)} className="px-6 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
                 style={{ borderRadius: '24px' }}
               >
                 Abbrechen
               </button>
               <button
-                onClick={handleConfirmRemove}
-                className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
+                onClick={handleConfirmRemove} className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
                 style={{ borderRadius: '24px' }}
               >
                 Bestätigen

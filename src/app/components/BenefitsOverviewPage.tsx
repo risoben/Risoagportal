@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Settings, Ban, Info } from 'lucide-react';
 import { BenefitInfoModal } from './BenefitInfoModal';
 import { BenefitIconComponent } from './BenefitIconComponent';
+import { StatusBadge } from './Table';
 
 type BenefitGroup = 'Cash Benefits' | 'Sachbezüge';
 
@@ -162,8 +163,7 @@ export function BenefitsOverviewPage() {
           {/* Filter Buttons */}
           <div className="flex gap-2">
             <button
-              onClick={() => setFilterStatus('Alle')}
-              className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
+              onClick={() => setFilterStatus('Alle')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
                 filterStatus === 'Alle'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
@@ -173,8 +173,7 @@ export function BenefitsOverviewPage() {
               Alle
             </button>
             <button
-              onClick={() => setFilterStatus('aktiv')}
-              className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
+              onClick={() => setFilterStatus('aktiv')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
                 filterStatus === 'aktiv'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
@@ -184,8 +183,7 @@ export function BenefitsOverviewPage() {
               Aktiv
             </button>
             <button
-              onClick={() => setFilterStatus('inaktiv')}
-              className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
+              onClick={() => setFilterStatus('inaktiv')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
                 filterStatus === 'inaktiv'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
@@ -246,8 +244,7 @@ export function BenefitsOverviewPage() {
               {/* Table Rows */}
               {benefits.map((benefit, index) => (
                 <div
-                  key={benefit.id}
-                  className={`grid grid-cols-[80px_1fr_140px_140px_160px_130px_120px_200px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 hover:bg-[#EEF2FF] hover:shadow-sm transition ${
+                  key={benefit.id} className={`grid grid-cols-[80px_1fr_140px_140px_160px_130px_120px_200px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 hover:bg-[#EEF2FF] hover:shadow-sm transition ${
                     index % 2 === 0 ? 'bg-white' : 'bg-[#F9F9F9]'
                   }`}
                   style={{ minHeight: '64px' }}
@@ -265,8 +262,7 @@ export function BenefitsOverviewPage() {
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedBenefitInfo(benefit.id);
-                        }}
-                        className="text-[#246AFF] hover:text-[#0F429F] transition"
+                        }} className="text-[#246AFF] hover:text-[#0F429F] transition"
                         title="Mehr Informationen"
                       >
                         <Info className="w-4 h-4" />
@@ -297,26 +293,14 @@ export function BenefitsOverviewPage() {
                   </div>
 
                   {/* Status */}
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`w-2 h-2 rounded-full ${
-                        benefit.status === 'aktiv' ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
-                      }`}
-                    ></span>
-                    <span
-                      className={`text-xs font-medium capitalize ${
-                        benefit.status === 'aktiv' ? 'text-[#4CAF50]' : 'text-[#9E9E9E]'
-                      }`}
-                    >
-                      {benefit.status}
-                    </span>
+                  <div>
+                    <StatusBadge status={benefit.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'aktiv' ? 'success' : 'inactive'} />
                   </div>
 
                   {/* Action */}
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handleConfigure(benefit.id)}
-                      className="px-4 py-2 border-2 border-[#0F429F] text-[#0F429F] font-medium text-xs rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
+                      onClick={() => handleConfigure(benefit.id)} className="px-4 py-2 border-2 border-[#0F429F] text-[#0F429F] font-medium text-xs rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
                       style={{ borderRadius: '24px' }}
                     >
                       <Settings className="w-3 h-3" />
@@ -324,8 +308,7 @@ export function BenefitsOverviewPage() {
                     </button>
                     {benefit.status === 'aktiv' && (
                       <button
-                        onClick={() => handleDeactivate(benefit.id)}
-                        className="px-4 py-2 bg-[#9E9E9E] text-white font-medium text-xs rounded-full hover:bg-[#757575] transition flex items-center gap-2"
+                        onClick={() => handleDeactivate(benefit.id)} className="px-4 py-2 bg-[#9E9E9E] text-white font-medium text-xs rounded-full hover:bg-[#757575] transition flex items-center gap-2"
                         style={{ borderRadius: '24px' }}
                       >
                         <Ban className="w-3 h-3" />

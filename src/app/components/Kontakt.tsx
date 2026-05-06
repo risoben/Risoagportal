@@ -39,7 +39,7 @@ export function Kontakt() {
     },
     {
       question: 'Wie ändere ich die Budget-Limits?',
-      answer: 'Sie können Limits pro Standort in Verwaltung > Berichte anpassen. Änderungen gelten ab dem 1. des nächsten Monats.',
+      answer: 'Sie können Budgets pro Standort in Verwaltung > Berichte anpassen. Änderungen gelten ab dem 1. des nächsten Monats.',
     },
     {
       question: 'Wo finde ich meine Berichte?',
@@ -200,8 +200,7 @@ export function Kontakt() {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="z.B. Max Mustermann"
-                className={`w-full h-[40px] px-3 py-2 border ${
+                placeholder="z.B. Max Mustermann" className={`w-full h-[40px] px-3 py-2 border ${
                   errors.name ? 'border-[#F44336]' : 'border-[#0F429F]'
                 } rounded text-[14px] text-[#273A5F] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
                 style={{ fontFamily: 'Roboto, sans-serif' }}
@@ -223,8 +222,7 @@ export function Kontakt() {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="max@firma.de"
-                className={`w-full h-[40px] px-3 py-2 border ${
+                placeholder="max@firma.de" className={`w-full h-[40px] px-3 py-2 border ${
                   errors.email ? 'border-[#F44336]' : 'border-[#0F429F]'
                 } rounded text-[14px] text-[#273A5F] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
                 style={{ fontFamily: 'Roboto, sans-serif' }}
@@ -246,8 +244,7 @@ export function Kontakt() {
                 name="subject"
                 value={formData.subject}
                 onChange={handleInputChange}
-                placeholder="Worum geht es?"
-                className={`w-full h-[40px] px-3 py-2 border ${
+                placeholder="Worum geht es?" className={`w-full h-[40px] px-3 py-2 border ${
                   errors.subject ? 'border-[#F44336]' : 'border-[#0F429F]'
                 } rounded text-[14px] text-[#273A5F] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
                 style={{ fontFamily: 'Roboto, sans-serif' }}
@@ -267,8 +264,7 @@ export function Kontakt() {
               <select
                 name="category"
                 value={formData.category}
-                onChange={handleInputChange}
-                className={`w-full h-[40px] px-3 py-2 border ${
+                onChange={handleInputChange} className={`w-full h-[40px] px-3 py-2 border ${
                   errors.category ? 'border-[#F44336]' : 'border-[#0F429F]'
                 } rounded text-[14px] text-[#273A5F] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
                 style={{ fontFamily: 'Roboto, sans-serif' }}
@@ -298,8 +294,7 @@ export function Kontakt() {
                 value={formData.message}
                 onChange={handleInputChange}
                 placeholder="Deine Nachricht..."
-                rows={5}
-                className={`w-full min-h-[120px] px-3 py-3 border ${
+                rows={5} className={`w-full min-h-[120px] px-3 py-3 border ${
                   errors.message ? 'border-[#F44336]' : 'border-[#0F429F]'
                 } rounded text-[14px] text-[#273A5F] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
                 style={{ fontFamily: 'Roboto, sans-serif' }}
@@ -318,8 +313,7 @@ export function Kontakt() {
                 name="sendCopy"
                 id="sendCopy"
                 checked={formData.sendCopy}
-                onChange={handleInputChange}
-                className="w-[18px] h-[18px] border-2 border-[#0F429F] rounded text-[#0F429F] focus:ring-[#0F429F]"
+                onChange={handleInputChange} className="w-[18px] h-[18px] border-2 border-[#0F429F] rounded text-[#0F429F] focus:ring-[#0F429F]"
               />
               <label htmlFor="sendCopy" className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 Kopie an meine E-Mail
@@ -330,16 +324,14 @@ export function Kontakt() {
             <div className="flex gap-3 mt-6 justify-between">
               <button
                 type="button"
-                onClick={handleCancel}
-                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition-colors"
+                onClick={handleCancel} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition-colors"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
                 Abbrechen
               </button>
               <button
                 type="submit"
-                disabled={!isFormValid || isSubmitting}
-                className={`px-6 py-3 rounded-full transition-colors ${
+                disabled={!isFormValid || isSubmitting} className={`px-6 py-3 rounded-full transition-colors ${
                   !isFormValid || isSubmitting
                     ? 'bg-[#CCCCCC] text-white cursor-not-allowed'
                     : 'bg-[#0F429F] text-white hover:bg-[#246AFF]'
@@ -361,8 +353,7 @@ export function Kontakt() {
           <div className="space-y-4">
             {faqItems.map((item, index) => (
               <div
-                key={index}
-                className={`pb-4 ${index !== faqItems.length - 1 ? 'border-b border-[#E0E0E0]' : ''}`}
+                key={index} className={`pb-4 ${index !== faqItems.length - 1 ? 'border-b border-[#E0E0E0]' : ''}`}
               >
                 <div className="flex gap-2 mb-2">
                   <span className="text-[16px] text-[#0F429F]">❓</span>
@@ -370,8 +361,7 @@ export function Kontakt() {
                     {item.question}
                   </h3>
                 </div>
-                <p
-                  className="text-[13px] text-[#666666] ml-6"
+                <p className="text-[13px] text-[#666666] ml-6"
                   style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}
                 >
                   {item.answer}
@@ -383,8 +373,7 @@ export function Kontakt() {
           {/* Link to Help Center */}
           <div className="text-right mt-4">
             <button
-              onClick={navigateToHelpCenter}
-              className="text-[13px] text-[#0F429F] hover:text-[#246AFF] hover:underline cursor-pointer"
+              onClick={navigateToHelpCenter} className="text-[13px] text-[#0F429F] hover:text-[#246AFF] hover:underline cursor-pointer"
               style={{ fontFamily: 'Roboto, sans-serif' }}
             >
               Mehr Fragen anschauen →
@@ -405,8 +394,7 @@ export function Kontakt() {
               Danke für deine Nachricht. Wir melden uns in Kürze bei dir.
             </p>
             <button
-              onClick={handleCloseSuccess}
-              className="px-6 py-3 bg-[#0F429F] text-white rounded-full hover:bg-[#246AFF] transition-colors"
+              onClick={handleCloseSuccess} className="px-6 py-3 bg-[#0F429F] text-white rounded-full hover:bg-[#246AFF] transition-colors"
               style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
             >
               Schließen
@@ -431,15 +419,13 @@ export function Kontakt() {
             </p>
             <div className="flex gap-3 justify-center">
               <button
-                onClick={handleCloseError}
-                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition-colors"
+                onClick={handleCloseError} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition-colors"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
                 Schließen
               </button>
               <button
-                onClick={handleRetry}
-                className="px-6 py-3 bg-[#0F429F] text-white rounded-full hover:bg-[#246AFF] transition-colors"
+                onClick={handleRetry} className="px-6 py-3 bg-[#0F429F] text-white rounded-full hover:bg-[#246AFF] transition-colors"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
                 Nochmal versuchen

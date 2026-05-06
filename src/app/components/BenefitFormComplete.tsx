@@ -162,7 +162,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
         </div>
       )}
 
-      <div className="max-w-[1200px] mx-auto p-8 space-y-6">
+      <div className="w-full p-8 space-y-6">
         {/* SECTION A: Basic Info */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-6">Grundinformationen</h2>
@@ -179,8 +179,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                 value={basicInfo.name}
                 onChange={(e) => handleBasicInfoChange('name', e.target.value)}
                 placeholder="z.B. Mittagessen"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -195,8 +194,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
               <select
                 value={basicInfo.frequencyType}
                 onChange={(e) => handleBasicInfoChange('frequencyType', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               >
                 <option value="">Bitte auswählen</option>
@@ -218,8 +216,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                 onChange={(e) => handleBasicInfoChange('description', e.target.value)}
                 placeholder="Beschreibung der Leistung..."
                 rows={4}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed resize-none"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed resize-none"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -234,8 +231,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
               <select
                 value={basicInfo.categoryType}
                 onChange={(e) => handleBasicInfoChange('categoryType', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               >
                 <option value="">Bitte auswählen</option>
@@ -261,8 +257,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                       value="Active"
                       checked={basicInfo.status === 'Active'}
                       onChange={(e) => handleBasicInfoChange('status', e.target.value)}
-                      disabled={loadingState}
-                      className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                      disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                     />
                     {basicInfo.status === 'Active' && (
                       <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -278,8 +273,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                       value="Inactive"
                       checked={basicInfo.status === 'Inactive'}
                       onChange={(e) => handleBasicInfoChange('status', e.target.value)}
-                      disabled={loadingState}
-                      className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                      disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                     />
                     {basicInfo.status === 'Inactive' && (
                       <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -307,13 +301,11 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
               </div>
               <button
                 onClick={() => handleConfigChange('taxLiable', !config.taxLiable)}
-                disabled={loadingState}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                disabled={loadingState} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                   config.taxLiable ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
                 }`}
               >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                     config.taxLiable ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
@@ -325,20 +317,18 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
           <div className="mb-6 pb-6 border-b border-[#E0E0E0]">
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <label className="text-[13px] text-black font-medium">Unterschiedliche Limits pro Jahr</label>
+                <label className="text-[13px] text-black font-medium">Unterschiedliche Budgets pro Jahr</label>
                 <p className="text-[12px] text-[#666666] mt-1">
                   Aktivieren um unterschiedliche Limits für verschiedene Jahre zu setzen
                 </p>
               </div>
               <button
                 onClick={() => handleConfigChange('differentTimesPerYear', !config.differentTimesPerYear)}
-                disabled={loadingState}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                disabled={loadingState} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                   config.differentTimesPerYear ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
                 }`}
               >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                     config.differentTimesPerYear ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
@@ -358,8 +348,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                 type="color"
                 value={config.color}
                 onChange={(e) => handleConfigChange('color', e.target.value)}
-                disabled={loadingState}
-                className="w-16 h-10 border border-[#E0E0E0] rounded cursor-pointer disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-16 h-10 border border-[#E0E0E0] rounded cursor-pointer disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
               <input
@@ -367,8 +356,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                 value={config.color}
                 onChange={(e) => handleConfigChange('color', e.target.value)}
                 placeholder="#2196F3"
-                disabled={loadingState}
-                className="w-32 px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-32 px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -386,8 +374,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                 <img src={config.imagePreview} alt="Preview" className="w-16 h-16 object-contain border border-[#E0E0E0] rounded" />
                 <button
                   onClick={removeImage}
-                  disabled={loadingState}
-                  className="text-[#E53935] text-[13px] hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={loadingState} className="text-[#E53935] text-[13px] hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Entfernen
                 </button>
@@ -400,8 +387,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                   type="file"
                   accept="image/svg+xml,image/png"
                   onChange={handleImageUpload}
-                  disabled={loadingState}
-                  className="hidden"
+                  disabled={loadingState} className="hidden"
                 />
               </label>
             )}
@@ -411,7 +397,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
         {/* SECTION C: Yearly Limits (Conditional) */}
         {config.differentTimesPerYear && (
           <div className="bg-white rounded border border-[#E0E0E0] p-6 animate-fadeIn">
-            <h2 className="text-[#273A5F] text-[16px] mb-2">Limits pro Jahr</h2>
+            <h2 className="text-[#273A5F] text-[16px] mb-2">Budgets pro Jahr</h2>
             <p className="text-[#666666] text-[12px] mb-6">
               Definiere täglich, monatlich und standardmäßig verfügbare Limits für jedes Jahr.
             </p>
@@ -421,16 +407,15 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                 <thead>
                   <tr className="bg-[#F5F5F5]">
                     <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Jahr</th>
-                    <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Tageslimit</th>
-                    <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Monatslimit</th>
+                    <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Tagesbudget</th>
+                    <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Monatsbudget</th>
                     <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Standard Betrag</th>
                   </tr>
                 </thead>
                 <tbody>
                   {yearlyLimits.map((limit, index) => (
                     <tr
-                      key={limit.year}
-                      className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} hover:bg-[#E3F2FD] transition-colors`}
+                      key={limit.year} className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} hover:bg-[#E3F2FD] transition-colors`}
                       style={{ height: '48px' }}
                     >
                       <td className="px-3 py-2 text-[13px] text-[#666666] border-b border-[#E0E0E0]">{limit.year}</td>
@@ -441,8 +426,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                             value={limit.dailyLimit}
                             onChange={(e) => handleYearlyLimitChange(limit.year, 'dailyLimit', e.target.value)}
                             disabled={loadingState}
-                            placeholder="0.00"
-                            className="w-24 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                            placeholder="0.00" className="w-24 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                             style={{ borderRadius: '4px', padding: '8px' }}
                           />
                           <span className="text-[13px] text-[#666666]">€</span>
@@ -455,8 +439,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                             value={limit.monthlyLimit}
                             onChange={(e) => handleYearlyLimitChange(limit.year, 'monthlyLimit', e.target.value)}
                             disabled={loadingState}
-                            placeholder="0.00"
-                            className="w-24 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                            placeholder="0.00" className="w-24 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                             style={{ borderRadius: '4px', padding: '8px' }}
                           />
                           <span className="text-[13px] text-[#666666]">€</span>
@@ -469,8 +452,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                             value={limit.standardAmount}
                             onChange={(e) => handleYearlyLimitChange(limit.year, 'standardAmount', e.target.value)}
                             disabled={loadingState}
-                            placeholder="0.00"
-                            className="w-24 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                            placeholder="0.00" className="w-24 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                             style={{ borderRadius: '4px', padding: '8px' }}
                           />
                           <span className="text-[13px] text-[#666666]">€</span>
@@ -486,7 +468,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
 
         {/* SECTION D: Location Limits */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
-          <h2 className="text-[#273A5F] text-[16px] mb-2">Limits pro Standort</h2>
+          <h2 className="text-[#273A5F] text-[16px] mb-2">Budgets pro Standort</h2>
           <p className="text-[#666666] text-[12px] mb-6">
             Hier werden die Limits für jeden Standort dargestellt. Um ein Limit zu ändern, klicke auf "Bearbeiten".
           </p>
@@ -503,16 +485,14 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
               <tbody>
                 {locations.map((location, index) => (
                   <tr
-                    key={location.id}
-                    className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} hover:bg-[#E3F2FD] transition-colors`}
+                    key={location.id} className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} hover:bg-[#E3F2FD] transition-colors`}
                   >
                     <td className="px-3 py-3 text-[13px] text-black border-b border-[#E0E0E0]">{location.name}</td>
                     <td className="px-3 py-3 text-[13px] text-black border-b border-[#E0E0E0]">{location.limit}</td>
                     <td className="px-3 py-3 border-b border-[#E0E0E0]">
                       <button
                         onClick={() => handleEditLimit(location)}
-                        disabled={loadingState}
-                        className="px-4 py-1.5 border border-[#0F429F] text-[#0F429F] text-[13px] rounded-full hover:bg-[#E3F2FD] transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled={loadingState} className="px-4 py-1.5 border border-[#0F429F] text-[#0F429F] text-[13px] rounded-full hover:bg-[#E3F2FD] transition disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Bearbeiten
                       </button>
@@ -534,15 +514,13 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
           <div className="space-y-2">
             {locations.map((location) => (
               <label
-                key={location.id}
-                className="flex items-center gap-3 px-3 py-3 hover:bg-[#F0F4FF] rounded cursor-pointer transition"
+                key={location.id} className="flex items-center gap-3 px-3 py-3 hover:bg-[#F0F4FF] rounded cursor-pointer transition"
               >
                 <input
                   type="checkbox"
                   checked={location.enabled}
                   onChange={() => toggleLocation(location.id)}
-                  disabled={loadingState}
-                  className="w-[18px] h-[18px] border-2 border-[#0F429F] rounded text-[#0F429F] disabled:cursor-not-allowed"
+                  disabled={loadingState} className="w-[18px] h-[18px] border-2 border-[#0F429F] rounded text-[#0F429F] disabled:cursor-not-allowed"
                   style={{ accentColor: '#0F429F' }}
                 />
                 <span className="text-[13px] text-black">
@@ -582,8 +560,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
           {isEditMode && (
             <button
               onClick={() => setShowDeleteModal(true)}
-              disabled={loadingState}
-              className="px-6 py-3 border border-[#F44336] text-[#F44336] text-[14px] rounded hover:bg-[#FFEBEE] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loadingState} className="px-6 py-3 border border-[#F44336] text-[#F44336] text-[14px] rounded hover:bg-[#FFEBEE] transition disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
               Löschen
@@ -592,16 +569,14 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
           <div className={`flex gap-4 ${!isEditMode ? 'ml-auto' : ''}`}>
             <button
               onClick={goBack}
-              disabled={loadingState}
-              className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loadingState} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
               Abbrechen
             </button>
             <button
               onClick={handleSave}
-              disabled={loadingState}
-              className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loadingState} className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
               {loadingState && <Loader2 size={16} className="animate-spin" />}
@@ -621,15 +596,14 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
 
             <div className="mb-4">
               <label className="block mb-2">
-                <span className="text-[#666666] text-[13px]">Limit pro Mitarbeiter</span>
+                <span className="text-[#666666] text-[13px]">Budget pro Mitarbeiter</span>
               </label>
               <div className="flex items-center gap-2">
                 <input
                   type="text"
                   value={limitValue}
                   onChange={(e) => setLimitValue(e.target.value)}
-                  placeholder="z.B. 100"
-                  className="flex-1 px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none"
+                  placeholder="z.B. 100" className="flex-1 px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none"
                   style={{ borderRadius: '4px' }}
                 />
                 <span className="text-[13px] text-[#666666]">€/Monat</span>
@@ -646,15 +620,13 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
                   setShowLimitModal(false);
                   setEditingLocation(null);
                   setLimitValue('');
-                }}
-                className="px-6 py-3 border border-[#E0E0E0] text-[#666666] rounded hover:bg-[#F5F5F5] transition"
+                }} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] rounded hover:bg-[#F5F5F5] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Abbrechen
               </button>
               <button
-                onClick={handleSaveLimit}
-                className="px-6 py-3 bg-[#4CAF50] text-white rounded hover:bg-[#45A049] transition"
+                onClick={handleSaveLimit} className="px-6 py-3 bg-[#4CAF50] text-white rounded hover:bg-[#45A049] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Speichern
@@ -687,15 +659,13 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
 
             <div className="flex gap-3 justify-center">
               <button
-                onClick={() => setShowDeleteModal(false)}
-                className="px-6 py-3 border border-[#E0E0E0] text-[#666666] rounded hover:bg-[#F5F5F5] transition"
+                onClick={() => setShowDeleteModal(false)} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] rounded hover:bg-[#F5F5F5] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Abbrechen
               </button>
               <button
-                onClick={handleDelete}
-                className="px-6 py-3 bg-[#F44336] text-white rounded hover:bg-[#D32F2F] transition"
+                onClick={handleDelete} className="px-6 py-3 bg-[#F44336] text-white rounded hover:bg-[#D32F2F] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Löschen

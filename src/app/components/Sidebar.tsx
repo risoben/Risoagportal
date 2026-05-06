@@ -27,8 +27,7 @@ export function Sidebar() {
   };
 
   return (
-    <div
-      className="flex flex-col w-[260px] h-full bg-[#273A5F] border-r border-[#E0E0E0]"
+    <div className="flex flex-col w-[260px] h-full bg-[#273A5F] border-r border-[#E0E0E0]"
       style={{
         fontFamily: 'Roboto, sans-serif',
         height: 'calc(100vh - 64px)'
@@ -43,8 +42,7 @@ export function Sidebar() {
           return (
             <button
               key={item.id}
-              onClick={() => handleItemClick(item.id)}
-              className={`
+              onClick={() => handleItemClick(item.id)} className={`
                 relative w-full px-4 py-3 text-left text-[14px] transition-all duration-200 rounded-md
                 flex items-center gap-3
                 ${isActive

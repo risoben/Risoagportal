@@ -13,6 +13,7 @@ const benefitConfig: Record<string, { svgPath: string; color: string; fallbackEm
   'Kindergarten': { svgPath: '/assets/benefit-icons/Kindergarten.svg', color: '#FF6B6B' },
   'Kindergartenzuschuss': { svgPath: '/assets/benefit-icons/Kindergarten.svg', color: '#FF6B6B' },
   'Commuting': { svgPath: '/assets/benefit-icons/Commuting.svg', color: '#4CAF50' },
+  'Fahrkostenzuschuss': { svgPath: '/assets/benefit-icons/Commuting.svg', color: '#4CAF50' },
   'Fahrtkostenzuschuss': { svgPath: '/assets/benefit-icons/Commuting.svg', color: '#4CAF50' },
   'Erholung': { svgPath: '/assets/benefit-icons/Erholung.svg', color: '#2196F3' },
   'Erholungsbeihilfe': { svgPath: '/assets/benefit-icons/Erholung.svg', color: '#2196F3' },
@@ -45,8 +46,7 @@ export function BenefitIconComponent({
 
   if (background) {
     return (
-      <div
-        className={`flex items-center justify-center rounded-full ${className}`}
+      <div className={`flex items-center justify-center rounded-full ${className}`}
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -78,8 +78,7 @@ export function BenefitIconComponent({
   }
 
   return (
-    <div
-      className={`flex items-center justify-center ${className}`}
+    <div className={`flex items-center justify-center ${className}`}
       style={{
         width: `${size}px`,
         height: `${size}px`,

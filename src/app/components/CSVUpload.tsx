@@ -65,8 +65,7 @@ export function CSVUpload() {
 
       {/* Upload Area */}
       <div className="px-6 pb-6">
-        <div
-          className={`
+        <div className={`
             relative w-full rounded-lg border-2 border-dashed transition-all
             ${isDragging ? 'border-[#246AFF] bg-blue-50' : 'border-[#0F429F] bg-[#F0F9FF]'}
           `}
@@ -79,8 +78,7 @@ export function CSVUpload() {
             ref={fileInputRef}
             type="file"
             accept=".csv,.xls,.xlsx"
-            onChange={handleFileSelect}
-            className="hidden"
+            onChange={handleFileSelect} className="hidden"
           />
 
           <div className="flex flex-col items-center justify-center h-full px-8">
@@ -93,8 +91,7 @@ export function CSVUpload() {
                 Ziehe eine CSV-Datei hier hin oder
               </p>
               <button
-                onClick={() => fileInputRef.current?.click()}
-                className="text-[#0F429F] text-base font-medium hover:underline"
+                onClick={() => fileInputRef.current?.click()} className="text-[#0F429F] text-base font-medium hover:underline"
               >
                 Klicke hier zum Hochladen
               </button>
@@ -122,8 +119,7 @@ export function CSVUpload() {
       <div className="px-6 pb-6 flex gap-4">
         <button
           onClick={handleValidate}
-          disabled={!selectedFile}
-          className={`
+          disabled={!selectedFile} className={`
             h-10 px-8 rounded-full font-medium text-sm transition-all
             ${
               selectedFile
@@ -136,8 +132,7 @@ export function CSVUpload() {
         </button>
 
         <button
-          onClick={handleCancel}
-          className="h-10 px-8 rounded-full font-medium text-sm bg-white border border-[#E5E7EB] text-[#273A5F] hover:bg-gray-50 transition-all"
+          onClick={handleCancel} className="h-10 px-8 rounded-full font-medium text-sm bg-white border border-[#E5E7EB] text-[#273A5F] hover:bg-gray-50 transition-all"
         >
           Abbrechen
         </button>
@@ -146,16 +141,14 @@ export function CSVUpload() {
       {/* Validation Modal */}
       {showValidationModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div
-            className="bg-white rounded-lg shadow-xl"
+          <div className="bg-white rounded-lg shadow-xl"
             style={{ width: '600px', maxWidth: '90%' }}
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E7EB]">
               <h2 className="text-[#273A5F] font-bold text-lg">Validierungsergebnis</h2>
               <button
-                onClick={() => setShowValidationModal(false)}
-                className="text-[#6B7280] hover:text-[#273A5F]"
+                onClick={() => setShowValidationModal(false)} className="text-[#6B7280] hover:text-[#273A5F]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -194,8 +187,7 @@ export function CSVUpload() {
                 <input
                   type="checkbox"
                   id="importOnlyValid"
-                  defaultChecked
-                  className="w-4 h-4 text-[#0F429F] border-gray-300 rounded focus:ring-[#0F429F]"
+                  defaultChecked className="w-4 h-4 text-[#0F429F] border-gray-300 rounded focus:ring-[#0F429F]"
                 />
                 <label htmlFor="importOnlyValid" className="text-[#273A5F] text-sm">
                   Nur OK-Zeilen importieren (21/25)
@@ -206,14 +198,12 @@ export function CSVUpload() {
             {/* Modal Footer */}
             <div className="flex justify-end gap-4 px-6 py-4 border-t border-[#E5E7EB]">
               <button
-                onClick={() => setShowValidationModal(false)}
-                className="h-10 px-6 rounded-full font-medium text-sm bg-white border border-[#E5E7EB] text-[#273A5F] hover:bg-gray-50 transition-all"
+                onClick={() => setShowValidationModal(false)} className="h-10 px-6 rounded-full font-medium text-sm bg-white border border-[#E5E7EB] text-[#273A5F] hover:bg-gray-50 transition-all"
               >
                 Abbrechen
               </button>
               <button
-                onClick={handleImport}
-                className="h-10 px-6 rounded-full font-medium text-sm bg-[#0F429F] text-white hover:bg-[#0d3680] transition-all"
+                onClick={handleImport} className="h-10 px-6 rounded-full font-medium text-sm bg-[#0F429F] text-white hover:bg-[#0d3680] transition-all"
               >
                 Import starten
               </button>

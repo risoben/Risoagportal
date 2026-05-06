@@ -189,8 +189,7 @@ export function MassImport() {
           </div>
           <div className="flex gap-3">
             <button
-              onClick={handleDownloadTemplate}
-              className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-blue-50 transition flex items-center gap-2"
+              onClick={handleDownloadTemplate} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-blue-50 transition flex items-center gap-2"
               style={{ borderRadius: '32px' }}
             >
               <Download size={18} />
@@ -198,8 +197,7 @@ export function MassImport() {
             </button>
             <button
               onClick={handleImportStart}
-              disabled={!validationData || validationData.valid_rows === 0}
-              className={`px-6 py-3 font-medium rounded-full transition flex items-center gap-2 ${
+              disabled={!validationData || validationData.valid_rows === 0} className={`px-6 py-3 font-medium rounded-full transition flex items-center gap-2 ${
                 validationData && validationData.valid_rows > 0
                   ? 'bg-[#0F429F] text-white hover:bg-[#0d3680]'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -249,8 +247,7 @@ export function MassImport() {
             <div
               onClick={() => fileInputRef.current?.click()}
               onDrop={handleDrop}
-              onDragOver={handleDragOver}
-              className="bg-[#F0F9FF] border-2 border-dashed border-[#0F429F] rounded-lg p-12 text-center cursor-pointer hover:bg-[#e6f5ff] transition"
+              onDragOver={handleDragOver} className="bg-[#F0F9FF] border-2 border-dashed border-[#0F429F] rounded-lg p-12 text-center cursor-pointer hover:bg-[#e6f5ff] transition"
             >
               <div className="flex flex-col items-center">
                 <FileText size={48} className="text-[#0F429F] mb-4" />
@@ -263,8 +260,7 @@ export function MassImport() {
                 ref={fileInputRef}
                 type="file"
                 accept=".csv"
-                onChange={handleFileSelect}
-                className="hidden"
+                onChange={handleFileSelect} className="hidden"
               />
             </div>
           ) : (
@@ -286,8 +282,7 @@ export function MassImport() {
                     setUploadedFile(null);
                     setValidationData(null);
                     if (fileInputRef.current) fileInputRef.current.value = '';
-                  }}
-                  className="px-4 py-2 border border-[#E5E7EB] text-[#273A5F] font-medium rounded-lg hover:bg-gray-50 transition"
+                  }} className="px-4 py-2 border border-[#E5E7EB] text-[#273A5F] font-medium rounded-lg hover:bg-gray-50 transition"
                 >
                   Ändern
                 </button>
@@ -347,8 +342,7 @@ export function MassImport() {
                           </span>
                         ) : (
                           <button
-                            onClick={() => toggleErrorRow(result.row_number)}
-                            className="inline-flex items-center gap-1 px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium hover:bg-red-200 transition"
+                            onClick={() => toggleErrorRow(result.row_number)} className="inline-flex items-center gap-1 px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium hover:bg-red-200 transition"
                           >
                             ❌ Fehler
                             {expandedErrorRows.has(result.row_number) ? (
@@ -388,8 +382,7 @@ export function MassImport() {
                     .flatMap((result) =>
                       result.errors.map((error, errorIdx) => (
                         <tr
-                          key={`${result.row_number}-${errorIdx}`}
-                          className={errorIdx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
+                          key={`${result.row_number}-${errorIdx}`} className={errorIdx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                         >
                           <td className="px-6 py-3 text-sm text-[#273A5F] font-medium">
                             {result.row_number}

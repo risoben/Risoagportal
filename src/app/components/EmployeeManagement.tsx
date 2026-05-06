@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Plus, ChevronLeft, ChevronRight, Search, Upload, Eye, Edit2 } from 'lucide-react';
 import { MassImportModal } from './MassImportModal';
+import { StatusBadge } from './Table';
 
 type Employee = {
   id: string;
@@ -234,16 +235,14 @@ export function EmployeeManagement() {
           <h1 className="text-[#000000] font-bold text-[28px]">Mitarbeiter</h1>
           <div className="flex gap-3">
             <button
-              onClick={() => setShowMassImportModal(true)}
-              className="px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
+              onClick={() => setShowMassImportModal(true)} className="px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
               style={{ borderRadius: '24px' }}
             >
               <Upload className="w-4 h-4" />
               CSV importieren
             </button>
             <button
-              onClick={handleAddNew}
-              className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition flex items-center gap-2"
+              onClick={handleAddNew} className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition flex items-center gap-2"
               style={{ borderRadius: '24px' }}
             >
               <Plus className="w-5 h-5" />
@@ -263,8 +262,7 @@ export function EmployeeManagement() {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1); // Reset to first page on search
               }}
-              placeholder="Nach Name, Personalnummer suchen..."
-              className="w-full pl-10 pr-4 py-3 border border-[#E0E0E0] rounded text-sm focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+              placeholder="Nach Name, Personalnummer suchen..." className="w-full pl-10 pr-4 py-3 border border-[#E0E0E0] rounded text-sm focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
               style={{ borderRadius: '4px' }}
             />
           </div>
@@ -272,22 +270,19 @@ export function EmployeeManagement() {
 
         {/* KPI Cards */}
         <div className="grid grid-cols-3 gap-4">
-          <div
-            className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
+          <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
             <p className="text-[#666666] text-[16px] font-bold mb-3">Gesamt Mitarbeiter</p>
             <p className="text-[#0F429F] font-bold text-[32px]">{totalEmployees}</p>
           </div>
-          <div
-            className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
+          <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
             <p className="text-[#666666] text-[16px] font-bold mb-3">Aktiv Mitarbeiter</p>
             <p className="text-[#0F429F] font-bold text-[32px]">{activeEmployees}</p>
           </div>
-          <div
-            className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
+          <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
             <p className="text-[#666666] text-[16px] font-bold mb-3">Inaktiv Mitarbeiter</p>
@@ -297,11 +292,11 @@ export function EmployeeManagement() {
       </div>
 
       {/* Employee Table */}
-      <div className="px-8 py-6">
-        <div className="bg-white border border-[#E0E0E0] rounded-xl overflow-hidden" style={{ borderRadius: '12px' }}>
+      <div className="px-4 md:px-6 lg:px-8 py-6">
+        <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
           {/* Table Header */}
-          <div className="bg-[#273A5F] grid grid-cols-[150px_1fr_150px_120px_150px_240px] h-12 items-center px-6">
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Personalnummer</div>
+          <div className="bg-[#273A5F] grid grid-cols-[150px_1fr_150px_140px_130px_240px] h-14 items-center px-6">
+            <div className="text-white font-bold text-xs uppercase tracking-wide leading-tight">Personal-<br />nummer</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide">Abteilung</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
@@ -312,29 +307,24 @@ export function EmployeeManagement() {
           {/* Table Rows */}
           {paginatedEmployees.map((employee, index) => (
             <div
-              key={employee.id}
-              className={`
+              key={employee.id} className={`
                 flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                 transition-colors hover:bg-gray-50
                 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
               `}
-              style={{ display: 'grid', gridTemplateColumns: '150px 1fr 150px 120px 150px 240px', gap: '0' }}
+              style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
             >
               <div className="text-[#000000] text-sm">{employee.personnelNumber}</div>
               <div className="text-[#000000] text-sm">{employee.name}</div>
               <div className="text-[#000000] text-sm">{employee.department}</div>
-              <div className="flex items-center gap-2">
-                <span className="text-green-500">✅</span>
-                <span className="text-[#000000] text-sm">{employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'}</span>
-              </div>
+              <StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} />
               <div className="text-[#000000] text-sm">{formatCurrency(employee.budgetYear)}</div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleShowDetails(employee);
-                  }}
-                  className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
+                  }} className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
                   style={{ borderRadius: '32px' }}
                 >
                   <Eye size={16} />
@@ -344,8 +334,7 @@ export function EmployeeManagement() {
                   onClick={(e) => {
                     e.stopPropagation();
                     handleEdit(employee);
-                  }}
-                  className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
+                  }} className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
                   style={{ borderRadius: '32px' }}
                 >
                   <Edit2 size={16} />
@@ -360,8 +349,7 @@ export function EmployeeManagement() {
         <div className="flex items-center justify-center gap-2 mt-6">
           <button
             onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-            disabled={currentPage === 1}
-            className={`p-2 border rounded-lg transition ${
+            disabled={currentPage === 1} className={`p-2 border rounded-lg transition ${
               currentPage === 1
                 ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
                 : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
@@ -376,8 +364,7 @@ export function EmployeeManagement() {
 
           <button
             onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-            disabled={currentPage === totalPages}
-            className={`p-2 border rounded-lg transition ${
+            disabled={currentPage === totalPages} className={`p-2 border rounded-lg transition ${
               currentPage === totalPages
                 ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
                 : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
@@ -390,12 +377,10 @@ export function EmployeeManagement() {
 
       {/* Details Modal */}
       {showDetailsModal && selectedEmployee && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={() => setShowDetailsModal(false)}
         >
-          <div
-            className="bg-white rounded-xl shadow-2xl p-8"
+          <div className="bg-white rounded-xl shadow-2xl p-8"
             style={{ width: '600px', borderRadius: '16px' }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -421,8 +406,7 @@ export function EmployeeManagement() {
 
               <div className="bg-[#F8F9FB] p-4 rounded-lg">
                 <p className="text-[#666666] text-xs mb-1">Status</p>
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
                     selectedEmployee.status === 'aktiv'
                       ? 'bg-[#E8F5E9] text-[#4CAF50]'
                       : 'bg-[#F5F5F5] text-[#9E9E9E]'
@@ -463,15 +447,13 @@ export function EmployeeManagement() {
                 onClick={() => {
                   setShowDetailsModal(false);
                   handleEdit(selectedEmployee);
-                }}
-                className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3780] transition"
+                }} className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3780] transition"
                 style={{ borderRadius: '24px' }}
               >
                 Bearbeiten
               </button>
               <button
-                onClick={() => setShowDetailsModal(false)}
-                className="px-8 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
+                onClick={() => setShowDetailsModal(false)} className="px-8 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
                 style={{ borderRadius: '24px' }}
               >
                 Schließen

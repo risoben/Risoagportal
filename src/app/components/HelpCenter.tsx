@@ -5,7 +5,6 @@ export function HelpCenter() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleBackToPortal = () => {
-    // Navigate back to dashboard
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'dashboard' } }));
   };
 
@@ -91,13 +90,23 @@ export function HelpCenter() {
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header / Navigation */}
-      <header className="h-16 bg-white border-b border-[#E0E0E0] px-8 flex items-center justify-between">
-        {/* Riso Logo - 24x24px for Help Center */}
-        <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition">
-          <div className="w-6 h-6 flex items-center justify-center rounded bg-[#0F429F]">
-            <span className="text-white font-bold text-sm">R</span>
+      <header className="h-16 bg-white border-b border-[#E0E0E0] px-4 md:px-6 lg:px-8 flex items-center justify-between">
+        {/* Left: Back Button + Logo */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={handleBackToPortal}
+            className="flex items-center gap-2 text-[#0F429F] hover:text-[#246AFF] transition font-medium text-sm"
+          >
+            <ArrowLeft size={18} />
+            Zurück zum Portal
+          </button>
+          <div className="w-px h-6 bg-[#E0E0E0]"></div>
+          <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition">
+            <div className="w-6 h-6 flex items-center justify-center rounded bg-[#0F429F]">
+              <span className="text-white font-bold text-sm">R</span>
+            </div>
+            <span className="font-bold text-lg text-[#0F429F]">Riso</span>
           </div>
-          <span className="font-bold text-lg text-[#0F429F]">Riso</span>
         </div>
 
         <nav className="flex items-center gap-8">
@@ -129,7 +138,7 @@ export function HelpCenter() {
 
       {/* Hero Section */}
       <section
-        className="h-[400px] px-8 py-16 flex flex-col items-center justify-center gap-6"
+        className="h-[400px] px-4 md:px-6 lg:px-8 py-16 flex flex-col items-center justify-center gap-6"
         style={{
           background: 'linear-gradient(135deg, #0F429F 0%, #246AFF 100%)',
         }}
@@ -160,7 +169,7 @@ export function HelpCenter() {
       </section>
 
       {/* Content Area */}
-      <div className="max-w-[1400px] mx-auto px-8 py-16">
+      <div className="w-full px-4 md:px-6 lg:px-8 py-16">
         {/* Section A: Kategorien Overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {categories.map((category) => (
@@ -222,8 +231,8 @@ export function HelpCenter() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#273A5F] text-white px-8 py-12">
-        <div className="max-w-[1400px] mx-auto">
+      <footer className="bg-[#273A5F] text-white px-4 md:px-6 lg:px-8 py-12">
+        <div className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {/* Column 1: Company Links */}
             <div>

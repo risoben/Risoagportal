@@ -71,8 +71,7 @@ export function BenefitIcon({
     const bgColor = fallbackColors[benefitName] || '#4CAF50';
 
     return (
-      <div
-        className={`flex items-center justify-center rounded-full transition-transform duration-200 ${
+      <div className={`flex items-center justify-center rounded-full transition-transform duration-200 ${
           disabled
             ? 'bg-[#F9FAFB] opacity-50 cursor-not-allowed'
             : 'hover:scale-105'
@@ -85,8 +84,7 @@ export function BenefitIcon({
         }}
       >
         <Icon
-          size={iconSize * 0.55}
-          className={disabled ? 'text-[#999999]' : 'text-white'}
+          size={iconSize * 0.55} className={disabled ? 'text-[#999999]' : 'text-white'}
         />
       </div>
     );
@@ -96,8 +94,7 @@ export function BenefitIcon({
   return (
     <img
       src={iconSrc}
-      alt={benefitName}
-      className={`transition-transform duration-200 ${
+      alt={benefitName} className={`transition-transform duration-200 ${
         disabled
           ? 'opacity-50 cursor-not-allowed grayscale'
           : 'hover:scale-105'

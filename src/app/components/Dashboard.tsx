@@ -1,6 +1,7 @@
 import { Users, FileText, Download, Eye, Euro, Edit2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
+import { StatusBadge } from './Table';
 
 // Generate rolling 12 months of budget data
 // Current month: April 2026 → Shows May 2025 to April 2026
@@ -111,8 +112,7 @@ export function Dashboard() {
       const percentage = ((genutzt / verfuegbar) * 100).toFixed(1);
 
       return (
-        <div
-          className="bg-white border border-[#E0E0E0] rounded-lg p-3 shadow-lg"
+        <div className="bg-white border border-[#E0E0E0] rounded-lg p-3 shadow-lg"
           style={{
             fontFamily: 'Roboto, sans-serif',
             animation: 'fadeIn 0.2s ease-in-out',
@@ -142,7 +142,7 @@ export function Dashboard() {
   return (
     <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
-      <div className="bg-white border-b border-[#E0E0E0] px-8 py-6">
+      <div className="bg-white border-b border-[#E0E0E0] px-4 md:px-6 lg:px-8 py-6">
         <h1 className="text-[#273A5F] font-bold text-[32px]">Übersicht</h1>
       </div>
 
@@ -151,8 +151,7 @@ export function Dashboard() {
         <div className="grid grid-cols-3 gap-6 mb-8">
           {/* Gesamtbudget */}
           <button
-            onClick={() => handleNavigate('benefits')}
-            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
+            onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -170,8 +169,7 @@ export function Dashboard() {
 
           {/* Registrierte Nutzer */}
           <button
-            onClick={() => handleNavigate('mitarbeiter')}
-            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
+            onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -189,8 +187,7 @@ export function Dashboard() {
 
           {/* Erstellte Berichte - Gesamtanzahl aller Berichte */}
           <button
-            onClick={() => handleNavigate('reports')}
-            className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
+            onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -210,7 +207,7 @@ export function Dashboard() {
         {/* SECTION 2: Budget Chart */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-8">
           <h2 className="text-[#273A5F] font-bold text-[16px] mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
-            Gesamtbudget und Nutzung (pro Monat)
+            Gesamtbudget und Nutzung <span style={{ fontWeight: 'normal' }}>(pro Monat)</span>
           </h2>
           <div style={{ width: '100%', height: '400px', minHeight: '400px', minWidth: 0 }}>
             <ResponsiveContainer width="100%" height={400} minWidth={0} minHeight={0}>
@@ -280,8 +277,7 @@ export function Dashboard() {
                 </h2>
               </div>
               <button
-                onClick={() => handleNavigate('mitarbeiter')}
-                className="text-[#0F429F] text-[12px] font-normal hover:underline"
+                onClick={() => handleNavigate('mitarbeiter')} className="text-[#0F429F] text-[12px] font-normal hover:underline"
                 style={{ fontFamily: 'Roboto, sans-serif' }}
               >
                 Alle Mitarbeiter anzeigen
@@ -290,12 +286,11 @@ export function Dashboard() {
           </div>
 
           {/* Table */}
-          <div className="px-6 py-6">
+          <div className="px-4 md:px-6 lg:px-8 py-6">
             <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
               {/* Table Header */}
-              <div
-                className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: '150px 1fr 1fr 80px 100px 240px', gap: '0' }}
+              <div className="bg-[#273A5F] flex items-center px-6 h-12"
+                style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
               >
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Personalnummer</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
@@ -308,29 +303,24 @@ export function Dashboard() {
               {/* Table Rows */}
               {employees.map((employee, index) => (
                 <div
-                  key={employee.id}
-                  className={`
+                  key={employee.id} className={`
                     flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: '150px 1fr 1fr 80px 100px 240px', gap: '0' }}
+                  style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
                 >
                   <div className="text-[#000000] text-sm">{employee.nr}</div>
                   <div className="text-[#000000] text-sm">{employee.name}</div>
                   <div className="text-[#000000] text-sm">{employee.abteilung}</div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500">✅</span>
-                    <span className="text-[#000000] text-sm">{employee.status}</span>
-                  </div>
+                  <StatusBadge status={employee.status} type={employee.status === 'Aktiv' ? 'success' : 'inactive'} />
                   <div className="text-[#000000] text-sm">{employee.budget}</div>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleEmployeeDetails(employee.id);
-                      }}
-                      className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
+                      }} className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
                       style={{ borderRadius: '32px' }}
                     >
                       <Eye size={16} />
@@ -340,8 +330,7 @@ export function Dashboard() {
                       onClick={(e) => {
                         e.stopPropagation();
                         handleEmployeeEdit(employee.id);
-                      }}
-                      className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
+                      }} className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
                       style={{ borderRadius: '32px' }}
                     >
                       <Edit2 size={16} />
@@ -370,8 +359,7 @@ export function Dashboard() {
                 </h2>
               </div>
               <button
-                onClick={() => handleNavigate('reports')}
-                className="text-[#0F429F] text-[12px] font-normal hover:underline"
+                onClick={() => handleNavigate('reports')} className="text-[#0F429F] text-[12px] font-normal hover:underline"
                 style={{ fontFamily: 'Roboto, sans-serif' }}
               >
                 Alle Berichte anzeigen
@@ -380,12 +368,11 @@ export function Dashboard() {
           </div>
 
           {/* Table */}
-          <div className="px-6 py-6">
+          <div className="px-4 md:px-6 lg:px-8 py-6">
             <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
               {/* Table Header */}
-              <div
-                className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: '80px 80px 1.5fr 80px 100px 1fr 240px', gap: '0' }}
+              <div className="bg-[#273A5F] flex items-center px-6 h-12"
+                style={{ display: 'grid', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
               >
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Datum</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Monat</div>
@@ -399,13 +386,12 @@ export function Dashboard() {
               {/* Table Rows */}
               {reports.map((report, index) => (
                 <div
-                  key={report.id}
-                  className={`
+                  key={report.id} className={`
                     flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: '80px 80px 1.5fr 80px 100px 1fr 240px', gap: '0' }}
+                  style={{ display: 'grid', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
                 >
                   <div className="text-[#000000] text-sm">{report.date}</div>
                   <div className="text-[#000000] text-sm">{report.month}</div>
@@ -416,15 +402,13 @@ export function Dashboard() {
                     {report.fileName}
                   </div>
                   <div className="flex items-center gap-2">
-                    <button
-                      className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
+                    <button className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
                       style={{ borderRadius: '32px' }}
                     >
                       <Eye size={16} />
                       Ansehen
                     </button>
-                    <button
-                      className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
+                    <button className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
                       style={{ borderRadius: '32px' }}
                     >
                       <Download size={16} />

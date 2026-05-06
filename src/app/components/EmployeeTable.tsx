@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, ChevronDown, Upload, Eye, Edit2 } from 'lucide-react';
+import { StatusBadge } from './Table';
 
 // Sample employee data
 const employees = [
@@ -79,14 +80,12 @@ export function EmployeeTable() {
                 type="text"
                 placeholder="Suche..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-10 pl-10 pr-4 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#273A5F] focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
+                onChange={(e) => setSearchQuery(e.target.value)} className="w-full h-10 pl-10 pr-4 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#273A5F] focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
               />
             </div>
 
             {/* Standort Filter */}
-            <button
-              className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
+            <button className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
               style={{ width: '200px' }}
             >
               <span className="text-[#273A5F] text-sm flex-1 text-left">
@@ -96,8 +95,7 @@ export function EmployeeTable() {
             </button>
 
             {/* Status Filter */}
-            <button
-              className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
+            <button className="bg-white border border-[#E5E7EB] rounded-lg px-4 h-10 flex items-center gap-2"
               style={{ width: '200px' }}
             >
               <span className="text-[#273A5F] text-sm flex-1 text-left">
@@ -109,8 +107,7 @@ export function EmployeeTable() {
 
           {/* Import Button */}
           <button
-            onClick={handleImportClick}
-            className="bg-[#0F429F] text-white px-6 h-10 rounded-lg flex items-center gap-2 hover:bg-[#0d3680] transition-colors font-medium text-sm"
+            onClick={handleImportClick} className="bg-[#0F429F] text-white px-6 h-10 rounded-lg flex items-center gap-2 hover:bg-[#0d3680] transition-colors font-medium text-sm"
           >
             <Upload className="w-4 h-4" />
             CSV Import
@@ -122,9 +119,8 @@ export function EmployeeTable() {
       <div className="px-6">
         <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
           {/* Table Header */}
-          <div
-            className="bg-[#273A5F] flex items-center px-6 h-12"
-            style={{ display: 'grid', gridTemplateColumns: '200px 80px 150px 100px 120px 240px' }}
+          <div className="bg-[#273A5F] flex items-center px-6 h-12"
+            style={{ display: 'grid', gridTemplateColumns: '1.5fr 0.8fr 1fr 1fr 0.8fr 1fr' }}
           >
             <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide">Nr.</div>
@@ -137,29 +133,24 @@ export function EmployeeTable() {
           {/* Table Rows */}
           {employees.map((employee, index) => (
             <div
-              key={employee.id}
-              className={`
+              key={employee.id} className={`
                 flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                 transition-colors hover:bg-gray-50
                 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
               `}
-              style={{ display: 'grid', gridTemplateColumns: '200px 80px 150px 100px 120px 240px' }}
+              style={{ display: 'grid', gridTemplateColumns: '1.5fr 0.8fr 1fr 1fr 0.8fr 1fr' }}
             >
               <div className="text-[#000000] text-sm">{employee.name}</div>
               <div className="text-[#000000] text-sm">{employee.nr}</div>
               <div className="text-[#000000] text-sm">{employee.abteilung}</div>
-              <div className="flex items-center gap-2">
-                <span className="text-green-500">✅</span>
-                <span className="text-[#000000] text-sm">{employee.status}</span>
-              </div>
+              <StatusBadge status={employee.status} type={employee.status === 'Aktiv' ? 'success' : 'inactive'} />
               <div className="text-[#000000] text-sm">{employee.budget}</div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleEmployeeDetails(employee.id);
-                  }}
-                  className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
+                  }} className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
                   style={{ borderRadius: '32px' }}
                 >
                   <Eye size={16} />
@@ -169,8 +160,7 @@ export function EmployeeTable() {
                   onClick={(e) => {
                     e.stopPropagation();
                     handleEmployeeEdit(employee.id);
-                  }}
-                  className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
+                  }} className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
                   style={{ borderRadius: '32px' }}
                 >
                   <Edit2 size={16} />

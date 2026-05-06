@@ -48,7 +48,7 @@ export function BenefitConfigWizard({
     if (selectedOption === 'IndividualEmployees') {
       setCurrentStep('step4');
     } else {
-      alert(`Alle Mitarbeiter in ${locationName} erhalten das gleiche Limit für ${benefitName}.`);
+      alert(`Alle Mitarbeiter in ${locationName} erhalten das gleiche Budget für ${benefitName}.`);
       handleBack();
     }
   };
@@ -139,7 +139,7 @@ export function BenefitConfigWizard({
       const names = employeesWithMissingLimits.map((emp) => emp.name).join(', ');
       return {
         type: 'error',
-        text: `Limits erforderlich für: ${names}`,
+        text: `Budgets erforderlich für: ${names}`,
       };
     }
 
@@ -156,8 +156,7 @@ export function BenefitConfigWizard({
       {/* Header */}
       <div className="bg-white px-8 py-6 border-b border-[#E0E0E0]">
         <button
-          onClick={handleBack}
-          className="text-[#0F429F] text-[13px] mb-4 hover:underline flex items-center gap-2"
+          onClick={handleBack} className="text-[#0F429F] text-[13px] mb-4 hover:underline flex items-center gap-2"
         >
           ← Zurück zur Übersicht
         </button>
@@ -166,8 +165,8 @@ export function BenefitConfigWizard({
           <div>
             <h1 className="text-[#273A5F] text-[18px]">
               {currentStep === 'step3'
-                ? 'Schritt 3 von 4: Limits konfigurieren'
-                : 'Schritt 4 von 4: Monatslimits für Mitarbeiter'}
+                ? 'Schritt 3 von 4: Budgets konfigurieren'
+                : 'Schritt 4 von 4: Monatsbudgets für Mitarbeiter'}
             </h1>
             <p className="text-[#666666] text-[14px]">
               {benefitName} – {locationName}
@@ -176,18 +175,17 @@ export function BenefitConfigWizard({
         </div>
       </div>
 
-      <div className="max-w-[1000px] mx-auto p-8">
-        {/* STEP 3: Limit Configuration */}
+      <div className="w-full p-8">
+        {/* STEP 3: Budget Configuration */}
         {currentStep === 'step3' && (
           <div className="space-y-6">
             <p className="text-[#666666] text-[13px]">
-              Wähle wie die Monatslimits für diese Location konfiguriert werden sollen.
+              Wähle wie die Monatsbudgets für diese Location konfiguriert werden sollen.
             </p>
 
             {/* Option 1: All Employees */}
             <button
-              onClick={() => handleOptionSelect('AllEmployees')}
-              className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 ${
+              onClick={() => handleOptionSelect('AllEmployees')} className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 ${
                 selectedOption === 'AllEmployees'
                   ? 'border-[#2196F3] bg-[#E3F2FD]'
                   : 'border-[#E0E0E0] bg-white hover:bg-[#E3F2FD] hover:border-[#2196F3]'
@@ -199,8 +197,7 @@ export function BenefitConfigWizard({
                   type="radio"
                   name="limitOption"
                   checked={selectedOption === 'AllEmployees'}
-                  onChange={() => handleOptionSelect('AllEmployees')}
-                  className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
+                  onChange={() => handleOptionSelect('AllEmployees')} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
                 />
                 {selectedOption === 'AllEmployees' && (
                   <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -214,15 +211,14 @@ export function BenefitConfigWizard({
                   </h3>
                 </div>
                 <p className="text-[#666666] text-[12px]">
-                  Alle Mitarbeiter erhalten das gleiche monatliche Limit. Du kannst später noch einzelne Limits setzen.
+                  Alle Mitarbeiter erhalten das gleiche monatliche Budget. Du kannst später noch einzelne Budgets setzen.
                 </p>
               </div>
             </button>
 
             {/* Option 2: Individual Employees */}
             <button
-              onClick={() => handleOptionSelect('IndividualEmployees')}
-              className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 ${
+              onClick={() => handleOptionSelect('IndividualEmployees')} className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 ${
                 selectedOption === 'IndividualEmployees'
                   ? 'border-[#2196F3] bg-[#E3F2FD]'
                   : 'border-[#E0E0E0] bg-white hover:bg-[#E3F2FD] hover:border-[#2196F3]'
@@ -234,8 +230,7 @@ export function BenefitConfigWizard({
                   type="radio"
                   name="limitOption"
                   checked={selectedOption === 'IndividualEmployees'}
-                  onChange={() => handleOptionSelect('IndividualEmployees')}
-                  className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
+                  onChange={() => handleOptionSelect('IndividualEmployees')} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
                 />
                 {selectedOption === 'IndividualEmployees' && (
                   <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -245,11 +240,11 @@ export function BenefitConfigWizard({
                 <div className="flex items-center gap-3 mb-2">
                   <Settings size={24} className="text-[#2196F3]" />
                   <h3 className="text-[#273A5F] text-[14px]">
-                    Limits für jeden Mitarbeiter einzeln verwalten
+                    Budgets für jeden Mitarbeiter einzeln verwalten
                   </h3>
                 </div>
                 <p className="text-[#666666] text-[12px]">
-                  Definiere unterschiedliche Monatslimits für einzelne Mitarbeiter. Dies ermöglicht flexible Limits je nach Bedarf.
+                  Definiere unterschiedliche Monatsbudgets für einzelne Mitarbeiter. Dies ermöglicht flexible Budgets je nach Bedarf.
                 </p>
               </div>
             </button>
@@ -265,16 +260,14 @@ export function BenefitConfigWizard({
             {/* Footer Buttons */}
             <div className="flex gap-3 pt-4">
               <button
-                onClick={handleStep3Back}
-                className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition"
+                onClick={handleStep3Back} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Zurück
               </button>
               <button
                 onClick={handleStep3Next}
-                disabled={!selectedOption}
-                className={`px-6 py-3 text-white text-[14px] rounded transition ${
+                disabled={!selectedOption} className={`px-6 py-3 text-white text-[14px] rounded transition ${
                   selectedOption
                     ? 'bg-[#4CAF50] hover:bg-[#45A049]'
                     : 'bg-[#CCCCCC] cursor-not-allowed'
@@ -291,7 +284,7 @@ export function BenefitConfigWizard({
         {currentStep === 'step4' && (
           <div className="space-y-6">
             <p className="text-[#666666] text-[13px]">
-              Wähle Mitarbeiter aus und lege ein Monatslimit fest. Das Limit ist erforderlich für alle ausgewählten Mitarbeiter.
+              Wähle Mitarbeiter aus und lege ein Monatsbudget fest. Das Limit ist erforderlich für alle ausgewählten Mitarbeiter.
             </p>
 
             {/* Employee Table */}
@@ -304,8 +297,7 @@ export function BenefitConfigWizard({
                         <input
                           type="checkbox"
                           checked={selectAll}
-                          onChange={handleSelectAll}
-                          className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
+                          onChange={handleSelectAll} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
                         />
                         {selectAll && (
                           <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
@@ -314,14 +306,13 @@ export function BenefitConfigWizard({
                     </th>
                     <th className="px-4 py-3 text-left text-[#666666] text-[13px]">Mitarbeiter</th>
                     <th className="px-4 py-3 text-left text-[#666666] text-[13px]">Personennummer</th>
-                    <th className="px-4 py-3 text-left text-[#666666] text-[13px]">Monatslimit</th>
+                    <th className="px-4 py-3 text-left text-[#666666] text-[13px]">Monatsbudget</th>
                   </tr>
                 </thead>
                 <tbody>
                   {employees.map((employee, index) => (
                     <tr
-                      key={employee.id}
-                      className={`border-b border-[#E0E0E0] hover:bg-[#E3F2FD] transition-colors ${
+                      key={employee.id} className={`border-b border-[#E0E0E0] hover:bg-[#E3F2FD] transition-colors ${
                         index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
                       } ${employee.hasError ? 'bg-[#FFEBEE]' : ''}`}
                       style={{ height: '56px' }}
@@ -331,8 +322,7 @@ export function BenefitConfigWizard({
                           <input
                             type="checkbox"
                             checked={employee.selected}
-                            onChange={() => toggleEmployeeSelection(employee.id)}
-                            className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
+                            onChange={() => toggleEmployeeSelection(employee.id)} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
                           />
                           {employee.selected && (
                             <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
@@ -349,8 +339,7 @@ export function BenefitConfigWizard({
                               value={employee.monthlyLimit}
                               onChange={(e) => updateEmployeeLimit(employee.id, e.target.value)}
                               disabled={!employee.selected}
-                              placeholder="z.B. 500"
-                              className={`w-32 px-3 py-2 border rounded text-[13px] text-black focus:outline-none transition ${
+                              placeholder="z.B. 500" className={`w-32 px-3 py-2 border rounded text-[13px] text-black focus:outline-none transition ${
                                 employee.hasError
                                   ? 'border-[#E74C3C] bg-[#FFEBEE] border-2'
                                   : employee.selected
@@ -362,7 +351,7 @@ export function BenefitConfigWizard({
                             <span className="text-[13px] text-[#666666]">€</span>
                           </div>
                           {employee.hasError && (
-                            <p className="text-[#E74C3C] text-[11px] mt-1">Monatslimit erforderlich</p>
+                            <p className="text-[#E74C3C] text-[11px] mt-1">Monatsbudget erforderlich</p>
                           )}
                         </div>
                       </td>
@@ -374,8 +363,7 @@ export function BenefitConfigWizard({
 
             {/* Validation Messages */}
             {validationMessage && (
-              <div
-                className={`flex items-center gap-2 text-[12px] ${
+              <div className={`flex items-center gap-2 text-[12px] ${
                   validationMessage.type === 'error'
                     ? 'text-[#E74C3C]'
                     : validationMessage.type === 'warning'
@@ -393,8 +381,7 @@ export function BenefitConfigWizard({
             {/* Footer Buttons */}
             <div className="flex gap-3 pt-4">
               <button
-                onClick={handleStep4Back}
-                className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition flex items-center gap-2"
+                onClick={handleStep4Back} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition flex items-center gap-2"
                 style={{ borderRadius: '4px' }}
               >
                 <ArrowLeft size={16} />
@@ -402,8 +389,7 @@ export function BenefitConfigWizard({
               </button>
               <button
                 onClick={handleStep4Next}
-                disabled={!validateStep4()}
-                className={`px-6 py-3 text-white text-[14px] rounded transition ${
+                disabled={!validateStep4()} className={`px-6 py-3 text-white text-[14px] rounded transition ${
                   validateStep4()
                     ? 'bg-[#4CAF50] hover:bg-[#45A049]'
                     : 'bg-[#CCCCCC] cursor-not-allowed'

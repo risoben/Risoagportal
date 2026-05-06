@@ -4,7 +4,7 @@ const benefitsList = [
   'Mittagessen',
   'Internet',
   'Kindergarten',
-  'Commuting',
+  'Fahrkostenzuschuss',
   'Erholung',
   'Sachbezug',
   'Danke-Bonus',
@@ -54,14 +54,13 @@ export function Settings() {
       </div>
 
       {/* Content Area */}
-      <div className="max-w-[1200px] mx-auto px-8 py-8 flex gap-8">
+      <div className="w-full px-4 md:px-6 lg:px-8 py-8 flex gap-8">
         {/* Sidebar */}
         <div className="w-[280px] flex-shrink-0">
           <div className="bg-white border border-[#E0E0E0] rounded-lg overflow-hidden">
             <nav>
               <button
-                onClick={() => setActiveTab('general')}
-                className={`w-full text-left px-4 py-3 text-[13px] transition cursor-pointer ${
+                onClick={() => setActiveTab('general')} className={`w-full text-left px-4 py-3 text-[13px] transition cursor-pointer ${
                   activeTab === 'general'
                     ? 'bg-[#F0F4FF] text-[#0F429F] border-l-[3px] border-[#0F429F]'
                     : 'text-[#333333] hover:bg-[#F9FAFB]'
@@ -70,8 +69,7 @@ export function Settings() {
                 Allgemeine Infos
               </button>
               <button
-                onClick={() => setActiveTab('reports')}
-                className={`w-full text-left px-4 py-3 text-[13px] transition cursor-pointer ${
+                onClick={() => setActiveTab('reports')} className={`w-full text-left px-4 py-3 text-[13px] transition cursor-pointer ${
                   activeTab === 'reports'
                     ? 'bg-[#F0F4FF] text-[#0F429F] border-l-[3px] border-[#0F429F]'
                     : 'text-[#333333] hover:bg-[#F9FAFB]'
@@ -100,8 +98,7 @@ export function Settings() {
                         type="text"
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
-                        placeholder="z.B. Riso GmbH"
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                        placeholder="z.B. Riso GmbH" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                       />
                     </div>
                     <div>
@@ -110,8 +107,7 @@ export function Settings() {
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        placeholder="z.B. Mannheim"
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                        placeholder="z.B. Mannheim" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                       />
                     </div>
                   </div>
@@ -122,8 +118,7 @@ export function Settings() {
                       type="text"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      placeholder="z.B. Hauptstraße 42, 68219 Mannheim"
-                      className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                      placeholder="z.B. Hauptstraße 42, 68219 Mannheim" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                     />
                   </div>
 
@@ -134,8 +129,7 @@ export function Settings() {
                         type="text"
                         value={zipCode}
                         onChange={(e) => setZipCode(e.target.value)}
-                        placeholder="z.B. 68219"
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                        placeholder="z.B. 68219" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                       />
                     </div>
                     <div>
@@ -144,8 +138,7 @@ export function Settings() {
                         type="text"
                         value={vatNumber}
                         onChange={(e) => setVatNumber(e.target.value)}
-                        placeholder="z.B. DE123456789"
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                        placeholder="z.B. DE123456789" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                       />
                     </div>
                   </div>
@@ -156,8 +149,7 @@ export function Settings() {
                       type="text"
                       value={contactPerson}
                       onChange={(e) => setContactPerson(e.target.value)}
-                      placeholder="z.B. Max Müller"
-                      className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                      placeholder="z.B. Max Müller" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                     />
                   </div>
                 </div>
@@ -175,8 +167,7 @@ export function Settings() {
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="z.B. Santiago"
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                        placeholder="z.B. Santiago" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                       />
                     </div>
                     <div>
@@ -185,8 +176,7 @@ export function Settings() {
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
-                        placeholder="z.B. Tellez"
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                        placeholder="z.B. Tellez" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                       />
                     </div>
                   </div>
@@ -197,8 +187,7 @@ export function Settings() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="z.B. santiago@riso-app.de"
-                      className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                      placeholder="z.B. santiago@riso-app.de" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                     />
                   </div>
 
@@ -209,16 +198,14 @@ export function Settings() {
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="z.B. +49 621 123456"
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
+                        placeholder="z.B. +49 621 123456" className="w-full px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition"
                       />
                     </div>
                     <div>
                       <label className="block font-medium text-xs text-[#333333] mb-2">Rolle im Portal</label>
                       <select
                         value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition cursor-pointer"
+                        onChange={(e) => setRole(e.target.value)} className="w-full px-4 py-3 text-[13px] text-[#333333] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] transition cursor-pointer"
                       >
                         <option value="">z.B. Admin</option>
                         <option value="Admin">Admin</option>
@@ -247,8 +234,7 @@ export function Settings() {
                       <input
                         type="text"
                         value="87"
-                        readOnly
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
+                        readOnly className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
                       />
                     </div>
                     <div>
@@ -256,8 +242,7 @@ export function Settings() {
                       <input
                         type="text"
                         value="1. Januar 2026"
-                        readOnly
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
+                        readOnly className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
                       />
                     </div>
                   </div>
@@ -268,8 +253,7 @@ export function Settings() {
                       <input
                         type="text"
                         value="31. Dezember 2026"
-                        readOnly
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
+                        readOnly className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
                       />
                     </div>
                     <div>
@@ -277,8 +261,7 @@ export function Settings() {
                       <input
                         type="text"
                         value="7. Mai 2026"
-                        readOnly
-                        className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
+                        readOnly className="w-full px-4 py-3 text-[13px] text-[#333333] bg-[#F9FAFB] border border-[#E0E0E0] rounded-md cursor-not-allowed"
                       />
                     </div>
                   </div>
@@ -288,15 +271,13 @@ export function Settings() {
               {/* Buttons */}
               <div className="flex gap-4 mt-8 justify-end">
                 <button
-                  onClick={handleCancel}
-                  className="px-8 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
+                  onClick={handleCancel} className="px-8 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
                   style={{ borderRadius: '24px' }}
                 >
                   Abbrechen
                 </button>
                 <button
-                  onClick={handleSave}
-                  className="px-8 py-3 bg-[#246AFF] text-white font-medium rounded-full hover:bg-[#0F429F] transition"
+                  onClick={handleSave} className="px-8 py-3 bg-[#246AFF] text-white font-medium rounded-full hover:bg-[#0F429F] transition"
                   style={{ borderRadius: '24px' }}
                 >
                   Speichern
@@ -323,8 +304,7 @@ export function Settings() {
                         name="reportType"
                         value="both"
                         checked={reportType === 'both'}
-                        onChange={(e) => setReportType(e.target.value as 'both')}
-                        className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setReportType(e.target.value as 'both')} className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Beide – Übersicht & Vollständiger Bericht</span>
                     </label>
@@ -334,8 +314,7 @@ export function Settings() {
                         name="reportType"
                         value="overview"
                         checked={reportType === 'overview'}
-                        onChange={(e) => setReportType(e.target.value as 'overview')}
-                        className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setReportType(e.target.value as 'overview')} className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Nur Übersichtsbericht</span>
                     </label>
@@ -345,8 +324,7 @@ export function Settings() {
                         name="reportType"
                         value="full"
                         checked={reportType === 'full'}
-                        onChange={(e) => setReportType(e.target.value as 'full')}
-                        className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setReportType(e.target.value as 'full')} className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Nur Vollständiger Bericht</span>
                     </label>
@@ -361,8 +339,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={locationsIncluded.all}
-                        onChange={(e) => setLocationsIncluded({ ...locationsIncluded, all: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setLocationsIncluded({ ...locationsIncluded, all: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Alle</span>
                     </label>
@@ -370,8 +347,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={locationsIncluded.muenchen}
-                        onChange={(e) => setLocationsIncluded({ ...locationsIncluded, muenchen: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setLocationsIncluded({ ...locationsIncluded, muenchen: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">München</span>
                     </label>
@@ -388,8 +364,7 @@ export function Settings() {
                         name="locationExportType"
                         value="combined"
                         checked={locationExportType === 'combined'}
-                        onChange={(e) => setLocationExportType(e.target.value as 'combined')}
-                        className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setLocationExportType(e.target.value as 'combined')} className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Alle Standorte in einem Report</span>
                     </label>
@@ -399,8 +374,7 @@ export function Settings() {
                         name="locationExportType"
                         value="separate"
                         checked={locationExportType === 'separate'}
-                        onChange={(e) => setLocationExportType(e.target.value as 'separate')}
-                        className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setLocationExportType(e.target.value as 'separate')} className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Einzelnen Report pro Standort</span>
                     </label>
@@ -412,8 +386,7 @@ export function Settings() {
                   <p className="text-[11px] text-[#999999] mb-3">Datentyp</p>
                   <div className="flex gap-3">
                     <button
-                      onClick={() => setDataTypes({ ...dataTypes, pdf: !dataTypes.pdf })}
-                      className={`px-4 py-2 text-xs border rounded-md transition ${
+                      onClick={() => setDataTypes({ ...dataTypes, pdf: !dataTypes.pdf })} className={`px-4 py-2 text-xs border rounded-md transition ${
                         dataTypes.pdf
                           ? 'bg-[#0F429F] text-white border-[#0F429F]'
                           : 'bg-white text-[#333333] border-[#E0E0E0] hover:bg-[#F0F4FF] hover:border-[#0F429F]'
@@ -422,8 +395,7 @@ export function Settings() {
                       PDF
                     </button>
                     <button
-                      onClick={() => setDataTypes({ ...dataTypes, excel: !dataTypes.excel })}
-                      className={`px-4 py-2 text-xs border rounded-md transition ${
+                      onClick={() => setDataTypes({ ...dataTypes, excel: !dataTypes.excel })} className={`px-4 py-2 text-xs border rounded-md transition ${
                         dataTypes.excel
                           ? 'bg-[#0F429F] text-white border-[#0F429F]'
                           : 'bg-white text-[#333333] border-[#E0E0E0] hover:bg-[#F0F4FF] hover:border-[#0F429F]'
@@ -432,8 +404,7 @@ export function Settings() {
                       Excel
                     </button>
                     <button
-                      onClick={() => setDataTypes({ ...dataTypes, csv: !dataTypes.csv })}
-                      className={`px-4 py-2 text-xs border rounded-md transition ${
+                      onClick={() => setDataTypes({ ...dataTypes, csv: !dataTypes.csv })} className={`px-4 py-2 text-xs border rounded-md transition ${
                         dataTypes.csv
                           ? 'bg-[#0F429F] text-white border-[#0F429F]'
                           : 'bg-white text-[#333333] border-[#E0E0E0] hover:bg-[#F0F4FF] hover:border-[#0F429F]'
@@ -455,8 +426,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={mitarbeiterData.vorname}
-                        onChange={(e) => setMitarbeiterData({ ...mitarbeiterData, vorname: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setMitarbeiterData({ ...mitarbeiterData, vorname: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Vorname</span>
                     </label>
@@ -464,8 +434,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={mitarbeiterData.nachname}
-                        onChange={(e) => setMitarbeiterData({ ...mitarbeiterData, nachname: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setMitarbeiterData({ ...mitarbeiterData, nachname: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Nachname</span>
                     </label>
@@ -473,8 +442,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={mitarbeiterData.personalnr}
-                        onChange={(e) => setMitarbeiterData({ ...mitarbeiterData, personalnr: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setMitarbeiterData({ ...mitarbeiterData, personalnr: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-3 text-xs text-[#333333]">Personalnr</span>
                     </label>
@@ -489,8 +457,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.essenszuschuss}
-                        onChange={(e) => setBenefits({ ...benefits, essenszuschuss: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, essenszuschuss: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Essenszuschuss" size={24} />
@@ -501,8 +468,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.sachbezug}
-                        onChange={(e) => setBenefits({ ...benefits, sachbezug: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, sachbezug: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Sachbezug" size={24} />
@@ -513,8 +479,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.dankeBonus}
-                        onChange={(e) => setBenefits({ ...benefits, dankeBonus: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, dankeBonus: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Danke-Bonus" size={24} />
@@ -525,8 +490,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.bkv}
-                        onChange={(e) => setBenefits({ ...benefits, bkv: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, bkv: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="BKV" size={24} />
@@ -537,8 +501,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.internetzuschuss}
-                        onChange={(e) => setBenefits({ ...benefits, internetzuschuss: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, internetzuschuss: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Internetzuschuss" size={24} />
@@ -549,8 +512,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.kindergartenzuschuss}
-                        onChange={(e) => setBenefits({ ...benefits, kindergartenzuschuss: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, kindergartenzuschuss: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Kindergartenzuschuss" size={24} />
@@ -561,8 +523,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.geburtstagsgutschein}
-                        onChange={(e) => setBenefits({ ...benefits, geburtstagsgutschein: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, geburtstagsgutschein: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Geburtstagsgutschein" size={24} />
@@ -573,8 +534,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.bav}
-                        onChange={(e) => setBenefits({ ...benefits, bav: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, bav: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="BAV" size={24} />
@@ -585,8 +545,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.erholungsbeihilfe}
-                        onChange={(e) => setBenefits({ ...benefits, erholungsbeihilfe: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, erholungsbeihilfe: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Erholungsbeihilfe" size={24} />
@@ -597,8 +556,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.fahrtkostenzuschuss}
-                        onChange={(e) => setBenefits({ ...benefits, fahrtkostenzuschuss: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, fahrtkostenzuschuss: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="Fahrtkostenzuschuss" size={24} />
@@ -609,8 +567,7 @@ export function Settings() {
                       <input
                         type="checkbox"
                         checked={benefits.oepnvTicketZuschuss}
-                        onChange={(e) => setBenefits({ ...benefits, oepnvTicketZuschuss: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        onChange={(e) => setBenefits({ ...benefits, oepnvTicketZuschuss: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
                         <BenefitIcon benefitName="ÖPNV-Ticket-Zuschuss" size={24} />
@@ -627,23 +584,20 @@ export function Settings() {
                 <textarea
                   value={comments}
                   onChange={(e) => setComments(e.target.value)}
-                  placeholder="Freitext für zusätzliche Hinweise..."
-                  className="w-full h-[120px] px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] resize-none transition"
+                  placeholder="Freitext für zusätzliche Hinweise..." className="w-full h-[120px] px-4 py-3 text-[13px] text-[#333333] placeholder-[#999999] bg-white border border-[#E0E0E0] rounded-md hover:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F] resize-none transition"
                 />
               </div>
 
               {/* Buttons */}
               <div className="flex gap-4 mt-8 justify-end">
                 <button
-                  onClick={handleCancel}
-                  className="px-8 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
+                  onClick={handleCancel} className="px-8 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
                   style={{ borderRadius: '24px' }}
                 >
                   Abbrechen
                 </button>
                 <button
-                  onClick={handleSave}
-                  className="px-8 py-3 bg-[#246AFF] text-white font-medium rounded-full hover:bg-[#0F429F] transition"
+                  onClick={handleSave} className="px-8 py-3 bg-[#246AFF] text-white font-medium rounded-full hover:bg-[#0F429F] transition"
                   style={{ borderRadius: '24px' }}
                 >
                   Speichern

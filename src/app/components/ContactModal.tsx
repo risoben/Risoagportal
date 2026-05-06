@@ -193,13 +193,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       onClick={(e) => e.target === e.currentTarget && handleClose()}
       style={{ fontFamily: 'Roboto, sans-serif' }}
     >
-      <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-[600px] max-h-[90vh] overflow-auto"
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-[600px] max-h-[90vh] overflow-auto"
         style={{ boxShadow: '0 10px 40px rgba(0,0,0,0.12)' }}
       >
         {/* Success State */}
@@ -213,8 +211,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               Danke für deine Nachricht. Wir melden uns in Kürze bei dir.
             </p>
             <button
-              onClick={handleClose}
-              className="px-8 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
+              onClick={handleClose} className="px-8 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
             >
               Schließen
             </button>
@@ -236,14 +233,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             </p>
             <div className="flex gap-3 justify-center">
               <button
-                onClick={handleClose}
-                className="px-8 py-3 border border-[#0F429F] text-[#0F429F] text-[14px] font-medium rounded-full hover:bg-[#F0F4FF] transition-colors"
+                onClick={handleClose} className="px-8 py-3 border border-[#0F429F] text-[#0F429F] text-[14px] font-medium rounded-full hover:bg-[#F0F4FF] transition-colors"
               >
                 Schließen
               </button>
               <button
-                onClick={handleRetry}
-                className="px-8 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
+                onClick={handleRetry} className="px-8 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
               >
                 Nochmal versuchen
               </button>
@@ -262,8 +257,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
               <button
                 onClick={handleClose}
-                disabled={formState === 'sending'}
-                className="w-8 h-8 flex items-center justify-center text-[#666666] hover:bg-[#F0F4FF] rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={formState === 'sending'} className="w-8 h-8 flex items-center justify-center text-[#666666] hover:bg-[#F0F4FF] rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <X size={24} />
               </button>
@@ -283,8 +277,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={formState === 'sending'}
-                  placeholder="z.B. Max Mustermann"
-                  className={`w-full px-3 py-2 border rounded text-[14px] transition-all ${
+                  placeholder="z.B. Max Mustermann" className={`w-full px-3 py-2 border rounded text-[14px] transition-all ${
                     errors.name && touched.name
                       ? 'border-[#F44336]'
                       : 'border-[#0F429F] focus:shadow-[0_0_0_3px_rgba(15,66,159,0.1)]'
@@ -308,8 +301,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={formState === 'sending'}
-                  placeholder="max@firma.de"
-                  className={`w-full px-3 py-2 border rounded text-[14px] transition-all ${
+                  placeholder="max@firma.de" className={`w-full px-3 py-2 border rounded text-[14px] transition-all ${
                     errors.email && touched.email
                       ? 'border-[#F44336]'
                       : 'border-[#0F429F] focus:shadow-[0_0_0_3px_rgba(15,66,159,0.1)]'
@@ -333,8 +325,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={formState === 'sending'}
-                  placeholder="Worum geht es?"
-                  className={`w-full px-3 py-2 border rounded text-[14px] transition-all ${
+                  placeholder="Worum geht es?" className={`w-full px-3 py-2 border rounded text-[14px] transition-all ${
                     errors.subject && touched.subject
                       ? 'border-[#F44336]'
                       : 'border-[#0F429F] focus:shadow-[0_0_0_3px_rgba(15,66,159,0.1)]'
@@ -356,8 +347,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   value={formData.category}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  disabled={formState === 'sending'}
-                  className={`w-full px-3 py-2 border rounded text-[14px] transition-all cursor-pointer ${
+                  disabled={formState === 'sending'} className={`w-full px-3 py-2 border rounded text-[14px] transition-all cursor-pointer ${
                     errors.category && touched.category
                       ? 'border-[#F44336]'
                       : 'border-[#0F429F] focus:shadow-[0_0_0_3px_rgba(15,66,159,0.1)]'
@@ -387,8 +377,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={formState === 'sending'}
-                  placeholder="Deine Nachricht..."
-                  className={`w-full px-3 py-3 border rounded text-[14px] transition-all resize-y ${
+                  placeholder="Deine Nachricht..." className={`w-full px-3 py-3 border rounded text-[14px] transition-all resize-y ${
                     errors.message && touched.message
                       ? 'border-[#F44336]'
                       : 'border-[#0F429F] focus:shadow-[0_0_0_3px_rgba(15,66,159,0.1)]'
@@ -407,8 +396,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     type="checkbox"
                     checked={formData.sendCopy}
                     onChange={handleCheckboxChange}
-                    disabled={formState === 'sending'}
-                    className="w-4 h-4 disabled:opacity-50"
+                    disabled={formState === 'sending'} className="w-4 h-4 disabled:opacity-50"
                   />
                   <span className="text-[#666666] text-[13px]">Kopie an meine E-Mail</span>
                 </label>
@@ -419,15 +407,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <button
                   type="button"
                   onClick={handleClose}
-                  disabled={formState === 'sending'}
-                  className="px-6 py-3 border border-[#0F429F] text-[#0F429F] text-[14px] font-medium rounded-full hover:bg-[#F0F4FF] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={formState === 'sending'} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] text-[14px] font-medium rounded-full hover:bg-[#F0F4FF] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Abbrechen
                 </button>
                 <button
                   type="submit"
-                  disabled={formState === 'sending' || !isFormValid()}
-                  className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors disabled:bg-[#CCCCCC] disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  disabled={formState === 'sending' || !isFormValid()} className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors disabled:bg-[#CCCCCC] disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {formState === 'sending' ? (
                     <>

@@ -52,8 +52,7 @@ export function PasswordProtect({ children }: PasswordProtectProps) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Gib das Passwort ein"
-              className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0F429F] focus:border-transparent"
+              placeholder="Gib das Passwort ein" className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0F429F] focus:border-transparent"
               autoFocus
             />
           </div>
@@ -65,8 +64,7 @@ export function PasswordProtect({ children }: PasswordProtectProps) {
           )}
 
           <button
-            type="submit"
-            className="w-full bg-[#0F429F] text-white font-semibold py-3 rounded-lg hover:bg-[#0a2e6f] transition-colors"
+            type="submit" className="w-full bg-[#0F429F] text-white font-semibold py-3 rounded-lg hover:bg-[#0a2e6f] transition-colors"
           >
             Zugriff
           </button>

@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { ArrowLeft, Check } from 'lucide-react';
 import { BenefitIconComponent } from './BenefitIconComponent';
+import { StatusBadge } from './Table';
+import { benefitsSettingsData } from './benefitSettingsData';
 
 interface Location {
   id: string;
@@ -10,7 +12,47 @@ interface Location {
   enabled: boolean;
 }
 
-export function BenefitSettings() {
+interface BenefitSettingsProps {
+  benefitId?: string;
+  benefitName?: string;
+  benefitDescription?: string;
+  initialLocations?: Location[];
+  initialStats?: {
+    employeesWithAccess: number;
+    budgetThisMonth: number;
+    usedThisMonth: number;
+  };
+}
+
+export function BenefitSettings({
+  benefitId,
+  benefitName: customName,
+  benefitDescription: customDescription,
+  initialLocations: customLocations,
+  initialStats: customStats,
+}: BenefitSettingsProps = {}) {
+  // Lookup benefit data if benefitId provided
+  const benefitData = useMemo(() => {
+    if (benefitId && benefitsSettingsData[benefitId]) {
+      return benefitsSettingsData[benefitId];
+    }
+    return null;
+  }, [benefitId]);
+
+  // Use provided props or benefit data or defaults
+  const benefitName = customName || benefitData?.name || 'Mittagessen';
+  const benefitDescription = customDescription || benefitData?.description || 'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Kantinenzuschüssen.';
+  const defaultLocations = customLocations || benefitData?.locations || [
+    { id: '1', name: 'München', limit: '100€/Monat', employeeCount: 34, enabled: true },
+    { id: '2', name: 'Heddesheim', limit: '100€/Monat', employeeCount: 15, enabled: true },
+    { id: '3', name: 'Berlin', limit: '85€/Monat', employeeCount: 8, enabled: true },
+    { id: '4', name: 'Viernheim', limit: '100€/Monat', employeeCount: 5, enabled: false },
+  ];
+  const defaultStats = customStats || benefitData?.stats || {
+    employeesWithAccess: 62,
+    budgetThisMonth: 4200,
+    usedThisMonth: 3100,
+  };
   const [isActive, setIsActive] = useState(true);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -18,24 +60,8 @@ export function BenefitSettings() {
   const [limitValue, setLimitValue] = useState('');
   const [limitError, setLimitError] = useState('');
 
-  const benefitName = 'Mittagessen';
-  const benefitIcon = '🍽️';
-  const benefitIconColor = '#F4B860';
-  const benefitDescription =
-    'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Kantinenzuschüssen.';
-
-  const [locations, setLocations] = useState<Location[]>([
-    { id: '1', name: 'München', limit: '100€/Monat', employeeCount: 34, enabled: true },
-    { id: '2', name: 'Heddesheim', limit: '100€/Monat', employeeCount: 15, enabled: true },
-    { id: '3', name: 'Berlin', limit: '85€/Monat', employeeCount: 8, enabled: true },
-    { id: '4', name: 'Viernheim', limit: '100€/Monat', employeeCount: 5, enabled: false },
-  ]);
-
-  const stats = {
-    employeesWithAccess: 62,
-    budgetThisMonth: 4200,
-    usedThisMonth: 3100,
-  };
+  const [locations, setLocations] = useState<Location[]>(defaultLocations);
+  const stats = defaultStats;
 
   const goBack = () => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-management' } }));
@@ -100,8 +126,7 @@ export function BenefitSettings() {
       {/* Back Link */}
       <div className="bg-white px-8 pt-6 pb-4">
         <button
-          onClick={goBack}
-          className="flex items-center text-[#0F429F] text-[12px] hover:underline transition"
+          onClick={goBack} className="flex items-center text-[#0F429F] text-[12px] hover:underline transition"
           style={{ fontFamily: 'Roboto, sans-serif' }}
         >
           <ArrowLeft size={16} className="mr-1" />
@@ -113,9 +138,7 @@ export function BenefitSettings() {
       <div className="bg-white border-b border-[#E0E0E0] px-8 pb-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
-            <div style={{ width: '48px', height: '48px', fontSize: '48px', lineHeight: '48px' }}>
-              {benefitIcon}
-            </div>
+            <BenefitIconComponent benefitName={benefitName} size={48} background={true} />
             <div>
               <h1 className="text-[32px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
                 {benefitName}
@@ -130,23 +153,16 @@ export function BenefitSettings() {
                 Status
               </span>
               <button
-                onClick={() => setIsActive(!isActive)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                onClick={() => setIsActive(!isActive)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                   isActive ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
                 }`}
               >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                     isActive ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
               </button>
-              <span
-                className={`text-[13px] font-medium ${isActive ? 'text-[#4CAF50]' : 'text-[#9E9E9E]'}`}
-                style={{ fontFamily: 'Roboto, sans-serif' }}
-              >
-                {isActive ? 'Aktiv' : 'Inaktiv'}
-              </span>
+              <StatusBadge status={isActive ? 'Aktiv' : 'Inaktiv'} type={isActive ? 'success' : 'inactive'} />
             </div>
             <p className="text-[11px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Status-Änderung gilt ab 1. nächsten Monat
@@ -174,60 +190,44 @@ export function BenefitSettings() {
         {/* Section 2: Limits pro Location */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
           <h2 className="text-[18px] font-bold text-[#273A5F] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
-            Limits pro Standort
+            Budgets pro Standort
           </h2>
 
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-[#F0F4FF]" style={{ height: '40px' }}>
-                  <th
-                    className="text-left px-4 py-3 text-[11px] font-normal text-[#666666] uppercase"
-                    style={{ fontFamily: 'Roboto, sans-serif', width: '200px' }}
-                  >
-                    STANDORT
-                  </th>
-                  <th
-                    className="text-left px-4 py-3 text-[11px] font-normal text-[#666666] uppercase"
-                    style={{ fontFamily: 'Roboto, sans-serif', width: '150px' }}
-                  >
-                    LIMIT
-                  </th>
-                  <th
-                    className="text-left px-4 py-3 text-[11px] font-normal text-[#666666] uppercase"
-                    style={{ fontFamily: 'Roboto, sans-serif', width: '100px' }}
-                  >
-                    AKTION
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {locations.map((location, index) => (
-                  <tr
-                    key={location.id}
-                    className={index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'}
-                    style={{ height: '40px', borderBottom: '1px solid #F0F0F0' }}
-                  >
-                    <td className="px-4 py-2 text-[12px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                      {location.name}
-                    </td>
-                    <td className="px-4 py-2 text-[12px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                      {location.limit}
-                    </td>
-                    <td className="px-4 py-2">
-                      <button
-                        onClick={() => handleEditLimit(location)}
-                        className="px-4 py-2 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-2xl hover:bg-[#F0F4FF] transition"
-                        style={{ fontFamily: 'Roboto, sans-serif' }}
-                      >
-                        Bearbeiten
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {/* Table Header */}
+          <div className="bg-[#273A5F] flex items-center px-6 h-12"
+            style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
+          >
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Standort</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Limit</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
           </div>
+
+          {/* Table Rows */}
+          {locations.map((location, index) => (
+            <div
+              key={location.id} className={`
+                flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                transition-colors hover:bg-gray-50
+                ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
+              `}
+              style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
+            >
+              <div className="text-[#000000] text-sm">
+                {location.name}
+              </div>
+              <div className="text-[#000000] text-sm">
+                {location.limit}
+              </div>
+              <div>
+                <button
+                  onClick={() => handleEditLimit(location)} className="px-4 py-2 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-2xl hover:bg-[#F0F4FF] transition"
+                  style={{ fontFamily: 'Roboto, sans-serif' }}
+                >
+                  Bearbeiten
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Section 3: Verfügbare Standorte */}
@@ -239,16 +239,14 @@ export function BenefitSettings() {
           <div className="space-y-2">
             {locations.map((location) => (
               <label
-                key={location.id}
-                className="flex items-center gap-3 px-3 py-3 hover:bg-[#F0F4FF] rounded cursor-pointer transition group"
+                key={location.id} className="flex items-center gap-3 px-3 py-3 hover:bg-[#F0F4FF] rounded cursor-pointer transition group"
                 style={{ height: '40px' }}
               >
                 <div className="relative flex items-center justify-center">
                   <input
                     type="checkbox"
                     checked={location.enabled}
-                    onChange={() => handleToggleLocation(location.id)}
-                    className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer group-hover:border-[#246AFF] transition-colors"
+                    onChange={() => handleToggleLocation(location.id)} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer group-hover:border-[#246AFF] transition-colors"
                   />
                   {location.enabled && (
                     <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
@@ -309,16 +307,14 @@ export function BenefitSettings() {
         {/* Action Buttons */}
         <div className="flex justify-between items-center mt-8">
           <button
-            onClick={() => setShowDeleteModal(true)}
-            className="px-6 py-3 border border-[#F44336] text-[#F44336] font-medium rounded-full hover:bg-[#FFEBEE] transition"
+            onClick={() => setShowDeleteModal(true)} className="px-6 py-3 border border-[#F44336] text-[#F44336] font-medium rounded-full hover:bg-[#FFEBEE] transition"
             style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
           >
             Löschen
           </button>
 
           <button
-            onClick={handleSave}
-            className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#246AFF] transition"
+            onClick={handleSave} className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#246AFF] transition"
             style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
           >
             Speichern
@@ -336,7 +332,7 @@ export function BenefitSettings() {
 
             <div className="mb-4">
               <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Limit pro Mitarbeiter
+                Budget pro Mitarbeiter
               </label>
               <div className="flex items-center gap-2">
                 <input
@@ -346,8 +342,7 @@ export function BenefitSettings() {
                     setLimitValue(e.target.value);
                     setLimitError('');
                   }}
-                  placeholder="z.B. 100"
-                  className={`flex-1 h-[40px] px-3 py-2 border ${
+                  placeholder="z.B. 100" className={`flex-1 h-[40px] px-3 py-2 border ${
                     limitError ? 'border-[#F44336]' : 'border-[#0F429F]'
                   } rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
                   style={{ fontFamily: 'Roboto, sans-serif', width: '250px' }}
@@ -374,15 +369,13 @@ export function BenefitSettings() {
                   setEditingLocation(null);
                   setLimitValue('');
                   setLimitError('');
-                }}
-                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
+                }} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
                 Abbrechen
               </button>
               <button
-                onClick={handleSaveLimit}
-                className="px-6 py-3 bg-[#0F429F] text-white rounded-full hover:bg-[#246AFF] transition"
+                onClick={handleSaveLimit} className="px-6 py-3 bg-[#0F429F] text-white rounded-full hover:bg-[#246AFF] transition"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
                 Speichern
@@ -417,15 +410,13 @@ export function BenefitSettings() {
 
             <div className="flex gap-3 justify-center">
               <button
-                onClick={() => setShowDeleteModal(false)}
-                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
+                onClick={() => setShowDeleteModal(false)} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
                 Abbrechen
               </button>
               <button
-                onClick={handleDelete}
-                className="px-6 py-3 bg-[#F44336] text-white rounded-full hover:bg-[#D32F2F] transition"
+                onClick={handleDelete} className="px-6 py-3 bg-[#F44336] text-white rounded-full hover:bg-[#D32F2F] transition"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
                 Löschen

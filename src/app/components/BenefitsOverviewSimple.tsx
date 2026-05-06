@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Settings, Ban, Info, Search } from 'lucide-react';
 import { BenefitInfoModal } from './BenefitInfoModal';
 import { BenefitIcon } from './BenefitIcon';
+import { StatusBadge } from './Table';
 
 type Benefit = {
   id: string;
@@ -165,8 +166,7 @@ export function BenefitsOverviewSimple() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Nach Benefit suchen..."
-              className="w-full pl-10 pr-4 py-3 border border-[#E0E0E0] rounded-lg text-sm focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+              placeholder="Nach Benefit suchen..." className="w-full pl-10 pr-4 py-3 border border-[#E0E0E0] rounded-lg text-sm focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
               style={{ borderRadius: '8px' }}
             />
           </div>
@@ -174,8 +174,7 @@ export function BenefitsOverviewSimple() {
           {/* Filter Buttons */}
           <div className="flex gap-2">
             <button
-              onClick={() => setFilterStatus('Alle')}
-              className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
+              onClick={() => setFilterStatus('Alle')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
                 filterStatus === 'Alle'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
@@ -185,8 +184,7 @@ export function BenefitsOverviewSimple() {
               Alle
             </button>
             <button
-              onClick={() => setFilterStatus('aktiv')}
-              className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
+              onClick={() => setFilterStatus('aktiv')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
                 filterStatus === 'aktiv'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
@@ -196,8 +194,7 @@ export function BenefitsOverviewSimple() {
               Aktiv
             </button>
             <button
-              onClick={() => setFilterStatus('inaktiv')}
-              className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
+              onClick={() => setFilterStatus('inaktiv')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
                 filterStatus === 'inaktiv'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
@@ -215,8 +212,7 @@ export function BenefitsOverviewSimple() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {filteredBenefits.map((benefit) => (
             <div
-              key={benefit.id}
-              className="bg-white border border-[#E0E0E0] rounded-xl p-5 hover:border-[#246AFF] hover:shadow-lg transition"
+              key={benefit.id} className="bg-white border border-[#E0E0E0] rounded-xl p-5 hover:border-[#246AFF] hover:shadow-lg transition"
               style={{ borderRadius: '12px' }}
             >
               {/* Icon */}
@@ -244,22 +240,13 @@ export function BenefitsOverviewSimple() {
 
               {/* Status Badge */}
               <div className="flex justify-center mb-4">
-                <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    benefit.status === 'aktiv'
-                      ? 'bg-[#E8F5E9] text-[#4CAF50]'
-                      : 'bg-[#F5F5F5] text-[#9E9E9E]'
-                  }`}
-                >
-                  {benefit.status === 'aktiv' ? '● Aktiv' : '● Inaktiv'}
-                </span>
+                <StatusBadge status={benefit.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'aktiv' ? 'success' : 'inactive'} />
               </div>
 
               {/* Action Buttons */}
               <div className="space-y-2">
                 <button
-                  onClick={() => handleConfigure(benefit.id)}
-                  className="w-full px-4 py-2 border-2 border-[#0F429F] text-[#0F429F] font-medium text-xs rounded-full hover:bg-[#F0F4FF] transition flex items-center justify-center gap-2"
+                  onClick={() => handleConfigure(benefit.id)} className="w-full px-4 py-2 border-2 border-[#0F429F] text-[#0F429F] font-medium text-xs rounded-full hover:bg-[#F0F4FF] transition flex items-center justify-center gap-2"
                   style={{ borderRadius: '24px' }}
                 >
                   <Settings className="w-3 h-3" />
@@ -268,8 +255,7 @@ export function BenefitsOverviewSimple() {
 
                 {benefit.status === 'aktiv' && (
                   <button
-                    onClick={() => handleDeactivate(benefit.id)}
-                    className="w-full px-4 py-2 border border-[#E0E0E0] text-[#666666] font-medium text-xs rounded-full hover:bg-gray-50 transition flex items-center justify-center gap-2"
+                    onClick={() => handleDeactivate(benefit.id)} className="w-full px-4 py-2 border border-[#E0E0E0] text-[#666666] font-medium text-xs rounded-full hover:bg-gray-50 transition flex items-center justify-center gap-2"
                     style={{ borderRadius: '24px' }}
                   >
                     <Ban className="w-3 h-3" />
@@ -278,8 +264,7 @@ export function BenefitsOverviewSimple() {
                 )}
 
                 <button
-                  onClick={() => handleShowInfo(benefit.id)}
-                  className="w-full px-4 py-2 text-[#246AFF] font-medium text-xs rounded-full hover:bg-[#F0F4FF] transition flex items-center justify-center gap-2"
+                  onClick={() => handleShowInfo(benefit.id)} className="w-full px-4 py-2 text-[#246AFF] font-medium text-xs rounded-full hover:bg-[#F0F4FF] transition flex items-center justify-center gap-2"
                   style={{ borderRadius: '24px' }}
                 >
                   <Info className="w-3 h-3" />

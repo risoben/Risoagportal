@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Users, Settings, AlertCircle, CheckCircle } from 'lucide-react';
+import { Check, Users, Settings, AlertCircle, CheckCircle, Info } from 'lucide-react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 
 type BenefitType = {
@@ -11,12 +11,12 @@ type BenefitType = {
 const benefitTypes: BenefitType[] = [
   { id: 'mittagessen', name: 'Mittagessen', description: 'Bis 100€/Monat' },
   { id: 'sachbezug', name: 'Sachbezug', description: 'Bis 50€/Monat' },
-  { id: 'danke-bonus', name: 'Danke-Bonus', description: 'Variable Prämie' },
+  { id: 'danke-bonus', name: 'Danke-Bonus', description: 'Cash Benefit - Variable Prämie' },
   { id: 'internet', name: 'Internet', description: 'Bis 50€/Monat' },
   { id: 'kindergarten', name: 'Kindergarten', description: 'Variable Zuschuss' },
   { id: 'geburtstag', name: 'Geburtstag', description: 'Einmaliger Gutschein' },
-  { id: 'erholung', name: 'Erholung', description: 'Bis 13€/Monat' },
-  { id: 'commuting', name: 'Commuting', description: 'Fahrtkostenzuschuss' },
+  { id: 'erholung', name: 'Erholung', description: 'Bis 156€/Jahr (jährliches Budget)' },
+  { id: 'commuting', name: 'Fahrkostenzuschuss', description: 'Fahrtkostenzuschuss' },
   { id: 'oepnv', name: 'ÖPNV', description: 'Ticket-Zuschuss' },
   { id: 'bkv', name: 'BKV', description: 'Bis 80€/Monat' },
   { id: 'bav', name: 'BAV', description: 'Bis 150€/Monat' },
@@ -52,7 +52,7 @@ type BenefitAddLocationProps = {
 };
 
 export function BenefitAddLocation({ onClose, editMode = false, benefitId, initialData }: BenefitAddLocationProps) {
-  // 5-step wizard: 1=choose benefit, 2=choose locations, 3=limit option, 3a/4=configure limits, 5=confirmation
+  // 5-step wizard: 1=choose benefit, 2=choose locations, 3=budget option, 3a/4=configure limits, 5=confirmation
   const [step, setStep] = useState(1);
   const [selectedBenefit, setSelectedBenefit] = useState<BenefitType | null>(null);
   const [selectedLocations, setSelectedLocations] = useState<Set<string>>(new Set());
@@ -109,7 +109,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
       for (const locationId of Array.from(selectedLocations)) {
         const limit = limits[locationId];
         if (!limit || parseFloat(limit) <= 0) {
-          alert('Bitte geben Sie für alle Standorte ein gültiges Limit ein');
+          alert('Bitte geben Sie für alle Standorte ein gültiges Budget ein');
           return;
         }
       }
@@ -207,8 +207,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
               {benefitTypes.map((benefit) => (
                 <button
                   key={benefit.id}
-                  onClick={() => handleBenefitSelect(benefit)}
-                  className="bg-white border-2 border-[#E0E0E0] rounded-lg p-4 hover:border-[#0F429F] hover:shadow-lg transition-all duration-200 cursor-pointer"
+                  onClick={() => handleBenefitSelect(benefit)} className="bg-white border-2 border-[#E0E0E0] rounded-lg p-4 hover:border-[#0F429F] hover:shadow-lg transition-all duration-200 cursor-pointer"
                 >
                   <div className="flex justify-center mb-2">
                     <BenefitIconComponent benefitName={benefit.name} size={48} />
@@ -228,8 +227,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
 
             <div className="flex gap-3 pt-4 border-t border-[#E0E0E0]">
               <button
-                onClick={handleBack}
-                className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
+                onClick={handleBack} className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
               >
                 Abbrechen
               </button>
@@ -250,15 +248,13 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
               <div className="space-y-3">
                 {locations.map((location) => (
                   <label
-                    key={location.id}
-                    className="flex items-center gap-3 cursor-pointer hover:bg-white p-3 rounded-md transition-colors group"
+                    key={location.id} className="flex items-center gap-3 cursor-pointer hover:bg-white p-3 rounded-md transition-colors group"
                   >
                     <div className="relative flex items-center justify-center">
                       <input
                         type="checkbox"
                         checked={selectedLocations.has(location.id)}
-                        onChange={() => handleToggleLocation(location.id)}
-                        className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer group-hover:border-[#246AFF] transition-colors"
+                        onChange={() => handleToggleLocation(location.id)} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer group-hover:border-[#246AFF] transition-colors"
                       />
                       {selectedLocations.has(location.id) && (
                         <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
@@ -275,8 +271,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
               </div>
 
               <button
-                onClick={handleSelectAllLocations}
-                className="mt-4 text-[#0F429F] text-[13px] font-medium hover:underline"
+                onClick={handleSelectAllLocations} className="mt-4 text-[#0F429F] text-[13px] font-medium hover:underline"
               >
                 Alle wählen
               </button>
@@ -290,15 +285,13 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
 
             <div className="flex gap-3 pt-4 border-t border-[#E0E0E0]">
               <button
-                onClick={handleBack}
-                className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
+                onClick={handleBack} className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
               >
                 Zurück
               </button>
               <button
                 onClick={handleNextToLimits}
-                disabled={selectedLocations.size === 0}
-                className={`px-6 py-2 rounded-md transition-colors ${
+                disabled={selectedLocations.size === 0} className={`px-6 py-2 rounded-md transition-colors ${
                   selectedLocations.size === 0
                     ? 'bg-[#E0E0E0] text-[#999999] cursor-not-allowed'
                     : 'bg-[#0F429F] text-white hover:bg-[#246AFF]'
@@ -310,7 +303,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
           </div>
         )}
 
-        {/* Step 3: Choose Limit Configuration Method */}
+        {/* Step 3: Choose Budget Configuration Method */}
         {step === 3 && selectedBenefit && (
           <div className="bg-white rounded-lg border border-[#E0E0E0] p-8">
             <h1 className="text-[#273A5F] font-bold text-[20px] mb-2">SCHRITT 3 VON 5: LIMITS KONFIGURIEREN</h1>
@@ -320,7 +313,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
             </p>
 
             <p className="text-[#666666] text-[13px] mb-6">
-              Wähle wie die Monatslimits für diese Standorte konfiguriert werden sollen.
+              Wähle wie die Monatsbudgets für diese Standorte konfiguriert werden sollen.
             </p>
 
             {/* Option 1: All Employees */}
@@ -328,8 +321,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
               onClick={() => {
                 setLimitOption('AllEmployees');
                 setHasLimitOptionError(false);
-              }}
-              className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 mb-4 ${
+              }} className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 mb-4 ${
                 limitOption === 'AllEmployees'
                   ? 'border-[#2196F3] bg-[#E3F2FD]'
                   : 'border-[#E0E0E0] bg-white hover:bg-[#E3F2FD] hover:border-[#2196F3]'
@@ -344,8 +336,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                   onChange={() => {
                     setLimitOption('AllEmployees');
                     setHasLimitOptionError(false);
-                  }}
-                  className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
+                  }} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
                 />
                 {limitOption === 'AllEmployees' && (
                   <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -359,7 +350,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                   </h3>
                 </div>
                 <p className="text-[#666666] text-[12px]">
-                  Alle Mitarbeiter erhalten das gleiche monatliche Limit. Du kannst später noch einzelne Limits setzen.
+                  Alle Mitarbeiter erhalten das gleiche monatliche Budget. Du kannst später noch einzelne Budgets setzen.
                 </p>
               </div>
             </button>
@@ -369,8 +360,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
               onClick={() => {
                 setLimitOption('IndividualEmployees');
                 setHasLimitOptionError(false);
-              }}
-              className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 mb-4 ${
+              }} className={`w-full p-4 border rounded-lg text-left transition-all flex items-start gap-4 mb-4 ${
                 limitOption === 'IndividualEmployees'
                   ? 'border-[#2196F3] bg-[#E3F2FD]'
                   : 'border-[#E0E0E0] bg-white hover:bg-[#E3F2FD] hover:border-[#2196F3]'
@@ -385,8 +375,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                   onChange={() => {
                     setLimitOption('IndividualEmployees');
                     setHasLimitOptionError(false);
-                  }}
-                  className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
+                  }} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer hover:border-[#246AFF] transition-colors"
                 />
                 {limitOption === 'IndividualEmployees' && (
                   <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -396,11 +385,11 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                 <div className="flex items-center gap-3 mb-2">
                   <Settings size={24} className="text-[#2196F3]" />
                   <h3 className="text-[#273A5F] text-[14px] font-medium">
-                    Limits für jeden Mitarbeiter einzeln verwalten
+                    Budgets für jeden Mitarbeiter einzeln verwalten
                   </h3>
                 </div>
                 <p className="text-[#666666] text-[12px]">
-                  Definiere unterschiedliche Monatslimits für einzelne Mitarbeiter. Dies ermöglicht flexible Limits je nach Bedarf.
+                  Definiere unterschiedliche Monatsbudgets für einzelne Mitarbeiter. Dies ermöglicht flexible Budgets je nach Bedarf.
                 </p>
               </div>
             </button>
@@ -416,7 +405,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
             {/* If AllEmployees selected, show location limits input */}
             {limitOption === 'AllEmployees' && (
               <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-6 mb-6">
-                <p className="text-[#273A5F] font-medium text-[14px] mb-4">Monatslimit pro Standort:</p>
+                <p className="text-[#273A5F] font-medium text-[14px] mb-4">Monatsbudget pro Standort:</p>
                 <div className="space-y-4">
                   {Array.from(selectedLocations).map((locationId) => {
                     const location = locations.find(l => l.id === locationId);
@@ -429,8 +418,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                           type="number"
                           value={limits[locationId] || ''}
                           onChange={(e) => setLimits({ ...limits, [locationId]: e.target.value })}
-                          placeholder="z.B. 100"
-                          className="flex-1 max-w-xs px-4 py-2 border border-[#E0E0E0] rounded-md text-[14px] focus:border-[#2196F3] focus:outline-none"
+                          placeholder="z.B. 100" className="flex-1 max-w-xs px-4 py-2 border border-[#E0E0E0] rounded-md text-[14px] focus:border-[#2196F3] focus:outline-none"
                         />
                         <span className="text-[#666666] text-[14px]">€ / Monat</span>
                       </div>
@@ -442,15 +430,13 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
 
             <div className="flex gap-3 pt-4 border-t border-[#E0E0E0]">
               <button
-                onClick={() => setStep(2)}
-                className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
+                onClick={() => setStep(2)} className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
               >
                 Zurück
               </button>
               <button
                 onClick={handleStep3Next}
-                disabled={!limitOption}
-                className={`px-6 py-2 rounded-md transition-colors ${
+                disabled={!limitOption} className={`px-6 py-2 rounded-md transition-colors ${
                   limitOption
                     ? 'bg-[#4CAF50] text-white hover:bg-[#45a049]'
                     : 'bg-[#E0E0E0] text-[#999999] cursor-not-allowed'
@@ -465,92 +451,92 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
         {/* Step 4: Employee Individual Limits */}
         {step === 4 && selectedBenefit && (
           <div className="bg-white rounded-lg border border-[#E0E0E0] p-8">
-            <h1 className="text-[#273A5F] font-bold text-[20px] mb-2">SCHRITT 4 VON 5: MONATSLIMITS FÜR MITARBEITER</h1>
+            <h1 className="text-[#273A5F] font-bold text-[20px] mb-2">SCHRITT 4 VON 5: MONATSBUDGETS FÜR MITARBEITER</h1>
             <p className="text-[#666666] text-[14px] mb-2">Benefit: <strong>{selectedBenefit.name}</strong></p>
             <p className="text-[#666666] text-[14px] mb-6">
               Für Standorte: <strong>{Array.from(selectedLocations).map(id => locations.find(l => l.id === id)?.name).join(', ')}</strong>
             </p>
 
             <p className="text-[#666666] text-[13px] mb-6">
-              Wähle Mitarbeiter aus und lege ein Monatslimit fest. Das Limit ist erforderlich für alle ausgewählten Mitarbeiter.
+              Wähle Mitarbeiter aus und lege ein Monatsbudget fest. Das Budget ist erforderlich für alle ausgewählten Mitarbeiter.
             </p>
 
             {/* Employee Table */}
-            <div className="bg-white rounded border border-[#E0E0E0] overflow-hidden mb-4">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-[#F5F5F5] border-b border-[#E0E0E0]">
-                    <th className="px-4 py-3 text-left">
+            <div className="px-4 md:px-6 lg:px-8 py-6">
+              <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+                <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}>
+                  <div className="flex items-center justify-center">
+                    <div className="relative flex items-center justify-center">
+                      <input
+                        type="checkbox"
+                        checked={selectAll}
+                        onChange={handleSelectAll} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
+                      />
+                      {selectAll && (
+                        <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Mitarbeiter</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Personennummer</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Monatsbudget</div>
+                </div>
+
+                {employees.map((employee, index) => (
+                  <div
+                    key={employee.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                      index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
+                    } ${employee.hasError ? 'bg-[#FFEBEE]' : ''}`}
+                    style={{ display: 'grid', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}
+                  >
+                    <div className="flex items-center justify-center">
                       <div className="relative flex items-center justify-center">
                         <input
                           type="checkbox"
-                          checked={selectAll}
-                          onChange={handleSelectAll}
-                          className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
+                          checked={employee.selected}
+                          onChange={() => toggleEmployeeSelection(employee.id)} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
                         />
-                        {selectAll && (
+                        {employee.selected && (
                           <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
                         )}
                       </div>
-                    </th>
-                    <th className="px-4 py-3 text-left text-[#666666] text-[13px] font-medium">Mitarbeiter</th>
-                    <th className="px-4 py-3 text-left text-[#666666] text-[13px] font-medium">Personennummer</th>
-                    <th className="px-4 py-3 text-left text-[#666666] text-[13px] font-medium">Monatslimit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {employees.map((employee, index) => (
-                    <tr
-                      key={employee.id}
-                      className={`border-b border-[#E0E0E0] hover:bg-[#E3F2FD] transition-colors ${
-                        index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
-                      } ${employee.hasError ? 'bg-[#FFEBEE]' : ''}`}
-                      style={{ height: '56px' }}
-                    >
-                      <td className="px-4">
-                        <div className="relative flex items-center justify-center">
+                    </div>
+
+                    <div className="flex items-center">
+                      <span className="text-sm text-[#000000]">{employee.name}</span>
+                    </div>
+
+                    <div className="flex items-center">
+                      <span className="text-sm text-[#000000]">{employee.employeeNo}</span>
+                    </div>
+
+                    <div className="flex items-center">
+                      <div>
+                        <div className="flex items-center gap-2">
                           <input
-                            type="checkbox"
-                            checked={employee.selected}
-                            onChange={() => toggleEmployeeSelection(employee.id)}
-                            className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
+                            type="number"
+                            value={employee.monthlyLimit}
+                            onChange={(e) => updateEmployeeLimit(employee.id, e.target.value)}
+                            disabled={!employee.selected}
+                            placeholder="z.B. 500" className={`w-32 px-3 py-2 border rounded text-sm text-black focus:outline-none transition ${
+                              employee.hasError
+                                ? 'border-[#E74C3C] bg-[#FFEBEE] border-2'
+                                : employee.selected
+                                ? 'border-[#E0E0E0] focus:border-[#2196F3] focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)]'
+                                : 'border-[#E0E0E0] bg-[#F5F5F5] cursor-not-allowed text-[#999999]'
+                            }`}
+                            style={{ borderRadius: '4px' }}
                           />
-                          {employee.selected && (
-                            <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
-                          )}
+                          <span className="text-sm text-[#000000]">€</span>
                         </div>
-                      </td>
-                      <td className="px-4 text-[13px] text-black">{employee.name}</td>
-                      <td className="px-4 text-[13px] text-[#666666]">{employee.employeeNo}</td>
-                      <td className="px-4">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="number"
-                              value={employee.monthlyLimit}
-                              onChange={(e) => updateEmployeeLimit(employee.id, e.target.value)}
-                              disabled={!employee.selected}
-                              placeholder="z.B. 500"
-                              className={`w-32 px-3 py-2 border rounded text-[13px] text-black focus:outline-none transition ${
-                                employee.hasError
-                                  ? 'border-[#E74C3C] bg-[#FFEBEE] border-2'
-                                  : employee.selected
-                                  ? 'border-[#E0E0E0] focus:border-[#2196F3] focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)]'
-                                  : 'border-[#E0E0E0] bg-[#F5F5F5] cursor-not-allowed text-[#999999]'
-                              }`}
-                              style={{ borderRadius: '4px' }}
-                            />
-                            <span className="text-[13px] text-[#666666]">€</span>
-                          </div>
-                          {employee.hasError && (
-                            <p className="text-[#E74C3C] text-[11px] mt-1">Monatslimit erforderlich</p>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                        {employee.hasError && (
+                          <p className="text-[#E74C3C] text-[11px] mt-1">Monatsbudget erforderlich</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Validation Messages */}
@@ -574,7 +560,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                 return (
                   <div className="flex items-center gap-2 text-[#E74C3C] text-[12px] mb-4">
                     <AlertCircle size={16} />
-                    <span>Limits erforderlich für: {names}</span>
+                    <span>Budgets erforderlich für: {names}</span>
                   </div>
                 );
               }
@@ -589,15 +575,13 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
 
             <div className="flex gap-3 pt-4 border-t border-[#E0E0E0]">
               <button
-                onClick={() => setStep(3)}
-                className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
+                onClick={() => setStep(3)} className="px-6 py-2 border border-[#E0E0E0] text-[#666666] rounded-md hover:bg-[#F9FAFB] transition-colors"
               >
                 Zurück
               </button>
               <button
                 onClick={handleStep4Next}
-                disabled={!validateStep4()}
-                className={`px-6 py-2 rounded-md transition-colors ${
+                disabled={!validateStep4()} className={`px-6 py-2 rounded-md transition-colors ${
                   validateStep4()
                     ? 'bg-[#4CAF50] text-white hover:bg-[#45a049]'
                     : 'bg-[#E0E0E0] text-[#999999] cursor-not-allowed'
@@ -641,8 +625,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
               </div>
 
               <button
-                onClick={handleClose}
-                className="px-8 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
+                onClick={handleClose} className="px-8 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
               >
                 Schließen
               </button>

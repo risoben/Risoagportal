@@ -111,12 +111,10 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
   };
 
   return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={onClose}
     >
-      <div
-        className="bg-white rounded-xl shadow-2xl"
+      <div className="bg-white rounded-xl shadow-2xl"
         style={{ width: '900px', maxHeight: '90vh', overflow: 'auto', borderRadius: '12px' }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -135,8 +133,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
           {phase === 'upload' ? (
             <>
               {/* Help Box */}
-              <div
-                className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 mb-6"
+              <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 mb-6"
                 style={{ borderRadius: '8px' }}
               >
                 <h3 className="text-[#333333] font-medium text-[13px] mb-3">
@@ -167,8 +164,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
               <div
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                className={`border-2 border-dashed rounded-xl flex flex-col items-center justify-center transition ${
+                onDrop={handleDrop} className={`border-2 border-dashed rounded-xl flex flex-col items-center justify-center transition ${
                   isDragging
                     ? 'bg-[#DDE7FF] border-[#0F429F] border-solid'
                     : csvFile
@@ -191,8 +187,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
               {/* Button Row */}
               <div className="flex items-center justify-between gap-3 mt-6">
                 <button
-                  onClick={handleDownloadTemplate}
-                  className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
+                  onClick={handleDownloadTemplate} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
                   style={{ borderRadius: '24px' }}
                 >
                   <Download className="w-4 h-4" />
@@ -200,8 +195,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
                 </button>
                 <button
                   onClick={handleStartImport}
-                  disabled={!csvFile}
-                  className={`px-6 py-3 font-medium rounded-full transition ${
+                  disabled={!csvFile} className={`px-6 py-3 font-medium rounded-full transition ${
                     csvFile
                       ? 'bg-[#246AFF] text-white hover:bg-[#1a5ae6]'
                       : 'bg-[#CCCCCC] text-[#FFFFFF] cursor-not-allowed'
@@ -215,12 +209,10 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
           ) : (
             <>
               {/* Status Info Box */}
-              <div
-                className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 mb-6 flex items-center gap-3"
+              <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 mb-6 flex items-center gap-3"
                 style={{ borderRadius: '8px' }}
               >
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                     hasErrors ? 'bg-[#F44336]' : 'bg-[#4CAF50]'
                   }`}
                 >
@@ -232,8 +224,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
               </div>
 
               {/* Validation Results Table */}
-              <div
-                className="border border-[#E0E0E0] rounded-lg overflow-hidden mb-6"
+              <div className="border border-[#E0E0E0] rounded-lg overflow-hidden mb-6"
                 style={{ borderRadius: '8px', maxHeight: '300px', overflowY: 'auto' }}
               >
                 {/* Table Header */}
@@ -247,8 +238,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
                 {/* Table Rows */}
                 {mockResults.map((result, index) => (
                   <div
-                    key={index}
-                    className={`grid grid-cols-[80px_150px_120px_100px] px-4 py-2 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition ${
+                    key={index} className={`grid grid-cols-[80px_150px_120px_100px] px-4 py-2 border-b border-[#F0F0F0] last:border-b-0 hover:bg-[#F0F4FF] transition ${
                       index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'
                     }`}
                     style={{ minHeight: '40px' }}
@@ -257,8 +247,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
                     <div className="text-[#333333] text-[12px] flex items-center">{result.name}</div>
                     <div className="text-[#333333] text-[12px] flex items-center">{result.action}</div>
                     <div className="flex items-center justify-center">
-                      <span
-                        className={`px-3 py-1 rounded-full text-[11px] font-medium ${
+                      <span className={`px-3 py-1 rounded-full text-[11px] font-medium ${
                           result.status === 'success'
                             ? 'bg-[#E8F5E9] text-[#4CAF50]'
                             : 'bg-[#FFEBEE] text-[#F44336]'
@@ -274,14 +263,12 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
 
               {/* Error Details Expander */}
               {hasErrors && (
-                <div
-                  className="bg-[#FFF5F5] border border-[#FFEBEE] rounded-lg mb-6"
+                <div className="bg-[#FFF5F5] border border-[#FFEBEE] rounded-lg mb-6"
                   style={{ borderRadius: '8px' }}
                 >
                   {/* Header (Clickable) */}
                   <button
-                    onClick={() => setShowErrorDetails(!showErrorDetails)}
-                    className="w-full flex items-center justify-between px-4 py-4 border-b border-[#FFEBEE] hover:bg-[#FFEDED] transition"
+                    onClick={() => setShowErrorDetails(!showErrorDetails)} className="w-full flex items-center justify-between px-4 py-4 border-b border-[#FFEBEE] hover:bg-[#FFEDED] transition"
                   >
                     <span className="text-[#273A5F] font-medium text-[13px]">Fehlerdetails</span>
                     {showErrorDetails ? (
@@ -294,8 +281,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
                   {/* Content (Expandable) */}
                   {showErrorDetails && (
                     <div className="p-4">
-                      <div
-                        className="border border-[#FFEBEE] rounded overflow-hidden"
+                      <div className="border border-[#FFEBEE] rounded overflow-hidden"
                         style={{ maxHeight: '250px', overflowY: 'auto' }}
                       >
                         {/* Error Details Table Header */}
@@ -309,8 +295,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
                         {/* Error Details Rows */}
                         {mockErrors.map((error, index) => (
                           <div
-                            key={index}
-                            className={`grid grid-cols-[80px_120px_200px_1fr] px-3 py-2 border-b border-[#FFEBEE] last:border-b-0 ${
+                            key={index} className={`grid grid-cols-[80px_120px_200px_1fr] px-3 py-2 border-b border-[#FFEBEE] last:border-b-0 ${
                               index % 2 === 0 ? 'bg-white' : 'bg-[#FFF5F5]'
                             }`}
                           >
@@ -329,15 +314,13 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
               {/* Button Row (Phase 2) */}
               <div className="flex items-center justify-between gap-3">
                 <button
-                  onClick={handleUploadAgain}
-                  className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
+                  onClick={handleUploadAgain} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
                   style={{ borderRadius: '24px' }}
                 >
                   Nochmal hochladen
                 </button>
                 <button
-                  onClick={handleSaveEmployees}
-                  className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
+                  onClick={handleSaveEmployees} className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
                   style={{ borderRadius: '24px' }}
                 >
                   Mitarbeiter speichern

@@ -63,7 +63,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
     { id: '1', name: 'Essenszuschuss', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '150.00', selected: isEditMode },
     { id: '2', name: 'Internet', frequency: 'Monatlich', dailyLimit: '50.00', monthlyLimit: '500.00', selected: isEditMode },
     { id: '3', name: 'Kindergarten', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '100.00', selected: false },
-    { id: '4', name: 'Commuting', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
+    { id: '4', name: 'Fahrkostenzuschuss', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
     { id: '5', name: 'Erholung', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '156.00', selected: false },
     { id: '6', name: 'Sachbezug', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '50.00', selected: false },
     { id: '7', name: 'Danke-Bonus', frequency: 'Einmalig', dailyLimit: '', monthlyLimit: '100.00', selected: false },
@@ -117,8 +117,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
       {/* Header */}
       <div className="bg-white px-8 py-6 border-b border-[#E0E0E0]">
         <button
-          onClick={handleBack}
-          className="text-[#0F429F] text-[13px] mb-4 hover:underline flex items-center gap-2"
+          onClick={handleBack} className="text-[#0F429F] text-[13px] mb-4 hover:underline flex items-center gap-2"
         >
           ← Zurück zur Übersicht
         </button>
@@ -138,7 +137,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
         </div>
       )}
 
-      <div className="max-w-[1200px] mx-auto p-8 space-y-6">
+      <div className="w-full p-8 space-y-6">
         {/* SECTION A: Personal Data */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-6">Persönliche Daten</h2>
@@ -153,8 +152,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 value={personalData.email}
                 onChange={(e) => handlePersonalChange('email', e.target.value)}
                 placeholder="max@example.com"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -165,8 +163,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 <span className="text-[#666666] text-[13px]">Passwort</span>
               </label>
               <button
-                type="button"
-                className="w-full px-3 py-2.5 border border-[#0F429F] bg-white text-[#0F429F] rounded text-[13px] font-medium hover:bg-[#F0F4FF] transition"
+                type="button" className="w-full px-3 py-2.5 border border-[#0F429F] bg-white text-[#0F429F] rounded text-[13px] font-medium hover:bg-[#F0F4FF] transition"
               >
                 Passwort-Reset-E-Mail senden
               </button>
@@ -182,8 +179,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 value={personalData.name}
                 onChange={(e) => handlePersonalChange('name', e.target.value)}
                 placeholder="Vorname"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -198,8 +194,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 value={personalData.surname}
                 onChange={(e) => handlePersonalChange('surname', e.target.value)}
                 placeholder="Nachname"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -219,8 +214,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                         value={option}
                         checked={personalData.gender === option}
                         onChange={(e) => handlePersonalChange('gender', e.target.value)}
-                        disabled={loadingState}
-                        className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                        disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                       />
                       {personalData.gender === option && (
                         <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -241,8 +235,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 type="date"
                 value={personalData.dateOfBirth}
                 onChange={(e) => handlePersonalChange('dateOfBirth', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -257,8 +250,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 value={personalData.phone}
                 onChange={(e) => handlePersonalChange('phone', e.target.value)}
                 placeholder="+49 xxx..."
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -273,8 +265,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 value={personalData.employeeNo}
                 onChange={(e) => handlePersonalChange('employeeNo', e.target.value)}
                 placeholder="z.B. EMP-12345"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -293,8 +284,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
               <select
                 value={companyData.company}
                 onChange={(e) => handleCompanyChange('company', e.target.value)}
-                disabled={loadingState || isEditMode}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState || isEditMode} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               >
                 <option value="">Bitte auswählen</option>
@@ -312,8 +302,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
               <select
                 value={companyData.location}
                 onChange={(e) => handleCompanyChange('location', e.target.value)}
-                disabled={loadingState || !companyData.company}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState || !companyData.company} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               >
                 <option value="">Bitte auswählen</option>
@@ -333,8 +322,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 value={companyData.department}
                 onChange={(e) => handleCompanyChange('department', e.target.value)}
                 placeholder="z.B. IT"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -353,8 +341,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                       value="Active"
                       checked={companyData.status === 'Active'}
                       onChange={(e) => handleCompanyChange('status', e.target.value)}
-                      disabled={loadingState}
-                      className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                      disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                     />
                     {companyData.status === 'Active' && (
                       <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -370,8 +357,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                       value="Inactive"
                       checked={companyData.status === 'Inactive'}
                       onChange={(e) => handleCompanyChange('status', e.target.value)}
-                      disabled={loadingState}
-                      className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                      disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                     />
                     {companyData.status === 'Inactive' && (
                       <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
@@ -391,8 +377,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 type="date"
                 value={companyData.startDate}
                 onChange={(e) => handleCompanyChange('startDate', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               />
             </div>
@@ -412,8 +397,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                       handleCompanyChange('endDate', '');
                     }
                   }}
-                  disabled={loadingState}
-                  className="px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                  disabled={loadingState} className="px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                   style={{ borderRadius: '4px', minWidth: '120px' }}
                 >
                   <option value="datum">Enddatum</option>
@@ -424,8 +408,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                     type="date"
                     value={companyData.endDate}
                     onChange={(e) => handleCompanyChange('endDate', e.target.value)}
-                    disabled={loadingState}
-                    className="flex-1 px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                    disabled={loadingState} className="flex-1 px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                     style={{ borderRadius: '4px' }}
                   />
                 )}
@@ -446,8 +429,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
               <select
                 value={familyData.maritalStatus}
                 onChange={(e) => handleFamilyChange('maritalStatus', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               >
                 <option value="">Bitte auswählen</option>
@@ -466,8 +448,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
               <select
                 value={familyData.numberOfChildren}
                 onChange={(e) => handleFamilyChange('numberOfChildren', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px' }}
               >
                 <option value="0">0</option>
@@ -484,89 +465,91 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-2">Mitarbeiter-Benefits</h2>
           <p className="text-[#666666] text-[12px] mb-6">
-            Wähle die Leistungen, die dieser Mitarbeiter erhalten soll. Die tatsächlichen Limits pro Standort sind in der Benefit-Detail-Seite definiert.
+            Wähle die Leistungen, die dieser Mitarbeiter erhalten soll. Die tatsächlichen Budgets pro Standort sind in der Benefit-Detail-Seite definiert.
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full border border-[#E0E0E0]">
-              <thead>
-                <tr className="bg-[#F5F5F5]">
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Benefit</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Frequenz</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Tageslimit</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Monatslimit</th>
-                  <th className="px-3 py-2 text-center text-[13px] border-b border-[#E0E0E0] w-12">Info</th>
-                  <th className="px-3 py-2 text-center text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {benefits.map((benefit, index) => (
-                  <tr key={benefit.id} className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} hover:bg-[#E3F2FD] transition-colors`}>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <div className="relative flex items-center justify-center">
-                        <input
-                          type="checkbox"
-                          checked={benefit.selected}
-                          onChange={() => toggleBenefit(benefit.id)}
-                          disabled={loadingState}
-                          className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-                        />
-                        {benefit.selected && (
-                          <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <BenefitIconComponent benefitName={benefit.name} size={32} background={false} />
-                    </td>
-                    <td className="px-3 py-3 text-[13px] text-black border-b border-[#E0E0E0]">{benefit.name}</td>
-                    <td className="px-3 py-3 text-[13px] text-[#666666] border-b border-[#E0E0E0]">{benefit.frequency}</td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      {benefit.dailyLimit ? (
-                        <div className="flex items-center gap-1">
-                          <input
-                            type="text"
-                            value={benefit.dailyLimit}
-                            readOnly
-                            disabled
-                            className="w-20 px-2 py-1.5 border border-[#CCCCCC] rounded text-[13px] text-[#999999] bg-[#F5F5F5] cursor-not-allowed"
-                            style={{ borderRadius: '4px' }}
-                          />
-                          <span className="text-[13px] text-[#666666]">€</span>
-                        </div>
-                      ) : (
-                        <span className="text-[13px] text-[#999999]">—</span>
+          <div className="px-6 py-6">
+            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+              <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '60px 60px 2fr 1fr 1fr 1fr 0.8fr', gap: '0' }}>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktiv</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide"></div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Benefit</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Frequenz</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Tagesbudget</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Monatsbudget</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Info</div>
+              </div>
+
+              {benefits.map((benefit, index) => (
+                <div key={benefit.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}`} style={{ display: 'grid', gridTemplateColumns: '60px 60px 2fr 1fr 1fr 1fr 0.8fr', gap: '0' }}>
+                  <div className="flex items-center justify-center">
+                    <div className="relative flex items-center justify-center">
+                      <input
+                        type="checkbox"
+                        checked={benefit.selected}
+                        onChange={() => toggleBenefit(benefit.id)}
+                        disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                      {benefit.selected && (
+                        <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
                       )}
-                    </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-center">
+                    <BenefitIconComponent benefitName={benefit.name} size={32} background={false} />
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-sm text-[#000000]">{benefit.name}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-sm text-[#000000]">{benefit.frequency}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    {benefit.dailyLimit ? (
                       <div className="flex items-center gap-1">
                         <input
                           type="text"
-                          value={benefit.monthlyLimit}
-                          onChange={(e) => updateBenefitLimit(benefit.id, 'monthlyLimit', e.target.value)}
-                          disabled={loadingState || !benefit.selected}
-                          className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                          value={benefit.dailyLimit}
+                          readOnly
+                          disabled className="w-20 px-2 py-1.5 border border-[#CCCCCC] rounded text-sm text-[#999999] bg-[#F5F5F5] cursor-not-allowed"
                           style={{ borderRadius: '4px' }}
                         />
-                        <span className="text-[13px] text-[#666666]">€</span>
+                        <span className="text-sm text-[#000000]">€</span>
                       </div>
-                    </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0] text-center">
-                      <button
-                        onClick={() => setInfoModalBenefit(benefit)}
-                        disabled={loadingState}
-                        className="inline-flex items-center justify-center w-5 h-5 rounded-full text-[#2196F3] hover:bg-[#E3F2FD] transition disabled:opacity-50 disabled:cursor-not-allowed"
-                        title={`Info zu ${benefit.name}`}
-                      >
-                        <Info size={16} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    ) : (
+                      <span className="text-sm text-[#000000]">—</span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center">
+                    <div className="flex items-center gap-1">
+                      <input
+                        type="text"
+                        value={benefit.monthlyLimit}
+                        onChange={(e) => updateBenefitLimit(benefit.id, 'monthlyLimit', e.target.value)}
+                        disabled={loadingState || !benefit.selected} className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                        style={{ borderRadius: '4px' }}
+                      />
+                      <span className="text-sm text-[#000000]">€</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={() => setInfoModalBenefit(benefit)}
+                      disabled={loadingState} className="inline-flex items-center justify-center w-5 h-5 rounded-full text-[#2196F3] hover:bg-[#E3F2FD] transition disabled:opacity-50 disabled:cursor-not-allowed"
+                      title={`Info zu ${benefit.name}`}
+                    >
+                      <Info size={16} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -574,8 +557,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
         <div className="flex gap-4 pt-2">
           <button
             onClick={handleSave}
-            disabled={loadingState}
-            className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loadingState} className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ borderRadius: '4px' }}
           >
             {loadingState && <Loader2 size={16} className="animate-spin" />}
@@ -583,8 +565,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
           </button>
           <button
             onClick={handleBack}
-            disabled={loadingState}
-            className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loadingState} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ borderRadius: '4px' }}
           >
             Abbrechen
@@ -594,12 +575,10 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
       {/* Info Modal */}
       {infoModalBenefit && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={() => setInfoModalBenefit(null)}
         >
-          <div
-            className="bg-white rounded-lg shadow-lg max-w-md w-full mx-4"
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full mx-4"
             onClick={(e) => e.stopPropagation()}
             style={{ borderRadius: '8px' }}
           >
@@ -609,8 +588,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 {infoModalBenefit.name}
               </h3>
               <button
-                onClick={() => setInfoModalBenefit(null)}
-                className="text-[#E53935] hover:text-[#C62828] transition"
+                onClick={() => setInfoModalBenefit(null)} className="text-[#E53935] hover:text-[#C62828] transition"
               >
                 <X size={20} />
               </button>
@@ -633,9 +611,9 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
               {infoModalBenefit.dailyLimit && (
                 <div>
-                  <h4 className="text-[#273A5F] text-[14px] mb-2">Tageslimit</h4>
+                  <h4 className="text-[#273A5F] text-[14px] mb-2">Tagesbudget</h4>
                   <p className="text-[#666666] text-[13px] leading-relaxed">
-                    Das Tageslimit ist vordefiniert und kann nicht geändert werden. Es beträgt {infoModalBenefit.dailyLimit}€ pro Tag.
+                    Das Tagesbudget ist vordefiniert und kann nicht geändert werden. Es beträgt {infoModalBenefit.dailyLimit}€ pro Tag.
                   </p>
                 </div>
               )}
@@ -644,8 +622,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
             {/* Modal Footer */}
             <div className="px-6 py-4 border-t border-[#E0E0E0] flex justify-end">
               <button
-                onClick={() => setInfoModalBenefit(null)}
-                className="px-4 py-2 bg-[#0F429F] text-white text-[13px] rounded hover:bg-[#0D3680] transition"
+                onClick={() => setInfoModalBenefit(null)} className="px-4 py-2 bg-[#0F429F] text-white text-[13px] rounded hover:bg-[#0D3680] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Schließen

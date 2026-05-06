@@ -196,12 +196,10 @@ export function BenefitInfoModal({ benefitId, onClose }: BenefitInfoModalProps) 
   if (!benefit) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={onClose}
     >
-      <div
-        className="bg-white rounded-xl shadow-2xl"
+      <div className="bg-white rounded-xl shadow-2xl"
         style={{ width: '700px', maxHeight: '85vh', overflow: 'auto', borderRadius: '16px' }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -212,8 +210,7 @@ export function BenefitInfoModal({ benefitId, onClose }: BenefitInfoModalProps) 
             <h2 className="text-[#000000] font-bold text-[24px]">{benefit.name}</h2>
           </div>
           <button
-            onClick={onClose}
-            className="text-[#666666] hover:text-[#000000] text-3xl font-light"
+            onClick={onClose} className="text-[#666666] hover:text-[#000000] text-3xl font-light"
           >
             ×
           </button>
@@ -253,8 +250,7 @@ export function BenefitInfoModal({ benefitId, onClose }: BenefitInfoModalProps) 
             <div className="space-y-3">
               {benefit.howItWorks.map((step, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <div
-                    className="w-6 h-6 flex items-center justify-center rounded-full bg-[#F0F4FF] text-[#0F429F] font-medium text-[13px] flex-shrink-0"
+                  <div className="w-6 h-6 flex items-center justify-center rounded-full bg-[#F0F4FF] text-[#0F429F] font-medium text-[13px] flex-shrink-0"
                   >
                     {index + 1}
                   </div>
@@ -278,8 +274,7 @@ export function BenefitInfoModal({ benefitId, onClose }: BenefitInfoModalProps) 
         {/* Modal Footer */}
         <div className="px-8 py-6 border-t border-[#E8E8E8] bg-[#F9FAFB]">
           <button
-            onClick={onClose}
-            className="w-full px-8 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
+            onClick={onClose} className="w-full px-8 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
             style={{ borderRadius: '24px' }}
           >
             Verstanden

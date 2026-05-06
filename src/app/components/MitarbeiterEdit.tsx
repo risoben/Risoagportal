@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
+import { StatusBadge } from './Table';
 
 export function MitarbeiterEdit() {
   const [formData, setFormData] = useState({
@@ -37,8 +38,7 @@ export function MitarbeiterEdit() {
       <div className="bg-white border-b border-[#E5E7EB] sticky top-0 z-10">
         <div className="px-8 py-4">
           <button
-            onClick={goBack}
-            className="flex items-center text-[#0F429F] hover:text-[#0d3680] mb-4 transition"
+            onClick={goBack} className="flex items-center text-[#0F429F] hover:text-[#0d3680] mb-4 transition"
           >
             <ChevronLeft size={20} />
             <span className="ml-2">Zurück</span>
@@ -68,8 +68,7 @@ export function MitarbeiterEdit() {
                   type="text"
                   name="firstName"
                   value={formData.firstName}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
+                  onChange={handleInputChange} className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
                 />
               </div>
               <div>
@@ -78,8 +77,7 @@ export function MitarbeiterEdit() {
                   type="text"
                   name="lastName"
                   value={formData.lastName}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
+                  onChange={handleInputChange} className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
                 />
               </div>
             </div>
@@ -91,8 +89,7 @@ export function MitarbeiterEdit() {
                   type="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
+                  onChange={handleInputChange} className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
                 />
               </div>
               <div>
@@ -101,8 +98,7 @@ export function MitarbeiterEdit() {
                   type="tel"
                   name="phone"
                   value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
+                  onChange={handleInputChange} className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
                 />
               </div>
             </div>
@@ -112,8 +108,7 @@ export function MitarbeiterEdit() {
               <select
                 name="department"
                 value={formData.department}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
+                onChange={handleInputChange} className="w-full px-4 py-2 border border-[#E5E7EB] rounded-lg focus:ring-2 focus:ring-[#0F429F] focus:border-[#0F429F]"
               >
                 <option>Vertrieb</option>
                 <option>IT</option>
@@ -127,60 +122,56 @@ export function MitarbeiterEdit() {
         {/* Benefits Section */}
         <div className="mb-8">
           <h2 className="text-xl font-bold text-[#273A5F] mb-6">Zugewiesene Benefits</h2>
-          <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-[#273A5F]">
-                  <th className="px-6 py-4 text-left text-sm font-bold text-white">Benefit</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-white">Status</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-white">Budget</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-white">Aktion</th>
-                </tr>
-              </thead>
-              <tbody>
-                {benefits.map((benefit, idx) => (
-                  <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}>
-                    <td className="px-6 py-4 text-sm text-[#273A5F]">{benefit.name}</td>
-                    <td className="px-6 py-4 text-sm">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        benefit.status === 'aktiv'
-                          ? 'bg-green-100 text-green-800'
-                          : benefit.status === 'ausstehend'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {benefit.status === 'aktiv' ? '✅ Aktiv' : benefit.status === 'ausstehend' ? '⏳ Ausstehend' : '❌ Inaktiv'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-[#273A5F]">{benefit.budget}</td>
-                    <td className="px-6 py-4 text-sm">
-                      <button className="text-[#0F429F] hover:text-[#0d3680] font-medium transition">Bearbeiten</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="px-6 py-6">
+            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+              <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Benefit</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+              </div>
+
+              {benefits.map((benefit, idx) => (
+                <div key={idx} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${idx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}`} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
+                  <div className="flex items-center">
+                    <span className="text-sm text-[#000000]">{benefit.name}</span>
+                  </div>
+
+                  <div>
+                    <StatusBadge
+                      status={benefit.status === 'aktiv' ? 'Aktiv' : benefit.status === 'ausstehend' ? 'Ausstehend' : 'Inaktiv'}
+                      type={benefit.status === 'aktiv' ? 'success' : benefit.status === 'ausstehend' ? 'pending' : 'inactive'}
+                    />
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-sm text-[#000000]">{benefit.budget}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <button className="text-[#0F429F] hover:text-[#0d3680] font-medium transition text-sm">Bearbeiten</button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex gap-3">
           <button
-            onClick={handleSave}
-            className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
+            onClick={handleSave} className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
             style={{ borderRadius: '32px' }}
           >
             Speichern
           </button>
           <button
-            onClick={goBack}
-            className="px-6 py-3 border border-[#E5E7EB] text-[#273A5F] font-medium rounded-full hover:bg-gray-50 transition"
+            onClick={goBack} className="px-6 py-3 border border-[#E5E7EB] text-[#273A5F] font-medium rounded-full hover:bg-gray-50 transition"
             style={{ borderRadius: '32px' }}
           >
             Abbrechen
           </button>
-          <button 
-            className="px-6 py-3 border border-red-300 text-red-600 font-medium rounded-full hover:bg-red-50 transition ml-auto"
+          <button className="px-6 py-3 border border-red-300 text-red-600 font-medium rounded-full hover:bg-red-50 transition ml-auto"
             style={{ borderRadius: '32px' }}
           >
             Löschen

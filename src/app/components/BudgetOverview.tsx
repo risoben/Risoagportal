@@ -42,8 +42,7 @@ export function BudgetOverview() {
       <div className="bg-[#F9FAFB] px-6 py-3 flex items-center gap-6">
         {/* Benefit Filter */}
         <div className="relative">
-          <button
-            className="bg-white border-2 border-[#0F429F] rounded-lg px-4 h-10 flex items-center gap-2"
+          <button className="bg-white border-2 border-[#0F429F] rounded-lg px-4 h-10 flex items-center gap-2"
             style={{ width: '200px' }}
           >
             <span className="text-[#273A5F] text-sm flex-1 text-left">
@@ -55,8 +54,7 @@ export function BudgetOverview() {
 
         {/* MA Filter */}
         <div className="relative">
-          <button
-            className="bg-white border-2 border-[#0F429F] rounded-lg px-4 h-10 flex items-center gap-2"
+          <button className="bg-white border-2 border-[#0F429F] rounded-lg px-4 h-10 flex items-center gap-2"
             style={{ width: '200px' }}
           >
             <span className="text-[#273A5F] text-sm flex-1 text-left">
@@ -68,8 +66,7 @@ export function BudgetOverview() {
 
         {/* Date Filter */}
         <div className="relative">
-          <div
-            className="bg-white border-2 border-[#0F429F] rounded-lg px-4 h-10 flex items-center gap-2"
+          <div className="bg-white border-2 border-[#0F429F] rounded-lg px-4 h-10 flex items-center gap-2"
             style={{ width: '250px' }}
           >
             <button className="p-1 hover:bg-gray-100 rounded">
@@ -153,8 +150,7 @@ export function BudgetOverview() {
       <div className="px-6 pb-10">
         <div className="max-w-4xl mx-auto">
           <button
-            onClick={() => setIsBreakdownExpanded(!isBreakdownExpanded)}
-            className="w-full bg-[#F9FAFB] rounded-t-lg px-6 py-4 flex items-center justify-between hover:bg-gray-100 transition-colors"
+            onClick={() => setIsBreakdownExpanded(!isBreakdownExpanded)} className="w-full bg-[#F9FAFB] rounded-t-lg px-6 py-4 flex items-center justify-between hover:bg-gray-100 transition-colors"
           >
             <h2 className="text-[#273A5F] font-bold text-base">Aufteilung nach Benefit</h2>
             {isBreakdownExpanded ? (
@@ -176,8 +172,7 @@ export function BudgetOverview() {
                   </div>
                   {/* Progress Bar */}
                   <div className="w-full h-3 bg-white rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[#0F429F] rounded-full transition-all duration-300"
+                    <div className="h-full bg-[#0F429F] rounded-full transition-all duration-300"
                       style={{ width: `${item.percentage}%` }}
                     ></div>
                   </div>

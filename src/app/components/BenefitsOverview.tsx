@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, X, Search } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
+import { StatusBadge } from './Table';
 
 type Benefit = {
   id: string;
@@ -58,7 +59,7 @@ const mockBenefits: BenefitWithCategory[] = [
   // Gutschein-Benefits
   {
     id: 'commuting',
-    name: 'Commuting',
+    name: 'Fahrkostenzuschuss',
     status: 'active',
     employeeCount: 856,
     totalBudget: 3000,
@@ -178,8 +179,7 @@ export function BenefitsOverview() {
           {/* Tabs */}
           <div className="flex gap-2">
             <button
-              onClick={() => setActiveTab('overview')}
-              className={`px-6 py-3 font-medium text-sm rounded-lg transition ${
+              onClick={() => setActiveTab('overview')} className={`px-6 py-3 font-medium text-sm rounded-lg transition ${
                 activeTab === 'overview'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#273A5F] border border-[#E5E7EB] hover:bg-gray-50'
@@ -188,8 +188,7 @@ export function BenefitsOverview() {
               Gesamtübersicht
             </button>
             <button
-              onClick={() => setActiveTab('employees')}
-              className={`px-6 py-3 font-medium text-sm rounded-lg transition ${
+              onClick={() => setActiveTab('employees')} className={`px-6 py-3 font-medium text-sm rounded-lg transition ${
                 activeTab === 'employees'
                   ? 'bg-[#0F429F] text-white'
                   : 'bg-white text-[#273A5F] border border-[#E5E7EB] hover:bg-gray-50'
@@ -322,8 +321,7 @@ export function BenefitsOverview() {
               {mockBenefits.filter(b => b.category === 'cash').map((benefit) => (
                 <button
                   key={benefit.id}
-                  onClick={() => handleEdit(benefit.id)}
-                  className="w-full bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
+                  onClick={() => handleEdit(benefit.id)} className="w-full bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
                 >
                   <div className="flex gap-6 items-start">
                     {/* Icon - Left Side (64px) */}
@@ -339,17 +337,7 @@ export function BenefitsOverview() {
                         <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString()}</span>
                       </div>
                       <div className="flex items-center gap-2 mb-4">
-                        {benefit.status === 'active' ? (
-                          <>
-                            <span className="text-green-600 text-sm">✓</span>
-                            <span className="text-[#10B981] text-sm font-medium">Aktiv</span>
-                          </>
-                        ) : (
-                          <>
-                            <span className="text-gray-400 text-sm">✗</span>
-                            <span className="text-[#6B7280] text-sm">Inaktiv</span>
-                          </>
-                        )}
+                        <StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} />
                       </div>
                       <div className="flex justify-between text-xs text-[#666666]">
                         <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
@@ -369,8 +357,7 @@ export function BenefitsOverview() {
               {mockBenefits.filter(b => b.category === 'gutschein').map((benefit) => (
                 <button
                   key={benefit.id}
-                  onClick={() => handleEdit(benefit.id)}
-                  className="w-full bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
+                  onClick={() => handleEdit(benefit.id)} className="w-full bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#0F429F] transition-all text-left"
                 >
                   <div className="flex gap-6 items-start">
                     {/* Icon - Left Side (64px) */}
@@ -386,17 +373,7 @@ export function BenefitsOverview() {
                         <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString()}</span>
                       </div>
                       <div className="flex items-center gap-2 mb-4">
-                        {benefit.status === 'active' ? (
-                          <>
-                            <span className="text-green-600 text-sm">✓</span>
-                            <span className="text-[#10B981] text-sm font-medium">Aktiv</span>
-                          </>
-                        ) : (
-                          <>
-                            <span className="text-gray-400 text-sm">✗</span>
-                            <span className="text-[#6B7280] text-sm">Inaktiv</span>
-                          </>
-                        )}
+                        <StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} />
                       </div>
                       <div className="flex justify-between text-xs text-[#666666]">
                         <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
@@ -414,8 +391,7 @@ export function BenefitsOverview() {
       {/* Add Employee Modal */}
       {showAddEmployeeModal && selectedBenefit && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div
-            className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] flex flex-col"
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -424,8 +400,7 @@ export function BenefitsOverview() {
                 Mitarbeiter hinzufügen — {selectedBenefit.name}
               </h2>
               <button
-                onClick={() => setShowAddEmployeeModal(false)}
-                className="text-[#6B7280] hover:text-[#273A5F] transition"
+                onClick={() => setShowAddEmployeeModal(false)} className="text-[#6B7280] hover:text-[#273A5F] transition"
               >
                 <X size={24} />
               </button>
@@ -440,8 +415,7 @@ export function BenefitsOverview() {
                     type="text"
                     placeholder="Suche nach Mitarbeitername, Nummer..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full h-10 pl-10 pr-4 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#273A5F] focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
+                    onChange={(e) => setSearchQuery(e.target.value)} className="w-full h-10 pl-10 pr-4 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#273A5F] focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
                   />
                 </div>
                 <button className="px-4 h-10 border border-[#E5E7EB] text-[#273A5F] text-sm rounded-lg hover:bg-gray-50 flex items-center gap-2">
@@ -450,14 +424,12 @@ export function BenefitsOverview() {
               </div>
               <div className="flex gap-3 mt-3">
                 <button
-                  onClick={handleSelectAll}
-                  className="text-[#0F429F] text-sm hover:underline"
+                  onClick={handleSelectAll} className="text-[#0F429F] text-sm hover:underline"
                 >
                   Alle auswählen
                 </button>
                 <button
-                  onClick={handleDeselectAll}
-                  className="text-[#6B7280] text-sm hover:underline"
+                  onClick={handleDeselectAll} className="text-[#6B7280] text-sm hover:underline"
                 >
                   Keine auswählen
                 </button>
@@ -469,8 +441,7 @@ export function BenefitsOverview() {
               <div className="space-y-2">
                 {filteredEmployees.map((employee) => (
                   <label
-                    key={employee.id}
-                    className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition ${
+                    key={employee.id} className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition ${
                       selectedEmployees.has(employee.id)
                         ? 'bg-[#F0F9FF] border-2 border-[#0F429F]'
                         : 'bg-white border border-[#E5E7EB] hover:bg-gray-50'
@@ -480,8 +451,7 @@ export function BenefitsOverview() {
                       type="checkbox"
                       checked={selectedEmployees.has(employee.id)}
                       onChange={() => handleToggleEmployee(employee.id)}
-                      disabled={employee.alreadyAssigned}
-                      className="w-5 h-5 text-[#0F429F] rounded border-gray-300 focus:ring-[#0F429F]"
+                      disabled={employee.alreadyAssigned} className="w-5 h-5 text-[#0F429F] rounded border-gray-300 focus:ring-[#0F429F]"
                     />
                     <div className="flex-1">
                       <p className="text-[#273A5F] font-medium text-sm">
@@ -504,16 +474,14 @@ export function BenefitsOverview() {
               </p>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setShowAddEmployeeModal(false)}
-                  className="px-6 py-3 border border-[#E5E7EB] text-[#273A5F] font-medium rounded-full hover:bg-white transition"
+                  onClick={() => setShowAddEmployeeModal(false)} className="px-6 py-3 border border-[#E5E7EB] text-[#273A5F] font-medium rounded-full hover:bg-white transition"
                   style={{ borderRadius: '32px' }}
                 >
                   Abbrechen
                 </button>
                 <button
                   onClick={handleSubmitEmployees}
-                  disabled={selectedEmployees.size === 0}
-                  className={`px-6 py-3 font-medium rounded-full transition ${
+                  disabled={selectedEmployees.size === 0} className={`px-6 py-3 font-medium rounded-full transition ${
                     selectedEmployees.size > 0
                       ? 'bg-[#0F429F] text-white hover:bg-[#0d3680]'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'

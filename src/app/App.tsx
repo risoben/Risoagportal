@@ -142,7 +142,7 @@ export default function App() {
               {currentView === 'benefits-management' && <BenefitsManagement />}
               {currentView === 'benefits-overview' && <BenefitsOverview />}
               {currentView === 'benefits-table' && <BenefitsOverviewPage />}
-              {currentView === 'benefits-edit' && <BenefitSettings />}
+              {currentView === 'benefits-edit' && <BenefitSettings benefitId={navigationData.benefitId} />}
               {currentView === 'benefits-form' && <BenefitFormComplete mode="Edit" />}
               {currentView === 'benefits-create' && <BenefitFormComplete mode="Create" />}
               {currentView === 'benefits-edit-location' && <BenefitEditLocation />}

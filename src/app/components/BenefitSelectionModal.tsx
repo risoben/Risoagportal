@@ -105,8 +105,7 @@ export function BenefitSelectionModal({ isOpen, onClose, onSelect }: BenefitSele
               </p>
             </div>
             <button
-              onClick={handleAbbrechen}
-              className="text-[#666666] hover:text-[#273A5F] transition"
+              onClick={handleAbbrechen} className="text-[#666666] hover:text-[#273A5F] transition"
             >
               <X size={24} />
             </button>
@@ -121,8 +120,7 @@ export function BenefitSelectionModal({ isOpen, onClose, onSelect }: BenefitSele
 
               return (
                 <div
-                  key={benefit.id}
-                  className={`border rounded-xl p-6 transition-all duration-200 cursor-pointer ${
+                  key={benefit.id} className={`border rounded-xl p-6 transition-all duration-200 cursor-pointer ${
                     isSelected
                       ? 'border-2 border-[#0F429F] bg-[#F0F4FF] shadow-lg'
                       : 'border border-[#E0E0E0] bg-white hover:border-[#0F429F] hover:shadow-md'
@@ -141,24 +139,21 @@ export function BenefitSelectionModal({ isOpen, onClose, onSelect }: BenefitSele
                   </div>
 
                   {/* Title */}
-                  <h3
-                    className="text-[14px] font-medium text-[#273A5F] mb-2 text-center"
+                  <h3 className="text-[14px] font-medium text-[#273A5F] mb-2 text-center"
                     style={{ fontFamily: 'Roboto, sans-serif' }}
                   >
                     {benefit.name}
                   </h3>
 
                   {/* Description */}
-                  <p
-                    className="text-[12px] text-[#666666] mb-4 text-center"
+                  <p className="text-[12px] text-[#666666] mb-4 text-center"
                     style={{ fontFamily: 'Roboto, sans-serif' }}
                   >
                     {benefit.description}
                   </p>
 
                   {/* Button */}
-                  <button
-                    className={`w-full py-2.5 px-5 rounded-full font-medium text-[12px] transition ${
+                  <button className={`w-full py-2.5 px-5 rounded-full font-medium text-[12px] transition ${
                       isSelected
                         ? 'bg-[#4CAF50] text-white'
                         : 'bg-[#0F429F] text-white hover:bg-[#246AFF]'
@@ -177,16 +172,14 @@ export function BenefitSelectionModal({ isOpen, onClose, onSelect }: BenefitSele
         <div className="bg-[#FAFAFA] border-t border-[#E0E0E0] px-6 py-6">
           <div className="flex justify-end gap-3">
             <button
-              onClick={handleAbbrechen}
-              className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
+              onClick={handleAbbrechen} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition"
               style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px', fontSize: '14px' }}
             >
               Abbrechen
             </button>
             <button
               onClick={handleWeiter}
-              disabled={!selectedBenefitId}
-              className={`px-6 py-3 font-medium rounded-full transition ${
+              disabled={!selectedBenefitId} className={`px-6 py-3 font-medium rounded-full transition ${
                 selectedBenefitId
                   ? 'bg-[#0F429F] text-white hover:bg-[#246AFF]'
                   : 'bg-[#CCCCCC] text-white cursor-not-allowed'

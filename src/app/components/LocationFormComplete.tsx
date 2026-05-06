@@ -1,33 +1,10 @@
-import { useState } from 'react';
-import { ArrowLeft, AlertCircle, Loader2, Plus, Trash2, X } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { ArrowLeft, AlertCircle, Loader2, X, Check, Info } from 'lucide-react';
+import { BenefitIconComponent } from './BenefitIconComponent';
 
 type LocationFormCompleteProps = {
   mode?: 'Create' | 'Edit';
   locationId?: string;
-};
-
-type Product = {
-  id: string;
-  name: string;
-  icon: string;
-  color: string;
-  selected: boolean;
-  dailyLimit: string;
-  monthlyLimit: string;
-};
-
-type YearlyProduct = {
-  id: string;
-  name: string;
-  icon: string;
-  color: string;
-  selected: boolean;
-  yearlyLimits: {
-    '2024': string;
-    '2025': string;
-    '2026': string;
-    '2027': string;
-  };
 };
 
 const GERMAN_STATES = [
@@ -50,8 +27,21 @@ const GERMAN_STATES = [
 ];
 
 const COUNTRIES = ['Deutschland', 'Österreich', 'Schweiz', 'Liechtenstein'];
-
 const COMPANIES = ['Cassianiel Software', 'Fine Cotton Company', 'Berlin Tech GmbH'];
+
+const ALL_BENEFITS = [
+  { id: 'mittagessen', name: 'Mittagessen', dailyLimit: '60', monthlyLimit: '600' },
+  { id: 'internet', name: 'Internet', dailyLimit: '', monthlyLimit: '50' },
+  { id: 'kindergarten', name: 'Kindergarten', dailyLimit: '', monthlyLimit: '150' },
+  { id: 'commuting', name: 'Fahrkostenzuschuss', dailyLimit: '', monthlyLimit: '80' },
+  { id: 'erholung', name: 'Erholung', dailyLimit: '', monthlyLimit: '13' },
+  { id: 'sachbezug', name: 'Sachbezug', dailyLimit: '', monthlyLimit: '50' },
+  { id: 'danke-bonus', name: 'Danke-Bonus', dailyLimit: '', monthlyLimit: '100' },
+  { id: 'geburtstag', name: 'Geburtstag', dailyLimit: '', monthlyLimit: '50' },
+  { id: 'oepnv', name: 'ÖPNV', dailyLimit: '', monthlyLimit: '70' },
+  { id: 'bkv', name: 'BKV', dailyLimit: '', monthlyLimit: '80' },
+  { id: 'bav', name: 'BAV', dailyLimit: '', monthlyLimit: '150' },
+];
 
 export function LocationFormComplete({ mode = 'Create', locationId }: LocationFormCompleteProps) {
   const isEditMode = mode === 'Edit' || !!locationId;
@@ -60,14 +50,12 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
   const [loadingState, setLoadingState] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  // Master Data
   const [masterData, setMasterData] = useState({
     locationName: isEditMode ? 'München' : '',
     company: isEditMode ? 'Cassianiel Software' : '',
     taxIdentificationNumber: isEditMode ? 'DE123456789' : '',
   });
 
-  // Address
   const [addressData, setAddressData] = useState({
     address: isEditMode ? 'Fürstenrieder Straße 279A, 81377 München' : '',
     street: isEditMode ? 'Fürstenrieder Straße 279A' : '',
@@ -77,45 +65,25 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
     country: isEditMode ? 'Deutschland' : 'Deutschland',
   });
 
-  // Contact Data
   const [contactData, setContactData] = useState({
     phone: isEditMode ? '+49 241 5850001' : '',
     fax: isEditMode ? '+49 241 5850079' : '',
   });
 
-  // Location Type
   const [locationType, setLocationType] = useState<'Standort' | 'Tochterunternehmen'>(
     isEditMode ? 'Standort' : 'Standort'
   );
 
-  // Products with Daily/Monthly Limits
-  const [products, setProducts] = useState<Product[]>([
-    { id: '1', name: 'Mittagessen', icon: '🍽️', color: '#F4B860', selected: isEditMode, dailyLimit: '60', monthlyLimit: '600' },
-    { id: '2', name: 'Internet', icon: '📡', color: '#4CAF50', selected: isEditMode, dailyLimit: '50', monthlyLimit: '500' },
-    { id: '3', name: 'Kindergartenzuschuss', icon: '👶', color: '#FF6B6B', selected: isEditMode, dailyLimit: '800', monthlyLimit: '800' },
-    { id: '4', name: 'ÖPNV', icon: '🚌', color: '#2196F3', selected: isEditMode, dailyLimit: '63', monthlyLimit: '630' },
-    { id: '5', name: 'Sachbezug', icon: '🎁', color: '#E91E63', selected: isEditMode, dailyLimit: '50', monthlyLimit: '500' },
-  ]);
+  const [activeBenefits, setActiveBenefits] = useState<Set<string>>(
+    new Set(isEditMode ? ['mittagessen', 'internet', 'commuting', 'danke-bonus'] : [])
+  );
 
-  // Products with Yearly Limits
-  const [yearlyProducts, setYearlyProducts] = useState<YearlyProduct[]>([
-    {
-      id: '1',
-      name: 'Danke-Bonus',
-      icon: '🙏',
-      color: '#4CAF50',
-      selected: isEditMode,
-      yearlyLimits: { '2024': '10000', '2025': '10000', '2026': '10000', '2027': '10000' },
-    },
-    {
-      id: '2',
-      name: 'Erholung',
-      icon: '🏖️',
-      color: '#2196F3',
-      selected: isEditMode,
-      yearlyLimits: { '2024': '2000', '2025': '2000', '2026': '2000', '2027': '2000' },
-    },
-  ]);
+  const [benefitLimits, setBenefitLimits] = useState<Record<string, { daily: string; monthly: string }>>(
+    ALL_BENEFITS.reduce((acc, b) => ({
+      ...acc,
+      [b.id]: { daily: b.dailyLimit, monthly: b.monthlyLimit }
+    }), {})
+  );
 
   const handleMasterDataChange = (field: string, value: string) => {
     setMasterData({ ...masterData, [field]: value });
@@ -129,31 +97,55 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
     setContactData({ ...contactData, [field]: value });
   };
 
-  const toggleProduct = (id: string) => {
-    setProducts(products.map((p) => (p.id === id ? { ...p, selected: !p.selected } : p)));
+  const toggleBenefit = (benefitId: string) => {
+    const newSet = new Set(activeBenefits);
+    if (newSet.has(benefitId)) {
+      newSet.delete(benefitId);
+    } else {
+      newSet.add(benefitId);
+    }
+    setActiveBenefits(newSet);
   };
 
-  const updateProductLimit = (id: string, field: 'dailyLimit' | 'monthlyLimit', value: string) => {
-    setProducts(products.map((p) => (p.id === id ? { ...p, [field]: value } : p)));
+  const updateBenefitLimit = (benefitId: string, type: 'daily' | 'monthly', value: string) => {
+    setBenefitLimits({
+      ...benefitLimits,
+      [benefitId]: {
+        ...benefitLimits[benefitId],
+        [type]: value
+      }
+    });
   };
 
-  const removeProduct = (id: string) => {
-    setProducts(products.filter((p) => p.id !== id));
-  };
+  const groupedBenefits = useMemo(() => {
+    const benefitCategories: Record<string, 'cash' | 'other' | 'insurance'> = {
+      'mittagessen': 'cash',
+      'internet': 'cash',
+      'kindergarten': 'cash',
+      'commuting': 'cash',
+      'erholung': 'cash',
+      'sachbezug': 'other',
+      'danke-bonus': 'cash',
+      'geburtstag': 'other',
+      'oepnv': 'cash',
+      'bkv': 'insurance',
+      'bav': 'insurance',
+    };
 
-  const toggleYearlyProduct = (id: string) => {
-    setYearlyProducts(yearlyProducts.map((p) => (p.id === id ? { ...p, selected: !p.selected } : p)));
-  };
+    return ALL_BENEFITS.reduce((acc, benefit) => {
+      const categoryType = benefitCategories[benefit.id];
 
-  const updateYearlyProductLimit = (id: string, year: string, value: string) => {
-    setYearlyProducts(
-      yearlyProducts.map((p) => (p.id === id ? { ...p, yearlyLimits: { ...p.yearlyLimits, [year]: value } } : p))
-    );
-  };
+      let category = '';
+      if (categoryType === 'cash') category = 'Cash-Benefits';
+      else if (categoryType === 'other') category = 'Benefits';
+      else if (categoryType === 'insurance') category = 'Versicherungen';
 
-  const removeYearlyProduct = (id: string) => {
-    setYearlyProducts(yearlyProducts.filter((p) => p.id !== id));
-  };
+      if (!category) return acc;
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(benefit);
+      return acc;
+    }, {} as Record<string, typeof ALL_BENEFITS>);
+  }, []);
 
   const handleSave = () => {
     setLoadingState(true);
@@ -178,7 +170,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
     <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
       <div className="bg-white px-8 py-6 border-b border-[#E0E0E0]">
-        <button onClick={goBack} className="text-[#0F429F] text-[13px] mb-4 hover:underline flex items-center gap-2">
+        <button onClick={goBack} className="text-[#0F429F] text-sm mb-4 hover:underline flex items-center gap-2">
           <ArrowLeft size={16} />
           Zurück zur Übersicht
         </button>
@@ -193,7 +185,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           <AlertCircle className="text-[#F44336] mt-0.5" size={20} />
           <div className="flex-1">
             <p className="text-[#D32F2F] font-medium text-[14px]">Fehler beim Speichern</p>
-            <p className="text-[#D32F2F] text-[13px]">Bitte versuchen Sie es später erneut.</p>
+            <p className="text-[#D32F2F] text-sm">Bitte versuchen Sie es später erneut.</p>
           </div>
           <button onClick={() => setHasErrors(false)} className="text-[#D32F2F]">
             <X size={20} />
@@ -201,15 +193,14 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
         </div>
       )}
 
-      <div className="max-w-[1200px] mx-auto p-8 space-y-6">
+      <div className="w-full p-8 space-y-6">
         {/* SECTION A: Standort-Stammdaten */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-6">Standort-Stammdaten</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Location Name */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   Standortname <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -218,24 +209,21 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                 value={masterData.locationName}
                 onChange={(e) => handleMasterDataChange('locationName', e.target.value)}
                 placeholder="z.B. Heidelsheim, München, etc."
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
 
-            {/* Company */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   Unternehmen <span className="text-[#E53935]">*</span>
                 </span>
               </label>
               <select
                 value={masterData.company}
                 onChange={(e) => handleMasterDataChange('company', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               >
                 <option value="">Bitte auswählen</option>
@@ -247,18 +235,16 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
               </select>
             </div>
 
-            {/* Tax Identification Number */}
             <div className="md:col-span-2">
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">Steuernummer / VAT ID</span>
+                <span className="text-[#666666] text-sm">Steuernummer / VAT ID</span>
               </label>
               <input
                 type="text"
                 value={masterData.taxIdentificationNumber}
                 onChange={(e) => handleMasterDataChange('taxIdentificationNumber', e.target.value)}
                 placeholder="z.B. DE123456789"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
@@ -269,10 +255,9 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-6">Adresse</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Address */}
             <div className="md:col-span-2">
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   Adresse <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -281,16 +266,14 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                 value={addressData.address}
                 onChange={(e) => handleAddressChange('address', e.target.value)}
                 placeholder="Vollständige Adresse mit Straße, Hausnummer und Ort"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
 
-            {/* Street */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   Straße <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -299,16 +282,14 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                 value={addressData.street}
                 onChange={(e) => handleAddressChange('street', e.target.value)}
                 placeholder="z.B. Fürstenrieder Straße 279A"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
 
-            {/* City */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   Stadt <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -317,24 +298,21 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                 value={addressData.city}
                 onChange={(e) => handleAddressChange('city', e.target.value)}
                 placeholder="z.B. München"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
 
-            {/* State */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   Bundesland <span className="text-[#E53935]">*</span>
                 </span>
               </label>
               <select
                 value={addressData.state}
                 onChange={(e) => handleAddressChange('state', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               >
                 <option value="">Bitte auswählen</option>
@@ -346,10 +324,9 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
               </select>
             </div>
 
-            {/* Zip Code */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   PLZ <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -358,24 +335,21 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                 value={addressData.zipCode}
                 onChange={(e) => handleAddressChange('zipCode', e.target.value)}
                 placeholder="z.B. 81377"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
 
-            {/* Country */}
             <div className="md:col-span-2">
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">
+                <span className="text-[#666666] text-sm">
                   Land <span className="text-[#E53935]">*</span>
                 </span>
               </label>
               <select
                 value={addressData.country}
                 onChange={(e) => handleAddressChange('country', e.target.value)}
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               >
                 {COUNTRIES.map((country) => (
@@ -392,34 +366,30 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-6">Kontaktdaten</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Phone */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">Telefon</span>
+                <span className="text-[#666666] text-sm">Telefon</span>
               </label>
               <input
                 type="tel"
                 value={contactData.phone}
                 onChange={(e) => handleContactChange('phone', e.target.value)}
                 placeholder="z.B. +49 241 5850001"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
 
-            {/* Fax */}
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-[13px]">Fax</span>
+                <span className="text-[#666666] text-sm">Fax</span>
               </label>
               <input
                 type="tel"
                 value={contactData.fax}
                 onChange={(e) => handleContactChange('fax', e.target.value)}
                 placeholder="z.B. +49 241 5850079"
-                disabled={loadingState}
-                className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
+                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
                 style={{ borderRadius: '4px', padding: '10px 12px' }}
               />
             </div>
@@ -438,14 +408,13 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                   value="Standort"
                   checked={locationType === 'Standort'}
                   onChange={(e) => setLocationType(e.target.value as 'Standort' | 'Tochterunternehmen')}
-                  disabled={loadingState}
-                  className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 />
                 {locationType === 'Standort' && (
                   <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
                 )}
               </div>
-              <span className="text-[13px] text-black">Standort</span>
+              <span className="text-sm text-black">Standort</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <div className="relative flex items-center justify-center">
@@ -455,187 +424,118 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                   value="Tochterunternehmen"
                   checked={locationType === 'Tochterunternehmen'}
                   onChange={(e) => setLocationType(e.target.value as 'Standort' | 'Tochterunternehmen')}
-                  disabled={loadingState}
-                  className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded-full cursor-pointer group-hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 />
                 {locationType === 'Tochterunternehmen' && (
                   <div className="absolute w-2 h-2 bg-[#0F429F] rounded-full pointer-events-none"></div>
                 )}
               </div>
-              <span className="text-[13px] text-black">Tochterunternehmen</span>
+              <span className="text-sm text-black">Tochterunternehmen</span>
             </label>
           </div>
         </div>
 
-        {/* SECTION E: Zugeordnete Benefits */}
+        {/* SECTION E: Benefits */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
-          <h2 className="text-[#273A5F] text-[16px] mb-2">Zugeordnete Benefits</h2>
-          <p className="text-[#666666] text-[12px] mb-6">
-            Benefits mit täglichen und monatlichen Limits für diesen Standort.
-          </p>
+          <h2 className="text-[#273A5F] text-[16px] mb-2">Hier kannst du für deine Benefits aktivieren und Budgets festlegen</h2>
 
-          <div className="overflow-x-auto">
-            <table className="w-full border border-[#E0E0E0]">
-              <thead>
-                <tr className="bg-[#F5F5F5]">
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Produkt</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Tageslimit</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Monatslimit</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product, index) => (
-                  <tr
-                    key={product.id}
-                    className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} hover:bg-[#E3F2FD] transition-colors`}
-                    style={{ height: '48px' }}
-                  >
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <input
-                        type="checkbox"
-                        checked={product.selected}
-                        onChange={() => toggleProduct(product.id)}
-                        disabled={loadingState}
-                        className="w-4 h-4 disabled:cursor-not-allowed"
-                      />
-                    </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <span className="text-[24px]">{product.icon}</span>
-                    </td>
-                    <td className="px-3 py-3 text-[13px] text-black border-b border-[#E0E0E0]">{product.name}</td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <div className="flex items-center gap-1">
-                        <input
-                          type="text"
-                          value={product.dailyLimit}
-                          onChange={(e) => updateProductLimit(product.id, 'dailyLimit', e.target.value)}
-                          disabled={loadingState || !product.selected}
-                          className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
-                          style={{ borderRadius: '4px', padding: '8px' }}
-                        />
-                        <span className="text-[13px] text-[#666666]">€</span>
+          {Object.entries(groupedBenefits).map(([category, benefits]) => (
+            <div key={category} className="mb-8">
+              <h3 className="text-[#273A5F] font-bold text-[14px] mb-4 mt-6">{category}</h3>
+              <div className="px-4 md:px-6 lg:px-8 py-6">
+                <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+                  <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '60px 60px 2fr 1fr 1fr', gap: '0' }}>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide">Aktiv</div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide"></div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide">Benefit</div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide">Tagesbudget</div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide">Monatsbudget</div>
+                  </div>
+
+                  {benefits.map((benefit, index) => (
+                    <div
+                      key={benefit.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                        index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
+                      }`}
+                      style={{ display: 'grid', gridTemplateColumns: '60px 60px 2fr 1fr 1fr', gap: '0' }}
+                    >
+                      <div className="flex items-center justify-center">
+                        <div className="relative flex items-center justify-center">
+                          <input
+                            type="checkbox"
+                            checked={activeBenefits.has(benefit.id)}
+                            onChange={() => toggleBenefit(benefit.id)}
+                            disabled={loadingState} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                          />
+                          {activeBenefits.has(benefit.id) && (
+                            <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
+                          )}
+                        </div>
                       </div>
-                    </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <div className="flex items-center gap-1">
-                        <input
-                          type="text"
-                          value={product.monthlyLimit}
-                          onChange={(e) => updateProductLimit(product.id, 'monthlyLimit', e.target.value)}
-                          disabled={loadingState || !product.selected}
-                          className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
-                          style={{ borderRadius: '4px', padding: '8px' }}
-                        />
-                        <span className="text-[13px] text-[#666666]">€</span>
+
+                      <div className="flex items-center justify-center">
+                        <BenefitIconComponent benefitName={benefit.name} size={32} background={false} />
                       </div>
-                    </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <button
-                        onClick={() => removeProduct(product.id)}
-                        disabled={loadingState}
-                        className="text-[#E53935] hover:text-[#C62828] disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
 
-          <button
-            onClick={() => alert('Produkt hinzufügen')}
-            disabled={loadingState}
-            className="mt-4 flex items-center gap-2 text-[#0F429F] text-[13px] hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Plus size={16} />
-            Produkt hinzufügen
-          </button>
-        </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-[#000000]">{benefit.name}</span>
+                        {benefit.id === 'erholung' && (
+                          <div className="group relative cursor-help">
+                            <Info size={16} className="text-[#0F429F]" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-[#273A5F] text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                              Jährliches Budget (156€/Jahr)
+                            </div>
+                          </div>
+                        )}
+                        {benefit.id === 'danke-bonus' && (
+                          <div className="group relative cursor-help">
+                            <Info size={16} className="text-[#0F429F]" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-[#273A5F] text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                              Variable Prämie
+                            </div>
+                          </div>
+                        )}
+                      </div>
 
-        {/* SECTION F: Jahres-Limit Benefits */}
-        <div className="bg-white rounded border border-[#E0E0E0] p-6">
-          <h2 className="text-[#273A5F] text-[16px] mb-2">Benefits mit Jahres-Limits</h2>
-          <p className="text-[#666666] text-[12px] mb-6">
-            Benefits mit Limits die pro Jahr unterschiedlich sein können.
-          </p>
-
-          <div className="overflow-x-auto">
-            <table className="w-full border border-[#E0E0E0]">
-              <thead>
-                <tr className="bg-[#F5F5F5]">
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Produkt</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">2024</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">2025</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">2026</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">2027</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0] w-12"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {yearlyProducts.map((product, index) => (
-                  <tr
-                    key={product.id}
-                    className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAFA]'} hover:bg-[#E3F2FD] transition-colors`}
-                    style={{ height: '48px' }}
-                  >
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <input
-                        type="checkbox"
-                        checked={product.selected}
-                        onChange={() => toggleYearlyProduct(product.id)}
-                        disabled={loadingState}
-                        className="w-4 h-4 disabled:cursor-not-allowed"
-                      />
-                    </td>
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <span className="text-[24px]">{product.icon}</span>
-                    </td>
-                    <td className="px-3 py-3 text-[13px] text-black border-b border-[#E0E0E0]">{product.name}</td>
-                    {['2024', '2025', '2026', '2027'].map((year) => (
-                      <td key={year} className="px-3 py-3 border-b border-[#E0E0E0]">
+                      <div className="flex items-center">
                         <div className="flex items-center gap-1">
                           <input
                             type="text"
-                            value={product.yearlyLimits[year as keyof typeof product.yearlyLimits]}
-                            onChange={(e) => updateYearlyProductLimit(product.id, year, e.target.value)}
-                            disabled={loadingState || !product.selected}
-                            className="w-24 px-2 py-1.5 border border-[#E0E0E0] rounded text-[13px] text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
-                            style={{ borderRadius: '4px', padding: '8px' }}
+                            value={benefitLimits[benefit.id]?.daily || ''}
+                            onChange={(e) => updateBenefitLimit(benefit.id, 'daily', e.target.value)}
+                            disabled={loadingState || !activeBenefits.has(benefit.id)}
+                            placeholder="-" className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                            style={{ borderRadius: '4px' }}
                           />
-                          <span className="text-[13px] text-[#666666]">€</span>
+                          <span className="text-sm text-[#000000]">€</span>
                         </div>
-                      </td>
-                    ))}
-                    <td className="px-3 py-3 border-b border-[#E0E0E0]">
-                      <button
-                        onClick={() => removeYearlyProduct(product.id)}
-                        disabled={loadingState}
-                        className="text-[#E53935] hover:text-[#C62828] disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      </div>
 
-          <button
-            onClick={() => alert('Produkt hinzufügen')}
-            disabled={loadingState}
-            className="mt-4 flex items-center gap-2 text-[#0F429F] text-[13px] hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Plus size={16} />
-            Produkt hinzufügen
-          </button>
+                      <div className="flex items-center">
+                        <div className="flex items-center gap-1">
+                          <input
+                            type="text"
+                            value={benefitLimits[benefit.id]?.monthly || ''}
+                            onChange={(e) => updateBenefitLimit(benefit.id, 'monthly', e.target.value)}
+                            disabled={loadingState || !activeBenefits.has(benefit.id)}
+                            placeholder="-" className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                            style={{ borderRadius: '4px' }}
+                          />
+                          <span className="text-sm text-[#000000]">€</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-lg p-4 mt-6">
+            <p className="text-[#666666] text-[12px]">
+              <strong>Hinweis:</strong> Änderungen gelten ab 1. nächsten Monat für alle Mitarbeiter dieses Standorts.
+            </p>
+          </div>
         </div>
 
         {/* Action Buttons */}
@@ -643,8 +543,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           {isEditMode && (
             <button
               onClick={() => setShowDeleteModal(true)}
-              disabled={loadingState}
-              className="px-6 py-3 border border-[#F44336] text-[#F44336] text-[14px] rounded hover:bg-[#FFEBEE] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loadingState} className="px-6 py-3 border border-[#F44336] text-[#F44336] text-[14px] rounded hover:bg-[#FFEBEE] transition disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
               Löschen
@@ -653,16 +552,14 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           <div className={`flex gap-4 ${!isEditMode ? 'ml-auto' : ''}`}>
             <button
               onClick={goBack}
-              disabled={loadingState}
-              className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loadingState} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
               Abbrechen
             </button>
             <button
               onClick={handleSave}
-              disabled={loadingState}
-              className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loadingState} className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
               {loadingState && <Loader2 size={16} className="animate-spin" />}
@@ -696,15 +593,13 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div className="flex gap-3 justify-center">
               <button
-                onClick={() => setShowDeleteModal(false)}
-                className="px-6 py-3 border border-[#E0E0E0] text-[#666666] rounded hover:bg-[#F5F5F5] transition"
+                onClick={() => setShowDeleteModal(false)} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] rounded hover:bg-[#F5F5F5] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Abbrechen
               </button>
               <button
-                onClick={handleDelete}
-                className="px-6 py-3 bg-[#F44336] text-white rounded hover:bg-[#D32F2F] transition"
+                onClick={handleDelete} className="px-6 py-3 bg-[#F44336] text-white rounded hover:bg-[#D32F2F] transition"
                 style={{ borderRadius: '4px' }}
               >
                 Löschen

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BenefitIconComponent } from './BenefitIconComponent';
+import { StatusBadge } from './Table';
 import { X } from 'lucide-react';
 
 interface Benefit {
@@ -42,7 +43,7 @@ const benefits: Benefit[] = [
   },
   {
     id: 'commuting',
-    name: 'Commuting',
+    name: 'Fahrkostenzuschuss',
     description: 'bis 80€ / Monat',
     limit: '80€ / Monat',
     active: true,
@@ -141,8 +142,7 @@ export function BenefitsOverviewNew() {
             </p>
           </div>
           <button
-            onClick={handleManageBenefits}
-            className="px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
+            onClick={handleManageBenefits} className="px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
           >
             Benefits verwalten
           </button>
@@ -151,37 +151,24 @@ export function BenefitsOverviewNew() {
 
       {/* Benefits Grid */}
       <div className="px-8 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4">
           {benefits.map(benefit => (
             <div
               key={benefit.id}
-              onClick={() => handleCardClick(benefit)}
-              className="aspect-square bg-white border border-[#E0E0E0] rounded-lg p-4 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer flex flex-col justify-between"
+              onClick={() => handleCardClick(benefit)} className="bg-white border border-[#E0E0E0] rounded-lg p-4 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer flex flex-row gap-1 items-center"
+              style={{ aspectRatio: '1.5/1' }}
             >
-              <div className="flex gap-3 items-start">
-                {/* Icon - Left Side */}
-                <div className="flex-shrink-0">
-                  <BenefitIconComponent benefitName={benefit.name} size={40} background={true} />
-                </div>
-
-                {/* Content */}
-                <div className="min-w-0 flex-grow-0">
-                  {/* Title */}
-                  <h3 className="text-[#273A5F] font-bold text-xs leading-tight truncate">{benefit.name}</h3>
-                  {/* Description */}
-                  <p className="text-[#666666] text-[10px] leading-tight truncate">{benefit.description}</p>
-                </div>
+              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: '80px', transform: 'scale(1.4)' }}>
+                <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
               </div>
 
-              {/* Status Badge - Bottom */}
-              <span
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium text-white w-fit"
-                style={{
-                  backgroundColor: benefit.active ? '#4CAF50' : '#9E9E9E'
-                }}
-              >
-                {benefit.active ? '✓ Aktiv' : 'Inaktiv'}
-              </span>
+              <div className="flex-1 flex flex-col min-w-0 justify-center items-center gap-1">
+                <div>
+                  <h3 className="text-[#273A5F] font-bold text-base leading-tight truncate">{benefit.name}</h3>
+                  <p className="text-[#666666] text-xs leading-tight truncate">{benefit.description}</p>
+                </div>
+                <StatusBadge status={benefit.active ? 'Aktiv' : 'Inaktiv'} type={benefit.active ? 'success' : 'inactive'} />
+              </div>
             </div>
           ))}
         </div>
@@ -189,12 +176,10 @@ export function BenefitsOverviewNew() {
 
       {/* Benefit Info Modal */}
       {selectedBenefit && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           onClick={(e) => e.target === e.currentTarget && handleCloseModal()}
         >
-          <div
-            className="bg-white rounded-xl shadow-2xl w-full max-w-[600px]"
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-[600px]"
             style={{ boxShadow: '0 10px 40px rgba(0,0,0,0.12)' }}
           >
             <div className="p-8">
@@ -205,8 +190,7 @@ export function BenefitsOverviewNew() {
                   <h2 className="text-[#273A5F] font-bold text-[20px]">{selectedBenefit.name}</h2>
                 </div>
                 <button
-                  onClick={handleCloseModal}
-                  className="w-8 h-8 flex items-center justify-center text-[#666666] hover:bg-[#F0F4FF] rounded-full transition-colors"
+                  onClick={handleCloseModal} className="w-8 h-8 flex items-center justify-center text-[#666666] hover:bg-[#F0F4FF] rounded-full transition-colors"
                 >
                   <X size={24} />
                 </button>
@@ -220,7 +204,7 @@ export function BenefitsOverviewNew() {
                 </div>
 
                 <div>
-                  <h3 className="text-[#273A5F] font-medium text-[13px] mb-2">Limit pro Mitarbeiter:</h3>
+                  <h3 className="text-[#273A5F] font-medium text-[13px] mb-2">Budget pro Mitarbeiter:</h3>
                   <p className="text-[#333333] text-[14px]">{selectedBenefit.limit}</p>
                 </div>
 
@@ -237,28 +221,19 @@ export function BenefitsOverviewNew() {
 
                 <div>
                   <h3 className="text-[#273A5F] font-medium text-[13px] mb-2">Status:</h3>
-                  <span
-                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-medium text-white"
-                    style={{
-                      backgroundColor: selectedBenefit.active ? '#4CAF50' : '#9E9E9E'
-                    }}
-                  >
-                    {selectedBenefit.active ? '✅ Aktiv' : '⚪ Inaktiv'}
-                  </span>
+                  <StatusBadge status={selectedBenefit.active ? 'Aktiv' : 'Inaktiv'} type={selectedBenefit.active ? 'success' : 'inactive'} />
                 </div>
               </div>
 
               {/* Buttons */}
               <div className="flex gap-3 pt-6 mt-6 border-t border-[#E0E0E0]">
                 <button
-                  onClick={handleCloseModal}
-                  className="px-6 py-3 border border-[#0F429F] text-[#0F429F] text-[14px] font-medium rounded-full hover:bg-[#F0F4FF] transition-colors"
+                  onClick={handleCloseModal} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] text-[14px] font-medium rounded-full hover:bg-[#F0F4FF] transition-colors"
                 >
                   Schließen
                 </button>
                 <button
-                  onClick={handleManageBenefits}
-                  className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
+                  onClick={handleManageBenefits} className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
                 >
                   Dieses Benefit verwalten
                 </button>

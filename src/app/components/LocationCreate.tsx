@@ -104,10 +104,9 @@ export function LocationCreate() {
   return (
     <div className="flex-1 bg-white overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
-      <div className="px-8 py-6 border-b border-[#E8E8E8]">
+      <div className="px-4 md:px-6 lg:px-8 py-6 border-b border-[#E8E8E8]">
         <button
-          onClick={handleBack}
-          className="text-[#246AFF] text-sm font-medium mb-4 hover:underline flex items-center gap-2"
+          onClick={handleBack} className="text-[#246AFF] text-sm font-medium mb-4 hover:underline flex items-center gap-2"
         >
           ← Zurück zu Standorten
         </button>
@@ -115,7 +114,7 @@ export function LocationCreate() {
       </div>
 
       {/* Form */}
-      <div className="px-8 py-8">
+      <div className="px-4 md:px-6 lg:px-8 py-8">
         <div className="max-w-6xl">
           {/* Section 1: Location Stammdaten */}
           <div className="mb-8">
@@ -134,8 +133,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.locationName}
                   onChange={(e) => handleChange('locationName', e.target.value)}
-                  placeholder="z.B. Heddesheim, München, etc."
-                  className={`w-full px-3 py-3 border rounded text-[14px] transition ${
+                  placeholder="z.B. Heddesheim, München, etc." className={`w-full px-3 py-3 border rounded text-[14px] transition ${
                     errors.locationName
                       ? 'border-[#E53935]'
                       : 'border-[#E0E0E0] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33]'
@@ -160,8 +158,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.company}
                   onChange={(e) => handleChange('company', e.target.value)}
-                  placeholder="z.B. Causaltel Software GmbH"
-                  className={`w-full px-3 py-3 border rounded text-[14px] transition ${
+                  placeholder="z.B. Causaltel Software GmbH" className={`w-full px-3 py-3 border rounded text-[14px] transition ${
                     errors.company
                       ? 'border-[#E53935]'
                       : 'border-[#E0E0E0] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33]'
@@ -186,8 +183,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.address}
                   onChange={(e) => handleChange('address', e.target.value)}
-                  placeholder="Vollständige Adresse mit Straße, Hausnummer und Ort"
-                  className={`w-full px-3 py-3 border rounded text-[14px] transition ${
+                  placeholder="Vollständige Adresse mit Straße, Hausnummer und Ort" className={`w-full px-3 py-3 border rounded text-[14px] transition ${
                     errors.address
                       ? 'border-[#E53935]'
                       : 'border-[#E0E0E0] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33]'
@@ -210,8 +206,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.street}
                   onChange={(e) => handleChange('street', e.target.value)}
-                  placeholder="z.B. Försterleide Straße 279A"
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+                  placeholder="z.B. Försterleide Straße 279A" className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
                   style={{ borderRadius: '4px' }}
                 />
               </div>
@@ -225,8 +220,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.city}
                   onChange={(e) => handleChange('city', e.target.value)}
-                  placeholder="z.B. München"
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+                  placeholder="z.B. München" className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
                   style={{ borderRadius: '4px' }}
                 />
               </div>
@@ -238,8 +232,7 @@ export function LocationCreate() {
                 </label>
                 <select
                   value={formData.state}
-                  onChange={(e) => handleChange('state', e.target.value)}
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+                  onChange={(e) => handleChange('state', e.target.value)} className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
                   style={{ borderRadius: '4px' }}
                 >
                   <option value="">Bitte auswählen</option>
@@ -260,8 +253,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.zip}
                   onChange={(e) => handleChange('zip', e.target.value)}
-                  placeholder="z.B. 81377"
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+                  placeholder="z.B. 81377" className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
                   style={{ borderRadius: '4px' }}
                 />
               </div>
@@ -273,8 +265,7 @@ export function LocationCreate() {
                 </label>
                 <select
                   value={formData.country}
-                  onChange={(e) => handleChange('country', e.target.value)}
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+                  onChange={(e) => handleChange('country', e.target.value)} className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
                   style={{ borderRadius: '4px' }}
                 >
                   {countries.map((country) => (
@@ -294,8 +285,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
-                  placeholder="z.B. +49 241 5850001"
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+                  placeholder="z.B. +49 241 5850001" className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
                   style={{ borderRadius: '4px' }}
                 />
               </div>
@@ -309,8 +299,7 @@ export function LocationCreate() {
                   type="text"
                   value={formData.fax}
                   onChange={(e) => handleChange('fax', e.target.value)}
-                  placeholder="z.B. +49 241 5850079"
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
+                  placeholder="z.B. +49 241 5850079" className="w-full px-3 py-3 border border-[#E0E0E0] rounded text-[14px] focus:border-[#246AFF] focus:outline-none focus:ring-2 focus:ring-[#246AFF33] transition"
                   style={{ borderRadius: '4px' }}
                 />
               </div>
@@ -329,8 +318,7 @@ export function LocationCreate() {
                       name="type"
                       value="Standort"
                       checked={formData.type === 'Standort'}
-                      onChange={(e) => handleChange('type', e.target.value)}
-                      className="w-4 h-4"
+                      onChange={(e) => handleChange('type', e.target.value)} className="w-4 h-4"
                     />
                     <span className="text-[#000000] text-[14px]">Standort</span>
                   </label>
@@ -340,8 +328,7 @@ export function LocationCreate() {
                       name="type"
                       value="Tochterunternehmen"
                       checked={formData.type === 'Tochterunternehmen'}
-                      onChange={(e) => handleChange('type', e.target.value)}
-                      className="w-4 h-4"
+                      onChange={(e) => handleChange('type', e.target.value)} className="w-4 h-4"
                     />
                     <span className="text-[#000000] text-[14px]">Tochterunternehmen</span>
                   </label>
@@ -363,15 +350,13 @@ export function LocationCreate() {
           {/* Bottom Buttons */}
           <div className="flex gap-4 pt-6 border-t border-[#E8E8E8]">
             <button
-              onClick={handleSubmit}
-              className="px-8 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
+              onClick={handleSubmit} className="px-8 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition"
               style={{ borderRadius: '24px' }}
             >
               Standort erstellen
             </button>
             <button
-              onClick={handleBack}
-              className="px-8 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
+              onClick={handleBack} className="px-8 py-3 border-2 border-[#E0E0E0] text-[#666666] font-medium rounded-full hover:bg-gray-50 transition"
               style={{ borderRadius: '24px' }}
             >
               Abbrechen

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Plus, ChevronRight, Edit2, Trash2, X, Search, BarChart3 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, ResponsiveContainer } from 'recharts';
+import { StatusBadge } from './Table';
 
 type LocationType = 'Standort' | 'Tochterunternehmen';
 
@@ -155,18 +156,16 @@ export function LocationsPage() {
     return (
       <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
         {/* Header */}
-        <div className="bg-white border-b border-[#E8E8E8] px-8 py-6">
+        <div className="bg-white border-b border-[#E8E8E8] px-4 md:px-6 lg:px-8 py-6">
           <button
-            onClick={handleBackToList}
-            className="text-[#246AFF] text-sm font-medium mb-4 hover:underline flex items-center gap-2"
+            onClick={handleBackToList} className="text-[#246AFF] text-sm font-medium mb-4 hover:underline flex items-center gap-2"
           >
             ← Zurück zur Übersicht
           </button>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <h1 className="text-[#000000] font-bold text-[24px]">{selectedLocation.name}</h1>
-              <span
-                className="px-3 py-1 rounded-full text-xs font-medium"
+              <span className="px-3 py-1 rounded-full text-xs font-medium"
                 style={{
                   backgroundColor: selectedLocation.type === 'Standort' ? '#F0F4FF' : '#FFF4E6',
                   color: selectedLocation.type === 'Standort' ? '#0F429F' : '#F57C00',
@@ -177,14 +176,12 @@ export function LocationsPage() {
             </div>
             <label className="flex items-center gap-3 cursor-pointer">
               <span className="text-[#666666] text-sm">Status</span>
-              <div
-                className={`w-12 h-6 rounded-full transition ${
+              <div className={`w-12 h-6 rounded-full transition ${
                   selectedLocation.status === 'aktiv' ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
                 }`}
                 style={{ position: 'relative' }}
               >
-                <div
-                  className="w-5 h-5 bg-white rounded-full absolute top-0.5 transition-all"
+                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 transition-all"
                   style={{ left: selectedLocation.status === 'aktiv' ? '26px' : '2px' }}
                 ></div>
               </div>
@@ -196,11 +193,10 @@ export function LocationsPage() {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white border-b border-[#E8E8E8] px-8">
-          <div className="flex gap-6">
+        <div className="bg-white border-b border-[#E8E8E8] px-4 md:px-6 lg:px-8">
+          <div className="flex gap-3 md:gap-6">
             <button
-              onClick={() => setActiveTab('benefits')}
-              className={`py-4 px-2 font-medium text-sm border-b-2 transition ${
+              onClick={() => setActiveTab('benefits')} className={`py-4 px-2 font-medium text-sm border-b-2 transition ${
                 activeTab === 'benefits'
                   ? 'border-[#0F429F] text-[#0F429F]'
                   : 'border-transparent text-[#666666] hover:text-[#000000]'
@@ -209,8 +205,7 @@ export function LocationsPage() {
               Benefits
             </button>
             <button
-              onClick={() => setActiveTab('employees')}
-              className={`py-4 px-2 font-medium text-sm border-b-2 transition ${
+              onClick={() => setActiveTab('employees')} className={`py-4 px-2 font-medium text-sm border-b-2 transition ${
                 activeTab === 'employees'
                   ? 'border-[#0F429F] text-[#0F429F]'
                   : 'border-transparent text-[#666666] hover:text-[#000000]'
@@ -219,8 +214,7 @@ export function LocationsPage() {
               Mitarbeiter
             </button>
             <button
-              onClick={() => setActiveTab('overview')}
-              className={`py-4 px-2 font-medium text-sm border-b-2 transition ${
+              onClick={() => setActiveTab('overview')} className={`py-4 px-2 font-medium text-sm border-b-2 transition ${
                 activeTab === 'overview'
                   ? 'border-[#0F429F] text-[#0F429F]'
                   : 'border-transparent text-[#666666] hover:text-[#000000]'
@@ -232,38 +226,35 @@ export function LocationsPage() {
         </div>
 
         {/* Tab Content */}
-        <div className="px-8 py-8">
+        <div className="px-4 md:px-6 lg:px-8 py-6">
           {activeTab === 'benefits' && (
             <div>
-              <div className="bg-white border border-[#E0E0E0] rounded-xl overflow-hidden" style={{ borderRadius: '12px' }}>
+              <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
                 {/* Table Header */}
-                <div className="bg-[#F0F4FF] grid grid-cols-[1fr_200px_120px_200px] h-12 items-center px-4">
-                  <div className="text-[#666666] text-xs font-medium uppercase">Benefit-Name</div>
-                  <div className="text-[#666666] text-xs font-medium uppercase">Limit/Monat</div>
-                  <div className="text-[#666666] text-xs font-medium uppercase">Status</div>
-                  <div className="text-[#666666] text-xs font-medium uppercase">Aktion</div>
+                <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Benefit-Name</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Budget/Monat</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
                 </div>
 
                 {/* Table Rows */}
                 {mockLocationBenefits.map((benefit, index) => (
                   <div
-                    key={benefit.id}
-                    className={`grid grid-cols-[1fr_200px_120px_200px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 ${
-                      index % 2 === 0 ? 'bg-white' : 'bg-[#F8F9FB]'
+                    key={benefit.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                      index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     }`}
-                    style={{ minHeight: '52px' }}
+                    style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}
                   >
                     <div className="text-[#000000] text-sm font-medium">{benefit.name}</div>
                     <div className="text-[#666666] text-sm">{benefit.limit}</div>
                     <div>
-                      <div
-                        className={`w-10 h-5 rounded-full transition ${
+                      <div className={`w-10 h-5 rounded-full transition ${
                           benefit.active ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
                         }`}
                         style={{ position: 'relative' }}
                       >
-                        <div
-                          className="w-4 h-4 bg-white rounded-full absolute top-0.5 transition-all"
+                        <div className="w-4 h-4 bg-white rounded-full absolute top-0.5 transition-all"
                           style={{ left: benefit.active ? '22px' : '2px' }}
                         ></div>
                       </div>
@@ -272,8 +263,7 @@ export function LocationsPage() {
                       <button
                         onClick={() => {
                           window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-edit-location' } }));
-                        }}
-                        className="p-2 text-[#0F429F] hover:bg-[#F0F4FF] rounded transition"
+                        }} className="p-2 text-[#0F429F] hover:bg-[#F0F4FF] rounded transition"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
@@ -288,8 +278,7 @@ export function LocationsPage() {
               <button
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-add-location' } }));
-                }}
-                className="mt-6 px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
+                }} className="mt-6 px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
               >
                 <Plus className="w-5 h-5" />
                 Benefit hinzufügen
@@ -308,33 +297,27 @@ export function LocationsPage() {
                 Mitarbeiter zuordnen
               </button>
 
-              <div className="bg-white border border-[#E0E0E0] rounded-xl overflow-hidden" style={{ borderRadius: '12px' }}>
+              <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
                 {/* Table Header */}
-                <div className="bg-[#F0F4FF] grid grid-cols-[200px_1fr_150px_120px] h-12 items-center px-4">
-                  <div className="text-[#666666] text-xs font-medium uppercase">Personennummer</div>
-                  <div className="text-[#666666] text-xs font-medium uppercase">Name</div>
-                  <div className="text-[#666666] text-xs font-medium uppercase">Status</div>
-                  <div className="text-[#666666] text-xs font-medium uppercase">Aktion</div>
+                <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Personennummer</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
                 </div>
 
                 {/* Table Rows */}
                 {mockLocationEmployees.map((employee, index) => (
                   <div
-                    key={employee.id}
-                    className={`grid grid-cols-[200px_1fr_150px_120px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 ${
-                      index % 2 === 0 ? 'bg-white' : 'bg-[#F8F9FB]'
+                    key={employee.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                      index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     }`}
-                    style={{ minHeight: '52px' }}
+                    style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}
                   >
-                    <div className="text-[#666666] text-sm">{employee.nr}</div>
-                    <div className="text-[#000000] text-sm font-medium">{employee.name}</div>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          employee.status === 'aktiv' ? 'bg-green-500' : 'bg-gray-400'
-                        }`}
-                      ></span>
-                      <span className="text-[#666666] text-sm capitalize">{employee.status}</span>
+                    <div className="text-[#000000] text-sm">{employee.nr}</div>
+                    <div className="text-[#000000] text-sm">{employee.name}</div>
+                    <div>
+                      <StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} />
                     </div>
                     <div>
                       <button className="p-2 text-red-500 hover:bg-red-50 rounded transition">
@@ -350,7 +333,7 @@ export function LocationsPage() {
           {activeTab === 'overview' && (
             <div>
               {/* KPI Cards */}
-              <div className="grid grid-cols-4 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
                 <div className="bg-white border border-[#E0E0E0] rounded-xl p-6" style={{ borderRadius: '12px' }}>
                   <p className="text-[#666666] text-xs mb-2">Gesamtbudget (Monat)</p>
                   <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalBudget)}</p>
@@ -477,7 +460,7 @@ export function LocationsPage() {
   return (
     <div className="flex-1 bg-white overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
-      <div className="px-8 py-6 border-b border-[#E8E8E8] flex items-center justify-between">
+      <div className="px-4 md:px-6 lg:px-8 py-6 border-b border-[#E8E8E8] flex items-center justify-between">
         <div>
           <h1 className="text-[#000000] font-bold text-[28px] mb-2">Verwaltete Standorte</h1>
           <p className="text-[#666666] text-sm">Übersicht aller Standorte und Tochterunternehmen</p>
@@ -485,8 +468,7 @@ export function LocationsPage() {
         <button
           onClick={() => {
             window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'location-form-create' } }));
-          }}
-          className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition flex items-center gap-2"
+          }} className="px-6 py-3 bg-[#4CAF50] text-white font-medium rounded-full hover:bg-[#45a049] transition flex items-center gap-2"
         >
           <Plus className="w-5 h-5" />
           Standort erstellen
@@ -494,33 +476,31 @@ export function LocationsPage() {
       </div>
 
       {/* Table */}
-      <div className="px-8 py-6">
-        <div className="border border-[#E8E8E8] rounded-lg overflow-hidden">
+      <div className="px-4 md:px-6 lg:px-8 py-6">
+        <div className="w-full border border-[#E5E7EB] rounded-lg overflow-hidden">
           {/* Table Header */}
-          <div className="bg-[#F0F4FF] grid grid-cols-[1fr_200px_120px_150px_180px_120px_100px] h-12 items-center px-4">
-            <div className="text-[#666666] text-xs font-medium uppercase">Name</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Typ</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Mitarbeiter</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Budget/Monat</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Genutzt (dieser Monat)</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Status</div>
-            <div className="text-[#666666] text-xs font-medium uppercase">Aktion</div>
+          <div className="w-full bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Typ</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Mitarbeiter</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Budget/Monat</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Genutzt (dieser Monat)</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
           </div>
 
           {/* Table Rows */}
           {mockLocations.map((location, index) => (
             <div
-              key={location.id}
-              className={`grid grid-cols-[1fr_200px_120px_150px_180px_120px_100px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 hover:bg-[#EEF2FF] transition cursor-pointer ${
-                index % 2 === 0 ? 'bg-white' : 'bg-[#F8F9FB]'
+              key={location.id} className={`w-full flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 cursor-pointer ${
+                index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
               }`}
-              style={{ minHeight: '56px' }}
+              style={{ display: 'grid', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}
               onClick={() => handleOpenLocation(location)}
             >
-              <div className="text-[#000000] text-sm font-medium">{location.name}</div>
+              <div className="text-[#000000] text-sm">{location.name}</div>
               <div>
-                <span
-                  className="px-3 py-1 rounded-full text-xs font-medium"
+                <span className="px-3 py-1 rounded-full text-xs font-medium"
                   style={{
                     backgroundColor: location.type === 'Standort' ? '#F0F4FF' : '#FFF4E6',
                     color: location.type === 'Standort' ? '#0F429F' : '#F57C00',
@@ -529,18 +509,13 @@ export function LocationsPage() {
                   {location.type === 'Standort' ? '🏢' : '🏛️'} {location.type}
                 </span>
               </div>
-              <div className="text-[#666666] text-sm">{location.employees}</div>
-              <div className="text-[#666666] text-sm">{formatCurrency(location.budgetMonth)}</div>
-              <div className="text-[#666666] text-sm">
+              <div className="text-[#000000] text-sm">{location.employees}</div>
+              <div className="text-[#000000] text-sm">{formatCurrency(location.budgetMonth)}</div>
+              <div className="text-[#000000] text-sm">
                 {formatCurrency(location.usedMonth)} ({location.percentage}%)
               </div>
-              <div className="flex items-center gap-2">
-                <span
-                  className={`w-2 h-2 rounded-full ${
-                    location.status === 'aktiv' ? 'bg-green-500' : 'bg-gray-400'
-                  }`}
-                ></span>
-                <span className="text-[#666666] text-sm capitalize">{location.status}</span>
+              <div>
+                <StatusBadge status={location.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={location.status === 'aktiv' ? 'success' : 'inactive'} />
               </div>
               <div>
                 <button className="text-[#246AFF] hover:underline flex items-center gap-1">
@@ -554,11 +529,10 @@ export function LocationsPage() {
       </div>
 
       {/* Pagination */}
-      <div className="px-8 py-6 flex items-center justify-center gap-2">
+      <div className="px-4 md:px-6 lg:px-8 py-6 flex items-center justify-center gap-2">
         <button
           onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-          disabled={currentPage === 1}
-          className={`px-4 py-2 border rounded-lg text-sm font-medium transition ${
+          disabled={currentPage === 1} className={`px-4 py-2 border rounded-lg text-sm font-medium transition ${
             currentPage === 1
               ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
               : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
@@ -570,8 +544,7 @@ export function LocationsPage() {
         {[1, 2, 3].map((page) => (
           <button
             key={page}
-            onClick={() => setCurrentPage(page)}
-            className={`w-10 h-10 rounded-lg text-sm font-medium transition ${
+            onClick={() => setCurrentPage(page)} className={`w-10 h-10 rounded-lg text-sm font-medium transition ${
               currentPage === page
                 ? 'bg-[#0F429F] text-white'
                 : 'border border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
@@ -583,8 +556,7 @@ export function LocationsPage() {
 
         <button
           onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === 3}
-          className={`px-4 py-2 border rounded-lg text-sm font-medium transition ${
+          disabled={currentPage === 3} className={`px-4 py-2 border rounded-lg text-sm font-medium transition ${
             currentPage === 3
               ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
               : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'

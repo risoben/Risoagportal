@@ -70,54 +70,53 @@ export function LocationsOverview() {
     {
       key: 'name',
       label: 'NAME',
-      width: '200px',
+      width: '2.5fr',
       align: 'left' as const
     },
     {
       key: 'type',
       label: 'TYP',
-      width: '180px',
+      width: '1.5fr',
       align: 'left' as const
     },
     {
       key: 'employees',
       label: 'MITARBEITER',
-      width: '140px',
+      width: '1fr',
       align: 'right' as const
     },
     {
       key: 'budgetPerMonth',
       label: 'BUDGET/MONAT',
-      width: '160px',
+      width: '1.2fr',
       align: 'right' as const,
       render: (value: number) => <CurrencyCell amount={value} />
     },
     {
       key: 'usedThisMonth',
       label: 'GENUTZT DIESE MONAT',
-      width: '180px',
+      width: '1.5fr',
       align: 'right' as const,
       render: (value: number) => <CurrencyCell amount={value} />
     },
     {
       key: 'status',
       label: 'STATUS',
-      width: '120px',
+      width: '1fr',
       align: 'center' as const,
-      render: (value: string) => <StatusBadge status={value === 'active' ? 'Aktiv' : 'Inaktiv'} type="success" />
+      render: (value: string) => <StatusBadge status={value === 'active' ? 'Aktiv' : 'Inaktiv'} type={value === 'active' ? 'success' : 'inactive'} />
     },
     {
       key: 'action',
       label: 'AKTION',
-      width: '120px',
+      width: '1fr',
       align: 'center' as const,
       render: (_: any, row: any) => (
         <button
           onClick={(e) => {
             e.stopPropagation();
             handleOpenLocation(row);
-          }}
-          className="px-4 py-1 bg-[#0F429F] text-white text-[12px] rounded-full hover:bg-[#246AFF] transition-colors"
+          }} className="px-4 py-1 bg-[#0F429F] text-white text-[12px] rounded-full hover:bg-[#246AFF] transition-colors"
           style={{ fontFamily: 'Roboto, sans-serif' }}
         >
           Öffnen
@@ -129,7 +128,7 @@ export function LocationsOverview() {
   return (
     <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
-      <div className="bg-white border-b border-[#E0E0E0] px-8 py-6">
+      <div className="bg-white border-b border-[#E0E0E0] px-4 md:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-[#273A5F] font-bold text-[32px] mb-2">Standorte</h1>
@@ -138,8 +137,7 @@ export function LocationsOverview() {
             </p>
           </div>
           <button
-            onClick={handleCreateLocation}
-            className="flex items-center gap-2 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
+            onClick={handleCreateLocation} className="flex items-center gap-2 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
           >
             <Plus size={16} />
             Standort erstellen
@@ -148,8 +146,8 @@ export function LocationsOverview() {
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8">
-        <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-hidden">
+      <div className="px-4 md:px-6 lg:px-8 py-6">
+        <div className="bg-white rounded-lg border border-[#E5E7EB] overflow-hidden">
           <Table
             columns={columns}
             data={locations}
