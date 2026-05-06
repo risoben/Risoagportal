@@ -219,7 +219,7 @@ export function VerwaltungPage() {
                   )}
                 </div>
                 <span className="text-[#333333] text-[14px] group-hover:text-[#0F429F] transition-colors" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Alle Standorte in einem Report
+                  Alle Standorte in einem Bericht
                 </span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer hover:bg-[#F0F4FF] p-2 rounded transition-colors group">
@@ -235,7 +235,7 @@ export function VerwaltungPage() {
                   )}
                 </div>
                 <span className="text-[#333333] text-[14px] group-hover:text-[#0F429F] transition-colors" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Report pro Standort
+                  Jeweils ein Bericht pro Standort
                 </span>
               </label>
             </div>

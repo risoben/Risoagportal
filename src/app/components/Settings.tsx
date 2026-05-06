@@ -366,7 +366,7 @@ export function Settings() {
                         checked={locationExportType === 'combined'}
                         onChange={(e) => setLocationExportType(e.target.value as 'combined')} className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
-                      <span className="ml-3 text-xs text-[#333333]">Alle Standorte in einem Report</span>
+                      <span className="ml-3 text-xs text-[#333333]">Alle Standorte in einem Bericht</span>
                     </label>
                     <label className="flex items-center cursor-pointer">
                       <input
@@ -376,7 +376,7 @@ export function Settings() {
                         checked={locationExportType === 'separate'}
                         onChange={(e) => setLocationExportType(e.target.value as 'separate')} className="w-4 h-4 text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
-                      <span className="ml-3 text-xs text-[#333333]">Einzelnen Report pro Standort</span>
+                      <span className="ml-3 text-xs text-[#333333]">Jeweils ein Bericht pro Standort</span>
                     </label>
                   </div>
 
