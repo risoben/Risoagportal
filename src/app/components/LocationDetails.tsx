@@ -243,9 +243,18 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
               </div>
             ))}
 
+            <div className="flex items-center gap-4 mt-6 mb-4">
+              <button
+                onClick={() => alert('Änderungen gespeichert!')}
+                className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
+              >
+                Speichern
+              </button>
+            </div>
+
             <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-lg p-4">
               <p className="text-[#666666] text-[12px]">
-                <strong>Hinweis:</strong> Änderungen gelten ab 1. nächsten Monat für alle Mitarbeiter dieser Location.
+                <strong>Hinweis:</strong> Änderungen gelten ab 1. des nächsten Monats für alle Mitarbeiter dieses Standorts. Benefits mit Jahresbudget (Erholung, Geburtstag, Danke-Bonus) werden einmal jährlich abgerechnet.
               </p>
             </div>
           </div>
@@ -255,6 +264,19 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
         {activeTab === 'employees' && (
           <div>
             <h2 className="text-[#273A5F] font-bold text-[20px] mb-6">Mitarbeiter in {locationName}</h2>
+
+            <div className="flex items-center gap-4 mb-4">
+              <button className="px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2">
+                <span className="text-lg leading-none">+</span>
+                Mitarbeiter hinzufügen
+              </button>
+              <button
+                onClick={() => alert('Änderungen gespeichert!')}
+                className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
+              >
+                Speichern
+              </button>
+            </div>
 
             <div className="mb-4">
               <input
@@ -271,8 +293,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
 
             <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-lg p-4">
               <p className="text-[#666666] text-[12px]">
-                <strong>Hinweis:</strong> Mitarbeiter-Änderungen gelten ab 1. nächsten Monat. Location-Wechsel werden
-                als weiche Migration durchgeführt.
+                <strong>Hinweis:</strong> Änderungen gelten ab 1. des nächsten Monats. Location-Wechsel werden als weiche Migration durchgeführt.
               </p>
             </div>
           </div>

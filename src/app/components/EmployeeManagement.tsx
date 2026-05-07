@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Plus, ChevronLeft, ChevronRight, Search, Upload, Eye, Edit2 } from 'lucide-react';
 import { MassImportModal } from './MassImportModal';
 import { StatusBadge } from './Table';
@@ -296,56 +296,36 @@ export function EmployeeManagement() {
 
       {/* Employee Table */}
       <div className="px-4 md:px-6 lg:px-8 py-6">
-        <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
-          {/* Table Header */}
-          <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: 0 }}>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Pers.-Nr.</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Abteilung</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktionen</div>
+        <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)', minWidth: '700px' }}>
+            {/* Header cells — same grid as rows */}
+            {['Pers.-Nr.', 'Name', 'Abteilung', 'Status', 'Budget', 'Aktionen'].map((h) => (
+              <div key={h} className="bg-[#273A5F] text-white font-bold text-xs uppercase tracking-wide px-6 flex items-center" style={{ height: '48px', overflow: 'hidden' }}>{h}</div>
+            ))}
+            {/* Body rows — flat cells in the same grid */}
+            {paginatedEmployees.map((employee, index) => {
+              const bg = index % 2 === 0 ? '#ffffff' : '#F9FAFB';
+              const border = '1px solid #E5E7EB';
+              const cell: React.CSSProperties = { background: bg, borderBottom: border, height: '56px', overflow: 'hidden', display: 'flex', alignItems: 'center', padding: '0 24px' };
+              return (
+                <React.Fragment key={employee.id}>
+                  <div style={cell} className="text-sm text-[#000000]">{employee.personnelNumber}</div>
+                  <div style={cell} className="text-sm text-[#000000]">{employee.name}</div>
+                  <div style={cell} className="text-sm text-[#000000]">{employee.department}</div>
+                  <div style={cell}><StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} /></div>
+                  <div style={cell} className="text-sm text-[#000000]">{formatCurrency(employee.budgetYear)}</div>
+                  <div style={{ ...cell, gap: '8px' }}>
+                    <button onClick={(e) => { e.stopPropagation(); handleShowDetails(employee); }} className="bg-[#0F429F] text-white px-3 h-8 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1" style={{ borderRadius: '32px' }}>
+                      <Eye size={14} />Details
+                    </button>
+                    <button onClick={(e) => { e.stopPropagation(); handleEdit(employee); }} className="bg-[#246AFF] text-white px-3 h-8 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-1" style={{ borderRadius: '32px' }}>
+                      <Edit2 size={14} />Bearbeiten
+                    </button>
+                  </div>
+                </React.Fragment>
+              );
+            })}
           </div>
-
-          {/* Table Rows */}
-          {paginatedEmployees.map((employee, index) => (
-            <div
-              key={employee.id} className={`
-                px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
-                transition-colors hover:bg-gray-50
-                ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
-              `}
-              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
-            >
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.personnelNumber}</div>
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.name}</div>
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.department}</div>
-              <StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} />
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{formatCurrency(employee.budgetYear)}</div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleShowDetails(employee);
-                  }} className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
-                  style={{ borderRadius: '32px' }}
-                >
-                  <Eye size={16} />
-                  Details
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEdit(employee);
-                  }} className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
-                  style={{ borderRadius: '32px' }}
-                >
-                  <Edit2 size={16} />
-                  Bearbeiten
-                </button>
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Pagination */}
