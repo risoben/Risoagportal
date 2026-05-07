@@ -155,10 +155,10 @@ export function Dashboard() {
           {/* Gesamtbudget */}
           <button
             onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
-            style={{ minHeight: '180px', minWidth: '300px' }}
+            style={{ minHeight: '160px', minWidth: '300px' }}
           >
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
-              <Euro size={28} className="text-[#0F429F]" strokeWidth={2} />
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '112px', height: '112px' }}>
+              <Euro size={56} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
             <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Gesamtbudget
@@ -171,10 +171,10 @@ export function Dashboard() {
           {/* Registrierte Nutzer */}
           <button
             onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
-            style={{ minHeight: '180px', minWidth: '300px' }}
+            style={{ minHeight: '160px', minWidth: '300px' }}
           >
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
-              <Users size={28} className="text-[#0F429F]" strokeWidth={2} />
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '112px', height: '112px' }}>
+              <Users size={56} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
             <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Registrierte Nutzer
@@ -187,10 +187,10 @@ export function Dashboard() {
           {/* Erstellte Berichte */}
           <button
             onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
-            style={{ minHeight: '180px', minWidth: '300px' }}
+            style={{ minHeight: '160px', minWidth: '300px' }}
           >
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
-              <FileText size={28} className="text-[#0F429F]" strokeWidth={2} />
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '112px', height: '112px' }}>
+              <FileText size={56} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
             <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Erstellte Berichte
