@@ -25,7 +25,9 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [showErrorDetails, setShowErrorDetails] = useState(false);
 
-  // Mock validation results
+  // TODO: Replace this mock data with a real API call.
+  // Endpoint: POST /api/v1/portal/import/execute
+  // See DEVELOPER_GUIDE.md Section 5 (Bulk Import) for the full response shape.
   const mockResults: ImportResult[] = [
     { row: 12, name: 'Killer, Anna', action: 'Neu anlegen', status: 'success' },
     { row: 13, name: 'Moer, Jonas', action: 'Aktualisieren', status: 'success' },

@@ -11,6 +11,9 @@ type ManagedBenefit = {
   description?: string;
 };
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/benefits
+// See DEVELOPER_GUIDE.md Section 5 (Benefit) for the full response shape.
 const managedBenefits: ManagedBenefit[] = [
   {
     id: 'mittagessen',

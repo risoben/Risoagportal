@@ -16,6 +16,9 @@ type Employee = {
   benefits: { benefitId: string; name: string; limit: string; period: 'Monat' | 'Jahr' }[];
 };
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/employees?search=&status=&location=&page=
+// See DEVELOPER_GUIDE.md Section 5 (Employee) for the full response shape.
 const mockEmployees: Employee[] = [
   {
     id: '1',

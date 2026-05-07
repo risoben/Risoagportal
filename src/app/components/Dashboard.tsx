@@ -3,6 +3,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip, Responsive
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { StatusBadge } from './Table';
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/dashboard
+// See DEVELOPER_GUIDE.md Section 5 (Dashboard KPIs) for the full response shape.
 // Generate rolling 12 months of budget data
 // Current month: April 2026 → Shows May 2025 to April 2026
 const generateBudgetData = () => {

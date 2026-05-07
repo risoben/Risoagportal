@@ -19,6 +19,9 @@ type Benefit = {
   status: 'aktiv' | 'inaktiv';
 };
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/benefits/overview
+// See DEVELOPER_GUIDE.md Section 5 (Benefit) for the full response shape including usage stats.
 const mockBenefits: Benefit[] = [
   // GRUPPE 1 — Cash Benefits
   {

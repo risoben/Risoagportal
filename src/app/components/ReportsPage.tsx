@@ -24,6 +24,9 @@ type Benefit = {
   percentage: number;
 };
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/reports?type=&location=&month=
+// See DEVELOPER_GUIDE.md Section 5 (Report) for the full response shape.
 const mockReports: Report[] = [
   {
     id: '1',

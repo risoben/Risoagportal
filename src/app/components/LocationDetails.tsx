@@ -10,6 +10,9 @@ interface LocationDetailsProps {
   locationName: string;
 }
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/locations/{id}
+// See DEVELOPER_GUIDE.md Section 5 (Location) for the full response shape including nested benefits, employees, and budgetChart.
 const mockAllBenefits = [
   { id: 'mittagessen', name: 'Mittagessen', limit: 100, active: true },
   { id: 'internet', name: 'Internet', limit: 50, active: true },

@@ -47,7 +47,9 @@ export function MassImport() {
 
     // Simulate API call for validation
     setTimeout(() => {
-      // Mock validation response
+      // TODO: Replace this mock response with a real API call.
+      // Endpoint: POST /api/v1/portal/import/validate (multipart/form-data with CSV file)
+      // See DEVELOPER_GUIDE.md Section 5 (Bulk Import) for the full response shape.
       const mockResponse: ValidationResponse = {
         total_rows: 25,
         valid_rows: 21,

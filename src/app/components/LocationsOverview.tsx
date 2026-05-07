@@ -1,6 +1,9 @@
 import { Table, StatusBadge, CurrencyCell } from './Table';
 import { Plus } from 'lucide-react';
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/locations
+// See DEVELOPER_GUIDE.md Section 5 (Location) for the full response shape.
 const locations = [
   {
     id: 'heddesheim',

@@ -11,6 +11,9 @@ type Employee = {
 
 type RemoveOption = 'immediately' | 'nextMonth' | 'customDate' | 'specificEmployees';
 
+// TODO: Replace this mock data with a real API call.
+// Endpoint: GET /api/v1/portal/benefits/{id} and GET /api/v1/portal/locations/{locationId}/employees
+// See DEVELOPER_GUIDE.md Section 5 (Employee, Benefit) for the full response shape.
 const mockEmployees: Employee[] = [
   { id: '1', nr: 'MA-2451', name: 'Max Mustermann', since: '01.01.2026' },
   { id: '2', nr: 'MA-2452', name: 'Anna Schmidt', since: '15.02.2026' },
