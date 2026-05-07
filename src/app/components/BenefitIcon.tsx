@@ -1,4 +1,3 @@
-import { Heart, PiggyBank } from 'lucide-react';
 import mittagessen from '/Mittagessen.svg';
 import sachbezug from '/Sachbezug.svg';
 import dankeBonus from '/Danke-Bonus.svg';
@@ -8,6 +7,8 @@ import geburtstag from '/Geburtstag.svg';
 import erholung from '/Erholung.svg';
 import commuting from '/Commuting.svg';
 import oepnv from '/OEPNV.svg';
+import bkv from '/BKV.png';
+import bav from '/BAV.png';
 
 type BenefitIconProps = {
   benefitName: string;
@@ -17,7 +18,7 @@ type BenefitIconProps = {
   className?: string;
 };
 
-// Mapping between benefit names and SVG assets
+// Mapping between benefit names and image assets
 const benefitIconMap: Record<string, string> = {
   'Essenszuschuss': mittagessen,
   'Mittagessen': mittagessen,
@@ -30,14 +31,10 @@ const benefitIconMap: Record<string, string> = {
   'Erholungsbeihilfe': erholung,
   'Fahrtkostenzuschuss': commuting,
   'ÖPNV-Ticket-Zuschuss': oepnv,
-};
-
-// Fallback colors for benefits without custom SVG
-const fallbackColors: Record<string, string> = {
-  'BKV': '#4CAF50', // Grün
-  'BKV (Betriebliche Krankenversicherung)': '#4CAF50',
-  'BAV': '#673AB7', // Deep Purple
-  'BAV (Betriebliche Altersvorsorge)': '#673AB7',
+  'BKV': bkv,
+  'BKV (Betriebliche Krankenversicherung)': bkv,
+  'BAV': bav,
+  'BAV (Betriebliche Altersvorsorge)': bav,
 };
 
 const sizeMap = {
@@ -65,32 +62,7 @@ export function BenefitIcon({
   // Apply subtle shadow only for large icons (48px) if requested
   const shadowStyle = withShadow && isLargeIcon ? { boxShadow: '0 2px 8px rgba(0,0,0,0.08)' } : {};
 
-  // Fallback for benefits without custom SVG (BKV, BAV)
-  if (!iconSrc) {
-    const Icon = benefitName.includes('BKV') ? Heart : PiggyBank;
-    const bgColor = fallbackColors[benefitName] || '#4CAF50';
-
-    return (
-      <div className={`flex items-center justify-center rounded-full transition-transform duration-200 ${
-          disabled
-            ? 'bg-[#F9FAFB] opacity-50 cursor-not-allowed'
-            : 'hover:scale-105'
-        } ${className}`}
-        style={{
-          width: `${iconSize}px`,
-          height: `${iconSize}px`,
-          backgroundColor: disabled ? '#F9FAFB' : bgColor,
-          ...shadowStyle,
-        }}
-      >
-        <Icon
-          size={iconSize * 0.55} className={disabled ? 'text-[#999999]' : 'text-white'}
-        />
-      </div>
-    );
-  }
-
-  // Use original SVG with native colors
+  // Use image asset
   return (
     <img
       src={iconSrc}
