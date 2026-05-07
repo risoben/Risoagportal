@@ -117,7 +117,7 @@ export function EmployeeTable() {
 
       {/* Table */}
       <div className="px-6">
-        <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+        <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
           {/* Table Header */}
           <div className="bg-[#273A5F] px-6 h-12"
             style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1.5fr 0.8fr 1fr 1fr 0.8fr 1fr' }}

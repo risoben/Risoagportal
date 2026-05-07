@@ -157,8 +157,8 @@ export function Dashboard() {
             onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '160px', minWidth: '300px' }}
           >
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '112px', height: '112px' }}>
-              <Euro size={56} className="text-[#0F429F]" strokeWidth={1.5} />
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
+              <Euro size={42} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
             <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Gesamtbudget
@@ -173,8 +173,8 @@ export function Dashboard() {
             onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '160px', minWidth: '300px' }}
           >
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '112px', height: '112px' }}>
-              <Users size={56} className="text-[#0F429F]" strokeWidth={1.5} />
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
+              <Users size={42} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
             <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Registrierte Nutzer
@@ -189,8 +189,8 @@ export function Dashboard() {
             onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '160px', minWidth: '300px' }}
           >
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '112px', height: '112px' }}>
-              <FileText size={56} className="text-[#0F429F]" strokeWidth={1.5} />
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
+              <FileText size={42} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
             <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Erstellte Berichte
@@ -285,7 +285,7 @@ export function Dashboard() {
 
           {/* Table */}
           <div className="px-4 md:px-6 lg:px-8 py-6">
-            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
               {/* Table Header */}
               <div className="bg-[#273A5F] px-6 h-12"
                 style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
@@ -367,7 +367,7 @@ export function Dashboard() {
 
           {/* Table */}
           <div className="px-4 md:px-6 lg:px-8 py-6">
-            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
               {/* Table Header */}
               <div className="bg-[#273A5F] px-6 h-12"
                 style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}

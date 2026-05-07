@@ -137,8 +137,8 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
       let category = '';
       if (categoryType === 'cash') category = 'Cash-Benefits';
-      else if (categoryType === 'other') category = 'Benefits';
-      else if (categoryType === 'insurance') category = 'Versicherungen';
+      else if (categoryType === 'other') category = 'Gutschein-Benefits';
+      else if (categoryType === 'insurance') category = 'Versicherungs-Benefits';
 
       if (!category) return acc;
       if (!acc[category]) acc[category] = [];
@@ -437,19 +437,19 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
         {/* SECTION E: Benefits */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
-          <h2 className="text-[#273A5F] text-[16px] mb-2">Hier kannst du für deine Benefits aktivieren und Budgets festlegen</h2>
+          <h2 className="text-[#273A5F] text-[16px] mb-2">Benefits aktivieren und Budgets festlegen</h2>
 
           {Object.entries(groupedBenefits).map(([category, benefits]) => (
             <div key={category} className="mb-8">
               <h3 className="text-[#273A5F] font-bold text-[14px] mb-4 mt-6">{category}</h3>
               <div className="px-4 md:px-6 lg:px-8 py-6">
-                <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+                <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
                   <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 60px 2fr 1fr 1fr', gap: '0' }}>
                     <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktiv</div>
                     <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}></div>
                     <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit</div>
-                    <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Tagesbudget</div>
                     <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monatsbudget</div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Jahresbudget</div>
                   </div>
 
                   {benefits.map((benefit, index) => (
@@ -483,15 +483,23 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                           <div className="group relative cursor-help">
                             <Info size={16} className="text-[#0F429F]" />
                             <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-[#273A5F] text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
-                              Jährliches Budget (156€/Jahr)
+                              Jahresbudget — nicht Monatsbudget (max. 156€/Jahr)
                             </div>
                           </div>
                         )}
                         {benefit.id === 'danke-bonus' && (
                           <div className="group relative cursor-help">
-                            <Info size={16} className="text-[#0F429F]" />
+                            <Info size={16} className="text-[#F57C00]" />
                             <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-[#273A5F] text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
-                              Variable Prämie
+                              Jahresbudget — wird einmalig/variabel vergeben
+                            </div>
+                          </div>
+                        )}
+                        {benefit.id === 'geburtstag' && (
+                          <div className="group relative cursor-help">
+                            <Info size={16} className="text-[#F57C00]" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-[#273A5F] text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                              Jahresbudget — einmal jährlich zum Geburtstag
                             </div>
                           </div>
                         )}
@@ -533,7 +541,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
           <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-lg p-4 mt-6">
             <p className="text-[#666666] text-[12px]">
-              <strong>Hinweis:</strong> Änderungen gelten ab 1. nächsten Monat für alle Mitarbeiter dieses Standorts.
+              <strong>Hinweis:</strong> Änderungen gelten ab 1. des nächsten Monats für alle Mitarbeiter dieses Standorts. Benefits mit <strong>Jahresbudget</strong> (Erholung, Geburtstag, Danke-Bonus) werden einmal jährlich abgerechnet — das eingetragene Budget gilt pro Jahr, nicht pro Monat.
             </p>
           </div>
         </div>

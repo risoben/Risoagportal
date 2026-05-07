@@ -463,7 +463,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
 
             {/* Employee Table */}
             <div className="px-4 md:px-6 lg:px-8 py-6">
-              <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+              <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
                 <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}>
                   <div className="flex items-center justify-center">
                     <div className="relative flex items-center justify-center">

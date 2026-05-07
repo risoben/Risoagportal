@@ -140,8 +140,8 @@ export function BenefitsManagement() {
 
       let category = '';
       if (categoryType === 'cash') category = 'Cash-Benefits';
-      else if (categoryType === 'other') category = 'Benefits';
-      else if (categoryType === 'insurance') category = 'Versicherungen';
+      else if (categoryType === 'other') category = 'Gutschein-Benefits';
+      else if (categoryType === 'insurance') category = 'Versicherungs-Benefits';
 
       if (!category) return acc;
       if (!acc[category]) acc[category] = [];

@@ -276,20 +276,20 @@ export function EmployeeManagement() {
           <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
-            <p className="text-[#666666] text-[16px] font-bold mb-3">Gesamte Mitarbeiter</p>
-            <p className="text-[#0F429F] font-bold text-[32px]">{totalEmployees}</p>
+            <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamte Mitarbeiter</p>
+            <p className="text-[#273A5F] font-bold text-[32px]">{totalEmployees}</p>
           </div>
           <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
-            <p className="text-[#666666] text-[16px] font-bold mb-3">Aktive Mitarbeiter</p>
-            <p className="text-[#0F429F] font-bold text-[32px]">{activeEmployees}</p>
+            <p className="text-[#666666] text-[14px] font-medium mb-1">Aktive Mitarbeiter</p>
+            <p className="text-[#273A5F] font-bold text-[32px]">{activeEmployees}</p>
           </div>
           <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
-            <p className="text-[#666666] text-[16px] font-bold mb-3">Inaktive Mitarbeiter</p>
-            <p className="text-[#0F429F] font-bold text-[32px]">{inactiveEmployees}</p>
+            <p className="text-[#666666] text-[14px] font-medium mb-1">Inaktive Mitarbeiter</p>
+            <p className="text-[#273A5F] font-bold text-[32px]">{inactiveEmployees}</p>
           </div>
         </div>
       </div>
@@ -298,8 +298,8 @@ export function EmployeeManagement() {
       <div className="px-4 md:px-6 lg:px-8 py-6">
         <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
           {/* Table Header */}
-          <div className="bg-[#273A5F] grid grid-cols-[150px_1fr_150px_140px_130px_240px] h-14 items-center px-6">
-            <div className="text-white font-bold text-xs uppercase tracking-wide leading-tight">Personal-<br />nummer</div>
+          <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: 0 }}>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Pers.-Nr.</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Abteilung</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
