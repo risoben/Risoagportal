@@ -287,32 +287,32 @@ export function Dashboard() {
           <div className="px-4 md:px-6 lg:px-8 py-6">
             <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
               {/* Table Header */}
-              <div className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
+              <div className="bg-[#273A5F] px-6 h-12"
+                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
               >
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Personalnummer</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Abteilung</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktionen</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Personalnummer</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Abteilung</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktionen</div>
               </div>
 
               {/* Table Rows */}
               {employees.map((employee, index) => (
                 <div
                   key={employee.id} className={`
-                    flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                    px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
+                  style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
                 >
-                  <div className="text-[#000000] text-sm">{employee.nr}</div>
-                  <div className="text-[#000000] text-sm">{employee.name}</div>
-                  <div className="text-[#000000] text-sm">{employee.abteilung}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.nr}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.name}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.abteilung}</div>
                   <StatusBadge status={employee.status} type={employee.status === 'Aktiv' ? 'success' : 'inactive'} />
-                  <div className="text-[#000000] text-sm">{employee.budget}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.budget}</div>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => {
@@ -369,33 +369,33 @@ export function Dashboard() {
           <div className="px-4 md:px-6 lg:px-8 py-6">
             <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
               {/* Table Header */}
-              <div className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
+              <div className="bg-[#273A5F] px-6 h-12"
+                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
               >
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Datum</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Monat</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Erstellungsdatum</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Version</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Dateityp</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Dateiname</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktionen</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Datum</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monat</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Erstellungsdatum</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Version</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateityp</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateiname</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktionen</div>
               </div>
 
               {/* Table Rows */}
               {reports.map((report, index) => (
                 <div
                   key={report.id} className={`
-                    flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                    px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
+                  style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
                 >
-                  <div className="text-[#000000] text-sm">{report.date}</div>
-                  <div className="text-[#000000] text-sm">{report.month}</div>
-                  <div className="text-[#000000] text-sm">{report.createdDate}</div>
-                  <div className="text-[#000000] text-sm">{report.version}</div>
-                  <div className="text-[#000000] text-sm">{report.fileType}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.date}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.month}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.createdDate}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.version}</div>
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.fileType}</div>
                   <div className="text-[#000000] text-sm truncate" title={report.fileName}>
                     {report.fileName}
                   </div>

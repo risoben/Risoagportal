@@ -166,26 +166,26 @@ export function BenefitsManagement() {
             <h2 className="text-[#273A5F] font-bold text-[16px] mb-4">{category}</h2>
             <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-hidden">
               {/* Table Header */}
-              <div className="bg-[#273A5F] flex items-center px-6 h-12"
-                style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0' }}
+              <div className="bg-[#273A5F] px-6 h-12"
+                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0' }}
               >
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Icon</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Standorte</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Icon</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Standorte</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
               </div>
 
               {/* Table Rows */}
               {benefits.map((benefit, index) => (
                 <div
                   key={benefit.id} className={`
-                    flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                    px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                     transition-colors hover:bg-gray-50
                     ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
                   `}
-                  style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0' }}
+                  style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0' }}
                 >
                   {/* Icon */}
                   <div>
@@ -193,12 +193,12 @@ export function BenefitsManagement() {
                   </div>
 
                   {/* Name */}
-                  <div className="text-[#000000] text-sm">
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                     {benefit.name}
                   </div>
 
                   {/* Budget */}
-                  <div className="text-[#000000] text-sm">
+                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                     {benefit.limit}
                   </div>
 
@@ -206,7 +206,7 @@ export function BenefitsManagement() {
                   <StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} />
 
                   {/* Locations */}
-                  <div className="text-[#666666] text-sm">
+                  <div className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                     {formatLocations(benefit.locations)}
                   </div>
 

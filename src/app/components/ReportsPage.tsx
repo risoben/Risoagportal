@@ -261,7 +261,7 @@ export function ReportsPage() {
       {/* Header */}
       <div className="px-8 py-6 border-b border-[#E8E8E8]">
         <h1 className="text-[#000000] font-bold text-[28px] mb-2">Meine Berichte</h1>
-        <p className="text-[#666666] text-sm">
+        <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
           Hier findest du alle deine generierten Reports zum Download
         </p>
       </div>
@@ -332,46 +332,46 @@ export function ReportsPage() {
       <div className="px-8 py-6">
         <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
           {/* Table Header */}
-          <div className="bg-[#273A5F] flex items-center px-6 h-12"
-            style={{ display: 'grid', gridTemplateColumns: '0.8fr 1fr 1fr 0.8fr 1fr 2fr 1fr', gap: '16px' }}
+          <div className="bg-[#273A5F] px-6 h-12"
+            style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 1fr 1fr 0.8fr 1fr 2fr 1fr', gap: '16px' }}
           >
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Datum</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Monat</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Erstellungsdatum</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Version</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Dateityp</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Dateiname</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Datum</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monat</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Erstellungsdatum</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Version</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateityp</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateiname</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
           </div>
 
           {/* Table Rows */}
           {filteredReports.map((report, index) => (
             <div
-              key={report.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+              key={report.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                 index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
               }`}
-              style={{ display: 'grid', gridTemplateColumns: '0.8fr 1fr 1fr 0.8fr 1fr 2fr 1fr', gap: '16px' }}
+              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 1fr 1fr 0.8fr 1fr 2fr 1fr', gap: '16px' }}
             >
               {/* Date */}
-              <div className="text-[#000000] text-sm">{report.date}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.date}</div>
 
               {/* Month */}
-              <div className="text-[#000000] text-sm">{report.month}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.month}</div>
 
               {/* Created Date */}
-              <div className="text-[#000000] text-sm">{report.createdDate}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.createdDate}</div>
 
               {/* Version */}
-              <div className="text-[#000000] text-sm">{report.version}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.version}</div>
 
               {/* File Type */}
               <div className="flex items-center gap-2">
                 {getFileTypeIcon(report.fileType)}
-                <span className="text-[#000000] text-sm">{report.fileType}</span>
+                <span className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.fileType}</span>
               </div>
 
               {/* File Name */}
-              <div className="text-[#000000] text-sm">{report.fileName}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.fileName}</div>
 
               {/* Actions */}
               <div className="flex gap-2">
@@ -438,7 +438,7 @@ export function ReportsPage() {
         {/* Header */}
         <div className="mb-6">
           <h2 className="text-[#000000] font-bold text-[24px] mb-2">Benefit-Übersicht</h2>
-          <p className="text-[#666666] text-sm">Nutzer nach Benefit und Budget-Verwendung</p>
+          <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Nutzer nach Benefit und Budget-Verwendung</p>
         </div>
 
         {/* Statistics Box */}

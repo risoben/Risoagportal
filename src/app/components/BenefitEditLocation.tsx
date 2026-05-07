@@ -104,7 +104,7 @@ export function BenefitEditLocation() {
           </div>
           <div>
             <label className="text-[#999999] text-xs mb-1 block">Beschreibung</label>
-            <p className="text-[#666666] text-sm">Gesetzliches Tagesmaximum: 7,67€/Tag</p>
+            <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Gesetzliches Tagesmaximum: 7,67€/Tag</p>
           </div>
         </div>
 
@@ -189,9 +189,9 @@ export function BenefitEditLocation() {
                 }`}
                 style={{ minHeight: '52px' }}
               >
-                <div className="text-[#666666] text-sm">{employee.nr}</div>
-                <div className="text-[#000000] text-sm">{employee.name}</div>
-                <div className="text-[#666666] text-sm">{employee.since}</div>
+                <div className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.nr}</div>
+                <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.name}</div>
+                <div className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.since}</div>
                 <div>
                   <button
                     onClick={() => handleRemoveEmployee(employee)} className="p-2 text-red-500 hover:bg-red-50 rounded transition"
@@ -338,7 +338,7 @@ export function BenefitEditLocation() {
                                 <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
                               )}
                             </div>
-                            <span className="text-[#000000] text-sm">
+                            <span className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                               {employee.nr} | {employee.name}
                             </span>
                           </label>

@@ -464,7 +464,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
             {/* Employee Table */}
             <div className="px-4 md:px-6 lg:px-8 py-6">
               <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
-                <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}>
+                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}>
                   <div className="flex items-center justify-center">
                     <div className="relative flex items-center justify-center">
                       <input
@@ -477,17 +477,17 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                       )}
                     </div>
                   </div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Mitarbeiter</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Personennummer</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Monatsbudget</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Mitarbeiter</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Personennummer</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monatsbudget</div>
                 </div>
 
                 {employees.map((employee, index) => (
                   <div
-                    key={employee.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                    key={employee.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                       index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     } ${employee.hasError ? 'bg-[#FFEBEE]' : ''}`}
-                    style={{ display: 'grid', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}
+                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}
                   >
                     <div className="flex items-center justify-center">
                       <div className="relative flex items-center justify-center">

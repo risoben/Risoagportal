@@ -200,7 +200,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   Standortname <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -216,7 +216,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   Unternehmen <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -237,7 +237,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div className="md:col-span-2">
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">Steuernummer / VAT ID</span>
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Steuernummer / VAT ID</span>
               </label>
               <input
                 type="text"
@@ -257,7 +257,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   Adresse <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -273,7 +273,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   Straße <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -289,7 +289,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   Stadt <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -305,7 +305,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   Bundesland <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -326,7 +326,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   PLZ <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -342,7 +342,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div className="md:col-span-2">
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                   Land <span className="text-[#E53935]">*</span>
                 </span>
               </label>
@@ -368,7 +368,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">Telefon</span>
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Telefon</span>
               </label>
               <input
                 type="tel"
@@ -382,7 +382,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
 
             <div>
               <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm">Fax</span>
+                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Fax</span>
               </label>
               <input
                 type="tel"
@@ -444,20 +444,20 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
               <h3 className="text-[#273A5F] font-bold text-[14px] mb-4 mt-6">{category}</h3>
               <div className="px-4 md:px-6 lg:px-8 py-6">
                 <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
-                  <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '60px 60px 2fr 1fr 1fr', gap: '0' }}>
-                    <div className="text-white font-bold text-xs uppercase tracking-wide">Aktiv</div>
-                    <div className="text-white font-bold text-xs uppercase tracking-wide"></div>
-                    <div className="text-white font-bold text-xs uppercase tracking-wide">Benefit</div>
-                    <div className="text-white font-bold text-xs uppercase tracking-wide">Tagesbudget</div>
-                    <div className="text-white font-bold text-xs uppercase tracking-wide">Monatsbudget</div>
+                  <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 60px 2fr 1fr 1fr', gap: '0' }}>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktiv</div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}></div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit</div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Tagesbudget</div>
+                    <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monatsbudget</div>
                   </div>
 
                   {benefits.map((benefit, index) => (
                     <div
-                      key={benefit.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                      key={benefit.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                         index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                       }`}
-                      style={{ display: 'grid', gridTemplateColumns: '60px 60px 2fr 1fr 1fr', gap: '0' }}
+                      style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 60px 2fr 1fr 1fr', gap: '0' }}
                     >
                       <div className="flex items-center justify-center">
                         <div className="relative flex items-center justify-center">

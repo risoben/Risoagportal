@@ -175,7 +175,7 @@ export function LocationsPage() {
               </span>
             </div>
             <label className="flex items-center gap-3 cursor-pointer">
-              <span className="text-[#666666] text-sm">Status</span>
+              <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Status</span>
               <div className={`w-12 h-6 rounded-full transition ${
                   selectedLocation.status === 'aktiv' ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
                 }`}
@@ -231,23 +231,23 @@ export function LocationsPage() {
             <div>
               <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
                 {/* Table Header */}
-                <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Benefit-Name</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Budget/Monat</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit-Name</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget/Monat</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
                 </div>
 
                 {/* Table Rows */}
                 {mockLocationBenefits.map((benefit, index) => (
                   <div
-                    key={benefit.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                    key={benefit.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                       index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     }`}
-                    style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}
+                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}
                   >
                     <div className="text-[#000000] text-sm font-medium">{benefit.name}</div>
-                    <div className="text-[#666666] text-sm">{benefit.limit}</div>
+                    <div className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>{benefit.limit}</div>
                     <div>
                       <div className={`w-10 h-5 rounded-full transition ${
                           benefit.active ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'
@@ -309,23 +309,23 @@ export function LocationsPage() {
 
               <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
                 {/* Table Header */}
-                <div className="bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Personennummer</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Personennummer</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
                 </div>
 
                 {/* Table Rows */}
                 {mockLocationEmployees.map((employee, index) => (
                   <div
-                    key={employee.id} className={`flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
+                    key={employee.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                       index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     }`}
-                    style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}
+                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}
                   >
-                    <div className="text-[#000000] text-sm">{employee.nr}</div>
-                    <div className="text-[#000000] text-sm">{employee.name}</div>
+                    <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.nr}</div>
+                    <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.name}</div>
                     <div>
                       <StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} />
                     </div>
@@ -473,7 +473,7 @@ export function LocationsPage() {
       <div className="px-4 md:px-6 lg:px-8 py-6 border-b border-[#E8E8E8] flex items-center justify-between">
         <div>
           <h1 className="text-[#000000] font-bold text-[28px] mb-2">Verwaltete Standorte</h1>
-          <p className="text-[#666666] text-sm">Übersicht aller Standorte und Tochterunternehmen</p>
+          <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Übersicht aller Standorte und Tochterunternehmen</p>
         </div>
         <button
           onClick={() => {
@@ -489,26 +489,26 @@ export function LocationsPage() {
       <div className="px-4 md:px-6 lg:px-8 py-6">
         <div className="w-full border border-[#E5E7EB] rounded-lg overflow-hidden">
           {/* Table Header */}
-          <div className="w-full bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Typ</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Mitarbeiter</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Budget/Monat</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Genutzt (dieser Monat)</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+          <div className="w-full bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Typ</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Mitarbeiter</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget/Monat</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Genutzt (dieser Monat)</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
           </div>
 
           {/* Table Rows */}
           {mockLocations.map((location, index) => (
             <div
-              key={location.id} className={`w-full flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 cursor-pointer ${
+              key={location.id} className={`w-full px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 cursor-pointer ${
                 index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
               }`}
-              style={{ display: 'grid', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}
+              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}
               onClick={() => handleOpenLocation(location)}
             >
-              <div className="text-[#000000] text-sm">{location.name}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{location.name}</div>
               <div>
                 <span className="px-3 py-1 rounded-full text-xs font-medium"
                   style={{
@@ -519,9 +519,9 @@ export function LocationsPage() {
                   {location.type === 'Standort' ? '🏢' : '🏛️'} {location.type}
                 </span>
               </div>
-              <div className="text-[#000000] text-sm">{location.employees}</div>
-              <div className="text-[#000000] text-sm">{formatCurrency(location.budgetMonth)}</div>
-              <div className="text-[#000000] text-sm">
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{location.employees}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{formatCurrency(location.budgetMonth)}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                 {formatCurrency(location.usedMonth)} ({location.percentage}%)
               </div>
               <div>

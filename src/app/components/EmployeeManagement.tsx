@@ -300,28 +300,28 @@ export function EmployeeManagement() {
           {/* Table Header */}
           <div className="bg-[#273A5F] grid grid-cols-[150px_1fr_150px_140px_130px_240px] h-14 items-center px-6">
             <div className="text-white font-bold text-xs uppercase tracking-wide leading-tight">Personal-<br />nummer</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Name</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Abteilung</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Status</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Aktionen</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Abteilung</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktionen</div>
           </div>
 
           {/* Table Rows */}
           {paginatedEmployees.map((employee, index) => (
             <div
               key={employee.id} className={`
-                flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                 transition-colors hover:bg-gray-50
                 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
               `}
-              style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
+              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
             >
-              <div className="text-[#000000] text-sm">{employee.personnelNumber}</div>
-              <div className="text-[#000000] text-sm">{employee.name}</div>
-              <div className="text-[#000000] text-sm">{employee.department}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.personnelNumber}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.name}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.department}</div>
               <StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} />
-              <div className="text-[#000000] text-sm">{formatCurrency(employee.budgetYear)}</div>
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{formatCurrency(employee.budgetYear)}</div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={(e) => {
@@ -361,7 +361,7 @@ export function EmployeeManagement() {
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <span className="text-[#666666] text-sm">
+          <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
             Seite {currentPage} von {totalPages}
           </span>
 
@@ -434,7 +434,7 @@ export function EmployeeManagement() {
                 {selectedEmployee.benefits.length > 0 ? (
                   <div className="space-y-2">
                     {selectedEmployee.benefits.map((benefit, idx) => (
-                      <p key={idx} className="text-[#000000] text-sm">
+                      <p key={idx} className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                         • {benefit.name}: {benefit.limit} ({benefit.period})
                       </p>
                     ))}

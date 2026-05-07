@@ -194,28 +194,28 @@ export function BenefitSettings({
           </h2>
 
           {/* Table Header */}
-          <div className="bg-[#273A5F] flex items-center px-6 h-12"
-            style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
+          <div className="bg-[#273A5F] px-6 h-12"
+            style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
           >
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Standort</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Standort</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
           </div>
 
           {/* Table Rows */}
           {locations.map((location, index) => (
             <div
               key={location.id} className={`
-                flex items-center px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
                 transition-colors hover:bg-gray-50
                 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
               `}
-              style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
+              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
             >
-              <div className="text-[#000000] text-sm">
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                 {location.name}
               </div>
-              <div className="text-[#000000] text-sm">
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                 {location.limit}
               </div>
               <div>
