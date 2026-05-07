@@ -597,9 +597,9 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
             {/* Modal Content */}
             <div className="px-6 py-5 space-y-4">
               <div>
-                <h4 className="text-[#273A5F] text-[14px] mb-2">Monatliches Limit</h4>
+                <h4 className="text-[#273A5F] text-[14px] mb-2">Monatliches Budget</h4>
                 <p className="text-[#666666] text-[13px] leading-relaxed">
-                  Das monatliche Limit definiert die maximale Summe, die pro Monat für diesen Mitarbeiter verfügbar ist.
+                  Das monatliche Budget definiert die maximale Summe, die pro Monat für diesen Mitarbeiter verfügbar ist.
                 </p>
               </div>
 

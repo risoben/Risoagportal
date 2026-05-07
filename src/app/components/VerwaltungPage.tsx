@@ -1,3 +1,5 @@
+// TODO V2: On save, send Riso an email notification listing the exact fields changed (e.g. "Straße: Mannheim → Saarbrücken").
+// TODO V2: Implement role/user management — define which portal users can access which sections (e.g. HR sees only employees, no benefits or locations).
 import { useState } from 'react';
 import { Check } from 'lucide-react';
 
@@ -175,7 +177,7 @@ export function VerwaltungPage() {
           {/* Subsection: Spalten-Auswahl */}
           <div className="mb-6">
             <h3 className="text-[#273A5F] text-[14px] font-medium mb-4">
-              Welche Spalten sollen in den Reports enthalten sein?
+              Welche Spalten sollen in den Berichten enthalten sein?
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {columnsList.map(column => (

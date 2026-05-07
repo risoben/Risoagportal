@@ -8,7 +8,7 @@ interface HelpPanelProps {
 const popularArticles = [
   { id: 1, title: 'Massenimport: Schritt für Schritt', url: '#' },
   { id: 2, title: 'Benefits erklären', url: '#' },
-  { id: 3, title: 'Reports konfigurieren', url: '#' },
+  { id: 3, title: 'Berichte konfigurieren', url: '#' },
   { id: 4, title: 'Fehlerbehandlung', url: '#' },
 ];
 
@@ -121,7 +121,7 @@ export function HelpPanel({ onClose }: HelpPanelProps) {
                   <option>CSV Import</option>
                   <option>Budget Management</option>
                   <option>Employee Management</option>
-                  <option>Reports</option>
+                  <option>Berichte</option>
                   <option>Sonstiges</option>
                 </select>
               </div>

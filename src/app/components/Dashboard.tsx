@@ -154,17 +154,15 @@ export function Dashboard() {
         <div className="grid grid-cols-3 gap-6 mb-8">
           {/* Gesamtbudget */}
           <button
-            onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
+            onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center justify-center bg-[#F0F4FF] rounded-full shrink-0" style={{ width: '48px', height: '48px' }}>
-                <Euro size={24} className="text-[#0F429F]" strokeWidth={2} />
-              </div>
-              <p className="text-[#666666] text-[16px] font-bold" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Gesamtbudget
-              </p>
+            <div className="absolute top-4 left-4 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '48px', height: '48px' }}>
+              <Euro size={24} className="text-[#0F429F]" strokeWidth={2} />
             </div>
+            <p className="text-[#666666] text-[16px] font-bold mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Gesamtbudget
+            </p>
             <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
               1.250.000€
             </p>
@@ -172,35 +170,31 @@ export function Dashboard() {
 
           {/* Registrierte Nutzer */}
           <button
-            onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
+            onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center justify-center bg-[#F0F4FF] rounded-full shrink-0" style={{ width: '48px', height: '48px' }}>
-                <Users size={24} className="text-[#0F429F]" strokeWidth={2} />
-              </div>
-              <p className="text-[#666666] text-[16px] font-bold" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Registrierte Nutzer
-              </p>
+            <div className="absolute top-4 left-4 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '48px', height: '48px' }}>
+              <Users size={24} className="text-[#0F429F]" strokeWidth={2} />
             </div>
+            <p className="text-[#666666] text-[16px] font-bold mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Registrierte Nutzer
+            </p>
             <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
               87
             </p>
           </button>
 
-          {/* Erstellte Berichte - Gesamtanzahl aller Berichte */}
+          {/* Erstellte Berichte */}
           <button
-            onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-center"
+            onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center justify-center bg-[#F0F4FF] rounded-full shrink-0" style={{ width: '48px', height: '48px' }}>
-                <FileText size={24} className="text-[#0F429F]" strokeWidth={2} />
-              </div>
-              <p className="text-[#666666] text-[16px] font-bold" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Erstellte Berichte
-              </p>
+            <div className="absolute top-4 left-4 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '48px', height: '48px' }}>
+              <FileText size={24} className="text-[#0F429F]" strokeWidth={2} />
             </div>
+            <p className="text-[#666666] text-[16px] font-bold mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Erstellte Berichte
+            </p>
             <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
               24
             </p>
@@ -279,6 +273,7 @@ export function Dashboard() {
                   Mitarbeiter
                 </h2>
               </div>
+              {/* TODO V2: clicking "Alle Mitarbeiter anzeigen" should also highlight "Mitarbeiter" in the sidebar navigation */}
               <button
                 onClick={() => handleNavigate('mitarbeiter')} className="text-[#0F429F] text-[12px] font-normal hover:underline"
                 style={{ fontFamily: 'Roboto, sans-serif' }}

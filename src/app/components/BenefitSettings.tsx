@@ -198,7 +198,7 @@ export function BenefitSettings({
             style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
           >
             <div className="text-white font-bold text-xs uppercase tracking-wide">Standort</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide">Limit</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide">Budget</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide">Aktion</div>
           </div>
 
@@ -260,7 +260,7 @@ export function BenefitSettings({
           </div>
 
           <p className="text-[12px] text-[#666666] mt-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-            Ein Benefit ist für einen Standort verfügbar, wenn mindestens ein Limit gesetzt ist. Mitarbeiter dieser
+            Ein Benefit ist für einen Standort verfügbar, wenn mindestens ein Budget gesetzt ist. Mitarbeiter dieser
             Standorte erhalten das Benefit automatisch ab 1. nächsten Monat.
           </p>
         </div>
@@ -322,12 +322,12 @@ export function BenefitSettings({
         </div>
       </div>
 
-      {/* Modal 1: Limit bearbeiten */}
+      {/* Modal 1: Budget bearbeiten */}
       {showLimitModal && editingLocation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
             <h3 className="text-[18px] font-bold text-[#273A5F] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Limit bearbeiten — {benefitName} — {editingLocation.name}
+              Budget bearbeiten — {benefitName} — {editingLocation.name}
             </h3>
 
             <div className="mb-4">

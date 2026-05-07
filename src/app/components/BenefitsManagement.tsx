@@ -105,6 +105,9 @@ const managedBenefits: ManagedBenefit[] = [
   },
 ];
 
+// TODO V2: BKV and BAV are not yet implemented in the backend. Their activation logic differs from standard benefits.
+// TODO V2: Add "Mehr Info zum Benefit" button per row that opens a dedicated benefit detail page (not just the info popup).
+
 export function BenefitsManagement() {
   const handleEdit = (benefitId: string) => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-edit', benefitId } }));
@@ -194,7 +197,7 @@ export function BenefitsManagement() {
                     {benefit.name}
                   </div>
 
-                  {/* Limit */}
+                  {/* Budget */}
                   <div className="text-[#000000] text-sm">
                     {benefit.limit}
                   </div>

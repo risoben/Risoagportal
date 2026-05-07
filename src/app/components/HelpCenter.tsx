@@ -27,7 +27,7 @@ export function HelpCenter() {
       id: 3,
       icon: <BarChart3 size={32} className="text-[#0F429F]" />,
       title: 'Berichte, Rechtliches, Lohn & Steuerberatung',
-      description: 'Reports erstellen, rechtliche Informationen und Steuerberatung',
+      description: 'Berichte erstellen, rechtliche Informationen und Steuerberatung',
       articleCount: 5,
     },
     {
@@ -60,7 +60,7 @@ export function HelpCenter() {
     {
       id: 3,
       title: 'Berichte exportieren',
-      category: 'Reports',
+      category: 'Berichte',
     },
     {
       id: 4,
@@ -116,9 +116,7 @@ export function HelpCenter() {
           <a href="#" className="text-[13px] text-[#0F429F] underline cursor-pointer">
             Wissensdatenbank
           </a>
-          <a href="#" className="text-[13px] text-[#666666] hover:text-[#0F429F] cursor-pointer transition">
-            Anmelden
-          </a>
+          {/* TODO V2: "Anmelden" makes no sense for already logged-in users — replace with profile/account link or remove */}
           <a href="#" className="text-[13px] text-[#666666] hover:text-[#0F429F] cursor-pointer transition">
             Registrieren
           </a>

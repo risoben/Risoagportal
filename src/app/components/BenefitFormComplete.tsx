@@ -319,7 +319,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
               <div className="flex-1">
                 <label className="text-[13px] text-black font-medium">Unterschiedliche Budgets pro Jahr</label>
                 <p className="text-[12px] text-[#666666] mt-1">
-                  Aktivieren um unterschiedliche Limits für verschiedene Jahre zu setzen
+                  Aktivieren um unterschiedliche Budgets für verschiedene Jahre zu setzen
                 </p>
               </div>
               <button
@@ -399,7 +399,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
           <div className="bg-white rounded border border-[#E0E0E0] p-6 animate-fadeIn">
             <h2 className="text-[#273A5F] text-[16px] mb-2">Budgets pro Jahr</h2>
             <p className="text-[#666666] text-[12px] mb-6">
-              Definiere täglich, monatlich und standardmäßig verfügbare Limits für jedes Jahr.
+              Definiere täglich, monatlich und standardmäßig verfügbare Budgets für jedes Jahr.
             </p>
 
             <div className="overflow-x-auto">
@@ -470,7 +470,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-2">Budgets pro Standort</h2>
           <p className="text-[#666666] text-[12px] mb-6">
-            Hier werden die Limits für jeden Standort dargestellt. Um ein Limit zu ändern, klicke auf "Bearbeiten".
+            Hier werden die Budgets für jeden Standort dargestellt. Um ein Budget zu ändern, klicke auf "Bearbeiten".
           </p>
 
           <div className="overflow-x-auto">
@@ -478,7 +478,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
               <thead>
                 <tr className="bg-[#F5F5F5]">
                   <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Standort</th>
-                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Limit</th>
+                  <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Budget</th>
                   <th className="px-3 py-2 text-left text-[13px] border-b border-[#E0E0E0]">Aktion</th>
                 </tr>
               </thead>
@@ -586,12 +586,12 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
         </div>
       </div>
 
-      {/* Limit Edit Modal */}
+      {/* Budget bearbeiten Modal */}
       {showLimitModal && editingLocation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
             <h3 className="text-[#273A5F] text-[18px] mb-4">
-              Limit bearbeiten — {basicInfo.name} — {editingLocation.name}
+              Budget bearbeiten — {basicInfo.name} — {editingLocation.name}
             </h3>
 
             <div className="mb-4">

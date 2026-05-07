@@ -168,6 +168,9 @@ const mockBenefits: Benefit[] = [
   },
 ];
 
+// TODO V2: "Ansehen" button should open the PDF in a new browser tab (not download). For Excel files this is complex — consider showing "Ansehen" only for PDF/CSV in V2.
+// TODO V2: Add configurable page size selector (10 / 30 / 50 / 100 entries per page).
+
 export function ReportsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<'Alle' | FileType>('Alle');

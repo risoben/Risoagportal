@@ -294,9 +294,9 @@ export function Settings() {
                 {/* LEFT COLUMN: Basiskonfigurationen */}
                 <div className="bg-white border border-[#E0E0E0] rounded-lg p-6">
                   <h3 className="font-bold text-[13px] text-[#333333] mb-1">Basiskonfigurationen</h3>
-                  <p className="text-[11px] text-[#999999] mb-3">Report-Typen exportieren</p>
+                  <p className="text-[11px] text-[#999999] mb-3">Berichts-Typen exportieren</p>
 
-                  {/* Report Types */}
+                  {/* Berichts-Typen */}
                   <div className="space-y-2 mb-4">
                     <label className="flex items-center cursor-pointer">
                       <input
