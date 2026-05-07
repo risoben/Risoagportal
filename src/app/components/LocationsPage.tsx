@@ -275,27 +275,37 @@ export function LocationsPage() {
                 ))}
               </div>
 
-              <button
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-add-location' } }));
-                }} className="mt-6 px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
-              >
-                <Plus className="w-5 h-5" />
-                Benefit hinzufügen
-              </button>
+              <div className="mt-6 flex items-center gap-4">
+                <button
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-add-location' } }));
+                  }} className="px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2"
+                >
+                  <Plus className="w-5 h-5" />
+                  Benefit hinzufügen
+                </button>
+                <button className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition">
+                  Speichern
+                </button>
+              </div>
 
-              <p className="mt-4 text-[#666666] text-xs italic">
-                💡 Neue Benefits gelten ab 1. des nächsten Monats
+              <p className="mt-4 text-[#666666] text-xs">
+                Änderungen gelten ab dem 1. des nächsten Monats für alle Mitarbeiter dieses Standorts.
               </p>
             </div>
           )}
 
           {activeTab === 'employees' && (
             <div>
-              <button className="mb-6 px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2">
-                <Plus className="w-5 h-5" />
-                Mitarbeiter zuordnen
-              </button>
+              <div className="mb-6 flex items-center gap-4">
+                <button className="px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2">
+                  <Plus className="w-5 h-5" />
+                  Mitarbeiter hinzufügen
+                </button>
+                <button className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition">
+                  Speichern
+                </button>
+              </div>
 
               <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
                 {/* Table Header */}

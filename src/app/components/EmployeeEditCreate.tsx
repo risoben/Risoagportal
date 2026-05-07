@@ -588,9 +588,10 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#E0E0E0]">
-              <h3 className="text-[#273A5F] text-[16px]">
-                {infoModalBenefit.name}
-              </h3>
+              <div>
+                <p className="text-[#666666] text-[11px] uppercase tracking-wide mb-0.5">{infoModalBenefit.name}</p>
+                <h3 className="text-[#273A5F] text-[16px] font-bold">Infos zum Budget</h3>
+              </div>
               <button
                 onClick={() => setInfoModalBenefit(null)} className="text-[#E53935] hover:text-[#C62828] transition"
               >
@@ -600,27 +601,35 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
             {/* Modal Content */}
             <div className="px-6 py-5 space-y-4">
+              {/* Monatsbudget */}
               <div>
-                <h4 className="text-[#273A5F] text-[14px] mb-2">Monatliches Budget</h4>
+                <h4 className="text-[#273A5F] text-[14px] font-medium mb-1">Monatsbudget</h4>
                 <p className="text-[#666666] text-[13px] leading-relaxed">
-                  Das monatliche Budget definiert die maximale Summe, die pro Monat für diesen Mitarbeiter verfügbar ist.
+                  {infoModalBenefit.frequency === 'Jährlich' || infoModalBenefit.frequency === 'Einmalig'
+                    ? `Das ${infoModalBenefit.name} wird jährlich ausgezahlt. Das rechnerische Monatsbudget beträgt ca. ${(parseFloat(infoModalBenefit.monthlyLimit) / 12).toFixed(2).replace('.', ',')}€.`
+                    : `Das monatliche Budget legt die maximale Summe fest, die pro Monat für diesen Mitarbeiter verfügbar ist.`
+                  }
                 </p>
               </div>
 
-              <div className="bg-[#F0F4FF] px-4 py-3 rounded" style={{ borderRadius: '6px' }}>
-                <p className="text-[#273A5F] text-[12px]">
-                  <strong>Beispiel:</strong> {infoModalBenefit.name} mit {infoModalBenefit.monthlyLimit}€/Monat = max. {infoModalBenefit.monthlyLimit}€ pro Monat nutzbar
+              {/* Jahresbudget */}
+              <div>
+                <h4 className="text-[#273A5F] text-[14px] font-medium mb-1">Jahresbudget</h4>
+                <p className="text-[#666666] text-[13px] leading-relaxed">
+                  {infoModalBenefit.frequency === 'Jährlich' || infoModalBenefit.frequency === 'Einmalig'
+                    ? `Das Jahresbudget beträgt ${infoModalBenefit.monthlyLimit.replace('.', ',')}€.`
+                    : `Das rechnerische Jahresbudget beträgt ${(parseFloat(infoModalBenefit.monthlyLimit) * 12).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}€ (${infoModalBenefit.monthlyLimit.replace('.', ',')}€ × 12 Monate).`
+                  }
                 </p>
               </div>
 
-              {infoModalBenefit.frequency === 'Jährlich' && (
-                <div>
-                  <h4 className="text-[#273A5F] text-[14px] mb-2">Jahresbudget</h4>
-                  <p className="text-[#666666] text-[13px] leading-relaxed">
-                    Dieses Benefit wird jährlich ausgezahlt. Das Jahresbudget beträgt {infoModalBenefit.monthlyLimit}€.
-                  </p>
-                </div>
-              )}
+              {/* Teilzeit-Hinweis */}
+              <div className="bg-[#FFF9E6] border border-[#FFE082] rounded px-4 py-3" style={{ borderRadius: '6px' }}>
+                <h4 className="text-[#273A5F] text-[13px] font-medium mb-1">Teilzeit-Hinweis</h4>
+                <p className="text-[#666666] text-[12px] leading-relaxed">
+                  Bei Teilzeit-Mitarbeitern empfehlen wir, das Budget anteilig anzupassen — z.B. 50% Budget bei einer 50%-Stelle.
+                </p>
+              </div>
             </div>
 
             {/* Modal Footer */}
