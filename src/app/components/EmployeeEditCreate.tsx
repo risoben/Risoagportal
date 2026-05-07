@@ -517,8 +517,8 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                       <input
                         type="text"
                         value={benefit.frequency === 'Jährlich' || benefit.frequency === 'Einmalig'
-                          ? (parseFloat(benefit.monthlyLimit) / 12).toFixed(2)
-                          : benefit.monthlyLimit}
+                          ? (parseFloat(benefit.monthlyLimit) / 12).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                          : benefit.monthlyLimit.replace('.', ',')}
                         onChange={(e) => updateBenefitLimit(benefit.id, 'monthlyLimit', e.target.value)}
                         disabled={loadingState || !benefit.selected} className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
                         style={{ borderRadius: '4px' }}
@@ -532,8 +532,8 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                       <input
                         type="text"
                         value={benefit.frequency === 'Jährlich' || benefit.frequency === 'Einmalig'
-                          ? benefit.monthlyLimit
-                          : (parseFloat(benefit.monthlyLimit) * 12).toFixed(2)}
+                          ? benefit.monthlyLimit.replace('.', ',')
+                          : (parseFloat(benefit.monthlyLimit) * 12).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         readOnly
                         disabled className="w-20 px-2 py-1.5 border border-[#CCCCCC] rounded text-sm text-[#666666] bg-[#F5F5F5] cursor-not-allowed"
                         style={{ borderRadius: '4px' }}
@@ -606,7 +606,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 <h4 className="text-[#273A5F] text-[14px] font-medium mb-1">Monatsbudget</h4>
                 <p className="text-[#666666] text-[13px] leading-relaxed">
                   {infoModalBenefit.frequency === 'Jährlich' || infoModalBenefit.frequency === 'Einmalig'
-                    ? `Das ${infoModalBenefit.name} wird jährlich ausgezahlt. Das rechnerische Monatsbudget beträgt ca. ${(parseFloat(infoModalBenefit.monthlyLimit) / 12).toFixed(2).replace('.', ',')}€.`
+                    ? `Das ${infoModalBenefit.name} wird jährlich ausgezahlt. Das rechnerische Monatsbudget beträgt ca. ${(parseFloat(infoModalBenefit.monthlyLimit) / 12).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€.`
                     : `Das monatliche Budget legt die maximale Summe fest, die pro Monat für diesen Mitarbeiter verfügbar ist.`
                   }
                 </p>
@@ -618,7 +618,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 <p className="text-[#666666] text-[13px] leading-relaxed">
                   {infoModalBenefit.frequency === 'Jährlich' || infoModalBenefit.frequency === 'Einmalig'
                     ? `Das Jahresbudget beträgt ${infoModalBenefit.monthlyLimit.replace('.', ',')}€.`
-                    : `Das rechnerische Jahresbudget beträgt ${(parseFloat(infoModalBenefit.monthlyLimit) * 12).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}€ (${infoModalBenefit.monthlyLimit.replace('.', ',')}€ × 12 Monate).`
+                    : `Das rechnerische Jahresbudget beträgt ${(parseFloat(infoModalBenefit.monthlyLimit) * 12).toLocaleString('de-DE')}€ (${infoModalBenefit.monthlyLimit.replace('.', ',')}€ × 12 Monate).`
                   }
                 </p>
               </div>
