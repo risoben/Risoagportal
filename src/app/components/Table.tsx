@@ -44,7 +44,7 @@ export function Table({ columns, data, onRowClick, hoverable = true }: TableProp
           <div
             key={column.key}
             className="text-white font-bold text-xs uppercase tracking-wide"
-            style={cellStyle(column.align)}
+            style={cellStyle('left')}
           >
             {column.label}
           </div>
@@ -75,7 +75,7 @@ export function Table({ columns, data, onRowClick, hoverable = true }: TableProp
             <div
               key={column.key}
               className="text-[#000000] text-sm"
-              style={cellStyle(column.align)}
+              style={cellStyle('left')}
             >
               {column.render
                 ? column.render(row[column.key], row)
