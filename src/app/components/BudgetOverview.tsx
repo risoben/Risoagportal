@@ -87,17 +87,17 @@ export function BudgetOverview() {
         <div className="grid grid-cols-3 gap-6 px-6" style={{ maxWidth: '1200px' }}>
           <div className="bg-white border border-[#E0E0E0] rounded-lg p-6 flex flex-col items-center justify-center text-center">
             <p className="text-[#666666] text-[16px] font-bold mb-3">Gesamtbudget</p>
-            <p className="text-[#273A5F] font-bold text-[32px]">€{totalBudget.toLocaleString()}</p>
+            <p className="text-[#273A5F] font-bold text-[32px]">€{totalBudget.toLocaleString('de-DE')}</p>
           </div>
 
           <div className="bg-white border border-[#E0E0E0] rounded-lg p-6 flex flex-col items-center justify-center text-center">
             <p className="text-[#666666] text-[16px] font-bold mb-3">Genutzt</p>
-            <p className="text-[#4CAF50] font-bold text-[32px]">€{usedBudget.toLocaleString()}</p>
+            <p className="text-[#4CAF50] font-bold text-[32px]">€{usedBudget.toLocaleString('de-DE')}</p>
           </div>
 
           <div className="bg-white border border-[#E0E0E0] rounded-lg p-6 flex flex-col items-center justify-center text-center">
             <p className="text-[#666666] text-[16px] font-bold mb-3">Verfügbar</p>
-            <p className="text-[#FF9800] font-bold text-[32px]">€{freeBudget.toLocaleString()}</p>
+            <p className="text-[#FF9800] font-bold text-[32px]">€{freeBudget.toLocaleString('de-DE')}</p>
           </div>
         </div>
       </div>
@@ -140,8 +140,8 @@ export function BudgetOverview() {
         {/* Legend */}
         <div className="text-center mt-8">
           <p className="text-[#273A5F] text-base">
-            €{totalBudget.toLocaleString()} Total | €{usedBudget.toLocaleString()} Genutzt | €
-            {freeBudget.toLocaleString()} Frei
+            €{totalBudget.toLocaleString('de-DE')} Total | €{usedBudget.toLocaleString('de-DE')} Genutzt | €
+            {freeBudget.toLocaleString('de-DE')} Frei
           </p>
         </div>
       </div>
@@ -167,7 +167,7 @@ export function BudgetOverview() {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[#273A5F] text-sm">{item.name}</span>
                     <span className="text-[#273A5F] text-sm font-medium">
-                      €{item.amount.toLocaleString()} ({item.percentage}%)
+                      €{item.amount.toLocaleString('de-DE')} ({item.percentage}%)
                     </span>
                   </div>
                   {/* Progress Bar */}

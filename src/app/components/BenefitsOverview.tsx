@@ -205,15 +205,15 @@ export function BenefitsOverview() {
         <div className="grid grid-cols-4 gap-6 mb-8">
           <div className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm">
             <p className="text-[#6B7280] text-xs mb-2">Gesamtbudget</p>
-            <p className="text-[#273A5F] font-bold text-3xl">€ {totalBudget.toLocaleString()}</p>
+            <p className="text-[#273A5F] font-bold text-3xl">€ {totalBudget.toLocaleString('de-DE')}</p>
           </div>
           <div className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm">
             <p className="text-[#6B7280] text-xs mb-2">Verwendet (YTD)</p>
-            <p className="text-[#273A5F] font-bold text-3xl">€ {usedYTD.toLocaleString()}</p>
+            <p className="text-[#273A5F] font-bold text-3xl">€ {usedYTD.toLocaleString('de-DE')}</p>
           </div>
           <div className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm">
             <p className="text-[#6B7280] text-xs mb-2">Aktive Mitarbeiter</p>
-            <p className="text-[#273A5F] font-bold text-3xl">{activeEmployees.toLocaleString()}</p>
+            <p className="text-[#273A5F] font-bold text-3xl">{activeEmployees.toLocaleString('de-DE')}</p>
           </div>
           <div className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-sm">
             <p className="text-[#6B7280] text-xs mb-2">Ø Nutzung/MA</p>
@@ -253,9 +253,9 @@ export function BenefitsOverview() {
                 <p className="text-[#0F429F] font-bold text-xl">{usagePercentage}% genutzt</p>
                 <p className="text-[#6B7280] text-sm">{100 - usagePercentage}% frei</p>
                 <div className="mt-4 text-xs text-[#4B5563] space-y-1">
-                  <p>€ {totalBudget.toLocaleString()} Total</p>
-                  <p>€ {usedYTD.toLocaleString()} Verwendet</p>
-                  <p>€ {(totalBudget - usedYTD).toLocaleString()} Frei</p>
+                  <p>€ {totalBudget.toLocaleString('de-DE')} Total</p>
+                  <p>€ {usedYTD.toLocaleString('de-DE')} Verwendet</p>
+                  <p>€ {(totalBudget - usedYTD).toLocaleString('de-DE')} Frei</p>
                 </div>
               </div>
             </div>
@@ -334,13 +334,13 @@ export function BenefitsOverview() {
                       <div className="mb-3">
                         <h3 className="text-[#273A5F] font-bold text-lg inline">{benefit.name}</h3>
                         <span className="text-[#273A5F] text-lg ml-3">bis zu</span>
-                        <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString()}</span>
+                        <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString('de-DE')}</span>
                       </div>
                       <div className="flex items-center gap-2 mb-4">
                         <StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} />
                       </div>
                       <div className="flex justify-between text-xs text-[#666666]">
-                        <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
+                        <span>{benefit.employeeCount.toLocaleString('de-DE')} Mitarbeiter</span>
                         <span>{benefit.usagePercentage}% genutzt</span>
                       </div>
                     </div>
@@ -370,13 +370,13 @@ export function BenefitsOverview() {
                       <div className="mb-3">
                         <h3 className="text-[#273A5F] font-bold text-lg inline">{benefit.name}</h3>
                         <span className="text-[#273A5F] text-lg ml-3">bis zu</span>
-                        <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString()}</span>
+                        <span className="text-[#0F429F] font-bold text-lg ml-2">€ {benefit.totalBudget.toLocaleString('de-DE')}</span>
                       </div>
                       <div className="flex items-center gap-2 mb-4">
                         <StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} />
                       </div>
                       <div className="flex justify-between text-xs text-[#666666]">
-                        <span>{benefit.employeeCount.toLocaleString()} Mitarbeiter</span>
+                        <span>{benefit.employeeCount.toLocaleString('de-DE')} Mitarbeiter</span>
                         <span>{benefit.usagePercentage}% genutzt</span>
                       </div>
                     </div>

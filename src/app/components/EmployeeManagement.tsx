@@ -276,19 +276,19 @@ export function EmployeeManagement() {
           <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
-            <p className="text-[#666666] text-[16px] font-bold mb-3">Gesamt Mitarbeiter</p>
+            <p className="text-[#666666] text-[16px] font-bold mb-3">Gesamte Mitarbeiter</p>
             <p className="text-[#0F429F] font-bold text-[32px]">{totalEmployees}</p>
           </div>
           <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
-            <p className="text-[#666666] text-[16px] font-bold mb-3">Aktiv Mitarbeiter</p>
+            <p className="text-[#666666] text-[16px] font-bold mb-3">Aktive Mitarbeiter</p>
             <p className="text-[#0F429F] font-bold text-[32px]">{activeEmployees}</p>
           </div>
           <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >
-            <p className="text-[#666666] text-[16px] font-bold mb-3">Inaktiv Mitarbeiter</p>
+            <p className="text-[#666666] text-[16px] font-bold mb-3">Inaktive Mitarbeiter</p>
             <p className="text-[#0F429F] font-bold text-[32px]">{inactiveEmployees}</p>
           </div>
         </div>

@@ -86,34 +86,34 @@ export function LocationsOverview() {
       key: 'employees',
       label: 'MITARBEITER',
       width: '1fr',
-      align: 'right' as const
+      align: 'left' as const
     },
     {
       key: 'budgetPerMonth',
       label: 'BUDGET/MONAT',
       width: '1.2fr',
-      align: 'right' as const,
+      align: 'left' as const,
       render: (value: number) => <CurrencyCell amount={value} />
     },
     {
       key: 'usedThisMonth',
-      label: 'GENUTZT DIESE MONAT',
+      label: 'GENUTZTES BUDGET (MONAT)',
       width: '1.5fr',
-      align: 'right' as const,
+      align: 'left' as const,
       render: (value: number) => <CurrencyCell amount={value} />
     },
     {
       key: 'status',
       label: 'STATUS',
       width: '1fr',
-      align: 'center' as const,
+      align: 'left' as const,
       render: (value: string) => <StatusBadge status={value === 'active' ? 'Aktiv' : 'Inaktiv'} type={value === 'active' ? 'success' : 'inactive'} />
     },
     {
       key: 'action',
       label: 'AKTION',
       width: '1fr',
-      align: 'center' as const,
+      align: 'left' as const,
       render: (_: any, row: any) => (
         <button
           onClick={(e) => {

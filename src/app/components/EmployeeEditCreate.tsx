@@ -455,7 +455,11 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4+">4+</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8+">8+</option>
               </select>
             </div>
           </div>
@@ -475,8 +479,8 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 <div className="text-white font-bold text-xs uppercase tracking-wide"></div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Benefit</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Frequenz</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide">Tagesbudget</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Monatsbudget</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wide">Jahresbudget</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide">Info</div>
               </div>
 
@@ -509,29 +513,29 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                   </div>
 
                   <div className="flex items-center">
-                    {benefit.dailyLimit ? (
-                      <div className="flex items-center gap-1">
-                        <input
-                          type="text"
-                          value={benefit.dailyLimit}
-                          readOnly
-                          disabled className="w-20 px-2 py-1.5 border border-[#CCCCCC] rounded text-sm text-[#999999] bg-[#F5F5F5] cursor-not-allowed"
-                          style={{ borderRadius: '4px' }}
-                        />
-                        <span className="text-sm text-[#000000]">€</span>
-                      </div>
-                    ) : (
-                      <span className="text-sm text-[#000000]">—</span>
-                    )}
+                    <div className="flex items-center gap-1">
+                      <input
+                        type="text"
+                        value={benefit.frequency === 'Jährlich' || benefit.frequency === 'Einmalig'
+                          ? (parseFloat(benefit.monthlyLimit) / 12).toFixed(2)
+                          : benefit.monthlyLimit}
+                        onChange={(e) => updateBenefitLimit(benefit.id, 'monthlyLimit', e.target.value)}
+                        disabled={loadingState || !benefit.selected} className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                        style={{ borderRadius: '4px' }}
+                      />
+                      <span className="text-sm text-[#000000]">€</span>
+                    </div>
                   </div>
 
                   <div className="flex items-center">
                     <div className="flex items-center gap-1">
                       <input
                         type="text"
-                        value={benefit.monthlyLimit}
-                        onChange={(e) => updateBenefitLimit(benefit.id, 'monthlyLimit', e.target.value)}
-                        disabled={loadingState || !benefit.selected} className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                        value={benefit.frequency === 'Jährlich' || benefit.frequency === 'Einmalig'
+                          ? benefit.monthlyLimit
+                          : (parseFloat(benefit.monthlyLimit) * 12).toFixed(2)}
+                        readOnly
+                        disabled className="w-20 px-2 py-1.5 border border-[#CCCCCC] rounded text-sm text-[#666666] bg-[#F5F5F5] cursor-not-allowed"
                         style={{ borderRadius: '4px' }}
                       />
                       <span className="text-sm text-[#000000]">€</span>
@@ -609,11 +613,11 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 </p>
               </div>
 
-              {infoModalBenefit.dailyLimit && (
+              {infoModalBenefit.frequency === 'Jährlich' && (
                 <div>
-                  <h4 className="text-[#273A5F] text-[14px] mb-2">Tagesbudget</h4>
+                  <h4 className="text-[#273A5F] text-[14px] mb-2">Jahresbudget</h4>
                   <p className="text-[#666666] text-[13px] leading-relaxed">
-                    Das Tagesbudget ist vordefiniert und kann nicht geändert werden. Es beträgt {infoModalBenefit.dailyLimit}€ pro Tag.
+                    Dieses Benefit wird jährlich ausgezahlt. Das Jahresbudget beträgt {infoModalBenefit.monthlyLimit}€.
                   </p>
                 </div>
               )}
