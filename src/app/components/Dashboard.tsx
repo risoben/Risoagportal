@@ -131,7 +131,7 @@ export function Dashboard() {
             Genutztes Budget: <strong>{formatCurrency(genutzt)}</strong>
           </p>
           <p className="text-[#333333] text-[11px] mb-1">
-            Verbleibender Budget: <strong>{formatCurrency(verbleibend)}</strong>
+            Verbleibendes Budget: <strong>{formatCurrency(verbleibend)}</strong>
           </p>
           <p className="text-[#333333] text-[11px]">
             Prozentuale Nutzung: <strong>{percentage}%</strong>

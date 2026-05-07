@@ -220,12 +220,15 @@ export function ReportsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<'Alle' | FileType>('Alle');
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const filteredReports = mockReports.filter((report) => {
     const matchesSearch = report.fileName.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filterType === 'Alle' || report.fileType === filterType;
     return matchesSearch && matchesFilter;
   });
+  const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
+  const paginatedReports = filteredReports.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const getFileTypeIcon = (type: FileType) => {
     switch (type) {
@@ -345,7 +348,7 @@ export function ReportsPage() {
           </div>
 
           {/* Table Rows */}
-          {filteredReports.map((report, index) => (
+          {paginatedReports.map((report, index) => (
             <div
               key={report.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                 index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
@@ -396,41 +399,36 @@ export function ReportsPage() {
       </div>
 
       {/* Pagination */}
-      <div className="px-8 py-6 flex items-center justify-center gap-2 border-b border-[#E8E8E8]">
-        <button
-          onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-          disabled={currentPage === 1} className={`px-4 py-2 border rounded-lg text-sm font-medium transition ${
-            currentPage === 1
-              ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
-              : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
-          }`}
-        >
-          Previous
-        </button>
-
-        {[1, 2, 3].map((page) => (
-          <button
-            key={page}
-            onClick={() => setCurrentPage(page)} className={`w-10 h-10 rounded-lg text-sm font-medium transition ${
-              currentPage === page
-                ? 'bg-[#0F429F] text-white'
-                : 'border border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
-            }`}
+      <div className="px-8 py-6 flex items-center justify-between border-b border-[#E8E8E8]">
+        <div className="flex items-center gap-2">
+          <span className="text-[#666666] text-sm">Anzeigen:</span>
+          <select
+            value={itemsPerPage}
+            onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
+            className="border border-[#D0D0D0] rounded px-2 py-1 text-sm text-[#000000] focus:outline-none focus:border-[#0F429F]"
           >
-            {page}
+            <option value={10}>10</option>
+            <option value={30}>30</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+          <span className="text-[#666666] text-sm">Einträge</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1} className={`p-2 border rounded-lg transition ${currentPage === 1 ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed' : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'}`}
+          >
+            ‹
           </button>
-        ))}
-
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === 3} className={`px-4 py-2 border rounded-lg text-sm font-medium transition ${
-            currentPage === 3
-              ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
-              : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
-          }`}
-        >
-          Next
-        </button>
+          <span className="text-[#666666] text-sm">Seite {currentPage} von {totalPages}</span>
+          <button
+            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+            disabled={currentPage === totalPages} className={`p-2 border rounded-lg transition ${currentPage === totalPages ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed' : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'}`}
+          >
+            ›
+          </button>
+        </div>
       </div>
 
       {/* Section 2: Benefit-Verwendungsübersicht */}

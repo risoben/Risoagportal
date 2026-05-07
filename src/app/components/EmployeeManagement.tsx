@@ -182,7 +182,7 @@ export function EmployeeManagement() {
   const [showMassImportModal, setShowMassImportModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // Filter employees by search query
   const filteredEmployees = mockEmployees.filter((employee) => {
@@ -349,32 +349,45 @@ export function EmployeeManagement() {
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-center gap-2 mt-6">
-          <button
-            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-            disabled={currentPage === 1} className={`p-2 border rounded-lg transition ${
-              currentPage === 1
-                ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
-                : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
-            }`}
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
+        <div className="flex items-center justify-between mt-6">
+          <div className="flex items-center gap-2">
+            <span className="text-[#666666] text-sm">Anzeigen:</span>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
+              className="border border-[#D0D0D0] rounded px-2 py-1 text-sm text-[#000000] focus:outline-none focus:border-[#0F429F]"
+            >
+              <option value={10}>10</option>
+              <option value={30}>30</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+            </select>
+            <span className="text-[#666666] text-sm">Einträge</span>
+          </div>
 
-          <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
-            Seite {currentPage} von {totalPages}
-          </span>
-
-          <button
-            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-            disabled={currentPage === totalPages} className={`p-2 border rounded-lg transition ${
-              currentPage === totalPages
-                ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
-                : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
-            }`}
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1} className={`p-2 border rounded-lg transition ${
+                currentPage === 1
+                  ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
+                  : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
+              }`}
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <span className="text-[#666666] text-sm">Seite {currentPage} von {totalPages}</span>
+            <button
+              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages} className={`p-2 border rounded-lg transition ${
+                currentPage === totalPages
+                  ? 'border-[#CCCCCC] text-[#CCCCCC] cursor-not-allowed'
+                  : 'border-[#D0D0D0] text-[#000000] hover:bg-gray-50'
+              }`}
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 

@@ -37,6 +37,15 @@ export function VerwaltungPage() {
 
       {/* Content */}
       <div className="px-8 py-8 max-w-6xl">
+        {/* Info Banner */}
+        <div className="bg-[#FFF9E6] border border-[#FFE082] rounded-lg px-4 py-3 mb-6 flex items-start gap-3">
+          <span className="text-[#F57C00] text-lg mt-0.5">ℹ</span>
+          <div>
+            <p className="text-[#333333] text-[13px] font-medium">Daten können nicht direkt bearbeitet werden.</p>
+            <p className="text-[#666666] text-[12px] mt-0.5">Änderungen bitte per E-Mail an <strong>support@riso-app.de</strong> — wir aktualisieren die Daten innerhalb von 24 Stunden.</p>
+          </div>
+        </div>
+
         {/* SECTION 1: Allgemeine Informationen */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
           <h2 className="text-[#273A5F] font-bold text-[18px] mb-5">Allgemeine Informationen</h2>
@@ -50,7 +59,7 @@ export function VerwaltungPage() {
                 </label>
                 <input
                   type="text"
-                  defaultValue="Riso GmbH" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="Riso GmbH" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
@@ -58,7 +67,7 @@ export function VerwaltungPage() {
                 <label className="block text-[#273A5F] text-[13px] font-medium mb-2">Stadt</label>
                 <input
                   type="text"
-                  defaultValue="Mannheim" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="Mannheim" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
@@ -71,7 +80,7 @@ export function VerwaltungPage() {
               </label>
               <input
                 type="text"
-                defaultValue="Hauptstraße 42" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                defaultValue="Hauptstraße 42" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                 style={{ fontFamily: 'Roboto, sans-serif' }}
               />
             </div>
@@ -82,7 +91,7 @@ export function VerwaltungPage() {
                 <label className="block text-[#273A5F] text-[13px] font-medium mb-2">Postleitzahl</label>
                 <input
                   type="text"
-                  defaultValue="68219" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="68219" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
@@ -90,7 +99,7 @@ export function VerwaltungPage() {
                 <label className="block text-[#273A5F] text-[13px] font-medium mb-2">Umsatzsteuer-ID / VAT</label>
                 <input
                   type="text"
-                  defaultValue="DE123456789" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="DE123456789" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
@@ -104,7 +113,7 @@ export function VerwaltungPage() {
                 </label>
                 <input
                   type="text"
-                  defaultValue="Max" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="Max" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
@@ -114,7 +123,7 @@ export function VerwaltungPage() {
                 </label>
                 <input
                   type="text"
-                  defaultValue="Müller" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="Müller" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
@@ -128,7 +137,7 @@ export function VerwaltungPage() {
                 </label>
                 <input
                   type="text"
-                  defaultValue="max.mueller@riso.de" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="max.mueller@riso.de" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
@@ -136,7 +145,7 @@ export function VerwaltungPage() {
                 <label className="block text-[#273A5F] text-[13px] font-medium mb-2">Telefonnummer</label>
                 <input
                   type="text"
-                  defaultValue="+49 621 123456" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#000000] focus:outline-none focus:border-[#0F429F]"
+                  defaultValue="+49 621 123456" className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-[14px] text-[#666666] bg-[#F5F5F5] cursor-default" readOnly
                   style={{ fontFamily: 'Roboto, sans-serif' }}
                 />
               </div>
