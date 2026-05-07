@@ -154,56 +154,50 @@ export function Dashboard() {
         <div className="grid grid-cols-3 gap-6 mb-8">
           {/* Gesamtbudget */}
           <button
-            onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex items-center justify-center gap-4"
+            onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
-            <div className="flex-shrink-0 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
               <Euro size={28} className="text-[#0F429F]" strokeWidth={2} />
             </div>
-            <div className="flex flex-col items-start">
-              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Gesamtbudget
-              </p>
-              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                1.250.000€
-              </p>
-            </div>
+            <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Gesamtbudget
+            </p>
+            <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              1.250.000€
+            </p>
           </button>
 
           {/* Registrierte Nutzer */}
           <button
-            onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex items-center justify-center gap-4"
+            onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
-            <div className="flex-shrink-0 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
               <Users size={28} className="text-[#0F429F]" strokeWidth={2} />
             </div>
-            <div className="flex flex-col items-start">
-              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Registrierte Nutzer
-              </p>
-              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                87
-              </p>
-            </div>
+            <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Registrierte Nutzer
+            </p>
+            <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              87
+            </p>
           </button>
 
           {/* Erstellte Berichte */}
           <button
-            onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex items-center justify-center gap-4"
+            onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '180px', minWidth: '300px' }}
           >
-            <div className="flex-shrink-0 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
+            <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '56px', height: '56px' }}>
               <FileText size={28} className="text-[#0F429F]" strokeWidth={2} />
             </div>
-            <div className="flex flex-col items-start">
-              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Erstellte Berichte
-              </p>
-              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                24
-              </p>
-            </div>
+            <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Erstellte Berichte
+            </p>
+            <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              24
+            </p>
           </button>
         </div>
 
