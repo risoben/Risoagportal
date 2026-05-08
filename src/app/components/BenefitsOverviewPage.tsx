@@ -200,23 +200,18 @@ export function BenefitsOverviewPage() {
 
         {/* Statistics Box */}
         <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-xl p-6 mt-6" style={{ borderRadius: '12px' }}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
-              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtbudget (Monat)</p>
-              <p className="text-[#273A5F] font-bold text-[28px]">{formatCurrency(totalBudget)}</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
-              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtvergeben</p>
-              <p className="text-[#273A5F] font-bold text-[28px]">{formatCurrency(totalUsed)}</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
-              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtverfügbar</p>
-              <p className="text-[#273A5F] font-bold text-[28px]">{formatCurrency(totalAvailable)}</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
-              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtauslastung</p>
-              <p className="text-[#273A5F] font-bold text-[28px]">{totalUtilization}%</p>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+            {[
+              { label: 'Gesamtbudget (Monat)', value: formatCurrency(totalBudget) },
+              { label: 'Gesamtvergeben',       value: formatCurrency(totalUsed) },
+              { label: 'Gesamtverfügbar',      value: formatCurrency(totalAvailable) },
+              { label: 'Gesamtauslastung',     value: `${totalUtilization}%` },
+            ].map(({ label, value }) => (
+              <div key={label} className="bg-white rounded-xl p-3 md:p-4 border border-[#E0E0E0]">
+                <p className="text-[#666666] text-xs md:text-sm font-medium mb-1 leading-tight">{label}</p>
+                <p className="text-[#273A5F] font-bold text-xl md:text-2xl lg:text-[28px] leading-none">{value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
