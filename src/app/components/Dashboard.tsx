@@ -161,12 +161,10 @@ export function Dashboard() {
             <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
               <Euro size={42} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
-            <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Gesamtbudget
-            </p>
-            <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              1.250.000€
-            </p>
+            <div style={{ paddingLeft: '96px' }}>
+              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>Gesamtbudget</p>
+              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>1.250.000€</p>
+            </div>
           </button>
 
           {/* Registrierte Nutzer */}
@@ -177,12 +175,10 @@ export function Dashboard() {
             <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
               <Users size={42} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
-            <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Registrierte Nutzer
-            </p>
-            <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              87
-            </p>
+            <div style={{ paddingLeft: '96px' }}>
+              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>Registrierte Nutzer</p>
+              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>87</p>
+            </div>
           </button>
 
           {/* Erstellte Berichte */}
@@ -193,12 +189,10 @@ export function Dashboard() {
             <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
               <FileText size={42} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
-            <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Erstellte Berichte
-            </p>
-            <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              24
-            </p>
+            <div style={{ paddingLeft: '96px' }}>
+              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>Erstellte Berichte</p>
+              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>24</p>
+            </div>
           </button>
         </div>
 

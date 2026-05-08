@@ -1,12 +1,12 @@
-export const benefitsSettingsData: Record<string, { category: 'cash' | 'other' | 'insurance'; isYearlyBudget?: boolean }> = {
+export const benefitsSettingsData: Record<string, { category: 'cash' | 'voucher' | 'insurance'; isYearlyBudget?: boolean }> = {
   'mittagessen': { category: 'cash' },
   'internet': { category: 'cash' },
   'kindergarten': { category: 'cash' },
   'commuting': { category: 'cash' },
   'erholung': { category: 'cash', isYearlyBudget: true },
-  'sachbezug': { category: 'other' },
+  'sachbezug': { category: 'voucher' },
   'danke-bonus': { category: 'cash' },
-  'geburtstag': { category: 'other' },
+  'geburtstag': { category: 'voucher', isYearlyBudget: true },
   'oepnv': { category: 'cash' },
   'bkv': { category: 'insurance' },
   'bav': { category: 'insurance' },

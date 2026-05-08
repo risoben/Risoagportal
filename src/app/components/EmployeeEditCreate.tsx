@@ -58,6 +58,13 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
     numberOfChildren: isEditMode ? '0' : '0',
   });
 
+  const benefitCategories: Record<string, string> = {
+    'Essenszuschuss': 'Cash-Benefits', 'Internet': 'Cash-Benefits', 'Kindergarten': 'Cash-Benefits',
+    'Fahrkostenzuschuss': 'Cash-Benefits', 'Erholung': 'Cash-Benefits', 'Danke-Bonus': 'Cash-Benefits', 'ÖPNV': 'Cash-Benefits',
+    'Sachbezug': 'Gutschein-Benefits', 'Geburtstag': 'Gutschein-Benefits',
+    'BKV': 'Versicherungs-Benefits', 'BAV': 'Versicherungs-Benefits',
+  };
+
   // Benefits
   const [benefits, setBenefits] = useState<Benefit[]>([
     { id: '1', name: 'Essenszuschuss', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '150.00', selected: isEditMode },
@@ -472,19 +479,20 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
             Wähle die Leistungen, die dieser Mitarbeiter erhalten soll. Die tatsächlichen Budgets pro Standort sind in der Benefit-Detail-Seite definiert.
           </p>
 
-          <div className="px-6 py-6">
-            <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-              <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 60px 2fr 1fr 1fr 1fr 0.8fr', gap: '0', minWidth: '700px' }}>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktiv</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}></div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Frequenz</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monatsbudget</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Jahresbudget</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Info</div>
-              </div>
-
-              {benefits.map((benefit, index) => (
+          <div className="px-6 py-6 space-y-6">
+            {['Cash-Benefits', 'Gutschein-Benefits', 'Versicherungs-Benefits'].map(category => {
+              const catBenefits = benefits.filter(b => benefitCategories[b.name] === category);
+              if (catBenefits.length === 0) return null;
+              return (
+                <div key={category}>
+                  <h3 className="text-[#273A5F] font-bold text-[14px] mb-3">{category}</h3>
+                  <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
+                    <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 60px 2fr 1fr 1fr 1fr 0.8fr', gap: '0', minWidth: '700px' }}>
+                      {['Aktiv','','Benefit','Frequenz','Monatsbudget','Jahresbudget','Info'].map((h, i) => (
+                        <div key={i} className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>{h}</div>
+                      ))}
+                    </div>
+                    {catBenefits.map((benefit, index) => (
                 <div key={benefit.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}`} style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 60px 2fr 1fr 1fr 1fr 0.8fr', gap: '0', minWidth: '700px' }}>
                   <div className="flex items-center justify-center">
                     <div className="relative flex items-center justify-center">
@@ -552,16 +560,19 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                     </button>
                   </div>
                 </div>
-              ))}
-            </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 pt-2">
+        <div className="flex justify-end gap-4 pt-2">
           <button
             onClick={handleSave}
-            disabled={loadingState} className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loadingState} className="px-6 py-3 bg-[#0F429F] text-white text-[14px] rounded-full hover:bg-[#0d3680] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ borderRadius: '4px' }}
           >
             {loadingState && <Loader2 size={16} className="animate-spin" />}
@@ -569,7 +580,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
           </button>
           <button
             onClick={handleBack}
-            disabled={loadingState} className="px-6 py-3 border border-[#E0E0E0] text-[#666666] text-[14px] rounded hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loadingState} className="px-6 py-3 border border-[#D0D0D0] text-[#666666] text-[14px] rounded-full hover:bg-[#F5F5F5] transition disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ borderRadius: '4px' }}
           >
             Abbrechen

@@ -92,7 +92,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
       let category = '';
       if (benefitData.category === 'cash') category = 'Cash-Benefits';
       else if (benefitData.category === 'voucher') category = 'Gutschein-Benefits';
-      else if (benefitData.category === 'insurance') category = 'Versicherungen';
+      else if (benefitData.category === 'insurance') category = 'Versicherungs-Benefits';
 
       if (!acc[category]) acc[category] = [];
       acc[category].push(benefit);
