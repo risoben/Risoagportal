@@ -24,10 +24,10 @@ const benefitConfig: Record<string, { svgPath: string }> = {
   'Geburtstagsgutschein / Jubiläum': { svgPath: '/assets/benefit-icons/Geburtstag.svg' },
   'ÖPNV':                        { svgPath: '/assets/benefit-icons/OEPNV.svg' },
   'ÖPNV-Ticket-Zuschuss':        { svgPath: '/assets/benefit-icons/OEPNV.svg' },
-  'BKV':                         { svgPath: '/assets/benefit-icons/BKV.png' },
-  'BKV (Betriebliche Krankenversicherung)': { svgPath: '/assets/benefit-icons/BKV.png' },
-  'BAV':                         { svgPath: '/assets/benefit-icons/BAV.png' },
-  'BAV (Betriebliche Altersvorsorge)': { svgPath: '/assets/benefit-icons/BAV.png' },
+  'BKV':                         { svgPath: '/assets/benefit-icons/BKV.svg' },
+  'BKV (Betriebliche Krankenversicherung)': { svgPath: '/assets/benefit-icons/BKV.svg' },
+  'BAV':                         { svgPath: '/assets/benefit-icons/BAV.svg' },
+  'BAV (Betriebliche Altersvorsorge)': { svgPath: '/assets/benefit-icons/BAV.svg' },
 };
 
 export function BenefitIconComponent({
