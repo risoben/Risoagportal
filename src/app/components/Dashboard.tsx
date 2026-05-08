@@ -1,3 +1,4 @@
+import React from 'react';
 import { Users, FileText, Download, Eye, Euro, Edit2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
@@ -285,58 +286,35 @@ export function Dashboard() {
 
           {/* Table */}
           <div className="px-4 md:px-6 lg:px-8 py-6">
-            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
-              {/* Table Header */}
-              <div className="bg-[#273A5F] px-6 h-12"
-                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
-              >
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Personalnummer</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Abteilung</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktionen</div>
-              </div>
-
-              {/* Table Rows */}
-              {employees.map((employee, index) => (
-                <div
-                  key={employee.id} className={`
-                    px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
-                    transition-colors hover:bg-gray-50
-                    ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
-                  `}
-                  style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr 1fr 1fr', gap: '0' }}
-                >
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.nr}</div>
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.name}</div>
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.abteilung}</div>
-                  <StatusBadge status={employee.status} type={employee.status === 'Aktiv' ? 'success' : 'inactive'} />
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.budget}</div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEmployeeDetails(employee.id);
-                      }} className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
-                      style={{ borderRadius: '32px' }}
-                    >
-                      <Eye size={16} />
-                      Details
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEmployeeEdit(employee.id);
-                      }} className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
-                      style={{ borderRadius: '32px' }}
-                    >
-                      <Edit2 size={16} />
-                      Bearbeiten
-                    </button>
+            <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)', minWidth: '650px' }}>
+                {['Personalnummer','Name','Abteilung','Status','Budget','Aktionen'].map(h => (
+                  <div key={h} style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' }}>
+                    <span className="text-white font-bold text-xs uppercase tracking-wide">{h}</span>
                   </div>
-                </div>
-              ))}
+                ))}
+                {employees.map((employee, index) => {
+                  const bg = index % 2 === 0 ? '#fff' : '#F9FAFB';
+                  const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' };
+                  return (
+                    <React.Fragment key={employee.id}>
+                      <div style={c} className="text-sm text-[#000000]">{employee.nr}</div>
+                      <div style={c} className="text-sm text-[#000000]">{employee.name}</div>
+                      <div style={c} className="text-sm text-[#000000]">{employee.abteilung}</div>
+                      <div style={c}><StatusBadge status={employee.status} type={employee.status === 'Aktiv' ? 'success' : 'inactive'} /></div>
+                      <div style={c} className="text-sm text-[#000000]">{employee.budget}</div>
+                      <div style={{ ...c, gap: '8px' }}>
+                        <button onClick={(e) => { e.stopPropagation(); handleEmployeeDetails(employee.id); }} className="bg-[#0F429F] text-white px-3 h-8 rounded-full text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1">
+                          <Eye size={14} />Details
+                        </button>
+                        <button onClick={(e) => { e.stopPropagation(); handleEmployeeEdit(employee.id); }} className="bg-[#246AFF] text-white px-3 h-8 rounded-full text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-1">
+                          <Edit2 size={14} />Bearbeiten
+                        </button>
+                      </div>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -367,54 +345,32 @@ export function Dashboard() {
 
           {/* Table */}
           <div className="px-4 md:px-6 lg:px-8 py-6">
-            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
-              {/* Table Header */}
-              <div className="bg-[#273A5F] px-6 h-12"
-                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
-              >
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Datum</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monat</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Erstellungsdatum</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Version</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateityp</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateiname</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktionen</div>
+            <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.8fr) minmax(0,0.8fr) minmax(0,2fr) minmax(0,0.8fr) minmax(0,0.8fr) minmax(0,1fr) minmax(0,1fr)', minWidth: '700px' }}>
+                {['Datum','Monat','Erstellungsdatum','Version','Dateityp','Dateiname','Aktionen'].map(h => (
+                  <div key={h} style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' }}>
+                    <span className="text-white font-bold text-xs uppercase tracking-wide">{h}</span>
+                  </div>
+                ))}
+                {reports.map((report, index) => {
+                  const bg = index % 2 === 0 ? '#fff' : '#F9FAFB';
+                  const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' };
+                  return (
+                    <React.Fragment key={report.id}>
+                      <div style={c} className="text-sm text-[#000000]">{report.date}</div>
+                      <div style={c} className="text-sm text-[#000000]">{report.month}</div>
+                      <div style={c} className="text-sm text-[#000000]">{report.createdDate}</div>
+                      <div style={c} className="text-sm text-[#000000]">{report.version}</div>
+                      <div style={c} className="text-sm text-[#000000]">{report.fileType}</div>
+                      <div style={c} className="text-sm text-[#000000] truncate" title={report.fileName}>{report.fileName}</div>
+                      <div style={{ ...c, gap: '8px' }}>
+                        <button className="bg-[#0F429F] text-white px-3 h-8 rounded-full text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1"><Eye size={14} />Ansehen</button>
+                        <button className="bg-[#246AFF] text-white px-3 h-8 rounded-full text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-1"><Download size={14} />Download</button>
+                      </div>
+                    </React.Fragment>
+                  );
+                })}
               </div>
-
-              {/* Table Rows */}
-              {reports.map((report, index) => (
-                <div
-                  key={report.id} className={`
-                    px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
-                    transition-colors hover:bg-gray-50
-                    ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
-                  `}
-                  style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 0.8fr 2fr 0.8fr 0.8fr 1fr 1fr', gap: '0' }}
-                >
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.date}</div>
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.month}</div>
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.createdDate}</div>
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.version}</div>
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.fileType}</div>
-                  <div className="text-[#000000] text-sm truncate" title={report.fileName}>
-                    {report.fileName}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button className="bg-[#0F429F] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-2"
-                      style={{ borderRadius: '32px' }}
-                    >
-                      <Eye size={16} />
-                      Ansehen
-                    </button>
-                    <button className="bg-[#246AFF] text-white px-4 h-10 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-2"
-                      style={{ borderRadius: '32px' }}
-                    >
-                      <Download size={16} />
-                      Download
-                    </button>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
 

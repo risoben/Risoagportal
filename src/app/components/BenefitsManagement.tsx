@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { StatusBadge } from './Table';
 
@@ -164,63 +164,32 @@ export function BenefitsManagement() {
         {Object.entries(groupedBenefits).map(([category, benefits]) => (
           <div key={category} className="mb-8">
             <h2 className="text-[#273A5F] font-bold text-[16px] mb-4">{category}</h2>
-            <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-hidden">
-              {/* Table Header */}
-              <div className="bg-[#273A5F] px-6 h-12"
-                style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0' }}
-              >
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Icon</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Standorte</div>
-                <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
+            <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-x-auto">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, minmax(0,1fr))', minWidth: '600px' }}>
+                {['Icon','Name','Budget','Status','Standorte','Aktion'].map(h => (
+                  <div key={h} style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' }}>
+                    <span className="text-white font-bold text-xs uppercase tracking-wide">{h}</span>
+                  </div>
+                ))}
+                {benefits.map((benefit, index) => {
+                  const bg = index % 2 === 0 ? '#fff' : '#F9FAFB';
+                  const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' };
+                  return (
+                    <React.Fragment key={benefit.id}>
+                      <div style={c}><BenefitIconComponent benefitName={benefit.name} size={32} /></div>
+                      <div style={c} className="text-sm text-[#000000]">{benefit.name}</div>
+                      <div style={c} className="text-sm text-[#000000]">{benefit.limit}</div>
+                      <div style={c}><StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} /></div>
+                      <div style={c} className="text-sm text-[#666666]">{formatLocations(benefit.locations)}</div>
+                      <div style={c}>
+                        <button onClick={() => handleEdit(benefit.id)} className="text-[12px] text-[#0F429F] hover:text-[#246AFF] hover:underline transition">
+                          Bearbeiten
+                        </button>
+                      </div>
+                    </React.Fragment>
+                  );
+                })}
               </div>
-
-              {/* Table Rows */}
-              {benefits.map((benefit, index) => (
-                <div
-                  key={benefit.id} className={`
-                    px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
-                    transition-colors hover:bg-gray-50
-                    ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
-                  `}
-                  style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0' }}
-                >
-                  {/* Icon */}
-                  <div>
-                    <BenefitIconComponent benefitName={benefit.name} size={32} />
-                  </div>
-
-                  {/* Name */}
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
-                    {benefit.name}
-                  </div>
-
-                  {/* Budget */}
-                  <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
-                    {benefit.limit}
-                  </div>
-
-                  {/* Status */}
-                  <StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} />
-
-                  {/* Locations */}
-                  <div className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
-                    {formatLocations(benefit.locations)}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => handleEdit(benefit.id)} className="text-[12px] text-[#0F429F] hover:text-[#246AFF] hover:underline transition"
-                      style={{ fontFamily: 'Roboto, sans-serif' }}
-                    >
-                      Bearbeiten
-                    </button>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         ))}

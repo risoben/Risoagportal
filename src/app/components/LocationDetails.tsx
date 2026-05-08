@@ -265,16 +265,10 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
           <div>
             <h2 className="text-[#273A5F] font-bold text-[20px] mb-6">Mitarbeiter in {locationName}</h2>
 
-            <div className="flex items-center gap-4 mb-4">
+            <div className="mb-4">
               <button className="px-6 py-3 border-2 border-[#0F429F] text-[#0F429F] font-medium rounded-full hover:bg-[#F0F4FF] transition flex items-center gap-2">
                 <span className="text-lg leading-none">+</span>
                 Mitarbeiter hinzufügen
-              </button>
-              <button
-                onClick={() => alert('Änderungen gespeichert!')}
-                className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
-              >
-                Speichern
               </button>
             </div>
 
@@ -287,9 +281,16 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
               />
             </div>
 
-            <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-hidden mb-6">
+            <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-hidden mb-4">
               <Table columns={employeeColumns} data={filteredEmployees} hoverable={true} />
             </div>
+
+            <button
+              onClick={() => alert('Änderungen gespeichert!')}
+              className="mb-4 px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
+            >
+              Speichern
+            </button>
 
             <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-lg p-4">
               <p className="text-[#666666] text-[12px]">
