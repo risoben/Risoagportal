@@ -24,10 +24,10 @@ const benefitConfig: Record<string, { svgPath: string; color: string; fallbackEm
   'Geburtstagsgutschein / Jubiläum': { svgPath: '/assets/benefit-icons/Geburtstag.svg', color: '#AB47BC' },
   'ÖPNV': { svgPath: '/assets/benefit-icons/OEPNV.svg', color: '#2196F3' },
   'ÖPNV-Ticket-Zuschuss': { svgPath: '/assets/benefit-icons/OEPNV.svg', color: '#2196F3' },
-  'BKV': { svgPath: '/assets/benefit-icons/BKV.png', color: '#0F429F' },
-  'BKV (Betriebliche Krankenversicherung)': { svgPath: '/assets/benefit-icons/BKV.png', color: '#0F429F' },
-  'BAV': { svgPath: '/assets/benefit-icons/BAV.png', color: '#8E44AD' },
-  'BAV (Betriebliche Altersvorsorge)': { svgPath: '/assets/benefit-icons/BAV.png', color: '#8E44AD' }
+  'BKV': { svgPath: '/assets/benefit-icons/BKV.svg', color: '#0F429F' },
+  'BKV (Betriebliche Krankenversicherung)': { svgPath: '/assets/benefit-icons/BKV.svg', color: '#0F429F' },
+  'BAV': { svgPath: '/assets/benefit-icons/BAV.svg', color: '#8E44AD' },
+  'BAV (Betriebliche Altersvorsorge)': { svgPath: '/assets/benefit-icons/BAV.svg', color: '#8E44AD' }
 };
 
 export function BenefitIconComponent({

@@ -7,8 +7,8 @@ import geburtstag from '/Geburtstag.svg';
 import erholung from '/Erholung.svg';
 import commuting from '/Commuting.svg';
 import oepnv from '/OEPNV.svg';
-import bkv from '/BKV.png';
-import bav from '/BAV.png';
+import bkv from '/BKV.svg';
+import bav from '/BAV.svg';
 
 type BenefitIconProps = {
   benefitName: string;
