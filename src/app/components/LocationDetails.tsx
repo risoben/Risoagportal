@@ -104,7 +104,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
     {
       key: 'active',
       label: 'AKTIV',
-      width: '60px',
+      width: '0.5fr',
       align: 'center' as const,
       render: (_, row: any) => (
         <div className="flex items-center justify-center">
@@ -121,9 +121,9 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
         </div>
       )
     },
-    { key: 'nr', label: 'PERSONALNUMMER', width: '150px' },
-    { key: 'name', label: 'NAME', width: '200px' },
-    { key: 'department', label: 'ABTEILUNG', width: '150px' },
+    { key: 'nr', label: 'PERSONALNUMMER', width: '1.2fr' },
+    { key: 'name', label: 'NAME', width: '2fr' },
+    { key: 'department', label: 'ABTEILUNG', width: '1fr' },
   ];
 
   const filteredEmployees = employees.filter(
@@ -281,7 +281,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
               />
             </div>
 
-            <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-hidden mb-4">
+            <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-x-auto mb-4">
               <Table columns={employeeColumns} data={filteredEmployees} hoverable={true} />
             </div>
 
