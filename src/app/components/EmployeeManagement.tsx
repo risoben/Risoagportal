@@ -297,7 +297,7 @@ export function EmployeeManagement() {
       {/* Employee Table */}
       <div className="px-4 md:px-6 lg:px-8 py-6">
         <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)', minWidth: '700px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(230px,1.8fr)', minWidth: '900px' }}>
             {/* Header cells — same grid as rows */}
             {['Pers.-Nr.', 'Name', 'Abteilung', 'Status', 'Budget', 'Aktionen'].map((h) => (
               <div key={h} className="bg-[#273A5F] text-white font-bold text-xs uppercase tracking-wide px-6 flex items-center" style={{ height: '48px', overflow: 'hidden' }}>{h}</div>
@@ -306,19 +306,19 @@ export function EmployeeManagement() {
             {paginatedEmployees.map((employee, index) => {
               const bg = index % 2 === 0 ? '#ffffff' : '#F9FAFB';
               const border = '1px solid #E5E7EB';
-              const cell: React.CSSProperties = { background: bg, borderBottom: border, height: '56px', overflow: 'hidden', display: 'flex', alignItems: 'center', padding: '0 24px' };
+              const cell: React.CSSProperties = { background: bg, borderBottom: border, height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px' };
               return (
                 <React.Fragment key={employee.id}>
-                  <div style={cell} className="text-sm text-[#000000]">{employee.personnelNumber}</div>
-                  <div style={cell} className="text-sm text-[#000000]">{employee.name}</div>
-                  <div style={cell} className="text-sm text-[#000000]">{employee.department}</div>
+                  <div style={{ ...cell, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.personnelNumber}</div>
+                  <div style={{ ...cell, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.name}</div>
+                  <div style={{ ...cell, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.department}</div>
                   <div style={cell}><StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} /></div>
-                  <div style={cell} className="text-sm text-[#000000]">{formatCurrency(employee.budgetYear)}</div>
-                  <div style={{ ...cell, gap: '8px' }}>
-                    <button onClick={(e) => { e.stopPropagation(); handleShowDetails(employee); }} className="bg-[#0F429F] text-white px-3 h-8 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1" style={{ borderRadius: '32px' }}>
+                  <div style={{ ...cell, overflow: 'hidden' }} className="text-sm text-[#000000]">{formatCurrency(employee.budgetYear)}</div>
+                  <div style={{ ...cell, gap: '8px', flexShrink: 0 }}>
+                    <button onClick={(e) => { e.stopPropagation(); handleShowDetails(employee); }} className="bg-[#0F429F] text-white px-3 h-8 rounded-full font-medium text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1 whitespace-nowrap">
                       <Eye size={14} />Details
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); handleEdit(employee); }} className="bg-[#246AFF] text-white px-3 h-8 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-1" style={{ borderRadius: '32px' }}>
+                    <button onClick={(e) => { e.stopPropagation(); handleEdit(employee); }} className="bg-[#246AFF] text-white px-3 h-8 rounded-full font-medium text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-1 whitespace-nowrap">
                       <Edit2 size={14} />Bearbeiten
                     </button>
                   </div>
