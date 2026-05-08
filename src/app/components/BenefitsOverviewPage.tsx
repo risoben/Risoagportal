@@ -154,8 +154,8 @@ export function BenefitsOverviewPage() {
   return (
     <div className="flex-1 bg-white overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
-      <div className="px-8 py-6 border-b border-[#E8E8E8]">
-        <div className="flex items-center justify-between mb-4">
+      <div className="px-4 md:px-6 lg:px-8 py-6 border-b border-[#E8E8E8]">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
           <div>
             <h1 className="text-[#000000] font-bold text-[28px] mb-2">Alle Benefits</h1>
             <p className="text-[#666666] text-sm">
@@ -200,29 +200,29 @@ export function BenefitsOverviewPage() {
 
         {/* Statistics Box */}
         <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-xl p-6 mt-6" style={{ borderRadius: '12px' }}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div>
-              <p className="text-[#666666] text-xs mb-2">Gesamtbudget (Monat)</p>
-              <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalBudget)}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
+              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtbudget (Monat)</p>
+              <p className="text-[#273A5F] font-bold text-[28px]">{formatCurrency(totalBudget)}</p>
             </div>
-            <div>
-              <p className="text-[#666666] text-xs mb-2">Gesamtvergeben</p>
-              <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalUsed)}</p>
+            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
+              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtvergeben</p>
+              <p className="text-[#273A5F] font-bold text-[28px]">{formatCurrency(totalUsed)}</p>
             </div>
-            <div>
-              <p className="text-[#666666] text-xs mb-2">Gesamtverfügbar</p>
-              <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalAvailable)}</p>
+            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
+              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtverfügbar</p>
+              <p className="text-[#273A5F] font-bold text-[28px]">{formatCurrency(totalAvailable)}</p>
             </div>
-            <div>
-              <p className="text-[#666666] text-xs mb-2">Gesamtauslastung</p>
-              <p className="text-[#0F429F] font-bold text-2xl">{totalUtilization}%</p>
+            <div className="bg-white rounded-xl p-4 border border-[#E0E0E0]">
+              <p className="text-[#666666] text-[14px] font-medium mb-1">Gesamtauslastung</p>
+              <p className="text-[#273A5F] font-bold text-[28px]">{totalUtilization}%</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Benefits Content */}
-      <div className="px-8 py-8">
+      <div className="px-4 md:px-6 lg:px-8 py-8">
         {Object.entries(groupedBenefits).map(([group, benefits]) => (
           <div key={group} className="mb-8 last:mb-0">
             {/* Group Header */}
