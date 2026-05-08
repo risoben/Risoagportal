@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Search, Eye, Download, FileText, FileSpreadsheet, File } from 'lucide-react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 
@@ -334,67 +334,36 @@ export function ReportsPage() {
       {/* Table */}
       <div className="px-8 py-6">
         <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-          {/* Table Header */}
-          <div className="bg-[#273A5F] px-6 h-12"
-            style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 1fr 1fr 0.8fr 1fr 2fr 1fr', gap: '16px' }}
-          >
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Datum</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Monat</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Erstellungsdatum</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Version</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateityp</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Dateiname</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.7fr) minmax(0,0.8fr) minmax(0,1.2fr) minmax(0,0.6fr) minmax(0,0.8fr) minmax(0,2fr) minmax(240px,1.5fr)', minWidth: '900px' }}>
+            {['Datum','Monat','Erstellungsdatum','Version','Dateityp','Dateiname','Aktion'].map(h => (
+              <div key={h} className="text-white font-bold text-xs uppercase tracking-wide" style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px' }}>{h}</div>
+            ))}
+            {paginatedReports.map((report, index) => {
+              const bg = index % 2 === 0 ? '#fff' : '#F9FAFB';
+              const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px' };
+              return (
+                <React.Fragment key={report.id}>
+                  <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.date}</div>
+                  <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.month}</div>
+                  <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.createdDate}</div>
+                  <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.version}</div>
+                  <div style={{ ...c, gap: '6px' }}>
+                    {getFileTypeIcon(report.fileType)}
+                    <span className="text-sm text-[#000000]">{report.fileType}</span>
+                  </div>
+                  <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000] truncate">{report.fileName}</div>
+                  <div style={{ ...c, gap: '8px', flexShrink: 0 }}>
+                    <button onClick={() => handleView(report.id)} className="flex items-center gap-1 px-3 py-1.5 border border-[#0F429F] text-[#0F429F] text-xs rounded-full hover:bg-[#F0F4FF] transition whitespace-nowrap">
+                      <Eye className="w-3.5 h-3.5" />Ansehen
+                    </button>
+                    <button onClick={() => handleDownload(report.id, report.fileName)} className="flex items-center gap-1 px-3 py-1.5 bg-[#0F429F] text-white text-xs rounded-full hover:bg-[#0A2E7A] transition whitespace-nowrap">
+                      <Download className="w-3.5 h-3.5" />Herunterladen
+                    </button>
+                  </div>
+                </React.Fragment>
+              );
+            })}
           </div>
-
-          {/* Table Rows */}
-          {paginatedReports.map((report, index) => (
-            <div
-              key={report.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
-                index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
-              }`}
-              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '0.8fr 1fr 1fr 0.8fr 1fr 2fr 1fr', gap: '16px' }}
-            >
-              {/* Date */}
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.date}</div>
-
-              {/* Month */}
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.month}</div>
-
-              {/* Created Date */}
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.createdDate}</div>
-
-              {/* Version */}
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.version}</div>
-
-              {/* File Type */}
-              <div className="flex items-center gap-2">
-                {getFileTypeIcon(report.fileType)}
-                <span className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.fileType}</span>
-              </div>
-
-              {/* File Name */}
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{report.fileName}</div>
-
-              {/* Actions */}
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleView(report.id)} className="flex items-center gap-2 px-4 py-2 bg-transparent border border-[#0F429F] text-[#0F429F] font-medium text-xs rounded-full hover:bg-[#F0F4FF] transition"
-                  style={{ borderRadius: '24px', padding: '8px 16px' }}
-                >
-                  <Eye className="w-4 h-4" />
-                  Ansehen
-                </button>
-                <button
-                  onClick={() => handleDownload(report.id, report.fileName)} className="flex items-center gap-2 px-4 py-2 bg-[#0F429F] text-white font-medium text-xs rounded-full hover:bg-[#0A2E7A] transition"
-                  style={{ borderRadius: '24px', padding: '8px 16px' }}
-                >
-                  <Download className="w-4 h-4" />
-                  Herunterladen
-                </button>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
 

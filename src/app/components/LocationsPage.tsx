@@ -232,7 +232,7 @@ export function LocationsPage() {
             <div>
               <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
                 {/* Table Header */}
-                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
+                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0', minWidth: '600px' }}>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit-Name</div>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget/Monat</div>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
@@ -245,7 +245,7 @@ export function LocationsPage() {
                     key={benefit.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                       index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     }`}
-                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}
+                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0', minWidth: '600px' }}
                   >
                     <div className="text-[#000000] text-sm font-medium">{benefit.name}</div>
                     <div className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>{benefit.limit}</div>
@@ -310,7 +310,7 @@ export function LocationsPage() {
 
               <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
                 {/* Table Header */}
-                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}>
+                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0', minWidth: '500px' }}>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Personennummer</div>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
@@ -323,7 +323,7 @@ export function LocationsPage() {
                     key={employee.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                       index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     }`}
-                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}
+                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0', minWidth: '500px' }}
                   >
                     <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.nr}</div>
                     <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{employee.name}</div>
@@ -490,7 +490,7 @@ export function LocationsPage() {
       <div className="px-4 md:px-6 lg:px-8 py-6">
         <div className="w-full border border-[#E5E7EB] rounded-lg overflow-x-auto">
           {/* Table Header */}
-          <div className="w-full bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}>
+          <div className="w-full bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0', minWidth: '800px' }}>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Typ</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Mitarbeiter</div>
@@ -506,7 +506,7 @@ export function LocationsPage() {
               key={location.id} className={`w-full px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 cursor-pointer ${
                 index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
               }`}
-              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}
+              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0', minWidth: '800px' }}
               onClick={() => handleOpenLocation(location)}
             >
               <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>{location.name}</div>

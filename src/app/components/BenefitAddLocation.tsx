@@ -464,7 +464,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
             {/* Employee Table */}
             <div className="px-4 md:px-6 lg:px-8 py-6">
               <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}>
+                <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0', minWidth: '500px' }}>
                   <div className="flex items-center justify-center">
                     <div className="relative flex items-center justify-center">
                       <input
@@ -487,7 +487,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                     key={employee.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                       index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                     } ${employee.hasError ? 'bg-[#FFEBEE]' : ''}`}
-                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0' }}
+                    style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0', minWidth: '500px' }}
                   >
                     <div className="flex items-center justify-center">
                       <div className="relative flex items-center justify-center">

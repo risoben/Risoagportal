@@ -152,11 +152,11 @@ export function Dashboard() {
 
       <div className="px-8 py-8">
         {/* SECTION 1: KPI Cards */}
-        <div className="grid grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {/* Gesamtbudget */}
           <button
             onClick={() => handleNavigate('benefits')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
-            style={{ minHeight: '160px', minWidth: '300px' }}
+            style={{ minHeight: '140px' }}
           >
             <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
               <Euro size={42} className="text-[#0F429F]" strokeWidth={1.5} />
@@ -172,7 +172,7 @@ export function Dashboard() {
           {/* Registrierte Nutzer */}
           <button
             onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
-            style={{ minHeight: '160px', minWidth: '300px' }}
+            style={{ minHeight: '140px' }}
           >
             <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
               <Users size={42} className="text-[#0F429F]" strokeWidth={1.5} />
@@ -188,7 +188,7 @@ export function Dashboard() {
           {/* Erstellte Berichte */}
           <button
             onClick={() => handleNavigate('reports')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
-            style={{ minHeight: '160px', minWidth: '300px' }}
+            style={{ minHeight: '140px' }}
           >
             <div className="absolute left-5 top-1/2 -translate-y-1/2 flex items-center justify-center bg-[#F0F4FF] rounded-full" style={{ width: '84px', height: '84px' }}>
               <FileText size={42} className="text-[#0F429F]" strokeWidth={1.5} />

@@ -272,7 +272,7 @@ export function EmployeeManagement() {
         </div>
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white border border-[#E0E0E0] rounded-xl p-4 text-center"
             style={{ borderRadius: '12px' }}
           >

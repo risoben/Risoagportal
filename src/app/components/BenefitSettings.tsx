@@ -195,7 +195,7 @@ export function BenefitSettings({
 
           {/* Table Header */}
           <div className="bg-[#273A5F] px-6 h-12"
-            style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
+            style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0', minWidth: '600px' }}
           >
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Standort</div>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
@@ -210,7 +210,7 @@ export function BenefitSettings({
                 transition-colors hover:bg-gray-50
                 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
               `}
-              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0' }}
+              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0', minWidth: '600px' }}
             >
               <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                 {location.name}
