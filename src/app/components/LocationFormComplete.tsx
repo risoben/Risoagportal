@@ -567,7 +567,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
             </button>
             <button
               onClick={handleSave}
-              disabled={loadingState} className="px-6 py-3 bg-[#4CAF50] text-white text-[14px] rounded hover:bg-[#45A049] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loadingState} className="px-6 py-3 bg-[#0F429F] text-white text-[14px] rounded hover:bg-[#0d3680] transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
               {loadingState && <Loader2 size={16} className="animate-spin" />}

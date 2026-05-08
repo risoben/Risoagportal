@@ -243,7 +243,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
               </div>
             ))}
 
-            <div className="flex items-center gap-4 mt-6 mb-4">
+            <div className="mt-6 mb-4">
               <button
                 onClick={() => alert('Änderungen gespeichert!')}
                 className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
@@ -285,12 +285,14 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
               <Table columns={employeeColumns} data={filteredEmployees} hoverable={true} />
             </div>
 
-            <button
-              onClick={() => alert('Änderungen gespeichert!')}
-              className="mb-4 px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
-            >
-              Speichern
-            </button>
+            <div className="mb-4">
+              <button
+                onClick={() => alert('Änderungen gespeichert!')}
+                className="px-6 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#0d3680] transition"
+              >
+                Speichern
+              </button>
+            </div>
 
             <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-lg p-4">
               <p className="text-[#666666] text-[12px]">

@@ -200,7 +200,7 @@ export function BenefitsOverviewPage() {
 
         {/* Statistics Box */}
         <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-xl p-6 mt-6" style={{ borderRadius: '12px' }}>
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <p className="text-[#666666] text-xs mb-2">Gesamtbudget (Monat)</p>
               <p className="text-[#0F429F] font-bold text-2xl">{formatCurrency(totalBudget)}</p>
@@ -231,9 +231,9 @@ export function BenefitsOverviewPage() {
             </h2>
 
             {/* Benefits Table */}
-            <div className="border border-[#E8E8E8] rounded-lg overflow-hidden">
+            <div className="border border-[#E8E8E8] rounded-lg overflow-x-auto">
               {/* Table Header */}
-              <div className="bg-[#F0F4FF] grid grid-cols-[80px_1fr_140px_140px_160px_130px_120px_200px] h-12 items-center px-4">
+              <div className="bg-[#F0F4FF] grid grid-cols-[80px_1fr_140px_140px_160px_130px_120px_200px] h-12 items-center px-4" style={{ minWidth: '1000px' }}>
                 <div className="text-[#666666] text-xs font-medium uppercase">Icon</div>
                 <div className="text-[#666666] text-xs font-medium uppercase">Benefit-Name</div>
                 <div className="text-[#666666] text-xs font-medium uppercase">Mitarbeiter</div>
@@ -250,7 +250,7 @@ export function BenefitsOverviewPage() {
                   key={benefit.id} className={`grid grid-cols-[80px_1fr_140px_140px_160px_130px_120px_200px] items-center px-4 border-b border-[#E8E8E8] last:border-b-0 hover:bg-[#EEF2FF] hover:shadow-sm transition ${
                     index % 2 === 0 ? 'bg-white' : 'bg-[#F9F9F9]'
                   }`}
-                  style={{ minHeight: '64px' }}
+                  style={{ minHeight: '64px', minWidth: '1000px' }}
                 >
                   {/* Icon */}
                   <div>
