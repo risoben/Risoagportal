@@ -210,7 +210,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
                   onClick={() => handleBenefitSelect(benefit)} className="bg-white border-2 border-[#E0E0E0] rounded-lg p-4 hover:border-[#0F429F] hover:shadow-lg transition-all duration-200 cursor-pointer"
                 >
                   <div className="flex justify-center mb-2">
-                    <BenefitIconComponent benefitName={benefit.name} size={48} />
+                    <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
                   </div>
                   <div className="text-[#273A5F] font-medium text-[13px] text-center mb-1">
                     {benefit.name}

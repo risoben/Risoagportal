@@ -176,7 +176,7 @@ export function BenefitsManagement() {
                   const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' };
                   return (
                     <React.Fragment key={benefit.id}>
-                      <div style={c}><BenefitIconComponent benefitName={benefit.name} size={32} /></div>
+                      <div style={c}><BenefitIconComponent benefitName={benefit.name} size={32} background={true} /></div>
                       <div style={c} className="text-sm text-[#000000]">{benefit.name}</div>
                       <div style={c} className="text-sm text-[#000000]">{benefit.limit}</div>
                       <div style={c}><StatusBadge status={benefit.status === 'active' ? 'Aktiv' : 'Inaktiv'} type={benefit.status === 'active' ? 'success' : 'inactive'} /></div>

@@ -227,7 +227,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                         </div>
 
                         <div className="flex items-center gap-3">
-                          <BenefitIconComponent benefitName={benefit.name} size={32} background={false} />
+                          <BenefitIconComponent benefitName={benefit.name} size={32} background={true} />
                           <span className="text-sm text-[#000000]">{benefit.name}</span>
                         </div>
 

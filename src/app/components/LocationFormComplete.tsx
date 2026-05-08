@@ -474,7 +474,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                       </div>
 
                       <div className="flex items-center justify-center">
-                        <BenefitIconComponent benefitName={benefit.name} size={32} background={false} />
+                        <BenefitIconComponent benefitName={benefit.name} size={32} background={true} />
                       </div>
 
                       <div className="flex items-center gap-2">

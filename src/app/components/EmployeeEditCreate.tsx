@@ -509,7 +509,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                   </div>
 
                   <div className="flex items-center justify-center">
-                    <BenefitIconComponent benefitName={benefit.name} size={32} background={false} />
+                    <BenefitIconComponent benefitName={benefit.name} size={32} background={true} />
                   </div>
 
                   <div className="flex items-center">
