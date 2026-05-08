@@ -230,7 +230,7 @@ export function LocationsPage() {
         <div className="px-4 md:px-6 lg:px-8 py-6">
           {activeTab === 'benefits' && (
             <div>
-              <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
+              <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
                 {/* Table Header */}
                 <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit-Name</div>
@@ -308,7 +308,7 @@ export function LocationsPage() {
                 </button>
               </div>
 
-              <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
+              <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
                 {/* Table Header */}
                 <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 2fr 1fr 1fr', gap: '0' }}>
                   <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Personennummer</div>
@@ -488,7 +488,7 @@ export function LocationsPage() {
 
       {/* Table */}
       <div className="px-4 md:px-6 lg:px-8 py-6">
-        <div className="w-full border border-[#E5E7EB] rounded-lg overflow-hidden">
+        <div className="w-full border border-[#E5E7EB] rounded-lg overflow-x-auto">
           {/* Table Header */}
           <div className="w-full bg-[#273A5F] flex items-center px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2.5fr 0.9fr 0.8fr 0.9fr 0.9fr 0.8fr auto', gap: '0' }}>
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Name</div>

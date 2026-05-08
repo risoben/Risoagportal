@@ -123,7 +123,7 @@ export function MitarbeiterEdit() {
         <div className="mb-8">
           <h2 className="text-xl font-bold text-[#273A5F] mb-6">Zugewiesene Benefits</h2>
           <div className="px-6 py-6">
-            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
+            <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
               <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '0' }}>
                 <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>

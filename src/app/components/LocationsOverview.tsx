@@ -150,7 +150,7 @@ export function LocationsOverview() {
 
       {/* Content */}
       <div className="px-4 md:px-6 lg:px-8 py-6">
-        <div className="bg-white rounded-lg border border-[#E5E7EB] overflow-hidden">
+        <div className="bg-white rounded-lg border border-[#E5E7EB] overflow-x-auto">
           <Table
             columns={columns}
             data={locations}

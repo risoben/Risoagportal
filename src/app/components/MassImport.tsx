@@ -317,7 +317,7 @@ export function MassImport() {
             </div>
 
             {/* Results Table */}
-            <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
+            <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="bg-[#273A5F]">
@@ -368,7 +368,7 @@ export function MassImport() {
           <div>
             <h2 className="text-xl font-bold text-[#273A5F] mb-4">Fehlerdetails</h2>
 
-            <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
+            <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="bg-[#273A5F]">

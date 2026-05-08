@@ -172,7 +172,7 @@ export function BenefitEditLocation() {
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6" style={{ borderRadius: '12px' }}>
           <h3 className="text-[#000000] font-medium text-base mb-4">Mitarbeiter mit diesem Benefit</h3>
 
-          <div className="border border-[#E8E8E8] rounded-lg overflow-hidden">
+          <div className="border border-[#E8E8E8] rounded-lg overflow-x-auto">
             {/* Table Header */}
             <div className="bg-[#F0F4FF] grid grid-cols-[200px_1fr_150px_80px] h-12 items-center px-4">
               <div className="text-[#666666] text-xs font-medium uppercase">Personennummer</div>

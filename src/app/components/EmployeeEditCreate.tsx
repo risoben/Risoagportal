@@ -473,7 +473,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
           </p>
 
           <div className="px-6 py-6">
-            <div className="border border-[#E5E7EB] rounded-lg overflow-hidden" style={{ overflowX: "auto" }}>
+            <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
               <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 60px 2fr 1fr 1fr 1fr 0.8fr', gap: '0' }}>
                 <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktiv</div>
                 <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}></div>
