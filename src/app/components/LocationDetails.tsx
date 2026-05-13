@@ -296,7 +296,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
 
             <div className="bg-[#F0F4FF] border border-[#E0E0E0] rounded-lg p-4">
               <p className="text-[#666666] text-[12px]">
-                <strong>Hinweis:</strong> Änderungen gelten ab 1. des nächsten Monats. Location-Wechsel werden als weiche Migration durchgeführt.
+                <strong>Hinweis:</strong> Änderungen gelten ab 1. des nächsten Monats. Standortwechsel werden als weiche Migration durchgeführt.
               </p>
             </div>
           </div>

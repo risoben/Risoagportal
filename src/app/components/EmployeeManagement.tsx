@@ -418,7 +418,7 @@ export function EmployeeManagement() {
               </div>
 
               <div className="bg-[#F8F9FB] p-4 rounded-lg">
-                <p className="text-[#666666] text-xs mb-1">Location</p>
+                <p className="text-[#666666] text-xs mb-1">Standort</p>
                 <p className="text-[#000000] text-sm font-medium">{selectedEmployee.location}</p>
               </div>
 

@@ -149,7 +149,7 @@ export function BenefitEditLocation() {
           </div>
 
           <div>
-            <label className="text-[#000000] font-medium text-sm mb-4 block">Status für diese Location</label>
+            <label className="text-[#000000] font-medium text-sm mb-4 block">Status für diesen Standort</label>
             <div className="flex items-center gap-4 mb-3">
               <button
                 onClick={() => setIsActive(!isActive)} className={`w-16 h-8 rounded-full transition relative ${

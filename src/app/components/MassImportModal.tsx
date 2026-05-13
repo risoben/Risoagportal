@@ -57,7 +57,7 @@ export function MassImportModal({ onClose }: MassImportModalProps) {
     },
     {
       row: 22,
-      field: 'Location',
+      field: 'Standort',
       problem: 'Standort existiert nicht',
       suggestion: 'Verfügbare: Heddesheim, Viernheim',
     },

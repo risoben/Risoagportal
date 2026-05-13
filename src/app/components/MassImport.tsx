@@ -140,7 +140,7 @@ export function MassImport() {
   const handleDownloadTemplate = () => {
     // Mock CSV template download
     const csvContent =
-      'Personennummer,Name,Abteilung,Email,Geburtstag,Location\n12345,Mustermann Max,IT,max@firma.de,01.01.1990,Berlin';
+      'Personennummer,Name,Abteilung,Email,Geburtstag,Standort\n12345,Mustermann Max,IT,max@firma.de,01.01.1990,Berlin';
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -228,7 +228,7 @@ export function MassImport() {
             </li>
             <li className="flex gap-2">
               <span className="mt-1">•</span>
-              <span>Die CSV-Datei muss diese Spalten enthalten: Personennummer, Name, Abteilung, Email, Geburtstag, Location</span>
+              <span>Die CSV-Datei muss diese Spalten enthalten: Personennummer, Name, Abteilung, Email, Geburtstag, Standort</span>
             </li>
             <li className="flex gap-2">
               <span className="mt-1">•</span>

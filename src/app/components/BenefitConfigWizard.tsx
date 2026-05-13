@@ -180,7 +180,7 @@ export function BenefitConfigWizard({
         {currentStep === 'step3' && (
           <div className="space-y-6">
             <p className="text-[#666666] text-[13px]">
-              Wähle wie die Monatsbudgets für diese Location konfiguriert werden sollen.
+              Wähle wie die Monatsbudgets für diesen Standort konfiguriert werden sollen.
             </p>
 
             {/* Option 1: All Employees */}

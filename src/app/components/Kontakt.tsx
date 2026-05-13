@@ -34,8 +34,8 @@ export function Kontakt() {
       answer: 'Gehen Sie zu Benefits > Benefits verwalten und folgen Sie dem Wizard. Das Benefit wird ab dem 1. des nächsten Monats aktiv.',
     },
     {
-      question: 'Was ist eine Location?',
-      answer: 'Eine Location ist ein flexibler Organisationscontainer — z.B. ein Standort oder eine Tochterunternehmen. Ein Mitarbeiter gehört immer zu genau einer Location.',
+      question: 'Was ist ein Standort?',
+      answer: 'Ein Standort ist ein flexibler Organisationscontainer — z.B. ein Standort oder ein Tochterunternehmen. Ein Mitarbeiter gehört immer zu genau einem Standort.',
     },
     {
       question: 'Wie ändere ich die Budget-Limits?',
