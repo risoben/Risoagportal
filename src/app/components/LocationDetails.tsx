@@ -56,9 +56,16 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
   const [activeBenefits, setActiveBenefits] = useState<Set<string>>(
     new Set(mockAllBenefits.filter(b => b.active).map(b => b.id))
   );
+  const [benefitLimits, setBenefitLimits] = useState<Record<string, string>>(
+    Object.fromEntries(mockAllBenefits.map(b => [b.id, String(b.limit)]))
+  );
   const [activeEmployees, setActiveEmployees] = useState<Set<string>>(
     new Set(employees.filter(e => e.active).map(e => e.id))
   );
+
+  const updateBenefitLimit = (benefitId: string, value: string) => {
+    setBenefitLimits(prev => ({ ...prev, [benefitId]: value }));
+  };
 
   const handleBack = () => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'locations' } }));
@@ -201,10 +208,10 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                 <h3 className="text-[#273A5F] font-bold text-[14px] mb-4">{category}</h3>
                 <div className="px-4 md:px-6 lg:px-8 py-6">
                   <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-                    <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0', minWidth: '500px' }}>
+                    <div className="bg-[#273A5F] px-6 h-12" style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1.2fr 1fr', gap: '0', minWidth: '500px' }}>
                       <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktiv</div>
                       <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Benefit</div>
-                      <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
+                      <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget / Monat</div>
                       <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Status</div>
                     </div>
 
@@ -213,7 +220,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                         key={benefit.id} className={`px-6 h-14 border-b border-[#E5E7EB] last:border-b-0 transition-colors hover:bg-gray-50 ${
                           index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'
                         }`}
-                        style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1fr 1fr', gap: '0', minWidth: '500px' }}
+                        style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '60px 2fr 1.2fr 1fr', gap: '0', minWidth: '500px' }}
                       >
                         <div className="relative flex items-center justify-center">
                           <input
@@ -231,7 +238,17 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                           <span className="text-sm text-[#000000]">{benefit.name}</span>
                         </div>
 
-                        <div className="text-sm text-[#000000]">{benefit.limit}€</div>
+                        <div className="flex items-center gap-1">
+                          <input
+                            type="text"
+                            value={benefitLimits[benefit.id] ?? ''}
+                            onChange={(e) => updateBenefitLimit(benefit.id, e.target.value)}
+                            disabled={!activeBenefits.has(benefit.id)}
+                            className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                            style={{ borderRadius: '4px' }}
+                          />
+                          <span className="text-sm text-[#666666]">€</span>
+                        </div>
 
                         <div>
                           <StatusBadge status={activeBenefits.has(benefit.id) ? 'Aktiv' : 'Inaktiv'} type={activeBenefits.has(benefit.id) ? 'success' : 'inactive'} />
