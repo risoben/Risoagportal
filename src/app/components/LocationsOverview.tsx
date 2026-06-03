@@ -142,7 +142,7 @@ export function LocationsOverview() {
           <div>
             <h1 className="text-[#273A5F] font-bold text-[32px] mb-2">Standorte</h1>
             <p className="text-[#666666] text-[14px]">
-              Verwalten Sie alle Standorte und Tochterunternehmen
+              Verwalte alle Standorte und Tochterunternehmen
             </p>
           </div>
           <button

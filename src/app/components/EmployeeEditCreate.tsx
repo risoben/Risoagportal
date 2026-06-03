@@ -14,6 +14,7 @@ type Benefit = {
   dailyLimit: string;
   monthlyLimit: string;
   selected: boolean;
+  budgetType: 'dynamic' | 'fix';
 };
 
 const COMPANIES = ['Fine Cotton Company', 'Cassianiel Software'];
@@ -67,18 +68,23 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
   // Benefits
   const [benefits, setBenefits] = useState<Benefit[]>([
-    { id: '1', name: 'Essenszuschuss', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '150.00', selected: isEditMode },
-    { id: '2', name: 'Internet', frequency: 'Monatlich', dailyLimit: '50.00', monthlyLimit: '500.00', selected: isEditMode },
-    { id: '3', name: 'Kindergarten', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '100.00', selected: false },
-    { id: '4', name: 'Fahrkostenzuschuss', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
-    { id: '5', name: 'Erholung', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '156.00', selected: false },
-    { id: '6', name: 'Sachbezug', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '50.00', selected: false },
-    { id: '7', name: 'Danke-Bonus', frequency: 'Einmalig', dailyLimit: '', monthlyLimit: '100.00', selected: false },
-    { id: '8', name: 'Geburtstag', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '50.00', selected: false },
-    { id: '9', name: 'ÖPNV', frequency: 'Monatlich', dailyLimit: '63.00', monthlyLimit: '630.00', selected: isEditMode },
-    { id: '10', name: 'BKV', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false },
-    { id: '11', name: 'BAV', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '150.00', selected: false },
+    { id: '1', name: 'Essenszuschuss', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '115.05', selected: isEditMode, budgetType: 'dynamic' },
+    { id: '2', name: 'Internet', frequency: 'Monatlich', dailyLimit: '50.00', monthlyLimit: '50.00', selected: isEditMode, budgetType: 'dynamic' },
+    { id: '3', name: 'Kindergarten', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '100.00', selected: false, budgetType: 'dynamic' },
+    { id: '4', name: 'Fahrkostenzuschuss', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false, budgetType: 'dynamic' },
+    { id: '5', name: 'Erholung', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '156.00', selected: false, budgetType: 'dynamic' },
+    { id: '6', name: 'Sachbezug', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '50.00', selected: false, budgetType: 'dynamic' },
+    { id: '7', name: 'Danke-Bonus', frequency: 'Einmalig', dailyLimit: '', monthlyLimit: '100.00', selected: false, budgetType: 'dynamic' },
+    { id: '8', name: 'Geburtstag', frequency: 'Jährlich', dailyLimit: '', monthlyLimit: '50.00', selected: false, budgetType: 'dynamic' },
+    { id: '9', name: 'ÖPNV', frequency: 'Monatlich', dailyLimit: '63.00', monthlyLimit: '63.00', selected: isEditMode, budgetType: 'dynamic' },
+    { id: '10', name: 'BKV', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false, budgetType: 'dynamic' },
+    { id: '11', name: 'BAV', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '150.00', selected: false, budgetType: 'dynamic' },
   ]);
+
+  const [showFixModal, setShowFixModal] = useState(false);
+  const [fixModalBenefitId, setFixModalBenefitId] = useState<string | null>(null);
+  const [fixModalValue, setFixModalValue] = useState('');
+  const [fixModalError, setFixModalError] = useState('');
 
   const availableLocations = companyData.company ? LOCATIONS_MAP[companyData.company] || [] : [];
 
@@ -104,6 +110,58 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
   const updateBenefitLimit = (id: string, field: 'dailyLimit' | 'monthlyLimit', value: string) => {
     setBenefits(benefits.map(b => b.id === id ? { ...b, [field]: value } : b));
+  };
+
+  const ESSEN_DAILY_RATE = 7.67;
+  const isEssenBenefit = (name: string) => name === 'Essenszuschuss' || name.toLowerCase().includes('essen');
+
+  const [showDynamicModal, setShowDynamicModal] = useState(false);
+  const [dynamicModalBenefitId, setDynamicModalBenefitId] = useState<string | null>(null);
+  const [dynamicWorkingDays, setDynamicWorkingDays] = useState(15);
+  const [dynamicModalError, setDynamicModalError] = useState('');
+
+  const handleToggleBudgetType = (id: string, type: 'dynamic' | 'fix') => {
+    if (type === 'dynamic') {
+      setDynamicModalBenefitId(id);
+      setDynamicWorkingDays(15);
+      setDynamicModalError('');
+      setShowDynamicModal(true);
+    } else {
+      const benefit = benefits.find(b => b.id === id);
+      setFixModalBenefitId(id);
+      setFixModalValue(benefit?.monthlyLimit || '');
+      setFixModalError('');
+      setShowFixModal(true);
+    }
+  };
+
+  const handleSaveDynamicModal = () => {
+    if (dynamicWorkingDays < 1 || dynamicWorkingDays > 15) {
+      setDynamicModalError('Arbeitstage müssen zwischen 1 und 15 liegen');
+      return;
+    }
+    const monthly = Math.round(dynamicWorkingDays * ESSEN_DAILY_RATE * 100) / 100;
+    if (dynamicModalBenefitId) {
+      setBenefits(benefits.map(b =>
+        b.id === dynamicModalBenefitId ? { ...b, budgetType: 'dynamic', monthlyLimit: String(monthly) } : b
+      ));
+    }
+    setShowDynamicModal(false);
+    setDynamicModalBenefitId(null);
+  };
+
+  const handleSaveFixModal = () => {
+    if (!fixModalValue.trim()) { setFixModalError('Feld erforderlich'); return; }
+    const num = parseFloat(fixModalValue.replace(',', '.'));
+    if (isNaN(num) || num < 0) { setFixModalError('Ungültiger Betrag'); return; }
+    if (fixModalBenefitId) {
+      setBenefits(benefits.map(b =>
+        b.id === fixModalBenefitId ? { ...b, budgetType: 'fix', monthlyLimit: String(num) } : b
+      ));
+    }
+    setShowFixModal(false);
+    setFixModalBenefitId(null);
+    setFixModalValue('');
   };
 
   const handleSave = () => {
@@ -139,7 +197,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
           <AlertCircle className="text-[#F44336] mt-0.5" size={20} />
           <div>
             <p className="text-[#D32F2F] font-medium text-[14px]">Fehler beim Speichern</p>
-            <p className="text-[#D32F2F] text-[13px]">Bitte überprüfen Sie die markierten Felder.</p>
+            <p className="text-[#D32F2F] text-[13px]">Bitte überprüfe die markierten Felder.</p>
           </div>
         </div>
       )}
@@ -520,19 +578,47 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                     <span className="text-sm text-[#000000]">{benefit.frequency}</span>
                   </div>
 
-                  <div className="flex items-center">
-                    <div className="flex items-center gap-1">
-                      <input
-                        type="text"
-                        value={benefit.frequency === 'Jährlich' || benefit.frequency === 'Einmalig'
-                          ? (parseFloat(benefit.monthlyLimit) / 12).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-                          : benefit.monthlyLimit.replace('.', ',')}
-                        onChange={(e) => updateBenefitLimit(benefit.id, 'monthlyLimit', e.target.value)}
-                        disabled={loadingState || !benefit.selected} className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
-                        style={{ borderRadius: '4px' }}
-                      />
-                      <span className="text-sm text-[#000000]">€</span>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    {isEssenBenefit(benefit.name) ? (
+                      /* Toggle nur für Essenszuschuss */
+                      <>
+                        <div className={`flex rounded border overflow-hidden transition ${!benefit.selected || loadingState ? 'opacity-40 pointer-events-none' : 'border-[#0F429F]'}`}>
+                          <button
+                            onClick={() => handleToggleBudgetType(benefit.id, 'dynamic')}
+                            className={`px-2 py-1 text-[11px] transition ${benefit.budgetType === 'dynamic' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                            style={{ fontFamily: 'Roboto, sans-serif' }}
+                            title="Dynamisch — Arbeitstage × Tagessatz"
+                          >🔄</button>
+                          <button
+                            onClick={() => handleToggleBudgetType(benefit.id, 'fix')}
+                            className={`px-2 py-1 text-[11px] transition border-l border-[#0F429F] ${benefit.budgetType === 'fix' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                            style={{ fontFamily: 'Roboto, sans-serif' }}
+                            title="Fix — eigenen Betrag setzen"
+                          >📌</button>
+                        </div>
+                        <span className="text-[12px] text-[#333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                          {benefit.budgetType === 'dynamic'
+                            ? <span className="text-[#0F429F]">{benefit.monthlyLimit.replace('.', ',')} €</span>
+                            : <span>{benefit.monthlyLimit.replace('.', ',')} €</span>
+                          }
+                        </span>
+                      </>
+                    ) : (
+                      /* Original-Inputfeld für alle anderen Benefits */
+                      <div className="flex items-center gap-1">
+                        <input
+                          type="text"
+                          value={benefit.frequency === 'Jährlich' || benefit.frequency === 'Einmalig'
+                            ? (parseFloat(benefit.monthlyLimit) / 12).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                            : benefit.monthlyLimit.replace('.', ',')}
+                          onChange={(e) => updateBenefitLimit(benefit.id, 'monthlyLimit', e.target.value)}
+                          disabled={loadingState || !benefit.selected}
+                          className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                          style={{ borderRadius: '4px' }}
+                        />
+                        <span className="text-sm text-[#000000]">€</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex items-center">
@@ -650,6 +736,128 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 style={{ borderRadius: '4px' }}
               >
                 Schließen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Dynamic-Budget Modal (nur Essenszuschuss) */}
+      {showDynamicModal && dynamicModalBenefitId && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full" style={{ borderRadius: '8px' }}>
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Dynamisches Budget — Essenszuschuss
+            </h3>
+            <p className="text-[13px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Tagessatz × Arbeitstage (passt sich jährlich an)
+            </p>
+
+            <div className="mb-3">
+              <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Tagessatz (gesetzl. Maximum)
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text" value={`${ESSEN_DAILY_RATE} €`} disabled
+                  className="w-28 h-[40px] px-3 py-2 border border-[#E0E0E0] rounded text-[14px] bg-[#F5F5F5] text-[#9E9E9E]"
+                  style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '4px' }}
+                />
+                <span className="text-[12px] text-[#9E9E9E]">🔒 jährlich von Riso</span>
+              </div>
+            </div>
+
+            <div className="mb-3">
+              <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Max. Arbeitstage / Monat
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number" min={1} max={15} value={dynamicWorkingDays}
+                  onChange={(e) => { setDynamicWorkingDays(Math.min(15, Math.max(1, Number(e.target.value)))); setDynamicModalError(''); }}
+                  className={`w-24 h-[40px] px-3 py-2 border ${dynamicModalError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
+                  style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '4px' }}
+                  autoFocus
+                />
+                <span className="text-[12px] text-[#9E9E9E]">(max: 15)</span>
+              </div>
+              {dynamicModalError && (
+                <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{dynamicModalError}</p>
+              )}
+            </div>
+
+            <div className="bg-[#F0F4FF] border border-[#C7D7F9] rounded p-3 mb-5">
+              <p className="text-[13px] text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Monatliches Budget: <strong>{Math.round(dynamicWorkingDays * ESSEN_DAILY_RATE * 100) / 100} €</strong>
+                <span className="text-[11px] text-[#9E9E9E] ml-1">({dynamicWorkingDays} × {ESSEN_DAILY_RATE} €)</span>
+              </p>
+            </div>
+
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => { setShowDynamicModal(false); setDynamicModalBenefitId(null); }}
+                className="px-5 py-2.5 border border-[#0F429F] text-[#0F429F] text-[13px] rounded-full hover:bg-[#F0F4FF] transition"
+                style={{ fontFamily: 'Roboto, sans-serif' }}
+              >Abbrechen</button>
+              <button
+                onClick={handleSaveDynamicModal}
+                className="px-5 py-2.5 bg-[#0F429F] text-white text-[13px] rounded-full hover:bg-[#246AFF] transition"
+                style={{ fontFamily: 'Roboto, sans-serif' }}
+              >Speichern</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fix-Budget Modal */}
+      {showFixModal && fixModalBenefitId && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full" style={{ borderRadius: '8px' }}>
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Fixes Budget setzen
+            </h3>
+            <p className="text-[13px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              {benefits.find(b => b.id === fixModalBenefitId)?.name} — individuelles Monatsbudget
+            </p>
+
+            <div className="mb-4">
+              <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Monatliches Budget
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={fixModalValue}
+                  onChange={(e) => { setFixModalValue(e.target.value); setFixModalError(''); }}
+                  placeholder="z.B. 80"
+                  className={`w-36 h-[40px] px-3 py-2 border ${fixModalError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
+                  style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '4px' }}
+                  autoFocus
+                />
+                <span className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>€/Monat</span>
+              </div>
+              {fixModalError && (
+                <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{fixModalError}</p>
+              )}
+              <p className="text-[11px] text-[#9E9E9E] mt-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                Darf das standortweite Budget nicht überschreiten
+              </p>
+            </div>
+
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => { setShowFixModal(false); setFixModalBenefitId(null); setFixModalValue(''); }}
+                className="px-5 py-2.5 border border-[#0F429F] text-[#0F429F] text-[13px] rounded-full hover:bg-[#F0F4FF] transition"
+                style={{ fontFamily: 'Roboto, sans-serif' }}
+              >
+                Abbrechen
+              </button>
+              <button
+                onClick={handleSaveFixModal}
+                className="px-5 py-2.5 bg-[#0F429F] text-white text-[13px] rounded-full hover:bg-[#246AFF] transition"
+                style={{ fontFamily: 'Roboto, sans-serif' }}
+              >
+                Speichern
               </button>
             </div>
           </div>

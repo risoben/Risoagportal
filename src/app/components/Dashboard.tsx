@@ -167,7 +167,7 @@ export function Dashboard() {
             </div>
           </button>
 
-          {/* Registrierte Nutzer */}
+          {/* Registrierte Mitarbeiter */}
           <button
             onClick={() => handleNavigate('mitarbeiter')} className="bg-white border border-[#E0E0E0] rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 relative flex flex-col items-center justify-center text-center"
             style={{ minHeight: '140px' }}
@@ -176,7 +176,7 @@ export function Dashboard() {
               <Users size={42} className="text-[#0F429F]" strokeWidth={1.5} />
             </div>
             <div style={{ paddingLeft: '96px' }}>
-              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>Registrierte Nutzer</p>
+              <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>Registrierte Mitarbeiter</p>
               <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>87</p>
             </div>
           </button>

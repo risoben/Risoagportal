@@ -265,7 +265,7 @@ export function ReportsPage() {
       <div className="px-8 py-6 border-b border-[#E8E8E8]">
         <h1 className="text-[#000000] font-bold text-[28px] mb-2">Meine Berichte</h1>
         <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>
-          Hier findest du alle deine generierten Reports zum Download
+          Hier findest du alle generierten Berichte zum Herunterladen
         </p>
       </div>
 
@@ -405,7 +405,7 @@ export function ReportsPage() {
         {/* Header */}
         <div className="mb-6">
           <h2 className="text-[#000000] font-bold text-[24px] mb-2">Benefit-Übersicht</h2>
-          <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Nutzer nach Benefit und Budget-Verwendung</p>
+          <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Mitarbeiter nach Benefit und Budget-Verwendung</p>
         </div>
 
         {/* Statistics Box */}

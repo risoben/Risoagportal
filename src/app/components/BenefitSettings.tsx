@@ -10,6 +10,9 @@ interface Location {
   limit: string;
   employeeCount: number;
   enabled: boolean;
+  budgetType?: 'dynamic' | 'fix';
+  pendingLimit?: string;
+  pendingStatus?: 'waiting';
 }
 
 interface BenefitSettingsProps {
@@ -43,22 +46,27 @@ export function BenefitSettings({
   const benefitName = customName || benefitData?.name || 'Mittagessen';
   const benefitDescription = customDescription || benefitData?.description || 'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Kantinenzuschüssen.';
   const defaultLocations = customLocations || benefitData?.locations || [
-    { id: '1', name: 'München', limit: '100€/Monat', employeeCount: 34, enabled: true },
-    { id: '2', name: 'Heddesheim', limit: '100€/Monat', employeeCount: 15, enabled: true },
-    { id: '3', name: 'Berlin', limit: '85€/Monat', employeeCount: 8, enabled: true },
-    { id: '4', name: 'Viernheim', limit: '100€/Monat', employeeCount: 5, enabled: false },
+    { id: '1', name: 'München', limit: '115,05€/Monat', employeeCount: 34, enabled: true, budgetType: 'dynamic' as const },
+    { id: '2', name: 'Heddesheim', limit: '115,05€/Monat', employeeCount: 15, enabled: true, budgetType: 'dynamic' as const },
+    { id: '3', name: 'Berlin', limit: '85,00€/Monat', employeeCount: 8, enabled: true, budgetType: 'fix' as const },
+    { id: '4', name: 'Viernheim', limit: '115,05€/Monat', employeeCount: 5, enabled: false, budgetType: 'dynamic' as const },
   ];
   const defaultStats = customStats || benefitData?.stats || {
     employeesWithAccess: 62,
     budgetThisMonth: 4200,
     usedThisMonth: 3100,
   };
+  const isEssen = benefitName === 'Mittagessen' || benefitName.toLowerCase().includes('essen');
+  const dailyRate = 7.67;
+
   const [isActive, setIsActive] = useState(true);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [editingLocation, setEditingLocation] = useState<Location | null>(null);
   const [limitValue, setLimitValue] = useState('');
   const [limitError, setLimitError] = useState('');
+  const [workingDays, setWorkingDays] = useState(15);
+  const [essenBudgetType, setEssenBudgetType] = useState<'fix' | 'dynamic'>('dynamic');
 
   const [locations, setLocations] = useState<Location[]>(defaultLocations);
   const stats = defaultStats;
@@ -69,41 +77,59 @@ export function BenefitSettings({
 
   const handleEditLimit = (location: Location) => {
     setEditingLocation(location);
-    setLimitValue(location.limit.replace('€/Monat', '').trim());
+    setLimitValue(location.limit.replace('€/Monat', '').replace(',', '.').trim());
     setLimitError('');
+    setWorkingDays(15);
+    setEssenBudgetType(location.budgetType === 'fix' ? 'fix' : 'dynamic');
     setShowLimitModal(true);
   };
 
   const handleSaveLimit = () => {
-    // Validation
-    if (!limitValue.trim()) {
-      setLimitError('Feld erforderlich');
-      return;
-    }
-
-    const numValue = parseFloat(limitValue);
-    if (isNaN(numValue)) {
-      setLimitError('Nur Zahlen erlaubt');
-      return;
-    }
-
-    if (numValue < 0) {
-      setLimitError('Betrag kann nicht negativ sein');
-      return;
-    }
-
-    // Update location
-    if (editingLocation) {
-      setLocations(
-        locations.map((loc) =>
-          loc.id === editingLocation.id ? { ...loc, limit: `${limitValue}€/Monat` } : loc
-        )
-      );
+    if (isEssen && essenBudgetType === 'dynamic') {
+      if (workingDays < 1 || workingDays > 15) {
+        setLimitError('Arbeitstage müssen zwischen 1 und 15 liegen');
+        return;
+      }
+      const pendingAmount = Math.round(workingDays * dailyRate * 100) / 100;
+      if (editingLocation) {
+        setLocations(locations.map((loc) =>
+          loc.id === editingLocation.id
+            ? { ...loc, pendingLimit: `${pendingAmount}€/Monat`, pendingStatus: 'waiting' }
+            : loc
+        ));
+      }
+    } else {
+      if (!limitValue.trim()) {
+        setLimitError('Feld erforderlich');
+        return;
+      }
+      const numValue = parseFloat(limitValue);
+      if (isNaN(numValue)) {
+        setLimitError('Nur Zahlen erlaubt');
+        return;
+      }
+      if (numValue < 0) {
+        setLimitError('Betrag kann nicht negativ sein');
+        return;
+      }
+      if (editingLocation) {
+        setLocations(locations.map((loc) =>
+          loc.id === editingLocation.id
+            ? { ...loc, pendingLimit: `${limitValue}€/Monat`, pendingStatus: 'waiting' }
+            : loc
+        ));
+      }
     }
 
     setShowLimitModal(false);
     setEditingLocation(null);
     setLimitValue('');
+  };
+
+  const handleWithdrawPending = (locationId: string) => {
+    setLocations(locations.map((loc) =>
+      loc.id === locationId ? { ...loc, pendingLimit: undefined, pendingStatus: undefined } : loc
+    ));
   };
 
   const handleToggleLocation = (locationId: string) => {
@@ -195,39 +221,82 @@ export function BenefitSettings({
 
           {/* Table Header */}
           <div className="bg-[#273A5F] px-6 h-12"
-            style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0', minWidth: '600px' }}
+            style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1.4fr 1.2fr', gap: '0', minWidth: '600px' }}
           >
             <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Standort</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget</div>
-            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Aktion</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Budget-Typ</div>
+            <div className="text-white font-bold text-xs uppercase tracking-wide overflow-hidden" style={{ minWidth: 0 }}>Betrag</div>
           </div>
 
           {/* Table Rows */}
-          {locations.map((location, index) => (
+          {locations.map((location, index) => {
+            const locBudgetType = location.budgetType ?? 'dynamic';
+            return (
             <div
               key={location.id} className={`
-                px-6 h-14 border-b border-[#E5E7EB] last:border-b-0
+                px-6 border-b border-[#E5E7EB] last:border-b-0
                 transition-colors hover:bg-gray-50
                 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'}
               `}
-              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1fr 1fr', gap: '0', minWidth: '600px' }}
+              style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '2fr 1.4fr 1.2fr', gap: '0', minWidth: '600px', minHeight: '56px', paddingTop: '8px', paddingBottom: '8px' }}
             >
               <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                 {location.name}
               </div>
-              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
-                {location.limit}
-              </div>
-              <div>
+
+              {/* Budget-Typ Toggle (nur Essenszuschuss) oder Betrag + Bearbeiten */}
+              {isEssen ? (
+                <div className="flex rounded border border-[#0F429F] overflow-hidden">
+                  <button
+                    onClick={() => handleEditLimit({ ...location, budgetType: 'dynamic' })}
+                    className={`px-3 py-1.5 text-[11px] transition ${locBudgetType === 'dynamic' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                    style={{ fontFamily: 'Roboto, sans-serif' }}
+                  >🔄 Auto</button>
+                  <button
+                    onClick={() => handleEditLimit({ ...location, budgetType: 'fix' })}
+                    className={`px-3 py-1.5 text-[11px] transition border-l border-[#0F429F] ${locBudgetType === 'fix' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                    style={{ fontFamily: 'Roboto, sans-serif' }}
+                  >📌 Fix</button>
+                </div>
+              ) : (
                 <button
-                  onClick={() => handleEditLimit(location)} className="px-4 py-2 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-2xl hover:bg-[#F0F4FF] transition"
+                  onClick={() => handleEditLimit(location)}
+                  className="px-4 py-2 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-2xl hover:bg-[#F0F4FF] transition"
                   style={{ fontFamily: 'Roboto, sans-serif' }}
-                >
-                  Bearbeiten
-                </button>
+                >Bearbeiten</button>
+              )}
+
+              {/* Betrag + Pending */}
+              <div className="text-[#000000] text-sm overflow-hidden flex flex-col gap-0.5" style={{ minWidth: 0 }}>
+                <span className={`text-[12px] ${locBudgetType === 'dynamic' && isEssen ? 'text-[#0F429F]' : ''}`}>
+                  {locBudgetType === 'dynamic' && isEssen ? `Auto — ${location.limit}` : location.limit}
+                </span>
+                {location.pendingStatus === 'waiting' && (
+                  <span className="text-[11px] text-[#F59E0B] bg-[#FFFBEB] border border-[#F59E0B] rounded px-1.5 py-0.5 w-fit">
+                    → {location.pendingLimit} ⏳
+                    <button
+                      onClick={() => handleWithdrawPending(location.id)}
+                      className="ml-1 text-[#F44336] hover:underline text-[10px]"
+                    >zurückziehen</button>
+                  </span>
+                )}
               </div>
             </div>
-          ))}
+          );
+          })}
+        </div>
+
+        {/* Legend: Budget-Typen */}
+        <div className="mt-3 px-2 flex flex-wrap items-center gap-x-5 gap-y-1">
+          <span className="text-[11px] text-[#666666]">
+            <span className="font-medium text-[#273A5F]">🔄 Auto</span> — Dynamisch: Budget wird automatisch aus Tagessatz × Arbeitstagen berechnet
+          </span>
+          <span className="text-[11px] text-[#666666]">
+            <span className="font-medium text-[#273A5F]">📌 Fix</span> — Fester Monatsbetrag: du legst einen fixen Betrag pro Monat fest
+          </span>
+          <span className="text-[11px] text-[#999999]">
+            Änderungen gelten ab dem 1. des nächsten Monats.
+          </span>
         </div>
 
         {/* Section 3: Verfügbare Standorte */}
@@ -310,7 +379,7 @@ export function BenefitSettings({
             onClick={() => setShowDeleteModal(true)} className="px-6 py-3 border border-[#F44336] text-[#F44336] font-medium rounded-full hover:bg-[#FFEBEE] transition"
             style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
           >
-            Löschen
+            Deaktivieren
           </button>
 
           <button
@@ -330,36 +399,144 @@ export function BenefitSettings({
               Budget bearbeiten — {benefitName} — {editingLocation.name}
             </h3>
 
-            <div className="mb-4">
-              <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Budget pro Mitarbeiter
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={limitValue}
-                  onChange={(e) => {
-                    setLimitValue(e.target.value);
-                    setLimitError('');
-                  }}
-                  placeholder="z.B. 100" className={`flex-1 h-[40px] px-3 py-2 border ${
-                    limitError ? 'border-[#F44336]' : 'border-[#0F429F]'
-                  } rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
-                  style={{ fontFamily: 'Roboto, sans-serif', width: '250px' }}
-                />
-                <span className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  €/Monat
-                </span>
+            {isEssen ? (
+              <div className="mb-4 space-y-4">
+                {/* Fix / Dynamisch Toggle */}
+                <div>
+                  <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                    Budget-Typ
+                  </label>
+                  <div className="flex rounded-lg border border-[#0F429F] overflow-hidden w-fit">
+                    <button
+                      onClick={() => { setEssenBudgetType('dynamic'); setLimitError(''); }}
+                      className={`px-4 py-2 text-[13px] transition ${essenBudgetType === 'dynamic' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                      style={{ fontFamily: 'Roboto, sans-serif' }}
+                    >
+                      🔄 Dynamisch
+                    </button>
+                    <button
+                      onClick={() => { setEssenBudgetType('fix'); setLimitError(''); }}
+                      className={`px-4 py-2 text-[13px] transition border-l border-[#0F429F] ${essenBudgetType === 'fix' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                      style={{ fontFamily: 'Roboto, sans-serif' }}
+                    >
+                      📌 Fix
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-[#9E9E9E] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                    {essenBudgetType === 'dynamic'
+                      ? 'Tagessatz × Arbeitstage — passt sich jährlich an'
+                      : 'Fester Betrag — bleibt bis zur nächsten Änderung'}
+                  </p>
+                </div>
+                {essenBudgetType === 'dynamic' ? (
+                  <>
+                    {/* Tagessatz — gesperrt */}
+                    <div>
+                      <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                        Tagessatz (gesetzl. Maximum)
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={`${dailyRate} €`}
+                          disabled
+                          className="w-28 h-[40px] px-3 py-2 border border-[#E0E0E0] rounded text-[14px] bg-[#F5F5F5] text-[#9E9E9E]"
+                          style={{ fontFamily: 'Roboto, sans-serif' }}
+                        />
+                        <span className="text-[12px] text-[#9E9E9E]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                          🔒 jährlich von Riso aktualisiert
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Arbeitstage — editierbar */}
+                    <div>
+                      <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                        Max. Arbeitstage / Monat
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="number"
+                          min={1}
+                          max={15}
+                          value={workingDays}
+                          onChange={(e) => {
+                            setWorkingDays(Math.min(15, Math.max(1, Number(e.target.value))));
+                            setLimitError('');
+                          }}
+                          className={`w-24 h-[40px] px-3 py-2 border ${limitError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
+                          style={{ fontFamily: 'Roboto, sans-serif' }}
+                        />
+                        <span className="text-[12px] text-[#9E9E9E]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                          (gesetzl. Max: 15)
+                        </span>
+                      </div>
+                      {limitError && (
+                        <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{limitError}</p>
+                      )}
+                    </div>
+
+                    {/* Auto-berechnetes Budget */}
+                    <div className="bg-[#F0F4FF] border border-[#C7D7F9] rounded p-3">
+                      <p className="text-[13px] text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                        Monatliches Budget:{' '}
+                        <strong>{Math.round(workingDays * dailyRate * 100) / 100} €</strong>
+                        <span className="text-[11px] text-[#9E9E9E] ml-1">({workingDays} × {dailyRate} €)</span>
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  /* Fix: einfaches Betrag-Feld */
+                  <div>
+                    <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                      Budget pro Mitarbeiter
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={limitValue}
+                        onChange={(e) => { setLimitValue(e.target.value); setLimitError(''); }}
+                        placeholder="z.B. 100"
+                        className={`w-40 h-[40px] px-3 py-2 border ${limitError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
+                        style={{ fontFamily: 'Roboto, sans-serif' }}
+                      />
+                      <span className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>€/Monat</span>
+                    </div>
+                    {limitError && (
+                      <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{limitError}</p>
+                    )}
+                  </div>
+                )}
               </div>
-              {limitError && (
-                <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  {limitError}
-                </p>
-              )}
-            </div>
+            ) : (
+              <div className="mb-4">
+                <label className="block text-[13px] font-medium text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  Budget pro Mitarbeiter
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={limitValue}
+                    onChange={(e) => {
+                      setLimitValue(e.target.value);
+                      setLimitError('');
+                    }}
+                    placeholder="z.B. 100"
+                    className={`flex-1 h-[40px] px-3 py-2 border ${limitError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
+                    style={{ fontFamily: 'Roboto, sans-serif', width: '250px' }}
+                  />
+                  <span className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                    €/Monat
+                  </span>
+                </div>
+                {limitError && (
+                  <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{limitError}</p>
+                )}
+              </div>
+            )}
 
             <p className="text-[12px] text-[#666666] mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Änderung gilt ab 1. nächsten Monat für alle Mitarbeiter dieses Standorts
+              Änderung gilt ab 1. nächsten Monat — wartet auf Riso-Genehmigung
             </p>
 
             <div className="flex gap-3 justify-end">
@@ -385,7 +562,7 @@ export function BenefitSettings({
         </div>
       )}
 
-      {/* Modal 2: Benefit löschen */}
+      {/* Modal 2: Benefit deaktivieren */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
@@ -394,11 +571,11 @@ export function BenefitSettings({
             </div>
 
             <h3 className="text-[18px] font-bold text-[#273A5F] mb-3 text-center" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Benefit löschen?
+              Benefit deaktivieren?
             </h3>
 
             <p className="text-[14px] text-[#333333] mb-4 text-center" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Möchtest du {benefitName} wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.
+              Möchtest du {benefitName} wirklich deaktivieren?
             </p>
 
             <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2">
@@ -419,7 +596,7 @@ export function BenefitSettings({
                 onClick={handleDelete} className="px-6 py-3 bg-[#F44336] text-white rounded-full hover:bg-[#D32F2F] transition"
                 style={{ fontFamily: 'Roboto, sans-serif', borderRadius: '24px' }}
               >
-                Löschen
+                Deaktivieren
               </button>
             </div>
           </div>

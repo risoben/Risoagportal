@@ -185,7 +185,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
           <AlertCircle className="text-[#F44336] mt-0.5" size={20} />
           <div className="flex-1">
             <p className="text-[#D32F2F] font-medium text-[14px]">Fehler beim Speichern</p>
-            <p className="text-[#D32F2F] text-sm">Bitte versuchen Sie es später erneut.</p>
+            <p className="text-[#D32F2F] text-sm">Bitte versuche es später erneut.</p>
           </div>
           <button onClick={() => setHasErrors(false)} className="text-[#D32F2F]">
             <X size={20} />
@@ -554,7 +554,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
               disabled={loadingState} className="px-6 py-3 border border-[#F44336] text-[#F44336] text-[14px] rounded hover:bg-[#FFEBEE] transition disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ borderRadius: '4px' }}
             >
-              Löschen
+              Inaktiv setzen
             </button>
           )}
           <div className={`flex gap-4 ${!isEditMode ? 'ml-auto' : ''}`}>
@@ -585,11 +585,10 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
               <span className="text-[48px]">⚠️</span>
             </div>
 
-            <h3 className="text-[#273A5F] text-[18px] mb-3 text-center">Standort löschen?</h3>
+            <h3 className="text-[#273A5F] text-[18px] mb-3 text-center">Standort deaktivieren?</h3>
 
             <p className="text-[#333333] text-[14px] mb-4 text-center">
-              Möchtest du "{masterData.locationName}" wirklich löschen? Diese Aktion kann nicht rückgängig gemacht
-              werden.
+              Möchtest du "{masterData.locationName}" wirklich deaktivieren?
             </p>
 
             <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2">
@@ -610,7 +609,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                 onClick={handleDelete} className="px-6 py-3 bg-[#F44336] text-white rounded hover:bg-[#D32F2F] transition"
                 style={{ borderRadius: '4px' }}
               >
-                Löschen
+                Inaktiv setzen
               </button>
             </div>
           </div>

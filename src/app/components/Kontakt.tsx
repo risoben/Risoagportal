@@ -27,23 +27,23 @@ export function Kontakt() {
   const faqItems = [
     {
       question: 'Wie füge ich einen neuen Mitarbeiter hinzu?',
-      answer: 'Sie können neue Mitarbeiter direkt im Portal unter Mitarbeiter > CSV importieren hinzufügen. Eine Schritt-für-Schritt-Anleitung finden Sie in unserer Hilfe.',
+      answer: 'Gehe zu Mitarbeiter → Neue Mitarbeiter importieren und lade eine CSV-Datei hoch. Alternativ kannst du einzelne Mitarbeiter über Neuen Mitarbeiter hinzufügen anlegen.',
     },
     {
       question: 'Wie aktiviere ich ein neues Benefit?',
-      answer: 'Gehen Sie zu Benefits > Benefits verwalten und folgen Sie dem Wizard. Das Benefit wird ab dem 1. des nächsten Monats aktiv.',
+      answer: 'Gehe zu Benefits → Benefits verwalten und aktiviere das Benefit per Toggle. Das Benefit wird ab dem 1. des nächsten Monats aktiv.',
     },
     {
       question: 'Was ist ein Standort?',
       answer: 'Ein Standort ist ein flexibler Organisationscontainer — z.B. ein Standort oder ein Tochterunternehmen. Ein Mitarbeiter gehört immer zu genau einem Standort.',
     },
     {
-      question: 'Wie ändere ich die Budget-Limits?',
-      answer: 'Sie können Budgets pro Standort in Verwaltung > Berichte anpassen. Änderungen gelten ab dem 1. des nächsten Monats.',
+      question: 'Wie ändere ich die Budgets?',
+      answer: 'Wähle den gewünschten Mitarbeiter unter Mitarbeiter aus und passe die Budgets direkt im Mitarbeiterprofil an. Änderungen gelten ab dem 1. des nächsten Monats.',
     },
     {
       question: 'Wo finde ich meine Berichte?',
-      answer: 'Alle erstellten Berichte sind unter Berichte > Meine Berichte verfügbar zum Download und zum Ansehen.',
+      answer: 'Alle generierten Berichte findest du unter Berichte. Du kannst jeden Bericht direkt herunterladen.',
     },
   ];
 

@@ -38,7 +38,7 @@ export function HelpPanel({ onClose }: HelpPanelProps) {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#6B7280]" />
             <input
               type="text"
-              placeholder="Search articles..."
+              placeholder="Artikel suchen..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)} className="w-full h-10 pl-10 pr-4 bg-white border border-[#0F429F] rounded text-sm text-[#273A5F] focus:outline-none focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20"
             />
@@ -119,8 +119,8 @@ export function HelpPanel({ onClose }: HelpPanelProps) {
                 </label>
                 <select className="w-full h-10 px-4 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#273A5F] focus:outline-none focus:border-[#0F429F] focus:ring-2 focus:ring-[#0F429F] focus:ring-opacity-20">
                   <option>CSV Import</option>
-                  <option>Budget Management</option>
-                  <option>Employee Management</option>
+                  <option>Budget-Verwaltung</option>
+                  <option>Mitarbeiter-Verwaltung</option>
                   <option>Berichte</option>
                   <option>Sonstiges</option>
                 </select>

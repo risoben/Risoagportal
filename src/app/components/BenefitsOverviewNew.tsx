@@ -16,102 +16,102 @@ interface Benefit {
 const benefits: Benefit[] = [
   {
     id: 'mittagessen',
-    name: 'Mittagessen',
-    description: 'bis 100€ / Monat',
-    limit: '100€ / Monat',
+    name: 'Essenszuschuss',
+    description: 'bis 115€ / Monat',
+    limit: 'bis 115€ / Monat',
     active: true,
     locations: ['München', 'Heddesheim'],
-    details: 'Steuerfreier Essenszuschuss für Mitarbeiter. Kann für Kantinenverpflegung oder Essensmarken verwendet werden.'
+    details: 'Erstattet deinen Mitarbeitern Mahlzeiten am Arbeitstag — täglich, flexibel, steuerfrei.'
   },
   {
     id: 'internet',
-    name: 'Internet',
+    name: 'Internetzuschuss',
     description: 'bis 50€ / Monat',
-    limit: '50€ / Monat',
+    limit: 'bis 50€ / Monat',
     active: true,
     locations: ['München', 'Berlin', 'Heddesheim'],
-    details: 'Zuschuss für Internetkosten im Home Office. Gesetzliches Maximum: 50€/Monat.'
+    details: 'Du übernimmst die privaten Internetkosten deiner Mitarbeiter — monatlich, unkompliziert.'
   },
   {
     id: 'kindergarten',
-    name: 'Kindergarten',
-    description: 'bis 150€ / Monat',
-    limit: '150€ / Monat',
+    name: 'Kindergartenzuschuss',
+    description: 'Tatsächliche Betreuungskosten',
+    limit: 'Tatsächliche Betreuungskosten',
     active: false,
     locations: ['München'],
-    details: 'Steuerfreier Zuschuss zur Kinderbetreuung gemäß §3 Nr. 33 EStG.'
+    details: 'Übernahme der Kita-Kosten deiner Mitarbeiter — unbegrenzt, bis zur Einschulung.'
   },
   {
     id: 'commuting',
     name: 'Fahrkostenzuschuss',
-    description: 'bis 80€ / Monat',
-    limit: '80€ / Monat',
+    description: 'ab 0,38€ pro Kilometer',
+    limit: 'ab 0,38€ pro Kilometer',
     active: true,
     locations: ['München', 'Heddesheim'],
-    details: 'Fahrtkostenzuschuss für Pendler. Exklusiv mit ÖPNV-Ticket.'
+    details: 'Erstattung des Arbeitswegs — abhängig von Entfernung und Arbeitstagen.'
   },
   {
     id: 'erholung',
-    name: 'Erholung',
-    description: 'bis 13€ / Monat',
-    limit: '13€ / Monat',
+    name: 'Erholungsbeihilfe',
+    description: 'ab 156€ / Jahr',
+    limit: 'ab 156€ / Jahr',
     active: true,
     locations: ['München', 'Berlin', 'Heddesheim'],
-    details: 'Erholungsbeihilfe. Jahresmaximum 156€ = ~13€/Monat.'
+    details: 'Jährlicher Urlaubszuschuss für Mitarbeiter und Familie — einmal im Jahr.'
   },
   {
     id: 'sachbezug',
     name: 'Sachbezug',
     description: 'bis 50€ / Monat',
-    limit: '50€ / Monat',
+    limit: 'bis 50€ / Monat',
     active: true,
     locations: ['München', 'Berlin'],
-    details: '§8 Abs. 2 EStG — Monatlicher Gutschein-Benefit.'
+    details: 'Monatlicher Gutschein aus unserem Partnernetzwerk — deine Mitarbeiter wählen selbst.'
   },
   {
     id: 'danke-bonus',
     name: 'Danke-Bonus',
     description: 'Variable Prämie',
-    limit: '100€ / Monat',
+    limit: 'Variable Prämie',
     active: true,
     locations: ['München'],
-    details: 'Flexible Prämie zur Wertschätzung außergewöhnlicher Leistungen.'
+    details: 'Flexibler Einmal-Bonus für besondere Leistungen — du entscheidest wann und wie viel.'
   },
   {
     id: 'geburtstag',
     name: 'Geburtstag',
-    description: 'Einmaliger Gutschein',
-    limit: '50€ / Jahr',
+    description: 'bis zu 60€ / Jahr',
+    limit: 'bis zu 60€ / Jahr',
     active: true,
     locations: ['München', 'Heddesheim'],
-    details: '§37b EStG — Einmaliger Gutschein zu besonderen Anlässen.'
+    details: 'Automatischer Gutschein im Geburtstagsmonat — persönliche Wertschätzung ohne Aufwand.'
   },
   {
     id: 'oepnv',
     name: 'ÖPNV',
-    description: 'bis 70€ / Monat',
-    limit: '70€ / Monat',
+    description: 'kein gesetzliches Maximum',
+    limit: 'kein gesetzliches Maximum',
     active: false,
     locations: ['Berlin'],
-    details: 'ÖPNV-Ticket-Zuschuss. Exklusiv mit Fahrtkostenzuschuss.'
+    details: 'Du übernimmst das Ticket für Bus und Bahn — vollständig steuerfrei, kein Höchstbetrag.'
   },
   {
     id: 'bkv',
     name: 'BKV',
     description: 'bis 80€ / Monat',
-    limit: '80€ / Monat',
+    limit: 'bis 80€ / Monat',
     active: true,
     locations: ['München'],
-    details: 'Betriebliche Krankenversicherung mit erweiterten Leistungen.'
+    details: 'Private Zusatzkrankenversicherung direkt durch dich als Arbeitgeber bezahlt.'
   },
   {
     id: 'bav',
     name: 'BAV',
-    description: 'bis 150€ / Monat',
-    limit: '150€ / Monat',
+    description: 'bis 676€ / Monat',
+    limit: 'bis 676€ / Monat',
     active: false,
     locations: ['München', 'Berlin'],
-    details: 'Betriebliche Altersvorsorge mit Arbeitgeberzuschuss.'
+    details: 'Betriebliche Altersvorsorge für deine Mitarbeiter — monatlicher Zuschuss direkt in ihren Versicherungsvertrag, steuerlich begünstigt, von Riso vollständig abgewickelt.'
   }
 ];
 
@@ -138,7 +138,7 @@ export function BenefitsOverviewNew() {
           <div>
             <h1 className="text-[#273A5F] font-bold text-[32px] mb-2">Benefits</h1>
             <p className="text-[#666666] text-[14px]">
-              Übersicht aller verfügbaren Benefits für Ihre Mitarbeiter
+              Übersicht aller verfügbaren Benefits für deine Mitarbeiter
             </p>
           </div>
           <button

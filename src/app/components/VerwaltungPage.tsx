@@ -179,9 +179,9 @@ export function VerwaltungPage() {
           </div>
         </div>
 
-        {/* SECTION 2: Berichte & Exports */}
+        {/* SECTION 2: Berichte & Exporte */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
-          <h2 className="text-[#273A5F] font-bold text-[18px] mb-5">Berichte & Exports</h2>
+          <h2 className="text-[#273A5F] font-bold text-[18px] mb-5">Berichte & Exporte</h2>
 
           {/* Subsection: Spalten-Auswahl */}
           <div className="mb-6">
