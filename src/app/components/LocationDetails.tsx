@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { ArrowLeft, Euro, Users as UsersIcon, TrendingUp, PieChart, Check } from 'lucide-react';
+import { ArrowLeft, Euro, Users as UsersIcon, TrendingUp, PieChart, Check, X } from 'lucide-react';
 import { Table, StatusBadge } from './Table';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
@@ -65,6 +65,38 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
 
   const updateBenefitLimit = (benefitId: string, value: string) => {
     setBenefitLimits(prev => ({ ...prev, [benefitId]: value }));
+  };
+
+  const ESSEN_DAILY_RATE = 7.67;
+  const [essenBudgetType, setEssenBudgetType] = useState<'dynamic' | 'fix'>('dynamic');
+
+  const [showDynamicModal, setShowDynamicModal] = useState(false);
+  const [dynamicWorkingDays, setDynamicWorkingDays] = useState(15);
+  const [dynamicModalError, setDynamicModalError] = useState('');
+
+  const [showFixModal, setShowFixModal] = useState(false);
+  const [fixModalValue, setFixModalValue] = useState('');
+  const [fixModalError, setFixModalError] = useState('');
+
+  const handleSaveDynamic = () => {
+    if (dynamicWorkingDays < 1 || dynamicWorkingDays > 15) {
+      setDynamicModalError('Arbeitstage müssen zwischen 1 und 15 liegen');
+      return;
+    }
+    const monthly = Math.round(dynamicWorkingDays * ESSEN_DAILY_RATE * 100) / 100;
+    setEssenBudgetType('dynamic');
+    updateBenefitLimit('mittagessen', String(monthly));
+    setShowDynamicModal(false);
+  };
+
+  const handleSaveFix = () => {
+    if (!fixModalValue.trim()) { setFixModalError('Feld erforderlich'); return; }
+    const num = parseFloat(fixModalValue.replace(',', '.'));
+    if (isNaN(num) || num < 0) { setFixModalError('Ungültiger Betrag'); return; }
+    setEssenBudgetType('fix');
+    updateBenefitLimit('mittagessen', String(num));
+    setShowFixModal(false);
+    setFixModalValue('');
   };
 
   const handleBack = () => {
@@ -238,16 +270,38 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                           <span className="text-sm text-[#000000]">{benefit.name}</span>
                         </div>
 
-                        <div className="flex items-center gap-1">
-                          <input
-                            type="text"
-                            value={benefitLimits[benefit.id] ?? ''}
-                            onChange={(e) => updateBenefitLimit(benefit.id, e.target.value)}
-                            disabled={!activeBenefits.has(benefit.id)}
-                            className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
-                            style={{ borderRadius: '4px' }}
-                          />
-                          <span className="text-sm text-[#666666]">€</span>
+                        <div className="flex items-center gap-2">
+                          {benefit.id === 'mittagessen' ? (
+                            <>
+                              <div className={`flex rounded border overflow-hidden transition ${!activeBenefits.has(benefit.id) ? 'opacity-40 pointer-events-none border-[#E0E0E0]' : 'border-[#0F429F]'}`}>
+                                <button
+                                  onClick={() => { setDynamicWorkingDays(15); setDynamicModalError(''); setShowDynamicModal(true); }}
+                                  className={`px-2 py-1 text-[11px] transition ${essenBudgetType === 'dynamic' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                                  title="Dynamisch — Arbeitstage × Tagessatz"
+                                >🔄 Auto</button>
+                                <button
+                                  onClick={() => { setFixModalValue(benefitLimits['mittagessen'] ?? ''); setFixModalError(''); setShowFixModal(true); }}
+                                  className={`px-2 py-1 text-[11px] transition border-l border-[#0F429F] ${essenBudgetType === 'fix' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
+                                  title="Fix — eigenen Betrag setzen"
+                                >📌 Fix</button>
+                              </div>
+                              <span className={`text-[12px] ${essenBudgetType === 'dynamic' ? 'text-[#0F429F]' : 'text-[#333]'}`}>
+                                {benefitLimits['mittagessen']} €
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <input
+                                type="text"
+                                value={benefitLimits[benefit.id] ?? ''}
+                                onChange={(e) => updateBenefitLimit(benefit.id, e.target.value)}
+                                disabled={!activeBenefits.has(benefit.id)}
+                                className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
+                                style={{ borderRadius: '4px' }}
+                              />
+                              <span className="text-sm text-[#666666]">€</span>
+                            </>
+                          )}
                         </div>
 
                         <div>
@@ -397,6 +451,96 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
           </div>
         )}
       </div>
+
+      {/* Modal: Dynamisches Budget (Essenszuschuss) */}
+      {showDynamicModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full" style={{ borderRadius: '8px' }}>
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Dynamisches Budget — Essenszuschuss
+            </h3>
+            <p className="text-[13px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Tagessatz × Arbeitstage (passt sich jährlich an)
+            </p>
+            <div className="mb-3">
+              <label className="block text-[13px] font-medium text-[#273A5F] mb-2">Tagessatz (gesetzl. Maximum)</label>
+              <div className="flex items-center gap-2">
+                <input type="text" value={`${ESSEN_DAILY_RATE} €`} disabled
+                  className="w-28 h-[40px] px-3 py-2 border border-[#E0E0E0] rounded text-[14px] bg-[#F5F5F5] text-[#9E9E9E]"
+                  style={{ borderRadius: '4px' }}
+                />
+                <span className="text-[12px] text-[#9E9E9E]">🔒 jährlich von Riso</span>
+              </div>
+            </div>
+            <div className="mb-3">
+              <label className="block text-[13px] font-medium text-[#273A5F] mb-2">Max. Arbeitstage / Monat</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number" min={1} max={15} value={dynamicWorkingDays}
+                  onChange={(e) => { setDynamicWorkingDays(Math.min(15, Math.max(1, Number(e.target.value)))); setDynamicModalError(''); }}
+                  className={`w-24 h-[40px] px-3 py-2 border ${dynamicModalError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none`}
+                  style={{ borderRadius: '4px' }}
+                  autoFocus
+                />
+                <span className="text-[12px] text-[#9E9E9E]">(max: 15)</span>
+              </div>
+              {dynamicModalError && <p className="text-[12px] text-[#F44336] mt-1">{dynamicModalError}</p>}
+            </div>
+            <div className="bg-[#F0F4FF] border border-[#C7D7F9] rounded p-3 mb-5">
+              <p className="text-[13px] text-[#273A5F]">
+                Monatliches Budget: <strong>{Math.round(dynamicWorkingDays * ESSEN_DAILY_RATE * 100) / 100} €</strong>
+                <span className="text-[11px] text-[#9E9E9E] ml-1">({dynamicWorkingDays} × {ESSEN_DAILY_RATE} €)</span>
+              </p>
+            </div>
+            <div className="flex gap-3 justify-end">
+              <button onClick={() => setShowDynamicModal(false)}
+                className="px-5 py-2.5 border border-[#0F429F] text-[#0F429F] text-[13px] rounded-full hover:bg-[#F0F4FF] transition"
+              >Abbrechen</button>
+              <button onClick={handleSaveDynamic}
+                className="px-5 py-2.5 bg-[#0F429F] text-white text-[13px] rounded-full hover:bg-[#246AFF] transition"
+              >Speichern</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Fixes Budget (Essenszuschuss) */}
+      {showFixModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full" style={{ borderRadius: '8px' }}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[18px] font-bold text-[#273A5F]">Fixes Budget — Essenszuschuss</h3>
+              <button onClick={() => setShowFixModal(false)} className="text-[#666666] hover:text-[#333]"><X size={20} /></button>
+            </div>
+            <p className="text-[13px] text-[#666666] mb-5">Fester Monatsbetrag für diesen Standort</p>
+            <div className="mb-4">
+              <label className="block text-[13px] font-medium text-[#273A5F] mb-2">Monatliches Budget</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={fixModalValue}
+                  onChange={(e) => { setFixModalValue(e.target.value); setFixModalError(''); }}
+                  placeholder="z.B. 80"
+                  className={`w-36 h-[40px] px-3 py-2 border ${fixModalError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none`}
+                  style={{ borderRadius: '4px' }}
+                  autoFocus
+                />
+                <span className="text-[14px] text-[#666666]">€/Monat</span>
+              </div>
+              {fixModalError && <p className="text-[12px] text-[#F44336] mt-1">{fixModalError}</p>}
+              <p className="text-[11px] text-[#9E9E9E] mt-2">Maximum: 115,05 € (15 Arbeitstage × 7,67 €)</p>
+            </div>
+            <div className="flex gap-3 justify-end">
+              <button onClick={() => { setShowFixModal(false); setFixModalValue(''); }}
+                className="px-5 py-2.5 border border-[#0F429F] text-[#0F429F] text-[13px] rounded-full hover:bg-[#F0F4FF] transition"
+              >Abbrechen</button>
+              <button onClick={handleSaveFix}
+                className="px-5 py-2.5 bg-[#0F429F] text-white text-[13px] rounded-full hover:bg-[#246AFF] transition"
+              >Speichern</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
