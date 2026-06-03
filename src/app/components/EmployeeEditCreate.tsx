@@ -533,9 +533,20 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
         {/* SECTION D: Benefits Table */}
         <div className="bg-white rounded border border-[#E0E0E0] p-6">
           <h2 className="text-[#273A5F] text-[16px] mb-2">Mitarbeiter-Benefits</h2>
-          <p className="text-[#666666] text-[12px] mb-6">
-            Wähle die Leistungen, die dieser Mitarbeiter erhalten soll. Die tatsächlichen Budgets pro Standort sind in der Benefit-Detail-Seite definiert.
+          <p className="text-[#666666] text-[12px] mb-3">
+            Wähle die Benefits aus, die dieser Mitarbeiter erhalten soll. Die Budgets pro Standort sind auf der Benefit-Detailseite definiert.
           </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1 mb-6">
+            <span className="text-[11px] text-[#666666]">
+              <span className="font-medium text-[#273A5F]">🔄 Auto</span> — Dynamisch: Tagessatz × Arbeitstage
+            </span>
+            <span className="text-[11px] text-[#666666]">
+              <span className="font-medium text-[#273A5F]">📌 Fix</span> — Fester Monatsbetrag
+            </span>
+            <span className="text-[11px] text-[#999999]">
+              Änderungen gelten ab dem 1. des nächsten Monats.
+            </span>
+          </div>
 
           <div className="px-6 py-6 space-y-6">
             {['Cash-Benefits', 'Gutschein-Benefits', 'Versicherungs-Benefits'].map(category => {
@@ -840,7 +851,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
                 <p className="text-[12px] text-[#F44336] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{fixModalError}</p>
               )}
               <p className="text-[11px] text-[#9E9E9E] mt-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Darf das standortweite Budget nicht überschreiten
+                Standortweites Maximum: <strong className="text-[#273A5F]">{benefits.find(b => b.id === fixModalBenefitId)?.monthlyLimit.replace('.', ',')} €</strong>
               </p>
             </div>
 
