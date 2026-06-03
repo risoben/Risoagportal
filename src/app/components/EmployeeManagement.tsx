@@ -294,6 +294,19 @@ export function EmployeeManagement() {
         </div>
       </div>
 
+      {/* Massenimport-Banner — Phase 2 */}
+      <div className="px-8 py-4">
+        <div className="flex items-center gap-4 bg-[#F9FAFB] border border-[#E0E0E0] rounded-xl px-6 py-4">
+          <div className="w-10 h-10 bg-[#E0E0E0] rounded-lg flex items-center justify-center flex-shrink-0">
+            <Upload className="w-5 h-5 text-[#999999]" />
+          </div>
+          <div>
+            <p className="text-[#666666] font-bold text-[14px]">Massenimport via CSV <span className="ml-2 px-2 py-0.5 bg-[#E0E0E0] text-[#666666] text-[11px] rounded-full font-medium">Phase 2</span></p>
+            <p className="text-[#999999] text-[13px]">Wird in einer späteren Version verfügbar sein — dann kannst du viele Mitarbeiter auf einmal importieren.</p>
+          </div>
+        </div>
+      </div>
+
       {/* Employee Table */}
       <div className="px-4 md:px-6 lg:px-8 py-6">
         <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-x-auto">

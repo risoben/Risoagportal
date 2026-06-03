@@ -12,27 +12,31 @@ interface LocationDetailsProps {
 
 // TODO: Replace this mock data with a real API call.
 // Endpoint: GET /api/v1/portal/locations/{id}
-// See DEVELOPER_GUIDE.md Section 5 (Location) for the full response shape including nested benefits, employees, and budgetChart.
+// API types (from Nalini 2026-06-03):
+//   - location_id: integer (not string)
+//   - benefit_id: integer (not string)
+//   - status: 0 = inactive, 1 = active (not boolean)
+// See DEVELOPER_GUIDE.md Section 5 (Location) for the full response shape.
 const mockAllBenefits = [
-  { id: 'mittagessen', name: 'Mittagessen', limit: 100, active: true },
-  { id: 'internet', name: 'Internet', limit: 50, active: true },
-  { id: 'kindergarten', name: 'Kindergarten', limit: 150, active: false },
-  { id: 'commuting', name: 'Fahrkostenzuschuss', limit: 80, active: true },
-  { id: 'danke-bonus', name: 'Danke-Bonus', limit: 100, active: true },
-  { id: 'erholung', name: 'Erholung', limit: 13, active: false },
-  { id: 'sachbezug', name: 'Sachbezug', limit: 50, active: false },
-  { id: 'geburtstag', name: 'Geburtstag', limit: 50, active: false },
-  { id: 'oepnv', name: 'ÖPNV', limit: 70, active: false },
-  { id: 'bkv', name: 'BKV', limit: 80, active: false },
-  { id: 'bav', name: 'BAV', limit: 150, active: false },
+  { id: 1, name: 'Mittagessen', limit: 100, active: 1 },
+  { id: 2, name: 'Internet', limit: 50, active: 1 },
+  { id: 3, name: 'Kindergarten', limit: 150, active: 0 },
+  { id: 4, name: 'Fahrkostenzuschuss', limit: 80, active: 1 },
+  { id: 5, name: 'Danke-Bonus', limit: 100, active: 1 },
+  { id: 6, name: 'Erholung', limit: 13, active: 0 },
+  { id: 7, name: 'Sachbezug', limit: 50, active: 0 },
+  { id: 8, name: 'Geburtstag', limit: 50, active: 0 },
+  { id: 9, name: 'ÖPNV', limit: 70, active: 0 },
+  { id: 10, name: 'BKV', limit: 80, active: 0 },
+  { id: 11, name: 'BAV', limit: 150, active: 0 },
 ];
 
 const employees = [
-  { id: '1', nr: 'MA-10234', name: 'Max Mustermann', department: 'IT', active: true },
-  { id: '2', nr: 'MA-10081', name: 'Sarah Weber', department: 'Marketing', active: true },
-  { id: '3', nr: 'MA-10977', name: 'Thomas Becker', department: 'Finanzen', active: true },
-  { id: '4', nr: 'MA-10542', name: 'Lisa Müller', department: 'HR', active: true },
-  { id: '5', nr: 'MA-11109', name: 'Michael Schmidt', department: 'IT', active: false },
+  { id: 1, nr: 'MA-10234', name: 'Max Mustermann', department: 'IT', active: 1 },
+  { id: 2, nr: 'MA-10081', name: 'Sarah Weber', department: 'Marketing', active: 1 },
+  { id: 3, nr: 'MA-10977', name: 'Thomas Becker', department: 'Finanzen', active: 1 },
+  { id: 4, nr: 'MA-10542', name: 'Lisa Müller', department: 'HR', active: 1 },
+  { id: 5, nr: 'MA-11109', name: 'Michael Schmidt', department: 'IT', active: 0 },
 ];
 
 const budgetData = [

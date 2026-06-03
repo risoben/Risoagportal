@@ -11,8 +11,6 @@ interface Location {
   employeeCount: number;
   enabled: boolean;
   budgetType?: 'dynamic' | 'fix';
-  pendingLimit?: string;
-  pendingStatus?: 'waiting';
 }
 
 interface BenefitSettingsProps {
@@ -84,52 +82,41 @@ export function BenefitSettings({
     setShowLimitModal(true);
   };
 
+  const [savedConfirm, setSavedConfirm] = useState<string | null>(null);
+
   const handleSaveLimit = () => {
     if (isEssen && essenBudgetType === 'dynamic') {
       if (workingDays < 1 || workingDays > 15) {
         setLimitError('Arbeitstage müssen zwischen 1 und 15 liegen');
         return;
       }
-      const pendingAmount = Math.round(workingDays * dailyRate * 100) / 100;
+      const newAmount = Math.round(workingDays * dailyRate * 100) / 100;
       if (editingLocation) {
         setLocations(locations.map((loc) =>
           loc.id === editingLocation.id
-            ? { ...loc, pendingLimit: `${pendingAmount}€/Monat`, pendingStatus: 'waiting' }
+            ? { ...loc, limit: `${newAmount}€/Monat`, budgetType: 'dynamic' }
             : loc
         ));
+        setSavedConfirm(`${editingLocation.name}: Änderung gespeichert — wird zum 1. nächsten Monat wirksam.`);
       }
     } else {
-      if (!limitValue.trim()) {
-        setLimitError('Feld erforderlich');
-        return;
-      }
+      if (!limitValue.trim()) { setLimitError('Feld erforderlich'); return; }
       const numValue = parseFloat(limitValue);
-      if (isNaN(numValue)) {
-        setLimitError('Nur Zahlen erlaubt');
-        return;
-      }
-      if (numValue < 0) {
-        setLimitError('Betrag kann nicht negativ sein');
-        return;
-      }
+      if (isNaN(numValue)) { setLimitError('Nur Zahlen erlaubt'); return; }
+      if (numValue < 0) { setLimitError('Betrag kann nicht negativ sein'); return; }
       if (editingLocation) {
         setLocations(locations.map((loc) =>
           loc.id === editingLocation.id
-            ? { ...loc, pendingLimit: `${limitValue}€/Monat`, pendingStatus: 'waiting' }
+            ? { ...loc, limit: `${limitValue}€/Monat`, budgetType: essenBudgetType }
             : loc
         ));
+        setSavedConfirm(`${editingLocation.name}: Änderung gespeichert — wird zum 1. nächsten Monat wirksam.`);
       }
     }
-
     setShowLimitModal(false);
     setEditingLocation(null);
     setLimitValue('');
-  };
-
-  const handleWithdrawPending = (locationId: string) => {
-    setLocations(locations.map((loc) =>
-      loc.id === locationId ? { ...loc, pendingLimit: undefined, pendingStatus: undefined } : loc
-    ));
+    setTimeout(() => setSavedConfirm(null), 4000);
   };
 
   const handleToggleLocation = (locationId: string) => {
@@ -266,25 +253,24 @@ export function BenefitSettings({
                 >Bearbeiten</button>
               )}
 
-              {/* Betrag + Pending */}
-              <div className="text-[#000000] text-sm overflow-hidden flex flex-col gap-0.5" style={{ minWidth: 0 }}>
+              {/* Betrag */}
+              <div className="text-[#000000] text-sm overflow-hidden" style={{ minWidth: 0 }}>
                 <span className={`text-[12px] ${locBudgetType === 'dynamic' && isEssen ? 'text-[#0F429F]' : ''}`}>
                   {locBudgetType === 'dynamic' && isEssen ? `Auto — ${location.limit}` : location.limit}
                 </span>
-                {location.pendingStatus === 'waiting' && (
-                  <span className="text-[11px] text-[#F59E0B] bg-[#FFFBEB] border border-[#F59E0B] rounded px-1.5 py-0.5 w-fit">
-                    → {location.pendingLimit} ⏳
-                    <button
-                      onClick={() => handleWithdrawPending(location.id)}
-                      className="ml-1 text-[#F44336] hover:underline text-[10px]"
-                    >zurückziehen</button>
-                  </span>
-                )}
               </div>
             </div>
           );
           })}
         </div>
+
+        {/* Logging-Bestätigung */}
+        {savedConfirm && (
+          <div className="mb-4 flex items-center gap-3 bg-[#E8F5E9] border border-[#A5D6A7] rounded-lg px-4 py-3">
+            <span className="text-[#2E7D32] text-[13px]">✅ {savedConfirm}</span>
+            <span className="text-[#666666] text-[11px] ml-auto">Änderung wird geloggt und zum 1. nächsten Monats aktiviert.</span>
+          </div>
+        )}
 
         {/* Legend: Budget-Typen */}
         <div className="mt-3 px-2 flex flex-wrap items-center gap-x-5 gap-y-1">

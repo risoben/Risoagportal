@@ -5,9 +5,9 @@ import { BenefitIconComponent } from './BenefitIconComponent';
 type FileType = 'PDF' | 'Excel' | 'CSV';
 
 type Report = {
-  id: string;
-  date: string;
-  month: string;
+  id: number;
+  year: number;
+  month: number;
   createdDate: string;
   version: string;
   fileType: FileType;
@@ -28,96 +28,16 @@ type Benefit = {
 // Endpoint: GET /api/v1/portal/reports?type=&location=&month=
 // See DEVELOPER_GUIDE.md Section 5 (Report) for the full response shape.
 const mockReports: Report[] = [
-  {
-    id: '1',
-    date: '01.04.',
-    month: 'April',
-    createdDate: '01.04.2026',
-    version: 'v2.3',
-    fileType: 'PDF',
-    fileName: 'Monatsbericht April',
-  },
-  {
-    id: '2',
-    date: '31.03.',
-    month: 'März',
-    createdDate: '31.03.2026',
-    version: 'v2.2',
-    fileType: 'Excel',
-    fileName: 'Quartalsübersicht Q1',
-  },
-  {
-    id: '3',
-    date: '28.02.',
-    month: 'Februar',
-    createdDate: '28.02.2026',
-    version: 'v2.1',
-    fileType: 'PDF',
-    fileName: 'Monatsbericht Februar',
-  },
-  {
-    id: '4',
-    date: '31.01.',
-    month: 'Januar',
-    createdDate: '31.01.2026',
-    version: 'v2.0',
-    fileType: 'Excel',
-    fileName: 'Jahresübersicht 2025',
-  },
-  {
-    id: '5',
-    date: '31.12.',
-    month: 'Dezember',
-    createdDate: '31.12.2025',
-    version: 'v1.9',
-    fileType: 'PDF',
-    fileName: 'Monatsbericht Dezember',
-  },
-  {
-    id: '6',
-    date: '30.11.',
-    month: 'November',
-    createdDate: '30.11.2025',
-    version: 'v1.8',
-    fileType: 'CSV',
-    fileName: 'Mitarbeiter-Export November',
-  },
-  {
-    id: '7',
-    date: '31.10.',
-    month: 'Oktober',
-    createdDate: '31.10.2025',
-    version: 'v1.7',
-    fileType: 'PDF',
-    fileName: 'Monatsbericht Oktober',
-  },
-  {
-    id: '8',
-    date: '30.09.',
-    month: 'September',
-    createdDate: '30.09.2025',
-    version: 'v1.6',
-    fileType: 'Excel',
-    fileName: 'Quartalsübersicht Q3',
-  },
-  {
-    id: '9',
-    date: '31.08.',
-    month: 'August',
-    createdDate: '31.08.2025',
-    version: 'v1.5',
-    fileType: 'PDF',
-    fileName: 'Monatsbericht August',
-  },
-  {
-    id: '10',
-    date: '15.01.',
-    month: 'Januar',
-    createdDate: '15.01.2026',
-    version: 'v1.9',
-    fileType: 'CSV',
-    fileName: 'Mitarbeiter-Export 2025',
-  },
+  { id: 1, year: 2026, month: 4,  createdDate: '01.04.2026', version: 'v2.3', fileType: 'PDF',   fileName: 'Monatsbericht April' },
+  { id: 2, year: 2026, month: 3,  createdDate: '31.03.2026', version: 'v2.2', fileType: 'Excel', fileName: 'Quartalsübersicht Q1' },
+  { id: 3, year: 2026, month: 2,  createdDate: '28.02.2026', version: 'v2.1', fileType: 'PDF',   fileName: 'Monatsbericht Februar' },
+  { id: 4, year: 2026, month: 1,  createdDate: '31.01.2026', version: 'v2.0', fileType: 'Excel', fileName: 'Jahresübersicht 2025' },
+  { id: 5, year: 2025, month: 12, createdDate: '31.12.2025', version: 'v1.9', fileType: 'PDF',   fileName: 'Monatsbericht Dezember' },
+  { id: 6, year: 2025, month: 11, createdDate: '30.11.2025', version: 'v1.8', fileType: 'CSV',   fileName: 'Mitarbeiter-Export November' },
+  { id: 7, year: 2025, month: 10, createdDate: '31.10.2025', version: 'v1.7', fileType: 'PDF',   fileName: 'Monatsbericht Oktober' },
+  { id: 8, year: 2025, month: 9,  createdDate: '30.09.2025', version: 'v1.6', fileType: 'Excel', fileName: 'Quartalsübersicht Q3' },
+  { id: 9, year: 2025, month: 8,  createdDate: '31.08.2025', version: 'v1.5', fileType: 'PDF',   fileName: 'Monatsbericht August' },
+  { id: 10, year: 2026, month: 1, createdDate: '15.01.2026', version: 'v1.9', fileType: 'CSV',   fileName: 'Mitarbeiter-Export 2025' },
 ];
 
 const mockBenefits: Benefit[] = [
@@ -241,12 +161,17 @@ export function ReportsPage() {
     }
   };
 
-  const handleView = (reportId: string) => {
+  const handleView = (reportId: number) => {
     alert(`Anzeigen: Report ${reportId}`);
   };
 
-  const handleDownload = (reportId: string, fileName: string) => {
-    alert(`Report "${fileName}" erfolgreich heruntergeladen`);
+  const handleDownload = (reportId: number, fileName: string, format: FileType) => {
+    // TODO: Call authenticated portal endpoint — never expose Zoho WorkDrive URL directly.
+    // Flow: GET /api/v1/portal/reports/{id}/download?format=pdf|excel
+    //   → backend fetches file from WorkDrive (zoho_drive_id from report_configuration)
+    //   → streams file to client as attachment (Content-Disposition: attachment)
+    // Report files are stored per-company in WorkDrive folders (report_folder_id in DB).
+    alert(`Report "${fileName}" (${format}) wird heruntergeladen...`);
   };
 
   const formatCurrency = (value: number) => {
@@ -334,8 +259,8 @@ export function ReportsPage() {
       {/* Table */}
       <div className="px-8 py-6">
         <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.7fr) minmax(0,0.8fr) minmax(0,1.2fr) minmax(0,0.6fr) minmax(0,0.8fr) minmax(0,2fr) minmax(240px,1.5fr)', minWidth: '900px' }}>
-            {['Datum','Monat','Erstellungsdatum','Version','Dateityp','Dateiname','Aktion'].map(h => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.2fr) minmax(0,0.6fr) minmax(0,0.8fr) minmax(0,2fr) minmax(280px,1.8fr)', minWidth: '960px' }}>
+            {['Jahr','Monat','Erstellungsdatum','Version','Dateityp','Dateiname','Aktion'].map(h => (
               <div key={h} className="text-white font-bold text-xs uppercase tracking-wide" style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px' }}>{h}</div>
             ))}
             {paginatedReports.map((report, index) => {
@@ -343,7 +268,7 @@ export function ReportsPage() {
               const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px' };
               return (
                 <React.Fragment key={report.id}>
-                  <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.date}</div>
+                  <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.year}</div>
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.month}</div>
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.createdDate}</div>
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.version}</div>
@@ -352,12 +277,15 @@ export function ReportsPage() {
                     <span className="text-sm text-[#000000]">{report.fileType}</span>
                   </div>
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000] truncate">{report.fileName}</div>
-                  <div style={{ ...c, gap: '8px', flexShrink: 0 }}>
+                  <div style={{ ...c, gap: '6px', flexShrink: 0 }}>
                     <button onClick={() => handleView(report.id)} className="flex items-center gap-1 px-3 py-1.5 border border-[#0F429F] text-[#0F429F] text-xs rounded-full hover:bg-[#F0F4FF] transition whitespace-nowrap">
                       <Eye className="w-3.5 h-3.5" />Ansehen
                     </button>
-                    <button onClick={() => handleDownload(report.id, report.fileName)} className="flex items-center gap-1 px-3 py-1.5 bg-[#0F429F] text-white text-xs rounded-full hover:bg-[#0A2E7A] transition whitespace-nowrap">
-                      <Download className="w-3.5 h-3.5" />Herunterladen
+                    <button onClick={() => handleDownload(report.id, report.fileName, 'PDF')} className="flex items-center gap-1 px-2 py-1.5 bg-red-500 text-white text-xs rounded-full hover:bg-red-600 transition whitespace-nowrap">
+                      <FileText className="w-3.5 h-3.5" />PDF
+                    </button>
+                    <button onClick={() => handleDownload(report.id, report.fileName, 'Excel')} className="flex items-center gap-1 px-2 py-1.5 bg-green-600 text-white text-xs rounded-full hover:bg-green-700 transition whitespace-nowrap">
+                      <FileSpreadsheet className="w-3.5 h-3.5" />Excel
                     </button>
                   </div>
                 </React.Fragment>

@@ -53,7 +53,6 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
   const [masterData, setMasterData] = useState({
     locationName: isEditMode ? 'München' : '',
     company: isEditMode ? 'Cassianiel Software' : '',
-    taxIdentificationNumber: isEditMode ? 'DE123456789' : '',
   });
 
   const [addressData, setAddressData] = useState({
@@ -267,19 +266,6 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
               </select>
             </div>
 
-            <div className="md:col-span-2">
-              <label className="block mb-1.5">
-                <span className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Steuernummer / VAT ID</span>
-              </label>
-              <input
-                type="text"
-                value={masterData.taxIdentificationNumber}
-                onChange={(e) => handleMasterDataChange('taxIdentificationNumber', e.target.value)}
-                placeholder="z.B. DE123456789"
-                disabled={loadingState} className="w-full px-3 py-2.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none focus:shadow-[0_0_0_3px_rgba(33,150,243,0.1)] transition disabled:bg-[#F5F5F5] disabled:cursor-not-allowed"
-                style={{ borderRadius: '4px', padding: '10px 12px' }}
-              />
-            </div>
           </div>
         </div>
 

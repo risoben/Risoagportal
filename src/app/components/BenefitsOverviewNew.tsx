@@ -1,3 +1,10 @@
+// BENEFITS VIEW vs LIST (Nalini clarification 2026-06-03):
+// - LIST:  GET /api/v1/portal/benefits          → returns all benefits with id, name, status, budget (compact)
+//          Used in: LocationDetails "Benefits" tab, EmployeeEditCreate benefit selection
+// - VIEW:  GET /api/v1/portal/benefits/{id}     → returns full detail: description, limits, locations, stats
+//          Used in: BenefitSettings (per-benefit detail page), this component (BenefitsOverviewNew)
+// benefit_id is integer in both endpoints (not string).
+
 import { useState } from 'react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { StatusBadge } from './Table';
