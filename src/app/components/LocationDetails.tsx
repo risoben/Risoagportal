@@ -18,17 +18,17 @@ interface LocationDetailsProps {
 //   - status: 0 = inactive, 1 = active (not boolean)
 // See DEVELOPER_GUIDE.md Section 5 (Location) for the full response shape.
 const mockAllBenefits = [
-  { id: 1, name: 'Mittagessen', limit: 100, active: 1 },
-  { id: 2, name: 'Internet', limit: 50, active: 1 },
-  { id: 3, name: 'Kindergarten', limit: 150, active: 0 },
-  { id: 4, name: 'Fahrkostenzuschuss', limit: 80, active: 1 },
-  { id: 5, name: 'Danke-Bonus', limit: 100, active: 1 },
-  { id: 6, name: 'Erholung', limit: 13, active: 0 },
-  { id: 7, name: 'Sachbezug', limit: 50, active: 0 },
-  { id: 8, name: 'Geburtstag', limit: 50, active: 0 },
-  { id: 9, name: 'ÖPNV', limit: 70, active: 0 },
-  { id: 10, name: 'BKV', limit: 80, active: 0 },
-  { id: 11, name: 'BAV', limit: 150, active: 0 },
+  { id: 1, name: 'Mittagessen', limit: 100, active: 1, settingsKey: 'mittagessen' },
+  { id: 2, name: 'Internet', limit: 50, active: 1, settingsKey: 'internet' },
+  { id: 3, name: 'Kindergarten', limit: 150, active: 0, settingsKey: 'kindergarten' },
+  { id: 4, name: 'Fahrkostenzuschuss', limit: 80, active: 1, settingsKey: 'commuting' },
+  { id: 5, name: 'Danke-Bonus', limit: 100, active: 1, settingsKey: 'danke-bonus' },
+  { id: 6, name: 'Erholung', limit: 13, active: 0, settingsKey: 'erholung' },
+  { id: 7, name: 'Sachbezug', limit: 50, active: 0, settingsKey: 'sachbezug' },
+  { id: 8, name: 'Geburtstag', limit: 50, active: 0, settingsKey: 'geburtstag' },
+  { id: 9, name: 'ÖPNV', limit: 70, active: 0, settingsKey: 'oepnv' },
+  { id: 10, name: 'BKV', limit: 80, active: 0, settingsKey: 'bkv' },
+  { id: 11, name: 'BAV', limit: 150, active: 0, settingsKey: 'bav' },
 ];
 
 const employees = [
@@ -58,17 +58,17 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
   const [activeTab, setActiveTab] = useState<'benefits' | 'employees' | 'overview'>('benefits');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeBenefits, setActiveBenefits] = useState<Set<string>>(
-    new Set(mockAllBenefits.filter(b => b.active).map(b => b.id))
+    new Set(mockAllBenefits.filter(b => b.active === 1).map(b => b.settingsKey))
   );
   const [benefitLimits, setBenefitLimits] = useState<Record<string, string>>(
-    Object.fromEntries(mockAllBenefits.map(b => [b.id, String(b.limit)]))
+    Object.fromEntries(mockAllBenefits.map(b => [b.settingsKey, String(b.limit)]))
   );
   const [activeEmployees, setActiveEmployees] = useState<Set<string>>(
-    new Set(employees.filter(e => e.active).map(e => e.id))
+    new Set(employees.filter(e => e.active === 1).map(e => String(e.id)))
   );
 
-  const updateBenefitLimit = (benefitId: string, value: string) => {
-    setBenefitLimits(prev => ({ ...prev, [benefitId]: value }));
+  const updateBenefitLimit = (settingsKey: string, value: string) => {
+    setBenefitLimits(prev => ({ ...prev, [settingsKey]: value }));
   };
 
   const ESSEN_DAILY_RATE = 7.67;
@@ -107,12 +107,12 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'locations' } }));
   };
 
-  const toggleBenefit = (benefitId: string) => {
+  const toggleBenefit = (settingsKey: string) => {
     const newSet = new Set(activeBenefits);
-    if (newSet.has(benefitId)) {
-      newSet.delete(benefitId);
+    if (newSet.has(settingsKey)) {
+      newSet.delete(settingsKey);
     } else {
-      newSet.add(benefitId);
+      newSet.add(settingsKey);
     }
     setActiveBenefits(newSet);
   };
@@ -129,7 +129,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
 
   const groupedBenefits = useMemo(() => {
     return mockAllBenefits.reduce((acc, benefit) => {
-      const benefitData = benefitsSettingsData[benefit.id];
+      const benefitData = benefitsSettingsData[benefit.settingsKey];
       if (!benefitData) return acc;
 
       let category = '';
@@ -149,7 +149,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
       label: 'AKTIV',
       width: '0.5fr',
       align: 'center' as const,
-      render: (_, row: any) => (
+      render: (_: unknown, row: any) => (
         <div className="flex items-center justify-center">
           <div className="relative flex items-center justify-center">
             <input
@@ -261,10 +261,10 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                         <div className="relative flex items-center justify-center">
                           <input
                             type="checkbox"
-                            checked={activeBenefits.has(benefit.id)}
-                            onChange={() => toggleBenefit(benefit.id)} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
+                            checked={activeBenefits.has(benefit.settingsKey)}
+                            onChange={() => toggleBenefit(benefit.settingsKey)} className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer hover:border-[#246AFF] transition-colors"
                           />
-                          {activeBenefits.has(benefit.id) && (
+                          {activeBenefits.has(benefit.settingsKey) && (
                             <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />
                           )}
                         </div>
@@ -275,9 +275,9 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                         </div>
 
                         <div className="flex items-center gap-2">
-                          {benefit.id === 'mittagessen' ? (
+                          {benefit.settingsKey === 'mittagessen' ? (
                             <>
-                              <div className={`flex rounded border overflow-hidden transition ${!activeBenefits.has(benefit.id) ? 'opacity-40 pointer-events-none border-[#E0E0E0]' : 'border-[#0F429F]'}`}>
+                              <div className={`flex rounded border overflow-hidden transition ${!activeBenefits.has(benefit.settingsKey) ? 'opacity-40 pointer-events-none border-[#E0E0E0]' : 'border-[#0F429F]'}`}>
                                 <button
                                   onClick={() => { setDynamicWorkingDays(15); setDynamicModalError(''); setShowDynamicModal(true); }}
                                   className={`px-2 py-1 text-[11px] transition ${essenBudgetType === 'dynamic' ? 'bg-[#0F429F] text-white font-medium' : 'bg-white text-[#0F429F] hover:bg-[#F0F4FF]'}`}
@@ -297,9 +297,9 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                             <>
                               <input
                                 type="text"
-                                value={benefitLimits[benefit.id] ?? ''}
-                                onChange={(e) => updateBenefitLimit(benefit.id, e.target.value)}
-                                disabled={!activeBenefits.has(benefit.id)}
+                                value={benefitLimits[benefit.settingsKey] ?? ''}
+                                onChange={(e) => updateBenefitLimit(benefit.settingsKey, e.target.value)}
+                                disabled={!activeBenefits.has(benefit.settingsKey)}
                                 className="w-20 px-2 py-1.5 border border-[#E0E0E0] rounded text-sm text-black focus:border-[#2196F3] focus:outline-none disabled:bg-[#F5F5F5] disabled:cursor-not-allowed transition"
                                 style={{ borderRadius: '4px' }}
                               />
@@ -309,7 +309,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                         </div>
 
                         <div>
-                          <StatusBadge status={activeBenefits.has(benefit.id) ? 'Aktiv' : 'Inaktiv'} type={activeBenefits.has(benefit.id) ? 'success' : 'inactive'} />
+                          <StatusBadge status={activeBenefits.has(benefit.settingsKey) ? 'Aktiv' : 'Inaktiv'} type={activeBenefits.has(benefit.settingsKey) ? 'success' : 'inactive'} />
                         </div>
                       </div>
                     ))}
