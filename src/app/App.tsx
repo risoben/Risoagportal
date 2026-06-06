@@ -14,6 +14,11 @@ import { BenefitsOverviewSimple } from './components/BenefitsOverviewSimple';
 import { BenefitsOverviewNew } from './components/BenefitsOverviewNew';
 import { BenefitsManagement } from './components/BenefitsManagement';
 import { BenefitSettings } from './components/BenefitSettings';
+import { BenefitDankeBonusSettings } from './components/BenefitDankeBonusSettings';
+import { BenefitGeburtstagSettings } from './components/BenefitGeburtstagSettings';
+import { BenefitErholungSettings } from './components/BenefitErholungSettings';
+import { BenefitBavSettings } from './components/BenefitBavSettings';
+import { BenefitBkvSettings } from './components/BenefitBkvSettings';
 import { BenefitFormComplete } from './components/BenefitFormComplete';
 import { BenefitEditLocation } from './components/BenefitEditLocation';
 import { BenefitAddLocation } from './components/BenefitAddLocation';
@@ -142,7 +147,12 @@ export default function App() {
               {currentView === 'benefits-management' && <BenefitsManagement />}
               {currentView === 'benefits-overview' && <BenefitsOverview />}
               {currentView === 'benefits-table' && <BenefitsOverviewPage />}
-              {currentView === 'benefits-edit' && <BenefitSettings benefitId={navigationData.benefitId} />}
+              {currentView === 'benefits-edit' && navigationData.benefitId === 'danke-bonus' && <BenefitDankeBonusSettings />}
+              {currentView === 'benefits-edit' && navigationData.benefitId === 'geburtstag' && <BenefitGeburtstagSettings />}
+              {currentView === 'benefits-edit' && navigationData.benefitId === 'erholung' && <BenefitErholungSettings />}
+              {currentView === 'benefits-edit' && navigationData.benefitId === 'bav' && <BenefitBavSettings />}
+              {currentView === 'benefits-edit' && navigationData.benefitId === 'bkv' && <BenefitBkvSettings />}
+              {currentView === 'benefits-edit' && !['danke-bonus','geburtstag','erholung','bav','bkv'].includes(navigationData.benefitId) && <BenefitSettings benefitId={navigationData.benefitId} />}
               {currentView === 'benefits-form' && <BenefitFormComplete mode="Edit" />}
               {currentView === 'benefits-create' && <BenefitFormComplete mode="Create" />}
               {currentView === 'benefits-edit-location' && <BenefitEditLocation />}

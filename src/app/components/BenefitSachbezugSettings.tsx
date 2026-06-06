@@ -1,5 +1,5 @@
-import { BenefitSettings } from './BenefitSettings';
+import { BenefitStandardSettings } from './BenefitStandardSettings';
 
 export function BenefitSachbezugSettings() {
-  return <BenefitSettings benefitId="sachbezug" />;
+  return <BenefitStandardSettings benefitId="sachbezug" />;
 }

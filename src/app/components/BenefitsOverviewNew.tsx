@@ -105,8 +105,8 @@ const benefits: Benefit[] = [
   {
     id: 'bkv',
     name: 'BKV',
-    description: 'bis 80€ / Monat',
-    limit: 'bis 80€ / Monat',
+    description: 'bis 50€ / Monat',
+    limit: 'bis 50€ / Monat',
     active: true,
     locations: ['München'],
     details: 'Private Zusatzkrankenversicherung direkt durch dich als Arbeitgeber bezahlt.'

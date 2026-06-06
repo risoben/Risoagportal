@@ -1,5 +1,5 @@
-import { BenefitSettings } from './BenefitSettings';
+import { BenefitStandardSettings } from './BenefitStandardSettings';
 
 export function BenefitInternetSettings() {
-  return <BenefitSettings benefitId="internet" />;
+  return <BenefitStandardSettings benefitId="internet" />;
 }

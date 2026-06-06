@@ -1,5 +1,5 @@
-import { BenefitSettings } from './BenefitSettings';
+import { BenefitStandardSettings } from './BenefitStandardSettings';
 
 export function BenefitKindergartenSettings() {
-  return <BenefitSettings benefitId="kindergarten" />;
+  return <BenefitStandardSettings benefitId="kindergarten" />;
 }

@@ -1,5 +1,5 @@
-import { BenefitSettings } from './BenefitSettings';
+import { BenefitStandardSettings } from './BenefitStandardSettings';
 
 export function BenefitCommutingSettings() {
-  return <BenefitSettings benefitId="commuting" />;
+  return <BenefitStandardSettings benefitId="commuting" />;
 }

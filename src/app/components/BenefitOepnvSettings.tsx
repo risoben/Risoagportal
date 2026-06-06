@@ -1,5 +1,5 @@
-import { BenefitSettings } from './BenefitSettings';
+import { BenefitStandardSettings } from './BenefitStandardSettings';
 
 export function BenefitOepnvSettings() {
-  return <BenefitSettings benefitId="oepnv" />;
+  return <BenefitStandardSettings benefitId="oepnv" />;
 }
