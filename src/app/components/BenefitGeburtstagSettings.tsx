@@ -33,6 +33,8 @@ export function BenefitGeburtstagSettings() {
   const data = benefitsSettingsData['geburtstag'];
   const taxInfo = data?.taxInfo;
 
+  const [isActive, setIsActive] = useState(true);
+  const [showDeactivateModal, setShowDeactivateModal] = useState(false);
   const [locations, setLocations] = useState<LocationEntry[]>(MOCK_LOCATIONS);
   const [birthdays, setBirthdays] = useState<BirthdayEntry[]>([]);
   const [savedConfirm, setSavedConfirm] = useState<string | null>(null);
@@ -102,8 +104,17 @@ export function BenefitGeburtstagSettings() {
             </div>
           </div>
           <div className="text-right">
-            <StatusBadge status="Aktiv" type="success" />
-            <p className="text-[11px] text-[#666666] mt-1">Wird automatisch ausgelöst</p>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[13px] text-[#273A5F]">Status</span>
+              <button
+                onClick={() => setIsActive(v => !v)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isActive ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'}`}
+              >
+                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isActive ? 'translate-x-6' : 'translate-x-1'}`} />
+              </button>
+              <StatusBadge status={isActive ? 'Aktiv' : 'Inaktiv'} type={isActive ? 'success' : 'inactive'} />
+            </div>
+            <p className="text-[11px] text-[#666666]">Wird automatisch ausgelöst</p>
           </div>
         </div>
       </div>
@@ -119,9 +130,6 @@ export function BenefitGeburtstagSettings() {
             <span className="text-[11px] bg-[#E8F5E9] text-[#2E7D32] px-3 py-1 rounded-full">Bis zu 60 € / Mitarbeiter</span>
           </div>
         </div>
-
-        {/* Section 2: Steuer */}
-        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
 
         {/* Save confirmation */}
         {savedConfirm && (
@@ -213,7 +221,35 @@ export function BenefitGeburtstagSettings() {
           </p>
         </div>
 
-        <div className="flex justify-end mt-6">
+        {/* Nutzungsstatistik */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6 mt-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-5">Nutzungsstatistik</h2>
+          <div className="grid grid-cols-3 gap-6">
+            {[
+              { label: 'Mitarbeiter mit Zugriff', value: '57' },
+              { label: 'Gutscheine dieses Jahr', value: '12' },
+              { label: 'Nächster Geburtstag', value: 'Juli 2026' },
+            ].map(({ label, value }) => (
+              <div key={label} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 text-center">
+                <p className="text-[24px] font-bold text-[#273A5F]">{value}</p>
+                <p className="text-[12px] text-[#666666] mt-2">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Steuerliche Behandlung */}
+        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
+
+        {/* Action Buttons */}
+        <div className="flex justify-between items-center mt-8 mb-8">
+          <button
+            onClick={() => setShowDeactivateModal(true)}
+            className="px-6 py-3 border border-[#F44336] text-[#F44336] font-medium rounded-full hover:bg-[#FFEBEE] transition"
+            style={{ borderRadius: '24px' }}
+          >
+            Deaktivieren
+          </button>
           <button
             className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#246AFF] transition"
             style={{ borderRadius: '24px' }}
@@ -226,6 +262,33 @@ export function BenefitGeburtstagSettings() {
           </button>
         </div>
       </div>
+
+      {/* Deactivate Modal */}
+      {showDeactivateModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full text-center" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            <div className="text-[48px] mb-3">⚠️</div>
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-3">Benefit deaktivieren?</h3>
+            <p className="text-[14px] text-[#333333] mb-4">Möchtest du den <strong>Geburtstagsgutschein</strong> wirklich deaktivieren?</p>
+            <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2 text-left">
+              <span>⚠️</span>
+              <p className="text-[12px] text-[#F44336]">Mitarbeiter erhalten ab 1. nächsten Monat keinen automatischen Geburtstagsgutschein mehr.</p>
+            </div>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => setShowDeactivateModal(false)}
+                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
+                style={{ borderRadius: '24px' }}
+              >Abbrechen</button>
+              <button
+                onClick={() => { setShowDeactivateModal(false); goBack(); }}
+                className="px-6 py-3 bg-[#F44336] text-white rounded-full hover:bg-[#D32F2F] transition"
+                style={{ borderRadius: '24px' }}
+              >Deaktivieren</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Add Birthday Modal */}
       {showModal && (

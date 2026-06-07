@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, FileText, Download, Eye, Euro, Edit2 } from 'lucide-react';
+import { Users, FileText, FileSpreadsheet, Download, Eye, Euro, Edit2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { StatusBadge } from './Table';
@@ -351,11 +351,19 @@ export function Dashboard() {
                       <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.month}</div>
                       <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.createdDate}</div>
                       <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.version}</div>
-                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.fileType}</div>
+                      <div style={{ ...c, gap: '6px' }}>
+                        {report.fileType === 'PDF' ? (
+                          <FileText className="w-4 h-4 text-red-500 flex-shrink-0" />
+                        ) : (
+                          <FileSpreadsheet className="w-4 h-4 text-green-600 flex-shrink-0" />
+                        )}
+                        <span className="text-sm text-[#000000]">{report.fileType}</span>
+                      </div>
                       <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000] truncate" title={report.fileName}>{report.fileName}</div>
-                      <div style={{ ...c, gap: '8px', flexShrink: 0 }}>
+                      <div style={{ ...c, gap: '6px', flexShrink: 0 }}>
                         <button className="bg-[#0F429F] text-white px-3 h-8 rounded-full text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1 whitespace-nowrap"><Eye size={14} />Ansehen</button>
-                        <button className="bg-[#246AFF] text-white px-3 h-8 rounded-full text-sm hover:bg-[#1a56e0] transition-colors flex items-center gap-1 whitespace-nowrap"><Download size={14} />Download</button>
+                        <button className="bg-red-500 text-white px-3 h-8 rounded-full text-sm hover:bg-red-600 transition-colors flex items-center gap-1 whitespace-nowrap"><FileText size={14} />PDF</button>
+                        <button className="bg-green-600 text-white px-3 h-8 rounded-full text-sm hover:bg-green-700 transition-colors flex items-center gap-1 whitespace-nowrap"><FileSpreadsheet size={14} />Excel</button>
                       </div>
                     </React.Fragment>
                   );

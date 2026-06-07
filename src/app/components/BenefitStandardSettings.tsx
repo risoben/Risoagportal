@@ -31,6 +31,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
   const benefitName = data?.name ?? benefitId;
   const description = data?.description ?? '';
   const taxInfo = data?.taxInfo;
+  const maxBudget = data?.maxBudgetPerEmployee;
 
   const [isActive, setIsActive] = useState(true);
   const [locations, setLocations] = useState<StandardLocation[]>(DEFAULT_LOCATIONS);
@@ -57,6 +58,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
     const n = parseFloat(budgetInput.replace(',', '.'));
     if (!budgetInput.trim() || isNaN(n)) { setBudgetError('Bitte gültigen Betrag eingeben'); return; }
     if (n <= 0) { setBudgetError('Betrag muss größer als 0 sein'); return; }
+    if (maxBudget && n > maxBudget) { setBudgetError(`Überschreitet das Maximum (${maxBudget} €/Monat)`); return; }
     if (editingLoc) {
       setLocations(prev => prev.map(l => l.id === editingLoc.id ? { ...l, budgetPerEmployee: n } : l));
       setSavedConfirm(`${editingLoc.name}: Budget gespeichert — gilt ab 1. nächsten Monat.`);
@@ -113,9 +115,6 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
           <h2 className="text-[18px] font-bold text-[#273A5F] mb-3">Benefit-Informationen</h2>
           <p className="text-[14px] text-[#333333]" style={{ lineHeight: '1.6' }}>{description}</p>
         </div>
-
-        {/* Section 2: Steuerliche Behandlung */}
-        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
 
         {/* Save confirmation banner */}
         {savedConfirm && (
@@ -212,6 +211,9 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
           </div>
         </div>
 
+        {/* Section 7: Steuerliche Behandlung */}
+        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
+
         {/* Action Buttons */}
         <div className="flex justify-between items-center mt-8">
           <button
@@ -249,11 +251,15 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
                 <input
                   type="number"
                   min={1}
+                  max={maxBudget ?? undefined}
                   value={budgetInput}
                   onChange={e => { setBudgetInput(e.target.value); setBudgetError(''); }}
                   className={`w-40 h-[40px] px-3 border ${budgetError ? 'border-[#F44336]' : 'border-[#0F429F]'} rounded text-[14px] focus:outline-none focus:ring-2 focus:ring-[#0F429F]`}
                 />
                 <span className="text-[14px] text-[#666666]">€/Monat</span>
+                {maxBudget && (
+                  <span className="text-[12px] text-[#9E9E9E]">max. {maxBudget} €</span>
+                )}
               </div>
               {budgetError && <p className="text-[12px] text-[#F44336] mt-1">{budgetError}</p>}
             </div>

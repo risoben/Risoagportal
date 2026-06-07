@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { BenefitTaxInfo } from './BenefitTaxInfo';
+import { StatusBadge } from './Table';
 import { benefitsSettingsData } from './benefitSettingsData';
 
 type ErholungStatus = 'pending' | 'approved' | 'rejected';
@@ -74,11 +75,13 @@ export function BenefitErholungSettings() {
   const [formStep, setFormStep] = useState<'form' | 'confirmation'>('form');
   const [lastSubmitted, setLastSubmitted] = useState<{ id: string; employee: string; availableFrom: string } | null>(null);
 
+  const [isActive, setIsActive] = useState(true);
   const [showBudgetModal, setShowBudgetModal] = useState(false);
   const [editingLoc, setEditingLoc] = useState<ErholungLocation | null>(null);
   const [budgetInput, setBudgetInput] = useState('');
   const [budgetError, setBudgetError] = useState('');
   const [savedConfirm, setSavedConfirm] = useState<string | null>(null);
+  const [showDeactivateModal, setShowDeactivateModal] = useState(false);
 
   const goBack = () =>
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-management' } }));
@@ -170,6 +173,19 @@ export function BenefitErholungSettings() {
               <p className="text-[13px] text-[#666666] mt-1">Einmal pro Jahr — bis zu 156 € + Familienzuschläge</p>
             </div>
           </div>
+          <div className="text-right">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[13px] text-[#273A5F]">Status</span>
+              <button
+                onClick={() => setIsActive(v => !v)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isActive ? 'bg-[#4CAF50]' : 'bg-[#9E9E9E]'}`}
+              >
+                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isActive ? 'translate-x-6' : 'translate-x-1'}`} />
+              </button>
+              <StatusBadge status={isActive ? 'Aktiv' : 'Inaktiv'} type={isActive ? 'success' : 'inactive'} />
+            </div>
+            <p className="text-[11px] text-[#666666]">Status-Änderung gilt ab 1. nächsten Monat</p>
+          </div>
         </div>
       </div>
 
@@ -192,9 +208,6 @@ export function BenefitErholungSettings() {
             ))}
           </div>
         </div>
-
-        {/* Section 2: Steuer */}
-        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
 
         {/* Save confirmation */}
         {savedConfirm && (
@@ -410,7 +423,70 @@ export function BenefitErholungSettings() {
             </>
           )}
         </div>
+        {/* Section 5: Nutzungsstatistik */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-5">Nutzungsstatistik</h2>
+          <div className="grid grid-cols-3 gap-6">
+            {[
+              { label: 'Mitarbeiter mit Zugriff', value: '57' },
+              { label: 'Vergaben dieses Jahr', value: '23' },
+              { label: 'Ø Betrag je Vergabe', value: '156 €' },
+            ].map(({ label, value }) => (
+              <div key={label} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 text-center">
+                <p className="text-[24px] font-bold text-[#273A5F]">{value}</p>
+                <p className="text-[12px] text-[#666666] mt-2">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section 6: Steuerliche Behandlung */}
+        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
+
+        {/* Action Buttons */}
+        <div className="flex justify-between items-center mt-8 mb-8">
+          <button
+            onClick={() => setShowDeactivateModal(true)}
+            className="px-6 py-3 border border-[#F44336] text-[#F44336] font-medium rounded-full hover:bg-[#FFEBEE] transition"
+            style={{ borderRadius: '24px' }}
+          >
+            Deaktivieren
+          </button>
+          <button
+            className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#246AFF] transition"
+            style={{ borderRadius: '24px' }}
+          >
+            Speichern
+          </button>
+        </div>
       </div>
+
+      {/* Deactivate Modal */}
+      {showDeactivateModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full text-center" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            <div className="text-[48px] mb-3">⚠️</div>
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-3">Benefit deaktivieren?</h3>
+            <p className="text-[14px] text-[#333333] mb-4">Möchtest du die <strong>Erholungsbeihilfe</strong> wirklich deaktivieren?</p>
+            <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2 text-left">
+              <span>⚠️</span>
+              <p className="text-[12px] text-[#F44336]">Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf dieses Benefit.</p>
+            </div>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => setShowDeactivateModal(false)}
+                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
+                style={{ borderRadius: '24px' }}
+              >Abbrechen</button>
+              <button
+                onClick={() => { setShowDeactivateModal(false); goBack(); }}
+                className="px-6 py-3 bg-[#F44336] text-white rounded-full hover:bg-[#D32F2F] transition"
+                style={{ borderRadius: '24px' }}
+              >Deaktivieren</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Budget Modal */}
       {showBudgetModal && editingLoc && (

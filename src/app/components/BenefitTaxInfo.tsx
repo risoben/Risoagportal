@@ -4,7 +4,8 @@ interface BenefitTaxInfoProps {
 }
 
 export function BenefitTaxInfo({ steuer, sv }: BenefitTaxInfoProps) {
-  const svFrei = sv.toLowerCase().startsWith('sv-frei');
+  const svLower = sv.toLowerCase();
+  const svFrei = svLower.startsWith('sv-frei') || svLower.startsWith('sozialversicherungsfrei');
 
   return (
     <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">

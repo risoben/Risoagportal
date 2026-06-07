@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { BenefitTaxInfo } from './BenefitTaxInfo';
 import { StatusBadge } from './Table';
+import { benefitsSettingsData } from './benefitSettingsData';
 
 type Occasion = 'goal_achieved' | 'team_result' | 'anniversary' | 'company_event' | 'other_professional';
 type AssignmentStatus = 'pending' | 'approved' | 'rejected';
@@ -12,6 +13,7 @@ interface LocationBudget {
   name: string;
   maxPerEmployee: number;
   employeeCount: number;
+  enabled: boolean;
 }
 
 interface DankebonusAssignment {
@@ -34,9 +36,9 @@ const OCCASION_LABELS: Record<Occasion, string> = {
 };
 
 const MOCK_LOCATIONS: LocationBudget[] = [
-  { id: '1', name: 'München', maxPerEmployee: 500, employeeCount: 34 },
-  { id: '2', name: 'Heddesheim', maxPerEmployee: 300, employeeCount: 15 },
-  { id: '3', name: 'Berlin', maxPerEmployee: 500, employeeCount: 8 },
+  { id: '1', name: 'München', maxPerEmployee: 500, employeeCount: 34, enabled: true },
+  { id: '2', name: 'Heddesheim', maxPerEmployee: 300, employeeCount: 15, enabled: true },
+  { id: '3', name: 'Berlin', maxPerEmployee: 500, employeeCount: 8, enabled: false },
 ];
 
 const MOCK_EMPLOYEES: Record<string, string[]> = {
@@ -96,8 +98,15 @@ export function BenefitDankeBonusSettings() {
   const [budgetError, setBudgetError]           = useState('');
   const [savedConfirm, setSavedConfirm]         = useState<string | null>(null);
 
+  const [showDeactivateModal, setShowDeactivateModal] = useState(false);
+
+  const taxInfo = benefitsSettingsData['danke-bonus']?.taxInfo;
+
   const goBack = () =>
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-management' } }));
+
+  const handleToggleLocation = (id: string) =>
+    setLocations(prev => prev.map(l => l.id === id ? { ...l, enabled: !l.enabled } : l));
 
   const selectedLocation = locations.find(l => l.id === formLocationId);
   const availableEmployees = MOCK_EMPLOYEES[formLocationId] ?? [];
@@ -222,12 +231,6 @@ export function BenefitDankeBonusSettings() {
             <span className="text-[11px] bg-[#FFF8E1] text-[#F57F17] px-3 py-1 rounded-full">Riso-Genehmigung erforderlich</span>
           </div>
         </div>
-
-        {/* Section 1b: Steuerliche Behandlung */}
-        <BenefitTaxInfo
-          steuer="30 % Pauschalsteuer + Soli + Kirche (§37b EStG)"
-          sv="SV-pflichtig"
-        />
 
         {/* Section 2: Dankebonus vergeben */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
@@ -412,7 +415,65 @@ export function BenefitDankeBonusSettings() {
           ))}
         </div>
 
-        {/* Section 4: Verlauf */}
+        {/* Section 4: Verfügbar für diese Standorte */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-4">Verfügbar für diese Standorte</h2>
+          <div className="space-y-1">
+            {locations.map(loc => (
+              <label key={loc.id} className="flex items-center gap-3 px-3 py-2.5 hover:bg-[#F0F4FF] rounded cursor-pointer transition">
+                <div className="relative flex items-center justify-center">
+                  <input
+                    type="checkbox"
+                    checked={loc.enabled}
+                    onChange={() => handleToggleLocation(loc.id)}
+                    className="appearance-none w-[18px] h-[18px] border-2 border-[#0F429F] rounded checked:bg-[#0F429F] cursor-pointer transition-colors"
+                  />
+                  {loc.enabled && <Check size={12} className="absolute text-white pointer-events-none" strokeWidth={3} />}
+                </div>
+                <span className="text-[14px] text-[#333333]">{loc.name} ({loc.employeeCount} Mitarbeiter)</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Section 5: Nutzungsstatistik */}
+        <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+          <h2 className="text-[18px] font-bold text-[#273A5F] mb-5">Nutzungsstatistik</h2>
+          <div className="grid grid-cols-3 gap-6">
+            {[
+              { label: 'Mitarbeiter mit Zugriff', value: '57' },
+              { label: 'Dankeboni dieses Jahr', value: '8' },
+              { label: 'Ø Betrag', value: '250 €' },
+            ].map(({ label, value }) => (
+              <div key={label} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4 text-center">
+                <p className="text-[24px] font-bold text-[#273A5F]">{value}</p>
+                <p className="text-[12px] text-[#666666] mt-2">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section 6: Steuerliche Behandlung */}
+        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
+
+        {/* Action Buttons */}
+        <div className="flex justify-between items-center mt-8 mb-8">
+          <button
+            onClick={() => setShowDeactivateModal(true)}
+            className="px-6 py-3 border border-[#F44336] text-[#F44336] font-medium rounded-full hover:bg-[#FFEBEE] transition"
+            style={{ borderRadius: '24px' }}
+          >
+            Deaktivieren
+          </button>
+          <button
+            className="px-8 py-3 bg-[#0F429F] text-white font-medium rounded-full hover:bg-[#246AFF] transition"
+            style={{ borderRadius: '24px' }}
+          >
+            Speichern
+          </button>
+        </div>
+
+        {/* Section 7: Verlauf */}
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
           <h2 className="text-[18px] font-bold text-[#273A5F] mb-5">Verlauf Dankeboni</h2>
 
@@ -470,6 +531,33 @@ export function BenefitDankeBonusSettings() {
           )}
         </div>
       </div>
+
+      {/* Deactivate Modal */}
+      {showDeactivateModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full text-center" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            <div className="text-[48px] mb-3">⚠️</div>
+            <h3 className="text-[18px] font-bold text-[#273A5F] mb-3">Benefit deaktivieren?</h3>
+            <p className="text-[14px] text-[#333333] mb-4">Möchtest du den <strong>Danke-Bonus</strong> wirklich deaktivieren?</p>
+            <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2 text-left">
+              <span>⚠️</span>
+              <p className="text-[12px] text-[#F44336]">Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf dieses Benefit.</p>
+            </div>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => setShowDeactivateModal(false)}
+                className="px-6 py-3 border border-[#0F429F] text-[#0F429F] rounded-full hover:bg-[#F0F4FF] transition"
+                style={{ borderRadius: '24px' }}
+              >Abbrechen</button>
+              <button
+                onClick={() => { setShowDeactivateModal(false); goBack(); }}
+                className="px-6 py-3 bg-[#F44336] text-white rounded-full hover:bg-[#D32F2F] transition"
+                style={{ borderRadius: '24px' }}
+              >Deaktivieren</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Budget Edit Modal */}
       {showBudgetModal && editingLocation && (

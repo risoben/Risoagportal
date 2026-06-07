@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { ArrowLeft, Check } from 'lucide-react';
 import { BenefitIconComponent } from './BenefitIconComponent';
+import { BenefitTaxInfo } from './BenefitTaxInfo';
 import { StatusBadge } from './Table';
 import { benefitsSettingsData } from './benefitSettingsData';
 
@@ -56,6 +57,7 @@ export function BenefitSettings({
   };
   const isEssen = benefitName === 'Mittagessen' || benefitName.toLowerCase().includes('essen');
   const dailyRate = 7.67;
+  const taxInfo = benefitData?.taxInfo ?? benefitsSettingsData['mittagessen']?.taxInfo;
 
   const [isActive, setIsActive] = useState(true);
   const [showLimitModal, setShowLimitModal] = useState(false);
@@ -246,11 +248,13 @@ export function BenefitSettings({
                   >📌 Fix</button>
                 </div>
               ) : (
-                <button
-                  onClick={() => handleEditLimit(location)}
-                  className="px-4 py-2 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-2xl hover:bg-[#F0F4FF] transition"
-                  style={{ fontFamily: 'Roboto, sans-serif' }}
-                >Bearbeiten</button>
+                <div>
+                  <button
+                    onClick={() => handleEditLimit(location)}
+                    className="px-4 py-1.5 border border-[#0F429F] text-[#0F429F] text-[12px] rounded-full hover:bg-[#F0F4FF] transition"
+                    style={{ fontFamily: 'Roboto, sans-serif' }}
+                  >Bearbeiten</button>
+                </div>
               )}
 
               {/* Betrag */}
@@ -358,6 +362,9 @@ export function BenefitSettings({
             </div>
           </div>
         </div>
+
+        {/* Section 7: Steuerliche Behandlung */}
+        {taxInfo && <BenefitTaxInfo steuer={taxInfo.steuer} sv={taxInfo.sv} />}
 
         {/* Action Buttons */}
         <div className="flex justify-between items-center mt-8">
