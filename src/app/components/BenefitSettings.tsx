@@ -870,10 +870,14 @@ export function BenefitSettings({
                   const isAllEmployees = a.employeeName === 'Alle Mitarbeiter';
                   const locId = locations.find(l => l.name === a.locationName)?.id;
                   const locLimit = locId ? locations.find(l => l.id === locId)?.limit?.replace('€/Monat', '').trim() : null;
-                  const expandedEmployees = isAllEmployees
+                  const expandedEmployeesWithLoc = isAllEmployees
                     ? (locId
-                      ? (MOCK_EMPLOYEES[locId] ?? [])
-                      : Array.from(new Set(enabledLocationIds.flatMap(id => MOCK_EMPLOYEES[id] ?? []))))
+                      ? (MOCK_EMPLOYEES[locId] ?? []).map(emp => ({ emp, empLocId: locId, empLocName: a.locationName }))
+                      : enabledLocationIds.flatMap(id => (MOCK_EMPLOYEES[id] ?? []).map(emp => ({
+                          emp,
+                          empLocId: id,
+                          empLocName: locations.find(l => l.id === id)?.name ?? id,
+                        }))))
                     : [];
                   const isExpanded = expandedAssignmentIds.has(a.id);
                   return (
@@ -894,7 +898,7 @@ export function BenefitSettings({
                               className="flex items-center gap-1 text-[14px] text-[#0F429F] hover:underline"
                               style={{ fontFamily: 'Roboto, sans-serif' }}
                             >
-                              Alle aktiven Mitarbeiter ({expandedEmployees.length})
+                              Alle aktiven Mitarbeiter ({expandedEmployeesWithLoc.length})
                               <span>{isExpanded ? '▲' : '▼'}</span>
                             </button>
                           ) : (
@@ -902,7 +906,9 @@ export function BenefitSettings({
                           )}
                         </div>
                         <span className="text-[14px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                          {a.budgetType === 'dynamic' ? `🔄 ${locLimit ?? '—'} €` : `📌 ${a.amount} €`}
+                          {a.budgetType === 'dynamic'
+                            ? (locLimit ? `🔄 ${locLimit} €` : '🔄 Standortabhängig')
+                            : `📌 ${a.amount} €`}
                         </span>
                         <span className="text-[14px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
                           {a.availableFrom}
@@ -911,29 +917,32 @@ export function BenefitSettings({
                           ⏳ Ausstehend
                         </span>
                       </div>
-                      {isAllEmployees && isExpanded && expandedEmployees.length > 0 && (
+                      {isAllEmployees && isExpanded && expandedEmployeesWithLoc.length > 0 && (
                         <div className="px-4 pb-3 bg-[#F0F4FF]">
-                          {expandedEmployees.map((emp, empIdx) => (
-                            <div
-                              key={emp}
-                              className="px-4 py-2"
-                              style={{
-                                display: 'grid',
-                                gridTemplateColumns: '1.2fr 1.4fr 1fr 1fr 1fr',
-                                borderBottom: empIdx < expandedEmployees.length - 1 ? '1px solid #C7D7F9' : 'none',
-                              }}
-                            >
-                              <span className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>{a.locationName}</span>
-                              <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>{emp}</span>
-                              <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                                {a.budgetType === 'dynamic' ? `🔄 ${locLimit ?? '—'} €` : `📌 ${a.amount} €`}
-                              </span>
-                              <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>{a.availableFrom}</span>
-                              <span className="text-[12px] font-medium px-2 py-0.5 rounded-full inline-block self-center" style={{ background: '#FFF8E1', color: '#F57F17', border: '1px solid #FFD54F', fontFamily: 'Roboto, sans-serif' }}>
-                                ⏳ Ausstehend
-                              </span>
-                            </div>
-                          ))}
+                          {expandedEmployeesWithLoc.map(({ emp, empLocId, empLocName }, empIdx) => {
+                            const empLimit = locations.find(l => l.id === empLocId)?.limit?.replace('€/Monat', '').trim();
+                            return (
+                              <div
+                                key={`${empLocId}-${emp}`}
+                                className="px-4 py-2"
+                                style={{
+                                  display: 'grid',
+                                  gridTemplateColumns: '1.2fr 1.4fr 1fr 1fr 1fr',
+                                  borderBottom: empIdx < expandedEmployeesWithLoc.length - 1 ? '1px solid #C7D7F9' : 'none',
+                                }}
+                              >
+                                <span className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>{empLocName}</span>
+                                <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>{emp}</span>
+                                <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                                  {a.budgetType === 'dynamic' ? `🔄 ${empLimit ?? '—'} €` : `📌 ${a.amount} €`}
+                                </span>
+                                <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>{a.availableFrom}</span>
+                                <span className="text-[12px] font-medium px-2 py-0.5 rounded-full inline-block self-center" style={{ background: '#FFF8E1', color: '#F57F17', border: '1px solid #FFD54F', fontFamily: 'Roboto, sans-serif' }}>
+                                  ⏳ Ausstehend
+                                </span>
+                              </div>
+                            );
+                          })}
                         </div>
                       )}
                     </div>
