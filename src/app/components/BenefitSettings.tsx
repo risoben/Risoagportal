@@ -456,16 +456,16 @@ export function BenefitSettings({
                 </p>
                 <div className="grid grid-cols-3 gap-5">
                   {[
-                    { icon: '🥡', title: 'Tupperdose-Fan', text: 'Bringt Essen von zuhause ins Büro — selbst gekochte Mahlzeiten zählen.' },
-                    { icon: '🍽️', title: 'Menü-Liebhaber', text: 'Genießt die lange Mittagspause im Restaurant — jeder Restaurantbeleg gilt.' },
-                    { icon: '🥗', title: 'Healthy Hero', text: 'Vegan, bio, glutenfrei — Lebensmittel aus dem Supermarkt sind selbstverständlich dabei.' },
-                    { icon: '🥨', title: 'Bäcker oder Imbiss', text: 'Auch Belege vom Bäcker, Metzger oder Imbiss um die Ecke werden akzeptiert.' },
-                    { icon: '💪', title: 'Fitness-Typ', text: 'Protein-Riegel, Proteinshakes und Sportlernahrung zählen ebenfalls als Beleg.' },
-                    { icon: '⏱️', title: 'Flexibler Esser', text: 'Arbeitet zu ungewöhnlichen Zeiten? Das Zeitfenster (11–16 Uhr) gilt auch im Home-Office.' },
-                  ].map(({ icon, title, text }) => (
+                    { img: '/assets/essen-icons/tupperdose.png', title: 'Tupperdose-Fan', text: 'Bringt Essen von zuhause ins Büro — selbst gekochte Mahlzeiten zählen.' },
+                    { img: '/assets/essen-icons/menü.png', title: 'Menü-Liebhaber', text: 'Genießt die lange Mittagspause im Restaurant — jeder Restaurantbeleg gilt.' },
+                    { img: '/assets/essen-icons/healthy.png', title: 'Healthy Hero', text: 'Vegan, bio, glutenfrei — Lebensmittel aus dem Supermarkt sind selbstverständlich dabei.' },
+                    { img: '/assets/essen-icons/bäcker.png', title: 'Bäcker oder Imbiss', text: 'Auch Belege vom Bäcker, Metzger oder Imbiss um die Ecke werden akzeptiert.' },
+                    { img: '/assets/essen-icons/fitness.png', title: 'Fitness-Typ', text: 'Protein-Riegel, Proteinshakes und Sportlernahrung zählen ebenfalls als Beleg.' },
+                    { img: '/assets/essen-icons/vegan.png', title: 'Flexibler Esser', text: 'Arbeitet zu ungewöhnlichen Zeiten? Das Zeitfenster (11–16 Uhr) gilt auch im Home-Office.' },
+                  ].map(({ img, title, text }) => (
                     <div key={title} className="bg-white border border-[#E0E0E0] rounded-xl p-5 flex flex-col">
                       <div className="flex justify-center mb-4">
-                        <span style={{ fontSize: '44px', lineHeight: '1' }}>{icon}</span>
+                        <img src={img} alt={title} style={{ width: '72px', height: '72px', objectFit: 'contain' }} />
                       </div>
                       <p className="text-[15px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>{title}</p>
                       <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>{text}</p>
