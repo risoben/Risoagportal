@@ -6,44 +6,43 @@ interface BenefitTaxInfoProps {
 export function BenefitTaxInfo({ steuer, sv }: BenefitTaxInfoProps) {
   const svLower = sv.toLowerCase();
   const svFrei = svLower.startsWith('sv-frei') || svLower.startsWith('sozialversicherungsfrei');
+  // Korrekte Lohnsteuer-Terminologie: "Sozialversicherungsfrei/-pflichtig" → "Abgabenfrei/-pflichtig"
+  const svLabel = sv
+    .replace(/Sozialversicherungsfrei/i, 'Abgabenfrei')
+    .replace(/Sozialversicherungspflichtig/i, 'Abgabenpflichtig');
 
   return (
     <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
-      <h2 className="text-[18px] font-bold text-[#273A5F] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-        Steuerliche Behandlung
+      <h2 className="text-[22px] font-bold text-[#273A5F] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
+        Hinweis zu Steuern und Abgaben
       </h2>
-      <div className="overflow-hidden rounded-lg border border-[#E0E0E0]">
-        <div
-          className="bg-[#273A5F] px-5 h-11"
-          style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 1fr' }}
-        >
-          <span className="text-white font-bold text-xs uppercase tracking-wide">Steuer</span>
-          <span className="text-white font-bold text-xs uppercase tracking-wide">Sozialversicherung</span>
-        </div>
-        <div
-          className="bg-white px-5"
-          style={{ display: 'grid', alignItems: 'center', gridTemplateColumns: '1fr 1fr', minHeight: '56px', paddingTop: '12px', paddingBottom: '12px' }}
-        >
-          <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.5' }}>
+      {/* grid-cols-3 wie die Highlight-Kacheln — 2 Slots belegt, jede Kachel 1/3 breit */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4">
+          <p className="text-[16px] font-bold text-[#273A5F] uppercase tracking-wide mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            Steuer
+          </p>
+          <p className="text-[17px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.5' }}>
             {steuer}
-          </span>
-          <div>
-            <span
-              className="text-[12px] font-medium px-3 py-1 rounded-full"
-              style={{
-                background: svFrei ? '#E8F5E9' : '#FFEBEE',
-                color: svFrei ? '#2E7D32' : '#C62828',
-                border: `1px solid ${svFrei ? '#A5D6A7' : '#EF9A9A'}`,
-              }}
-            >
-              {sv}
-            </span>
-          </div>
+          </p>
         </div>
+        <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4">
+          <p className="text-[16px] font-bold text-[#273A5F] uppercase tracking-wide mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+            Sozialversicherung
+          </p>
+          <span
+            className="inline-block text-[16px] font-medium px-3 py-1 rounded-full"
+            style={{
+              background: svFrei ? '#E8F5E9' : '#F0F0F0',
+              color: svFrei ? '#2E7D32' : '#333333',
+              border: `1px solid ${svFrei ? '#A5D6A7' : '#D6D6D6'}`,
+            }}
+          >
+            {svLabel}
+          </span>
+        </div>
+        {/* 3. Slot leer — Kacheln behalten dieselbe Breite wie die 3er-Grid-Kacheln oben */}
       </div>
-      <p className="text-[11px] text-[#9E9E9E] mt-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-        Steuerliche Behandlung nach geltendem deutschen Recht. Riso übernimmt die Abwicklung automatisch.
-      </p>
     </div>
   );
 }

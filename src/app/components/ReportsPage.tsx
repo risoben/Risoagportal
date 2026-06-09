@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Eye, Download, FileText, FileSpreadsheet, File } from 'lucide-react';
+import { Search, Eye, Download, FileText, FileSpreadsheet } from 'lucide-react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 
 type FileType = 'PDF' | 'Excel' | 'CSV';
@@ -138,28 +138,14 @@ const mockBenefits: Benefit[] = [
 
 export function ReportsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterType, setFilterType] = useState<'Alle' | FileType>('Alle');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const filteredReports = mockReports.filter((report) => {
-    const matchesSearch = report.fileName.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter = filterType === 'Alle' || report.fileType === filterType;
-    return matchesSearch && matchesFilter;
-  });
+  const filteredReports = mockReports.filter((report) =>
+    report.fileName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
   const paginatedReports = filteredReports.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
-  const getFileTypeIcon = (type: FileType) => {
-    switch (type) {
-      case 'PDF':
-        return <FileText className="w-5 h-5 text-red-500" />;
-      case 'Excel':
-        return <FileSpreadsheet className="w-5 h-5 text-green-500" />;
-      case 'CSV':
-        return <File className="w-5 h-5 text-gray-500" />;
-    }
-  };
 
   const handleView = (reportId: number) => {
     alert(`Anzeigen: Report ${reportId}`);
@@ -209,40 +195,6 @@ export function ReportsPage() {
                 style={{ borderRadius: '8px', padding: '12px 16px 12px 48px' }}
               />
             </div>
-
-            {/* Filter Buttons */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => setFilterType('Alle')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
-                  filterType === 'Alle'
-                    ? 'bg-[#0F429F] text-white'
-                    : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
-                }`}
-                style={{ borderRadius: '8px' }}
-              >
-                Alle
-              </button>
-              <button
-                onClick={() => setFilterType('PDF')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
-                  filterType === 'PDF'
-                    ? 'bg-[#0F429F] text-white'
-                    : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
-                }`}
-                style={{ borderRadius: '8px' }}
-              >
-                PDF
-              </button>
-              <button
-                onClick={() => setFilterType('Excel')} className={`px-6 py-3 text-sm font-medium rounded-lg transition ${
-                  filterType === 'Excel'
-                    ? 'bg-[#0F429F] text-white'
-                    : 'bg-white text-[#666666] border border-[#E0E0E0] hover:bg-gray-50'
-                }`}
-                style={{ borderRadius: '8px' }}
-              >
-                Excel
-              </button>
-            </div>
           </div>
 
           {/* Download All Button */}
@@ -259,8 +211,8 @@ export function ReportsPage() {
       {/* Table */}
       <div className="px-8 py-6">
         <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.2fr) minmax(0,0.6fr) minmax(0,0.8fr) minmax(0,2fr) minmax(280px,1.8fr)', minWidth: '960px' }}>
-            {['Jahr','Monat','Erstellungsdatum','Version','Dateityp','Dateiname','Aktion'].map(h => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.6fr) minmax(0,0.6fr) minmax(0,1.2fr) minmax(0,0.6fr) minmax(0,2fr) minmax(280px,1.8fr)', minWidth: '960px' }}>
+            {['Jahr','Monat','Erstellungsdatum','Version','Dateiname','Aktion'].map(h => (
               <div key={h} className="text-white font-bold text-xs uppercase tracking-wide" style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px' }}>{h}</div>
             ))}
             {paginatedReports.map((report, index) => {
@@ -272,10 +224,6 @@ export function ReportsPage() {
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.month}</div>
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.createdDate}</div>
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.version}</div>
-                  <div style={{ ...c, gap: '6px' }}>
-                    {getFileTypeIcon(report.fileType)}
-                    <span className="text-sm text-[#000000]">{report.fileType}</span>
-                  </div>
                   <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000] truncate">{report.fileName}</div>
                   <div style={{ ...c, gap: '6px', flexShrink: 0 }}>
                     <button onClick={() => handleView(report.id)} className="flex items-center gap-1 px-3 py-1.5 border border-[#0F429F] text-[#0F429F] text-xs rounded-full hover:bg-[#F0F4FF] transition whitespace-nowrap">

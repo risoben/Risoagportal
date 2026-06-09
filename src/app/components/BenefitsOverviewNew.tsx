@@ -5,10 +5,10 @@
 //          Used in: BenefitSettings (per-benefit detail page), this component (BenefitsOverviewNew)
 // benefit_id is integer in both endpoints (not string).
 
-import { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { StatusBadge } from './Table';
-import { X } from 'lucide-react';
+import { ChevronLeft, X } from 'lucide-react';
 
 interface Benefit {
   id: string;
@@ -122,11 +122,77 @@ const benefits: Benefit[] = [
   }
 ];
 
+// Gruppierung 1:1 übernommen aus BenefitsManagement.tsx (benefitCategories)
+type GroupId = 'cash' | 'gutschein' | 'versicherung';
+
+const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; intro: string[]; highlights: string[] }[] = [
+  {
+    id: 'cash',
+    name: 'Cash Benefits',
+    icon: '💵',
+    benefitIds: ['mittagessen', 'internet', 'kindergarten', 'commuting', 'erholung', 'danke-bonus', 'oepnv'],
+    intro: [
+      'Prinzip: Beleg einreichen, Geld zurückbekommen.',
+      'Dazu zählen z. B. Mittagessen, Internet, Fahrtkosten und Erholung.',
+    ],
+    highlights: [
+      'Bis zu 3.000 € steuerfrei pro Jahr möglich',
+      'Flexibel für Internet, Fahrt, Essen etc. einsetzbar',
+      'Gültig: Belege für Mittagessen, Fahrkarten, Online-Käufe',
+    ],
+  },
+  {
+    id: 'gutschein',
+    name: 'Gutschein Benefits',
+    icon: '🎁',
+    benefitIds: ['sachbezug', 'geburtstag'],
+    intro: [
+      'Prinzip: Gutschein erhalten, bei Partnern einlösen.',
+      'Dazu zählen der monatliche Sachbezug und der Geburtstagsgutschein.',
+    ],
+    highlights: [
+      'Bis zu 50 €/Monat + 60 € zum Geburtstag steuerfrei',
+      'Auswahl bei vielen Partnern wie Amazon, Rewe, Tankstellen etc.',
+      'Beliebt: Rewe, dm, Amazon, Tanken, Zalando',
+    ],
+  },
+  {
+    id: 'versicherung',
+    name: 'Versicherungs Benefits',
+    icon: '🛡️',
+    benefitIds: ['bkv', 'bav'],
+    intro: [
+      'Prinzip: Arbeitgeber zahlt, Mitarbeiter sind abgesichert.',
+      'Dazu zählen die betriebliche Krankenversicherung (BKV) und die betriebliche Altersvorsorge (bAV).',
+    ],
+    highlights: [
+      'Arbeitgeber zahlt private Zusatzversicherung',
+      'Automatische Absicherung – kein Aufwand',
+      'Beispiele: Zahnzusatz, Klinik, Vorsorge',
+    ],
+  },
+];
+
 export function BenefitsOverviewNew() {
   const [selectedBenefit, setSelectedBenefit] = useState<Benefit | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<GroupId | null>(null);
+
+  const groupsWithBenefits = useMemo(() => {
+    return GROUPS.map(group => {
+      const groupBenefits = group.benefitIds
+        .map(id => benefits.find(b => b.id === id))
+        .filter((b): b is Benefit => Boolean(b));
+      const activeCount = groupBenefits.filter(b => b.active).length;
+      return { ...group, benefits: groupBenefits, activeCount };
+    });
+  }, []);
 
   const handleManageBenefits = () => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-management' } }));
+  };
+
+  const handleEdit = (benefitId: string) => {
+    window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-edit', benefitId } }));
   };
 
   const handleCardClick = (benefit: Benefit) => {
@@ -136,6 +202,13 @@ export function BenefitsOverviewNew() {
   const handleCloseModal = () => {
     setSelectedBenefit(null);
   };
+
+  const formatLocations = (locations: string[]) => {
+    if (locations.length <= 2) return locations.join(', ');
+    return `${locations[0]}, ${locations[1]}, ...`;
+  };
+
+  const activeGroup = groupsWithBenefits.find(g => g.id === selectedGroup) ?? null;
 
   return (
     <div className="flex-1 bg-[#F9FAFB] overflow-auto" style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -156,30 +229,90 @@ export function BenefitsOverviewNew() {
         </div>
       </div>
 
-      {/* Benefits Grid */}
-      <div className="px-8 py-8">
-        <div className="grid grid-cols-4 gap-4">
-          {benefits.map(benefit => (
-            <div
-              key={benefit.id}
-              onClick={() => handleCardClick(benefit)} className="bg-white border border-[#E0E0E0] rounded-lg p-4 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer flex flex-row gap-1 items-center"
-              style={{ aspectRatio: '1.5/1' }}
-            >
-              <div className="flex-shrink-0 flex items-center justify-center" style={{ width: '80px', transform: 'scale(1.4)' }}>
-                <BenefitIconComponent benefitName={benefit.name} size={48} background={true} />
-              </div>
-
-              <div className="flex-1 flex flex-col min-w-0 justify-center items-center gap-1">
-                <div>
-                  <h3 className="text-[#273A5F] font-bold text-base leading-tight truncate">{benefit.name}</h3>
-                  <p className="text-[#666666] text-xs leading-tight truncate">{benefit.description}</p>
+      {!activeGroup ? (
+        <div className="px-8 py-8">
+          <div className="grid grid-cols-3 gap-6">
+              {groupsWithBenefits.map(group => (
+                <div
+                  key={group.id}
+                  onClick={() => setSelectedGroup(group.id)}
+                  className="bg-white border border-[#E0E0E0] rounded-xl p-8 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer flex flex-col items-center text-center"
+                >
+                  <div
+                    className="flex items-center justify-center rounded-full mb-4"
+                    style={{ width: '72px', height: '72px', backgroundColor: '#F0F4FF', fontSize: '36px' }}
+                  >
+                    {group.icon}
+                  </div>
+                  <div className="flex flex-col flex-1 w-full">
+                    <h2 className="text-[#273A5F] font-bold text-[24px] mb-1">{group.name}</h2>
+                    <p className="text-[#666666] text-[15px] mb-2">
+                      {group.benefits.length} Benefits · {group.activeCount} aktiv
+                    </p>
+                    <div className="flex flex-col gap-1 mt-1 text-left">
+                      {group.intro.map(sentence => (
+                        <p key={sentence} className="text-[#666666] text-[14px] leading-snug">
+                          {sentence}
+                        </p>
+                      ))}
+                    </div>
+                    <div className="flex-1" />
+                    <ul className="flex flex-col gap-1 pt-3 text-left border-t border-[#E0E0E0] mt-3">
+                      {group.highlights.map(highlight => (
+                        <li key={highlight} className="text-[#666666] text-[14px] leading-snug">
+                          • {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <StatusBadge status={benefit.active ? 'Aktiv' : 'Inaktiv'} type={benefit.active ? 'success' : 'inactive'} />
-              </div>
+              ))}
             </div>
-          ))}
         </div>
-      </div>
+      ) : (
+        <div className="px-8 py-8">
+          <button
+            onClick={() => setSelectedGroup(null)}
+            className="flex items-center text-[#0F429F] hover:text-[#246AFF] mb-6 text-[14px] font-medium"
+          >
+            <ChevronLeft size={20} />
+            <span className="ml-1">Zurück zur Übersicht</span>
+          </button>
+
+          <h2 className="text-[#273A5F] font-bold text-[17px] mb-4">{activeGroup.name}</h2>
+
+          {/* Tabelle — gleiche Struktur/Optik wie "Benefits verwalten" (BenefitsManagement.tsx) */}
+          <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-x-auto">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, minmax(0,1fr))', minWidth: '600px' }}>
+              {['Icon', 'Name', 'Budget', 'Status', 'Standorte', 'Aktion'].map(h => (
+                <div key={h} style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' }}>
+                  <span className="text-white font-bold text-[14px] uppercase tracking-wide">{h}</span>
+                </div>
+              ))}
+              {activeGroup.benefits.map((benefit, index) => {
+                const bg = index % 2 === 0 ? '#fff' : '#F9FAFB';
+                const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' };
+                return (
+                  <React.Fragment key={benefit.id}>
+                    <div style={c} className="cursor-pointer" onClick={() => handleCardClick(benefit)}>
+                      <BenefitIconComponent benefitName={benefit.name} size={32} background={true} />
+                    </div>
+                    <div style={c} className="text-[14px] text-[#000000] cursor-pointer" onClick={() => handleCardClick(benefit)}>{benefit.name}</div>
+                    <div style={c} className="text-[14px] text-[#000000]">{benefit.limit}</div>
+                    <div style={c}><StatusBadge status={benefit.active ? 'Aktiv' : 'Inaktiv'} type={benefit.active ? 'success' : 'inactive'} /></div>
+                    <div style={c} className="text-[14px] text-[#666666]">{formatLocations(benefit.locations)}</div>
+                    <div style={c}>
+                      <button onClick={() => handleEdit(benefit.id)} className="text-[14px] text-[#0F429F] hover:text-[#246AFF] hover:underline transition">
+                        Bearbeiten
+                      </button>
+                    </div>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Benefit Info Modal */}
       {selectedBenefit && (
@@ -194,7 +327,7 @@ export function BenefitsOverviewNew() {
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
                   <BenefitIconComponent benefitName={selectedBenefit.name} size={48} />
-                  <h2 className="text-[#273A5F] font-bold text-[20px]">{selectedBenefit.name}</h2>
+                  <h2 className="text-[#273A5F] font-bold text-[17px]">{selectedBenefit.name}</h2>
                 </div>
                 <button
                   onClick={handleCloseModal} className="w-8 h-8 flex items-center justify-center text-[#666666] hover:bg-[#F0F4FF] rounded-full transition-colors"
@@ -206,20 +339,20 @@ export function BenefitsOverviewNew() {
               {/* Content */}
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-[#273A5F] font-medium text-[13px] mb-2">Beschreibung:</h3>
+                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Beschreibung:</h3>
                   <p className="text-[#333333] text-[14px]">{selectedBenefit.details}</p>
                 </div>
 
                 <div>
-                  <h3 className="text-[#273A5F] font-medium text-[13px] mb-2">Budget pro Mitarbeiter:</h3>
+                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Budget pro Mitarbeiter:</h3>
                   <p className="text-[#333333] text-[14px]">{selectedBenefit.limit}</p>
                 </div>
 
                 <div>
-                  <h3 className="text-[#273A5F] font-medium text-[13px] mb-2">Verfügbar für Standorte:</h3>
+                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Verfügbar für Standorte:</h3>
                   <ul className="space-y-1">
                     {selectedBenefit.locations.map(location => (
-                      <li key={location} className="text-[#666666] text-[12px]">
+                      <li key={location} className="text-[#666666] text-[14px]">
                         • {location}
                       </li>
                     ))}
@@ -227,7 +360,7 @@ export function BenefitsOverviewNew() {
                 </div>
 
                 <div>
-                  <h3 className="text-[#273A5F] font-medium text-[13px] mb-2">Status:</h3>
+                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Status:</h3>
                   <StatusBadge status={selectedBenefit.active ? 'Aktiv' : 'Inaktiv'} type={selectedBenefit.active ? 'success' : 'inactive'} />
                 </div>
               </div>
@@ -240,7 +373,7 @@ export function BenefitsOverviewNew() {
                   Schließen
                 </button>
                 <button
-                  onClick={handleManageBenefits} className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
+                  onClick={() => handleEdit(selectedBenefit.id)} className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
                 >
                   Dieses Benefit verwalten
                 </button>
