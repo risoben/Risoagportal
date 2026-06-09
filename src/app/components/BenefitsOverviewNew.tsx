@@ -86,7 +86,7 @@ const benefits: Benefit[] = [
   },
   {
     id: 'geburtstag',
-    name: 'Geburtstag',
+    name: 'Geburtstagsgutschein',
     description: 'bis zu 60€ / Jahr',
     limit: 'bis zu 60€ / Jahr',
     active: true,
@@ -95,7 +95,7 @@ const benefits: Benefit[] = [
   },
   {
     id: 'oepnv',
-    name: 'ÖPNV',
+    name: 'ÖPNV-Ticket',
     description: 'kein gesetzliches Maximum',
     limit: 'kein gesetzliches Maximum',
     active: false,
@@ -236,31 +236,49 @@ export function BenefitsOverviewNew() {
                 <div
                   key={group.id}
                   onClick={() => setSelectedGroup(group.id)}
-                  className="bg-white border border-[#E0E0E0] rounded-xl p-8 hover:shadow-md hover:border-[#0F429F] transition-all duration-200 cursor-pointer flex flex-col items-center text-center"
+                  className="bg-white border border-[#E0E0E0] rounded-xl p-8 cursor-pointer flex flex-col items-center text-center transition-all duration-200"
+                  style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 24px rgba(15,66,159,0.12)';
+                    (e.currentTarget as HTMLDivElement).style.borderColor = '#246AFF';
+                    (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = '0 1px 4px rgba(0,0,0,0.05)';
+                    (e.currentTarget as HTMLDivElement).style.borderColor = '#E0E0E0';
+                    (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+                  }}
                 >
                   <div
-                    className="flex items-center justify-center rounded-full mb-4"
-                    style={{ width: '72px', height: '72px', backgroundColor: '#F0F4FF', fontSize: '36px' }}
+                    className="flex items-center justify-center rounded-full mb-5"
+                    style={{ width: '68px', height: '68px', backgroundColor: '#EFF6FF', fontSize: '34px' }}
                   >
                     {group.icon}
                   </div>
                   <div className="flex flex-col flex-1 w-full">
-                    <h2 className="text-[#273A5F] font-bold text-[24px] mb-1">{group.name}</h2>
-                    <p className="text-[#666666] text-[15px] mb-2">
-                      {group.benefits.length} Benefits · {group.activeCount} aktiv
-                    </p>
-                    <div className="flex flex-col gap-1 mt-1 text-left">
+                    <h2 className="text-[#273A5F] font-bold text-[22px] mb-3" style={{ letterSpacing: '-0.2px' }}>{group.name}</h2>
+                    <div className="flex items-center justify-center gap-2 mb-4">
+                      <span className="text-[#666666] text-[14px]">{group.benefits.length} Benefits</span>
+                      <span
+                        className="text-[13px] font-medium px-2.5 py-0.5 rounded-full"
+                        style={{ background: '#E8F5E9', color: '#2E7D32', border: '1px solid #A5D6A7' }}
+                      >
+                        🟢 {group.activeCount} aktiv
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2 text-left">
                       {group.intro.map(sentence => (
-                        <p key={sentence} className="text-[#666666] text-[14px] leading-snug">
+                        <p key={sentence} className="text-[#666666] text-[14px]" style={{ lineHeight: '1.6' }}>
                           {sentence}
                         </p>
                       ))}
                     </div>
                     <div className="flex-1" />
-                    <ul className="flex flex-col gap-1 pt-3 text-left border-t border-[#E0E0E0] mt-3">
+                    <ul className="flex flex-col gap-2 mt-6 text-left">
                       {group.highlights.map(highlight => (
-                        <li key={highlight} className="text-[#666666] text-[14px] leading-snug">
-                          • {highlight}
+                        <li key={highlight} className="text-[#444444] text-[14px] flex gap-2" style={{ lineHeight: '1.5' }}>
+                          <span className="text-[#2E7D32] font-bold flex-shrink-0">✓</span>
+                          <span>{highlight}</span>
                         </li>
                       ))}
                     </ul>

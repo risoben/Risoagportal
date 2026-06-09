@@ -76,7 +76,7 @@ export function BenefitSettings({
   }, [benefitId]);
 
   // Use provided props or benefit data or defaults
-  const benefitName = customName || benefitData?.name || 'Mittagessen';
+  const benefitName = customName || benefitData?.name || 'Essenszuschuss';
   const benefitDescription = customDescription || benefitData?.description || 'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Kantinenzuschüssen.';
   const defaultLocations = customLocations || benefitData?.locations || [
     { id: '1', name: 'München', limit: '115,05€/Monat', employeeCount: 34, enabled: true, budgetType: 'dynamic' as const },
@@ -392,30 +392,32 @@ export function BenefitSettings({
 
             {/* 3. Das Belegprinzip */}
             {isEssen && (
-              <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
-                <h2 className="text-[17px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              <div className="border border-[#C7D7F9] rounded-xl px-8 py-10 mb-6" style={{ background: '#EFF6FF' }}>
+                <h2 className="text-[17px] font-bold text-[#273A5F] mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
                   Das Belegprinzip
                 </h2>
-                <p className="text-[13px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
+                <p className="text-[13px] text-[#666666] mb-8" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
                   Mitarbeiter reichen ihre Essensbelege direkt über die App ein — der Betrag wird automatisch geprüft und mit dem nächsten Gehalt erstattet. Kein Gutschein, kein Umweg.
                 </p>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   {[
                     { icon: '🧾', label: 'Beleg kaufen', sub: 'Restaurant, Supermarkt, Lieferdienst' },
                     { icon: '📱', label: 'In App hochladen', sub: 'Foto machen & einreichen' },
                     { icon: '🔍', label: 'Riso prüft', sub: 'Automatisch & regelkonform' },
                     { icon: '💰', label: 'Erstattung', sub: 'Direkt aufs Konto mit Gehalt' },
                   ].map((s, i, arr) => (
-                    <div key={s.label} className="flex items-center gap-2 flex-1">
-                      <div className="flex flex-col items-center text-center flex-1">
-                        <div className="flex items-center justify-center rounded-full bg-[#F0F4FF] mb-2" style={{ width: '48px', height: '48px', fontSize: '26px' }}>
+                    <div key={s.label} className="flex items-center gap-3 flex-1">
+                      <div className="flex flex-col items-center text-center flex-1 gap-3">
+                        <div className="flex items-center justify-center rounded-full bg-white" style={{ width: '84px', height: '84px', fontSize: '42px', boxShadow: '0 2px 8px rgba(15,66,159,0.10)', border: '1.5px solid #C7D7F9' }}>
                           {s.icon}
                         </div>
-                        <p className="text-[14px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>{s.label}</p>
-                        <p className="text-[15px] text-[#9E9E9E]" style={{ fontFamily: 'Roboto, sans-serif' }}>{s.sub}</p>
+                        <div>
+                          <p className="text-[15px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>{s.label}</p>
+                          <p className="text-[13px] text-[#9E9E9E] mt-1" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.4' }}>{s.sub}</p>
+                        </div>
                       </div>
                       {i < arr.length - 1 && (
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C7D7F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><polyline points="9,18 15,12 9,6"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7BAAE0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><polyline points="9,18 15,12 9,6"/></svg>
                       )}
                     </div>
                   ))}
@@ -429,16 +431,16 @@ export function BenefitSettings({
                 <h2 className="text-[17px] font-bold text-[#273A5F] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
                   Vorteile für dich als Arbeitgeber
                 </h2>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-5">
                   {[
                     { icon: '💸', title: 'Bis zu 50% niedrigere Lohnnebenkosten', text: 'Der Essenszuschuss reduziert die Lohnnebenkosten gegenüber einer klassischen Gehaltserhöhung erheblich.' },
                     { icon: '🧲', title: 'Talentbindung & -gewinnung', text: 'Attraktive Benefits helfen, Mitarbeiter zu halten und neue im Wettbewerb um Fachkräfte zu gewinnen.' },
                     { icon: '⚡', title: 'Einfache digitale Umsetzung', text: 'Einmal einrichten — Riso übernimmt Belegprüfung, Abrechnung und Reporting automatisch.' },
                   ].map(({ icon, title, text }) => (
-                    <div key={title} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4">
-                      <div className="text-[15px] mb-2">{icon}</div>
-                      <p className="text-[15px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{title}</p>
-                      <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.5' }}>{text}</p>
+                    <div key={title} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-5">
+                      <div className="text-[22px] mb-3">{icon}</div>
+                      <p className="text-[16px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.3' }}>{title}</p>
+                      <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>{text}</p>
                     </div>
                   ))}
                 </div>
@@ -447,14 +449,14 @@ export function BenefitSettings({
 
             {/* 5. Passt für jeden Essenstyp — Mitarbeiter-Personas */}
             {isEssen && (
-              <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+              <div className="border border-[#E0E0E0] rounded-xl p-6 mb-6" style={{ background: '#F9FAFB' }}>
                 <h2 className="text-[17px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
                   Passt für jeden Essenstyp
                 </h2>
-                <p className="text-[13px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
+                <p className="text-[13px] text-[#666666] mb-6" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
                   Egal was für ein Essenstyp deine Mitarbeitenden sind — der Essenszuschuss passt zu jedem Lifestyle und jeder Essensgewohnheit.
                 </p>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-5">
                   {[
                     { icon: '🥡', title: 'Tupperdose-Fan', text: 'Bringt Essen von zuhause ins Büro — selbst gekochte Mahlzeiten zählen.' },
                     { icon: '🍽️', title: 'Menü-Liebhaber', text: 'Genießt die lange Mittagspause im Restaurant — jeder Restaurantbeleg gilt.' },
@@ -463,10 +465,12 @@ export function BenefitSettings({
                     { icon: '💪', title: 'Fitness-Typ', text: 'Protein-Riegel, Proteinshakes und Sportlernahrung zählen ebenfalls als Beleg.' },
                     { icon: '⏱️', title: 'Flexibler Esser', text: 'Arbeitet zu ungewöhnlichen Zeiten? Das Zeitfenster (11–16 Uhr) gilt auch im Home-Office.' },
                   ].map(({ icon, title, text }) => (
-                    <div key={title} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4">
-                      <div className="text-[15px] mb-2">{icon}</div>
-                      <p className="text-[15px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{title}</p>
-                      <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.5' }}>{text}</p>
+                    <div key={title} className="bg-white border border-[#E0E0E0] rounded-xl p-5 flex flex-col">
+                      <div className="flex justify-center mb-4">
+                        <span style={{ fontSize: '44px', lineHeight: '1' }}>{icon}</span>
+                      </div>
+                      <p className="text-[15px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>{title}</p>
+                      <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>{text}</p>
                     </div>
                   ))}
                 </div>
@@ -506,7 +510,7 @@ export function BenefitSettings({
             {/* Einrichtungshinweise — Onboarding-Kachel ganz oben */}
             <div className="rounded-xl p-6 mb-6" style={{ background: '#F0F4FF', border: '1px solid #C7D7F9' }}>
               <h2 className="text-[17px] font-bold text-[#273A5F] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                🚀 So richtest du {benefitName} ein
+                So richtest du den Benefit „{benefitName}" ein
               </h2>
               <div className="grid grid-cols-3 gap-4">
                 {[
@@ -665,7 +669,7 @@ export function BenefitSettings({
             {/* Einem Mitarbeiter zuweisen */}
             <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
               <h2 className="text-[17px] font-bold text-[#273A5F] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                {benefitName} einem Mitarbeiter zuweisen
+                Den Benefit „{benefitName}" einem Mitarbeiter zuweisen
               </h2>
 
               {assignStep === 'confirmation' && lastAssigned ? (
@@ -846,12 +850,12 @@ export function BenefitSettings({
                   </div>
                 </div>
                 <p className="text-[14px] text-[#666666] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Alle eingereichten Zuweisungen für dieses Benefit. Eine neuere Zuweisung für denselben Mitarbeiter überschreibt automatisch die ältere.
+                  Alle eingereichten Zuweisungen für dieses Benefit.
                 </p>
 
                 <div className="bg-[#FFF8E1] border border-[#FFD54F] rounded-lg px-4 py-3 mb-4">
                   <p className="text-[14px] text-[#8D6E00]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                    ⚠️ <strong>Hinweis:</strong> Nur die zuletzt eingereichte Zuweisung ist aktiv — ältere werden automatisch ersetzt.
+                    ⚠️ Eine neuere Zuweisung für denselben Mitarbeiter überschreibt automatisch die ältere.
                   </p>
                 </div>
 
