@@ -76,7 +76,7 @@ export function BenefitSettings({
   }, [benefitId]);
 
   // Use provided props or benefit data or defaults
-  const benefitName = customName || benefitData?.name || 'Essenszuschuss';
+  const benefitName = customName || benefitData?.name || 'Mittagessen';
   const benefitDescription = customDescription || benefitData?.description || 'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Kantinenzuschüssen.';
   const defaultLocations = customLocations || benefitData?.locations || [
     { id: '1', name: 'München', limit: '115,05€/Monat', employeeCount: 34, enabled: true, budgetType: 'dynamic' as const },
@@ -326,9 +326,8 @@ export function BenefitSettings({
               </p>
               {highlightBoxes.length > 0 && (
                 <div className="grid grid-cols-3 gap-4">
-                  {highlightBoxes.map(({ icon, title, text }) => (
+                  {highlightBoxes.map(({ title, text }) => (
                     <div key={title} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4">
-                      <div className="text-[15px] mb-2">{icon}</div>
                       <p className="text-[15px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>{title}</p>
                       <p className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>{text}</p>
                     </div>
@@ -351,14 +350,14 @@ export function BenefitSettings({
                     </p>
                     <div className="flex flex-col gap-3">
                       {[
-                        { step: '1', icon: '⚙️', title: 'Standort & Budget', text: 'Standorte aktivieren, Budget per Auto oder Fix festlegen' },
-                        { step: '2', icon: '👥', title: 'Mitarbeiter zuweisen', text: 'Benefit den richtigen Mitarbeitern zuweisen' },
-                        { step: '3', icon: '✅', title: 'Fertig', text: 'Riso übernimmt Prüfung & Abrechnung automatisch' },
-                      ].map(({ step, icon, title, text }) => (
+                        { step: '1', title: 'Standort & Budget', text: 'Standorte aktivieren, Budget per Auto oder Fix festlegen' },
+                        { step: '2', title: 'Mitarbeiter zuweisen', text: 'Benefit den richtigen Mitarbeitern zuweisen' },
+                        { step: '3', title: 'Fertig', text: 'Riso übernimmt Prüfung & Abrechnung automatisch' },
+                      ].map(({ step, title, text }) => (
                         <div key={step} className="flex items-start gap-3 bg-[#F0F4FF] border border-[#C7D7F9] rounded-lg p-3">
                           <span className="flex items-center justify-center rounded-full bg-[#0F429F] text-white text-[15px] font-bold flex-shrink-0 mt-0.5" style={{ width: '20px', height: '20px' }}>{step}</span>
                           <div>
-                            <p className="text-[14px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>{icon} {title}</p>
+                            <p className="text-[14px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>{title}</p>
                             <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>{text}</p>
                           </div>
                         </div>
@@ -372,14 +371,14 @@ export function BenefitSettings({
                     </p>
                     <div className="flex flex-col gap-3">
                       {[
-                        { step: '1', icon: '🍽️', title: 'Essen kaufen', text: 'Restaurant, Supermarkt, Lieferdienst — beliebig' },
-                        { step: '2', icon: '📱', title: 'Beleg hochladen', text: 'In der Riso App fotografieren & einreichen' },
-                        { step: '3', icon: '💰', title: 'Geld erhalten', text: 'Bis 115 € / Monat steuerfrei aufs Konto' },
-                      ].map(({ step, icon, title, text }) => (
+                        { step: '1', title: 'Essen kaufen', text: 'Restaurant, Supermarkt, Lieferdienst — beliebig' },
+                        { step: '2', title: 'Beleg hochladen', text: 'In der Riso App fotografieren & einreichen' },
+                        { step: '3', title: 'Geld erhalten', text: 'Bis 115 € / Monat steuerfrei aufs Konto' },
+                      ].map(({ step, title, text }) => (
                         <div key={step} className="flex items-start gap-3 bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-3">
                           <span className="flex items-center justify-center rounded-full bg-[#273A5F] text-white text-[15px] font-bold flex-shrink-0 mt-0.5" style={{ width: '20px', height: '20px' }}>{step}</span>
                           <div>
-                            <p className="text-[14px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>{icon} {title}</p>
+                            <p className="text-[14px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>{title}</p>
                             <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>{text}</p>
                           </div>
                         </div>
@@ -433,12 +432,11 @@ export function BenefitSettings({
                 </h2>
                 <div className="grid grid-cols-3 gap-5">
                   {[
-                    { icon: '💸', title: 'Bis zu 50% niedrigere Lohnnebenkosten', text: 'Der Essenszuschuss reduziert die Lohnnebenkosten gegenüber einer klassischen Gehaltserhöhung erheblich.' },
-                    { icon: '🧲', title: 'Talentbindung & -gewinnung', text: 'Attraktive Benefits helfen, Mitarbeiter zu halten und neue im Wettbewerb um Fachkräfte zu gewinnen.' },
-                    { icon: '⚡', title: 'Einfache digitale Umsetzung', text: 'Einmal einrichten — Riso übernimmt Belegprüfung, Abrechnung und Reporting automatisch.' },
-                  ].map(({ icon, title, text }) => (
+                    { title: 'Bis zu 50% niedrigere Lohnnebenkosten', text: 'Der Mittagessen-Zuschuss reduziert die Lohnnebenkosten gegenüber einer klassischen Gehaltserhöhung erheblich.' },
+                    { title: 'Talentbindung & -gewinnung', text: 'Attraktive Benefits helfen, Mitarbeiter zu halten und neue im Wettbewerb um Fachkräfte zu gewinnen.' },
+                    { title: 'Einfache digitale Umsetzung', text: 'Einmal einrichten — Riso übernimmt Belegprüfung, Abrechnung und Reporting automatisch.' },
+                  ].map(({ title, text }) => (
                     <div key={title} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-5">
-                      <div className="text-[22px] mb-3">{icon}</div>
                       <p className="text-[16px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.3' }}>{title}</p>
                       <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>{text}</p>
                     </div>
@@ -510,7 +508,7 @@ export function BenefitSettings({
             {/* Einrichtungshinweise — Onboarding-Kachel ganz oben */}
             <div className="rounded-xl p-6 mb-6" style={{ background: '#F0F4FF', border: '1px solid #C7D7F9' }}>
               <h2 className="text-[17px] font-bold text-[#273A5F] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                So richtest du den Benefit „{benefitName}" ein
+                So richtest du den Benefit {benefitName} ein
               </h2>
               <div className="grid grid-cols-3 gap-4">
                 {[
@@ -669,7 +667,7 @@ export function BenefitSettings({
             {/* Einem Mitarbeiter zuweisen */}
             <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
               <h2 className="text-[17px] font-bold text-[#273A5F] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Den Benefit „{benefitName}" einem Mitarbeiter zuweisen
+                Den Benefit {benefitName} einem Mitarbeiter zuweisen
               </h2>
 
               {assignStep === 'confirmation' && lastAssigned ? (

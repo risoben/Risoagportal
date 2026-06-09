@@ -23,7 +23,7 @@ interface Benefit {
 const benefits: Benefit[] = [
   {
     id: 'mittagessen',
-    name: 'Essenszuschuss',
+    name: 'Mittagessen',
     description: 'bis 115€ / Monat',
     limit: 'bis 115€ / Monat',
     active: true,
@@ -255,7 +255,7 @@ export function BenefitsOverviewNew() {
                   >
                     {group.icon}
                   </div>
-                  <div className="flex flex-col flex-1 w-full">
+                  <div className="flex flex-col w-full" style={{ flex: 1 }}>
                     <h2 className="text-[#273A5F] font-bold text-[22px] mb-3" style={{ letterSpacing: '-0.2px' }}>{group.name}</h2>
                     <div className="flex items-center justify-center gap-2 mb-4">
                       <span className="text-[#666666] text-[14px]">{group.benefits.length} Benefits</span>
@@ -266,14 +266,14 @@ export function BenefitsOverviewNew() {
                         🟢 {group.activeCount} aktiv
                       </span>
                     </div>
-                    <div className="flex flex-col gap-2 text-left">
+                    {/* Fixed-height description area — ensures feature list starts at same position in all cards */}
+                    <div className="flex flex-col gap-2 text-left" style={{ minHeight: '88px' }}>
                       {group.intro.map(sentence => (
                         <p key={sentence} className="text-[#666666] text-[14px]" style={{ lineHeight: '1.6' }}>
                           {sentence}
                         </p>
                       ))}
                     </div>
-                    <div className="flex-1" />
                     <ul className="flex flex-col gap-2 mt-6 text-left">
                       {group.highlights.map(highlight => (
                         <li key={highlight} className="text-[#444444] text-[14px] flex gap-2" style={{ lineHeight: '1.5' }}>

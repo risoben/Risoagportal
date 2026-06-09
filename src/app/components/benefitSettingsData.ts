@@ -33,8 +33,8 @@ interface BenefitSettingsEntry {
 export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'mittagessen': {
     category: 'cash',
-    name: 'Essenszuschuss',
-    description: 'Mit dem Essenszuschuss erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird automatisch über die Riso App geprüft, und der Betrag landet mit dem nächsten Gehalt auf dem Konto. Das Maximum liegt bei 7,67€ pro Arbeitstag — bis zu 115€ im Monat.',
+    name: 'Mittagessen',
+    description: 'Mit dem Mittagessen-Benefit erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird automatisch über die Riso App geprüft, und der Betrag landet mit dem nächsten Gehalt auf dem Konto. Das Maximum liegt bei 7,67€ pro Arbeitstag — bis zu 115€ im Monat.',
     // TODO [Santiago + Philipp]: Bessere Formulierung für "Steuerliche Behandlung" finden.
     // Aktuell: 'Steuerfrei bis 7,67 € pro Arbeitstag' — könnte präziser/verständlicher sein.
     // → Termin mit Philipp vereinbaren um gemeinsam die richtige Formulierung zu erarbeiten.
