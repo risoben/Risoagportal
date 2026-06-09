@@ -870,7 +870,11 @@ export function BenefitSettings({
                   const isAllEmployees = a.employeeName === 'Alle Mitarbeiter';
                   const locId = locations.find(l => l.name === a.locationName)?.id;
                   const locLimit = locId ? locations.find(l => l.id === locId)?.limit?.replace('€/Monat', '').trim() : null;
-                  const expandedEmployees = isAllEmployees && locId ? (MOCK_EMPLOYEES[locId] ?? []) : [];
+                  const expandedEmployees = isAllEmployees
+                    ? (locId
+                      ? (MOCK_EMPLOYEES[locId] ?? [])
+                      : Array.from(new Set(enabledLocationIds.flatMap(id => MOCK_EMPLOYEES[id] ?? []))))
+                    : [];
                   const isExpanded = expandedAssignmentIds.has(a.id);
                   return (
                     <div key={a.id} className={index % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'} style={{ borderBottom: '1px solid #E5E7EB' }}>
