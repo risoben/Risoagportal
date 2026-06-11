@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 // Budget breakdown data
 const budgetBreakdown = [
-  { name: 'Essenszuschuss', amount: 5000, percentage: 70, color: '#0F429F' },
+  { name: 'Mittagessen', amount: 5000, percentage: 70, color: '#0F429F' },
   { name: 'Mobilität', amount: 3000, percentage: 40, color: '#0F429F' },
   { name: 'Urban Sports Club', amount: 2000, percentage: 60, color: '#0F429F' },
 ];

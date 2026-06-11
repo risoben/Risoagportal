@@ -15,9 +15,9 @@ type Benefit = {
 
 const mockBenefits: Benefit[] = [
   {
-    id: 'essenszuschuss',
+    id: 'mittagessen',
     icon: '🍽️',
-    name: 'Essenszuschuss',
+    name: 'Mittagessen',
     limitDescription: '7,67€ pro Tag',
     monthlyEquivalent: '(~153€/Monat)',
     status: 'aktiv',
@@ -125,7 +125,7 @@ export function BenefitsOverviewSimple() {
     // Navigate to the same page as "Benefit hinzufügen" but in EDIT mode
     // Mock data for demonstration - in production this would come from the backend
     const mockInitialData = {
-      limit: benefitId === 'essenszuschuss' ? '150' : benefitId === 'internetzuschuss' ? '50' : '100',
+      limit: benefitId === 'mittagessen' ? '150' : benefitId === 'internetzuschuss' ? '50' : '100',
       isActive: true,
       assignmentType: 'all' as const,
       selectedEmployees: [],

@@ -60,7 +60,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
   });
 
   const benefitCategories: Record<string, string> = {
-    'Essenszuschuss': 'Cash-Benefits', 'Internet': 'Cash-Benefits', 'Kindergarten': 'Cash-Benefits',
+    'Mittagessen': 'Cash-Benefits', 'Internet': 'Cash-Benefits', 'Kindergarten': 'Cash-Benefits',
     'Fahrkostenzuschuss': 'Cash-Benefits', 'Erholung': 'Cash-Benefits', 'Danke-Bonus': 'Cash-Benefits', 'ÖPNV': 'Cash-Benefits',
     'Sachbezug': 'Gutschein-Benefits', 'Geburtstag': 'Gutschein-Benefits',
     'BKV': 'Versicherungs-Benefits', 'BAV': 'Versicherungs-Benefits',
@@ -68,7 +68,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
   // Benefits
   const [benefits, setBenefits] = useState<Benefit[]>([
-    { id: '1', name: 'Essenszuschuss', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '115.05', selected: isEditMode, budgetType: 'dynamic' },
+    { id: '1', name: 'Mittagessen', frequency: 'Täglich', dailyLimit: '7.00', monthlyLimit: '115.05', selected: isEditMode, budgetType: 'dynamic' },
     { id: '2', name: 'Internet', frequency: 'Monatlich', dailyLimit: '50.00', monthlyLimit: '50.00', selected: isEditMode, budgetType: 'dynamic' },
     { id: '3', name: 'Kindergarten', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '100.00', selected: false, budgetType: 'dynamic' },
     { id: '4', name: 'Fahrkostenzuschuss', frequency: 'Monatlich', dailyLimit: '', monthlyLimit: '80.00', selected: false, budgetType: 'dynamic' },
@@ -113,7 +113,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
   };
 
   const ESSEN_DAILY_RATE = 7.67;
-  const isEssenBenefit = (name: string) => name === 'Essenszuschuss' || name.toLowerCase().includes('essen');
+  const isEssenBenefit = (name: string) => name === 'Mittagessen' || name.toLowerCase().includes('essen');
 
   const [showDynamicModal, setShowDynamicModal] = useState(false);
   const [dynamicModalBenefitId, setDynamicModalBenefitId] = useState<string | null>(null);
@@ -591,7 +591,7 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
                   <div className="flex items-center gap-2">
                     {isEssenBenefit(benefit.name) ? (
-                      /* Toggle nur für Essenszuschuss */
+                      /* Toggle nur für Mittagessen */
                       <>
                         <div className={`flex rounded border overflow-hidden transition ${!benefit.selected || loadingState ? 'opacity-40 pointer-events-none' : 'border-[#0F429F]'}`}>
                           <button
@@ -753,12 +753,12 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
         </div>
       )}
 
-      {/* Dynamic-Budget Modal (nur Essenszuschuss) */}
+      {/* Dynamic-Budget Modal (nur Mittagessen) */}
       {showDynamicModal && dynamicModalBenefitId && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-sm w-full" style={{ borderRadius: '8px' }}>
             <h3 className="text-[18px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Dynamisches Budget — Essenszuschuss
+              Dynamisches Budget — Mittagessen
             </h3>
             <p className="text-[13px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Tagessatz × Arbeitstage (passt sich jährlich an)

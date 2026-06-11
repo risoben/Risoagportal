@@ -13,7 +13,7 @@ export function MitarbeiterEdit() {
   });
 
   const [benefits, setBenefits] = useState([
-    { name: 'Essenszuschuss', status: 'aktiv', budget: '€1.000' },
+    { name: 'Mittagessen', status: 'aktiv', budget: '€1.000' },
     { name: 'Mobilität', status: 'aktiv', budget: '€500' },
     { name: 'Internet', status: 'ausstehend', budget: '€50' },
   ]);

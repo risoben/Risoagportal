@@ -105,8 +105,8 @@ const benefits: Benefit[] = [
   {
     id: 'bkv',
     name: 'BKV',
-    description: 'bis 50€ / Monat',
-    limit: 'bis 50€ / Monat',
+    description: 'bis 1.000€ / Jahr',
+    limit: 'bis 1.000€ / Jahr',
     active: true,
     locations: ['München'],
     details: 'Private Zusatzkrankenversicherung direkt durch dich als Arbeitgeber bezahlt.'
@@ -129,7 +129,7 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
   {
     id: 'cash',
     name: 'Cash Benefits',
-    icon: '💵',
+    icon: '/assets/group-icons/cash-benefits.svg',
     benefitIds: ['mittagessen', 'internet', 'kindergarten', 'commuting', 'erholung', 'danke-bonus', 'oepnv'],
     intro: [
       'Prinzip: Beleg einreichen, Geld zurückbekommen.',
@@ -144,7 +144,7 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
   {
     id: 'gutschein',
     name: 'Gutschein Benefits',
-    icon: '🎁',
+    icon: '/assets/group-icons/gutschein-benefits.svg',
     benefitIds: ['sachbezug', 'geburtstag'],
     intro: [
       'Prinzip: Gutschein erhalten, bei Partnern einlösen.',
@@ -159,7 +159,7 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
   {
     id: 'versicherung',
     name: 'Versicherungs Benefits',
-    icon: '🛡️',
+    icon: '/assets/group-icons/versicherung-benefits.png',
     benefitIds: ['bkv', 'bav'],
     intro: [
       'Prinzip: Arbeitgeber zahlt, Mitarbeiter sind abgesichert.',
@@ -251,9 +251,9 @@ export function BenefitsOverviewNew() {
                 >
                   <div
                     className="flex items-center justify-center rounded-full mb-5"
-                    style={{ width: '68px', height: '68px', backgroundColor: '#EFF6FF', fontSize: '34px' }}
+                    style={{ width: '68px', height: '68px', backgroundColor: '#EFF6FF' }}
                   >
-                    {group.icon}
+                    <img src={group.icon} alt={group.name} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
                   </div>
                   <div className="flex flex-col w-full" style={{ flex: 1 }}>
                     <h2 className="text-[#273A5F] font-bold text-[22px] mb-3" style={{ letterSpacing: '-0.2px' }}>{group.name}</h2>

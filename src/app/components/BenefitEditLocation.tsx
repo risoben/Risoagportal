@@ -87,7 +87,7 @@ export function BenefitEditLocation() {
           Zurück zu Benefits
         </button>
         <div className="flex items-center gap-3">
-          <h1 className="text-[#000000] font-bold text-[24px]">Benefit bearbeiten: Essenszuschuss</h1>
+          <h1 className="text-[#000000] font-bold text-[24px]">Benefit bearbeiten: Mittagessen</h1>
           <span className="px-3 py-1 bg-gray-100 text-[#666666] text-xs rounded-full">
             📍 Heddesheim
           </span>
@@ -100,7 +100,7 @@ export function BenefitEditLocation() {
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6" style={{ borderRadius: '12px' }}>
           <div className="mb-4">
             <label className="text-[#999999] text-xs mb-1 block">Benefit-Name</label>
-            <p className="text-[#666666] font-medium text-base">Essenszuschuss</p>
+            <p className="text-[#666666] font-medium text-base">Mittagessen</p>
           </div>
           <div>
             <label className="text-[#999999] text-xs mb-1 block">Beschreibung</label>

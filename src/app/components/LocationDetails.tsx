@@ -456,12 +456,12 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
         )}
       </div>
 
-      {/* Modal: Dynamisches Budget (Essenszuschuss) */}
+      {/* Modal: Dynamisches Budget (Mittagessen) */}
       {showDynamicModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-sm w-full" style={{ borderRadius: '8px' }}>
             <h3 className="text-[18px] font-bold text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Dynamisches Budget — Essenszuschuss
+              Dynamisches Budget — Mittagessen
             </h3>
             <p className="text-[13px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
               Tagessatz × Arbeitstage (passt sich jährlich an)
@@ -508,12 +508,12 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
         </div>
       )}
 
-      {/* Modal: Fixes Budget (Essenszuschuss) */}
+      {/* Modal: Fixes Budget (Mittagessen) */}
       {showFixModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-sm w-full" style={{ borderRadius: '8px' }}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[18px] font-bold text-[#273A5F]">Fixes Budget — Essenszuschuss</h3>
+              <h3 className="text-[18px] font-bold text-[#273A5F]">Fixes Budget — Mittagessen</h3>
               <button onClick={() => setShowFixModal(false)} className="text-[#666666] hover:text-[#333]"><X size={20} /></button>
             </div>
             <p className="text-[13px] text-[#666666] mb-5">Fester Monatsbetrag für diesen Standort</p>

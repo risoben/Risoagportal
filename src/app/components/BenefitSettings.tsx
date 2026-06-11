@@ -77,12 +77,12 @@ export function BenefitSettings({
 
   // Use provided props or benefit data or defaults
   const benefitName = customName || benefitData?.name || 'Mittagessen';
-  const benefitDescription = customDescription || benefitData?.description || 'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Kantinenzuschüssen.';
+  const benefitDescription = customDescription || benefitData?.description || 'Das Mittagessen ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Verpflegungszuschüssen.';
   const defaultLocations = customLocations || benefitData?.locations || [
-    { id: '1', name: 'München', limit: '115,05€/Monat', employeeCount: 34, enabled: true, budgetType: 'dynamic' as const },
-    { id: '2', name: 'Heddesheim', limit: '115,05€/Monat', employeeCount: 15, enabled: true, budgetType: 'dynamic' as const },
-    { id: '3', name: 'Berlin', limit: '85,00€/Monat', employeeCount: 8, enabled: true, budgetType: 'fix' as const },
-    { id: '4', name: 'Viernheim', limit: '115,05€/Monat', employeeCount: 5, enabled: false, budgetType: 'dynamic' as const },
+    { id: '1', name: 'München', limit: '115,05 €/Monat', employeeCount: 34, enabled: true, budgetType: 'dynamic' as const },
+    { id: '2', name: 'Heddesheim', limit: '115,05 €/Monat', employeeCount: 15, enabled: true, budgetType: 'dynamic' as const },
+    { id: '3', name: 'Berlin', limit: '85,00 €/Monat', employeeCount: 8, enabled: true, budgetType: 'fix' as const },
+    { id: '4', name: 'Viernheim', limit: '115,05 €/Monat', employeeCount: 5, enabled: false, budgetType: 'dynamic' as const },
   ];
   const defaultStats = customStats || benefitData?.stats || {
     employeesWithAccess: 62,
@@ -400,15 +400,15 @@ export function BenefitSettings({
                 </p>
                 <div className="flex items-center gap-3">
                   {[
-                    { icon: '🧾', label: 'Beleg kaufen', sub: 'Restaurant, Supermarkt, Lieferdienst' },
-                    { icon: '📱', label: 'In App hochladen', sub: 'Foto machen & einreichen' },
-                    { icon: '🔍', label: 'Riso prüft', sub: 'Automatisch & regelkonform' },
-                    { icon: '💰', label: 'Erstattung', sub: 'Direkt aufs Konto mit Gehalt' },
+                    { icon: '/assets/essen-icons/belegprinzip/beleg-kaufen.svg', label: 'Beleg kaufen', sub: 'Restaurant, Supermarkt, Lieferdienst' },
+                    { icon: '/assets/essen-icons/belegprinzip/app-hochladen.svg', label: 'In App hochladen', sub: 'Foto machen & einreichen' },
+                    { icon: '/assets/essen-icons/belegprinzip/riso-prueft.svg', label: 'Riso prüft', sub: 'Automatisch & regelkonform' },
+                    { icon: '/assets/essen-icons/belegprinzip/erstattung.svg', label: 'Erstattung', sub: 'Direkt aufs Konto mit Gehalt' },
                   ].map((s, i, arr) => (
                     <div key={s.label} className="flex items-center gap-3 flex-1">
                       <div className="flex flex-col items-center text-center flex-1 gap-3">
-                        <div className="flex items-center justify-center rounded-full bg-white" style={{ width: '84px', height: '84px', fontSize: '42px', boxShadow: '0 2px 8px rgba(15,66,159,0.10)', border: '1.5px solid #C7D7F9' }}>
-                          {s.icon}
+                        <div className="flex items-center justify-center rounded-full bg-white" style={{ width: '84px', height: '84px', boxShadow: '0 2px 8px rgba(15,66,159,0.10)', border: '1.5px solid #C7D7F9' }}>
+                          <img src={s.icon} alt={s.label} style={{ width: '52px', height: '52px', objectFit: 'contain' }} />
                         </div>
                         <div>
                           <p className="text-[15px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>{s.label}</p>
@@ -452,7 +452,7 @@ export function BenefitSettings({
                   Passt für jeden Essenstyp
                 </h2>
                 <p className="text-[13px] text-[#666666] mb-6" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-                  Egal was für ein Essenstyp deine Mitarbeitenden sind — der Essenszuschuss passt zu jedem Lifestyle und jeder Essensgewohnheit.
+                  Egal was für ein Essenstyp deine Mitarbeitenden sind — der Mittagessen-Zuschuss passt zu jedem Lifestyle und jeder Essensgewohnheit.
                 </p>
                 <div className="grid grid-cols-3 gap-5">
                   {[
@@ -1027,7 +1027,7 @@ export function BenefitSettings({
                     Wie hoch ist das gesetzliche Tageslimit für den Essensbenefit?
                   </p>
                   <p className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-                    Der Essenszuschuss ist steuerfrei bis zu 7,67 € pro Arbeitstag — das entspricht bis zu 115 € im Monat.
+                    Der Mittagessen-Zuschuss ist steuerfrei bis zu 7,67 € pro Arbeitstag — das entspricht bis zu 115 € im Monat.
                   </p>
                 </div>
               )}
@@ -1041,7 +1041,7 @@ export function BenefitSettings({
               <div className="flex-1">
                 <h2 className="text-[17px] font-bold text-[#273A5F] mb-2">Beratung anfragen</h2>
                 <p className="text-[14px] text-[#273A5F]" style={{ lineHeight: '1.6' }}>
-                  Du möchtest den Essenszuschuss einrichten oder hast Fragen zur Umsetzung? Unser Team begleitet dich durch den gesamten Prozess — von der Standort-Konfiguration bis zur Abrechnung.
+                  Du möchtest das Mittagessen einrichten oder hast Fragen zur Umsetzung? Unser Team begleitet dich durch den gesamten Prozess — von der Standort-Konfiguration bis zur Abrechnung.
                 </p>
               </div>
               <div className="flex-shrink-0">

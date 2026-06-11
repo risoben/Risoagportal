@@ -42,8 +42,8 @@ const mockReports: Report[] = [
 
 const mockBenefits: Benefit[] = [
   {
-    id: 'essenszuschuss',
-    name: 'Essenszuschuss',
+    id: 'mittagessen',
+    name: 'Mittagessen',
     employees: 45,
     budgetMonth: 1250,
     usedMonth: 850,

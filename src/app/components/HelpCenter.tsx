@@ -54,7 +54,7 @@ export function HelpCenter() {
     },
     {
       id: 2,
-      title: 'Essenszuschuss einrichten',
+      title: 'Mittagessen einrichten',
       category: 'Benefits',
     },
     {

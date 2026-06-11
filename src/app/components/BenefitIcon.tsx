@@ -20,7 +20,6 @@ type BenefitIconProps = {
 
 // Mapping between benefit names and image assets
 const benefitIconMap: Record<string, string> = {
-  'Essenszuschuss': mittagessen,
   'Mittagessen': mittagessen,
   '50€-Sachbezug': sachbezug,
   'Sachbezug': sachbezug,

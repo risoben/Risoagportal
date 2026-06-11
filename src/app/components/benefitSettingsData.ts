@@ -34,12 +34,9 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'mittagessen': {
     category: 'cash',
     name: 'Mittagessen',
-    description: 'Mit dem Mittagessen-Benefit erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird automatisch über die Riso App geprüft, und der Betrag landet mit dem nächsten Gehalt auf dem Konto. Das Maximum liegt bei 7,67€ pro Arbeitstag — bis zu 115€ im Monat.',
-    // TODO [Santiago + Philipp]: Bessere Formulierung für "Steuerliche Behandlung" finden.
-    // Aktuell: 'Steuerfrei bis 7,67 € pro Arbeitstag' — könnte präziser/verständlicher sein.
-    // → Termin mit Philipp vereinbaren um gemeinsam die richtige Formulierung zu erarbeiten.
+    description: 'Mit dem Mittagessen-Benefit erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird automatisch über die Riso App geprüft, und der Betrag landet mit dem nächsten Gehalt auf dem Konto. Das Maximum liegt bei 7,67 € pro Arbeitstag — bis zu 115 € im Monat.',
     taxInfo: {
-      steuer: 'Steuerfrei bis 7,67 € pro Arbeitstag',
+      steuer: '25 % Pauschalsteuer auf 4,57 € pro Mahlzeit',
       sv: 'Sozialversicherungsfrei',
     },
   },
@@ -65,7 +62,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'commuting': {
     category: 'cash',
     name: 'Fahrkostenzuschuss',
-    description: 'Mit dem Fahrtkostenzuschuss unterstützt du deine Mitarbeiter auf dem Weg zur Arbeit — egal ob Auto, Fahrrad oder zu Fuß. Der Betrag berechnet sich automatisch aus Entfernung und Arbeitstagen: 0,30€/km bis 20km, 0,38€/km ab dem 21. km. Hinweis: nicht kombinierbar mit dem ÖPNV-Ticket — pro Mitarbeiter eine Option wählen.',
+    description: 'Mit dem Fahrtkostenzuschuss unterstützt du deine Mitarbeiter auf dem Weg zur Arbeit — egal ob Auto, Fahrrad oder zu Fuß. Der Betrag berechnet sich automatisch aus Entfernung und Arbeitstagen: 0,38 € pro Kilometer (ab dem 1. Kilometer, einheitlicher Satz seit 01.01.2026). Hinweis: nicht kombinierbar mit dem ÖPNV-Ticket — pro Mitarbeiter eine Option wählen.',
     taxInfo: {
       steuer: '15 % Pauschalsteuer wird vom Arbeitgeber übernommen',
       sv: 'Sozialversicherungsfrei',
@@ -122,11 +119,11 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   },
   'bkv': {
     category: 'insurance',
-    maxBudgetPerEmployee: 50,
+    maxBudgetPerEmployee: 83.33,
     name: 'BKV',
     description: 'Mit der Betrieblichen Krankenversicherung bietest du deinen Mitarbeitern privaten Zusatzschutz — Zahn, stationär, ambulant und mehr. Du zahlst den Beitrag direkt, Riso leitet ihn monatlich an den Versicherer weiter. Ein starkes Benefit im Recruiting, das zeigt: bei uns werden Mitarbeiter wirklich gut versorgt.',
     taxInfo: {
-      steuer: 'Steuerfrei bis 50 €/Monat',
+      steuer: 'Pauschalversteuerung mit Ø-Steuersatz (§ 40 Abs. 1 EStG) — bis 1.000 €/Jahr (≈ 83,33 €/Monat)',
       sv: 'Sozialversicherungsfrei',
     },
   },

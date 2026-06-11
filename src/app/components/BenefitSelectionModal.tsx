@@ -17,9 +17,9 @@ interface BenefitSelectionModalProps {
 
 const allBenefits: Benefit[] = [
   {
-    id: 'essenszuschuss',
-    name: 'Essenszuschuss',
-    description: 'Essenszuschuss für Mitarbeiter',
+    id: 'mittagessen',
+    name: 'Mittagessen',
+    description: 'Mittagessen für Mitarbeiter',
     status: 'active',
   },
   {

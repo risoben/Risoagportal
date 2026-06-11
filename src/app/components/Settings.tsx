@@ -456,13 +456,13 @@ export function Settings() {
                     <label className="flex items-center cursor-pointer">
                       <input
                         type="checkbox"
-                        checked={benefits.essenszuschuss}
-                        onChange={(e) => setBenefits({ ...benefits, essenszuschuss: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
+                        checked={benefits.mittagessen}
+                        onChange={(e) => setBenefits({ ...benefits, mittagessen: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
-                        <BenefitIcon benefitName="Essenszuschuss" size={24} />
+                        <BenefitIcon benefitName="Mittagessen" size={24} />
                       </span>
-                      <span className="text-xs text-[#333333]">Essenszuschuss</span>
+                      <span className="text-xs text-[#333333]">Mittagessen</span>
                     </label>
                     <label className="flex items-center cursor-pointer">
                       <input

@@ -27,8 +27,8 @@ type BenefitWithCategory = Benefit & { category: 'cash' | 'gutschein' };
 const mockBenefits: BenefitWithCategory[] = [
   // Cash-Benefits
   {
-    id: 'essenszuschuss',
-    name: 'Essenszuschuss',
+    id: 'mittagessen',
+    name: 'Mittagessen',
     status: 'active',
     employeeCount: 1024,
     totalBudget: 5000,

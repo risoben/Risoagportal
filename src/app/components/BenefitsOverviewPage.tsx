@@ -25,8 +25,8 @@ type Benefit = {
 const mockBenefits: Benefit[] = [
   // GRUPPE 1 — Cash Benefits
   {
-    id: 'essenszuschuss',
-    group: 'Cash Benefits',    name: 'Essenszuschuss',
+    id: 'mittagessen',
+    group: 'Cash Benefits',    name: 'Mittagessen',
     description: 'bis 7,67€/Tag',
     employees: 45,
     budgetMonth: 1250,

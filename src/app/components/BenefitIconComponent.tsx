@@ -6,7 +6,6 @@ interface BenefitIconProps {
 }
 
 const benefitConfig: Record<string, { svgPath: string }> = {
-  'Essenszuschuss':              { svgPath: '/assets/benefit-icons/Mittagessen.svg' },
   'Mittagessen':                 { svgPath: '/assets/benefit-icons/Mittagessen.svg' },
   'Internet':                    { svgPath: '/assets/benefit-icons/Internet.svg' },
   'Internetzuschuss':            { svgPath: '/assets/benefit-icons/Internet.svg' },

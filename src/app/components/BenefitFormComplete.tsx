@@ -34,7 +34,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
   // Basic Info
   const [basicInfo, setBasicInfo] = useState({
     name: isEditMode ? 'Mittagessen' : '',
-    description: isEditMode ? 'Der Essenszuschuss ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Mitarbeiterverpflegung.' : '',
+    description: isEditMode ? 'Das Mittagessen ermöglicht Mitarbeitern die Nutzung von Essensgutscheinen oder direkten Mitarbeiterverpflegung.' : '',
     frequencyType: isEditMode ? 'Monthly' : '',
     categoryType: isEditMode ? 'Cash' : '',
     status: isEditMode ? 'Active' : 'Active',

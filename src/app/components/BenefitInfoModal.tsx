@@ -12,8 +12,8 @@ type BenefitInfo = {
 };
 
 const benefitInfoData: Record<string, BenefitInfo> = {
-  essenszuschuss: {
-    id: 'essenszuschuss',    name: 'Essenszuschuss',
+  mittagessen: {
+    id: 'mittagessen',    name: 'Mittagessen',
     headline: 'Für jeden Lifestyle und jede Essensgewohnheit geeignet.',
     what: 'Finanzielle Unterstützung für deine Mittagspause oder Mahlzeiten am Arbeitsplatz.',
     vorteile: [
