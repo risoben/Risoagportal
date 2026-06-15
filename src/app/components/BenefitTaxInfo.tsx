@@ -22,7 +22,7 @@ export function BenefitTaxInfo({ steuer, sv }: BenefitTaxInfoProps) {
           <p className="text-[16px] font-bold text-[#273A5F] uppercase tracking-wide mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
             Steuer
           </p>
-          <p className="text-[17px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.5' }}>
+          <p className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
             {steuer}
           </p>
         </div>
@@ -31,7 +31,7 @@ export function BenefitTaxInfo({ steuer, sv }: BenefitTaxInfoProps) {
             Sozialversicherung
           </p>
           <span
-            className="inline-block text-[16px] font-medium px-3 py-1 rounded-full"
+            className="inline-block text-[13px] font-medium px-3 py-1 rounded-full"
             style={{
               background: svFrei ? '#E8F5E9' : '#F0F0F0',
               color: svFrei ? '#2E7D32' : '#333333',
