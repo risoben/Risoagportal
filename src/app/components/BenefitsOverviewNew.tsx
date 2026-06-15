@@ -8,7 +8,7 @@
 import React, { useMemo, useState } from 'react';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { StatusBadge } from './Table';
-import { ChevronLeft, X } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 
 interface Benefit {
   id: string;
@@ -174,7 +174,6 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
 ];
 
 export function BenefitsOverviewNew() {
-  const [selectedBenefit, setSelectedBenefit] = useState<Benefit | null>(null);
   const [selectedGroup, setSelectedGroup] = useState<GroupId | null>(null);
 
   const groupsWithBenefits = useMemo(() => {
@@ -193,14 +192,6 @@ export function BenefitsOverviewNew() {
 
   const handleEdit = (benefitId: string) => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'benefits-edit', benefitId } }));
-  };
-
-  const handleCardClick = (benefit: Benefit) => {
-    setSelectedBenefit(benefit);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedBenefit(null);
   };
 
   const formatLocations = (locations: string[]) => {
@@ -312,10 +303,10 @@ export function BenefitsOverviewNew() {
                 const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' };
                 return (
                   <React.Fragment key={benefit.id}>
-                    <div style={c} className="cursor-pointer" onClick={() => handleCardClick(benefit)}>
+                    <div style={c}>
                       <BenefitIconComponent benefitName={benefit.name} size={32} background={true} />
                     </div>
-                    <div style={c} className="text-[14px] text-[#000000] cursor-pointer" onClick={() => handleCardClick(benefit)}>{benefit.name}</div>
+                    <div style={c} className="text-[14px] text-[#000000]">{benefit.name}</div>
                     <div style={c} className="text-[14px] text-[#000000]">{benefit.limit}</div>
                     <div style={c}><StatusBadge status={benefit.active ? 'Aktiv' : 'Inaktiv'} type={benefit.active ? 'success' : 'inactive'} /></div>
                     <div style={c} className="text-[14px] text-[#666666]">{formatLocations(benefit.locations)}</div>
@@ -327,75 +318,6 @@ export function BenefitsOverviewNew() {
                   </React.Fragment>
                 );
               })}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Benefit Info Modal */}
-      {selectedBenefit && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={(e) => e.target === e.currentTarget && handleCloseModal()}
-        >
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-[600px]"
-            style={{ boxShadow: '0 10px 40px rgba(0,0,0,0.12)' }}
-          >
-            <div className="p-8">
-              {/* Header */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center gap-4">
-                  <BenefitIconComponent benefitName={selectedBenefit.name} size={48} />
-                  <h2 className="text-[#273A5F] font-bold text-[17px]">{selectedBenefit.name}</h2>
-                </div>
-                <button
-                  onClick={handleCloseModal} className="w-8 h-8 flex items-center justify-center text-[#666666] hover:bg-[#F0F4FF] rounded-full transition-colors"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
-              {/* Content */}
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Beschreibung:</h3>
-                  <p className="text-[#333333] text-[14px]">{selectedBenefit.details}</p>
-                </div>
-
-                <div>
-                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Budget pro Mitarbeiter:</h3>
-                  <p className="text-[#333333] text-[14px]">{selectedBenefit.limit}</p>
-                </div>
-
-                <div>
-                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Verfügbar für Standorte:</h3>
-                  <ul className="space-y-1">
-                    {selectedBenefit.locations.map(location => (
-                      <li key={location} className="text-[#666666] text-[14px]">
-                        • {location}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-[#273A5F] font-medium text-[17px] mb-2">Status:</h3>
-                  <StatusBadge status={selectedBenefit.active ? 'Aktiv' : 'Inaktiv'} type={selectedBenefit.active ? 'success' : 'inactive'} />
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="flex gap-3 pt-6 mt-6 border-t border-[#E0E0E0]">
-                <button
-                  onClick={handleCloseModal} className="px-6 py-3 border border-[#0F429F] text-[#0F429F] text-[14px] font-medium rounded-full hover:bg-[#F0F4FF] transition-colors"
-                >
-                  Schließen
-                </button>
-                <button
-                  onClick={() => handleEdit(selectedBenefit.id)} className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
-                >
-                  Diesen Benefit verwalten
-                </button>
-              </div>
             </div>
           </div>
         </div>
