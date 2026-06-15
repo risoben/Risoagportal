@@ -372,7 +372,7 @@ export function BenefitSettings({
                     <div className="flex flex-col gap-3">
                       {[
                         { step: '1', title: 'Essen kaufen', text: 'Restaurant, Supermarkt, Lieferdienst — beliebig' },
-                        { step: '2', title: 'Beleg hochladen', text: 'In der Riso App fotografieren & einreichen' },
+                        { step: '2', title: 'Beleg in App hochladen', text: 'In der Riso App fotografieren & einreichen' },
                         { step: '3', title: 'Geld erhalten', text: 'Bis 115 € / Monat steuerfrei aufs Konto' },
                       ].map(({ step, title, text }) => (
                         <div key={step} className="flex items-start gap-3 bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-3">
