@@ -302,7 +302,7 @@ export function BenefitsOverviewNew() {
           {/* Tabelle — gleiche Struktur/Optik wie "Benefits verwalten" (BenefitsManagement.tsx) */}
           <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-x-auto">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, minmax(0,1fr))', minWidth: '600px' }}>
-              {['Icon', 'Name', 'Budget', 'Status', 'Standorte', 'Aktion'].map(h => (
+              {['', 'Name', 'Budget', 'Status', 'Standorte', 'Aktion'].map(h => (
                 <div key={h} style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' }}>
                   <span className="text-white font-bold text-[14px] uppercase tracking-wide">{h}</span>
                 </div>
@@ -393,7 +393,7 @@ export function BenefitsOverviewNew() {
                 <button
                   onClick={() => handleEdit(selectedBenefit.id)} className="flex-1 px-6 py-3 bg-[#0F429F] text-white text-[14px] font-medium rounded-full hover:bg-[#246AFF] transition-colors"
                 >
-                  Dieses Benefit verwalten
+                  Diesen Benefit verwalten
                 </button>
               </div>
             </div>

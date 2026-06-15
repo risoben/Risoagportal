@@ -653,7 +653,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
             <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2">
               <span className="text-[16px]">⚠️</span>
               <p className="text-[#F44336] text-[12px]">
-                Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf dieses Benefit
+                Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf diesen Benefit
               </p>
             </div>
 

@@ -98,10 +98,10 @@ export function BenefitSelectionModal({ isOpen, onClose, onSelect }: BenefitSele
           <div className="flex items-start justify-between">
             <div>
               <h2 className="text-[20px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Welches Benefit möchte du aktivieren?
+                Welchen Benefit möchtest du aktivieren?
               </h2>
               <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Wähle ein inaktives Benefit aus der Liste
+                Wähle einen inaktiven Benefit aus der Liste
               </p>
             </div>
             <button

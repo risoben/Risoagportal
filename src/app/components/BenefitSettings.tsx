@@ -400,7 +400,7 @@ export function BenefitSettings({
                 </p>
                 <div className="flex items-center gap-3">
                   {[
-                    { icon: '/assets/essen-icons/belegprinzip/beleg-kaufen.svg', label: 'Beleg kaufen', sub: 'Restaurant, Supermarkt, Lieferdienst' },
+                    { icon: '/assets/essen-icons/belegprinzip/beleg-kaufen.svg', label: 'Essen kaufen', sub: 'Restaurant, Supermarkt, Lieferdienst' },
                     { icon: '/assets/essen-icons/belegprinzip/app-hochladen.svg', label: 'In App hochladen', sub: 'Foto machen & einreichen' },
                     { icon: '/assets/essen-icons/belegprinzip/riso-prueft.svg', label: 'Riso prüft', sub: 'Automatisch & regelkonform' },
                     { icon: '/assets/essen-icons/belegprinzip/erstattung.svg', label: 'Erstattung', sub: 'Direkt aufs Konto mit Gehalt' },
@@ -649,8 +649,8 @@ export function BenefitSettings({
 
 
               <p className="text-[14px] text-[#666666] mt-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Ein Standort ist für dieses Benefit aktiv, wenn der Haken gesetzt <strong>und</strong> ein Budget
-                hinterlegt ist. Das allein reicht aber nicht — Mitarbeiter erhalten das Benefit erst, wenn sie zusätzlich
+                Ein Standort ist für diesen Benefit aktiv, wenn der Haken gesetzt <strong>und</strong> ein Budget
+                hinterlegt ist. Das allein reicht aber nicht — Mitarbeiter erhalten den Benefit erst, wenn sie zusätzlich
                 im Abschnitt „Einem Mitarbeiter zuweisen" weiter unten zugewiesen wurden.
               </p>
 
@@ -658,7 +658,7 @@ export function BenefitSettings({
                 <div className="mt-4 bg-[#FFF8E1] border border-[#FFD54F] rounded-lg px-4 py-3">
                   <p className="text-[17px] text-[#8D6E00]" style={{ fontFamily: 'Roboto, sans-serif' }}>
                     ⚠️ Noch keine Standorte angelegt. Bitte zuerst unter <strong>Standortverwaltung</strong> mindestens
-                    einen Standort einrichten — erst danach kann dieses Benefit dort aktiviert werden.
+                    einen Standort einrichten — erst danach kann dieser Benefit dort aktiviert werden.
                   </p>
                 </div>
               )}
@@ -848,7 +848,7 @@ export function BenefitSettings({
                   </div>
                 </div>
                 <p className="text-[14px] text-[#666666] mb-4" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                  Alle eingereichten Zuweisungen für dieses Benefit.
+                  Alle eingereichten Zuweisungen für diesen Benefit.
                 </p>
 
                 <div className="bg-[#FFF8E1] border border-[#FFD54F] rounded-lg px-4 py-3 mb-4">

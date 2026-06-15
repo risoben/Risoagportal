@@ -541,7 +541,7 @@ export function BenefitDankeBonusSettings() {
             <p className="text-[14px] text-[#333333] mb-4">Möchtest du den <strong>Danke-Bonus</strong> wirklich deaktivieren?</p>
             <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2 text-left">
               <span>⚠️</span>
-              <p className="text-[12px] text-[#F44336]">Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf dieses Benefit.</p>
+              <p className="text-[12px] text-[#F44336]">Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf diesen Benefit.</p>
             </div>
             <div className="flex gap-3 justify-center">
               <button

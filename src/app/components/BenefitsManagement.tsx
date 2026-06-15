@@ -166,7 +166,7 @@ export function BenefitsManagement() {
             <h2 className="text-[#273A5F] font-bold text-[16px] mb-4">{category}</h2>
             <div className="bg-white rounded-lg border border-[#E0E0E0] overflow-x-auto">
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, minmax(0,1fr))', minWidth: '600px' }}>
-                {['Icon','Name','Budget','Status','Standorte','Aktion'].map(h => (
+                {['','Name','Budget','Status','Standorte','Aktion'].map(h => (
                   <div key={h} style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px', overflow: 'hidden' }}>
                     <span className="text-white font-bold text-xs uppercase tracking-wide">{h}</span>
                   </div>

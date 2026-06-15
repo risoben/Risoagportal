@@ -44,7 +44,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     category: 'cash',
     maxBudgetPerEmployee: 50,
     name: 'Internetzuschuss',
-    description: 'Mit dem Internetzuschuss übernimmst du die privaten Internetkosten deiner Mitarbeiter — bei jedem Anbieter, egal ob DSL, Glasfaser oder Mobilfunk. Deine Mitarbeiter reichen ihre monatliche Rechnung in der Riso App ein und bekommen bis zu 50€ direkt ausgezahlt. Ein unkompliziertes Benefit, das jeden Monat spürbar ist.',
+    description: 'Mit dem Internetzuschuss übernimmst du die privaten Internetkosten deiner Mitarbeiter — bei jedem Anbieter, egal ob DSL, Glasfaser oder Mobilfunk. Deine Mitarbeiter reichen ihre monatliche Rechnung in der Riso App ein und bekommen bis zu 50€ direkt ausgezahlt. Ein unkomplizierter Benefit, der jeden Monat spürbar ist.',
     taxInfo: {
       steuer: 'Steuerfrei bis 50 €/Monat',
       sv: 'Sozialversicherungsfrei',
@@ -82,7 +82,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     category: 'voucher',
     maxBudgetPerEmployee: 50,
     name: 'Sachbezug',
-    description: 'Mit dem Sachbezug bekommt jeder Mitarbeiter monatlich einen Gutschein bis zu 50€ — aus unserem Partnernetzwerk mit einer großen Auswahl an Shops, Restaurants und Freizeitangeboten. Wählt ein Mitarbeiter nichts aus, greift automatisch sein hinterlegter Standard-Gutschein — so verfällt kein Budget. Kein Beleg, kein Aufwand, jeden Monat ein sichtbares Benefit.',
+    description: 'Mit dem Sachbezug bekommt jeder Mitarbeiter monatlich einen Gutschein bis zu 50€ — aus unserem Partnernetzwerk mit einer großen Auswahl an Shops, Restaurants und Freizeitangeboten. Wählt ein Mitarbeiter nichts aus, greift automatisch sein hinterlegter Standard-Gutschein — so verfällt kein Budget. Kein Beleg, kein Aufwand, jeden Monat ein sichtbarer Benefit.',
     taxInfo: {
       steuer: 'Steuerfrei bis 50 €/Monat',
       sv: 'Sozialversicherungsfrei',
@@ -121,7 +121,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     category: 'insurance',
     maxBudgetPerEmployee: 83.33,
     name: 'BKV',
-    description: 'Mit der Betrieblichen Krankenversicherung bietest du deinen Mitarbeitern privaten Zusatzschutz — Zahn, stationär, ambulant und mehr. Du zahlst den Beitrag direkt, Riso leitet ihn monatlich an den Versicherer weiter. Ein starkes Benefit im Recruiting, das zeigt: bei uns werden Mitarbeiter wirklich gut versorgt.',
+    description: 'Mit der Betrieblichen Krankenversicherung bietest du deinen Mitarbeitern privaten Zusatzschutz — Zahn, stationär, ambulant und mehr. Du zahlst den Beitrag direkt, Riso leitet ihn monatlich an den Versicherer weiter. Ein starker Benefit im Recruiting, der zeigt: bei uns werden Mitarbeiter wirklich gut versorgt.',
     taxInfo: {
       steuer: 'Pauschalversteuerung mit Ø-Steuersatz (§ 40 Abs. 1 EStG) — bis 1.000 €/Jahr (≈ 83,33 €/Monat)',
       sv: 'Sozialversicherungsfrei',

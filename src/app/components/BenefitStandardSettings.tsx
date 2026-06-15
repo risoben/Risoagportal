@@ -190,7 +190,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
             ))}
           </div>
           <p className="text-[12px] text-[#666666] mt-4">
-            Mitarbeiter aktivierter Standorte erhalten das Benefit automatisch ab 1. nächsten Monat.
+            Mitarbeiter aktivierter Standorte erhalten den Benefit automatisch ab 1. nächsten Monat.
           </p>
         </div>
 
@@ -298,7 +298,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
             <div className="bg-[#FFEBEE] border border-[#F44336] rounded p-3 mb-6 flex items-start gap-2 text-left">
               <span>⚠️</span>
               <p className="text-[12px] text-[#F44336]">
-                Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf dieses Benefit.
+                Mitarbeiter verlieren ab 1. nächsten Monat Zugriff auf diesen Benefit.
               </p>
             </div>
             <div className="flex gap-3 justify-center">

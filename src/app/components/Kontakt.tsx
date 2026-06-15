@@ -30,8 +30,8 @@ export function Kontakt() {
       answer: 'Gehe zu Mitarbeiter → Neue Mitarbeiter importieren und lade eine CSV-Datei hoch. Alternativ kannst du einzelne Mitarbeiter über Neuen Mitarbeiter hinzufügen anlegen.',
     },
     {
-      question: 'Wie aktiviere ich ein neues Benefit?',
-      answer: 'Gehe zu Benefits → Benefits verwalten und aktiviere das Benefit per Toggle. Das Benefit wird ab dem 1. des nächsten Monats aktiv.',
+      question: 'Wie aktiviere ich einen neuen Benefit?',
+      answer: 'Gehe zu Benefits → Benefits verwalten und aktiviere den Benefit per Toggle. Der Benefit wird ab dem 1. des nächsten Monats aktiv.',
     },
     {
       question: 'Was ist ein Standort?',
