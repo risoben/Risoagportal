@@ -915,7 +915,7 @@ export function BenefitSettings({
                         <span className="text-[14px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>
                           {a.availableFrom}
                         </span>
-                        <span className="text-[13px] font-medium px-2 py-1 rounded-full inline-block" style={{ background: '#FFF8E1', color: '#F57F17', border: '1px solid #FFD54F', fontFamily: 'Roboto, sans-serif' }}>
+                        <span className="text-[11px] font-medium px-2 py-1 rounded-full inline-block whitespace-nowrap" style={{ background: '#FFF8E1', color: '#F57F17', border: '1px solid #FFD54F', fontFamily: 'Roboto, sans-serif', width: 'fit-content' }}>
                           ⏳ Ausstehend
                         </span>
                       </div>
@@ -939,7 +939,7 @@ export function BenefitSettings({
                                   {a.budgetType === 'dynamic' ? `🔄 ${empLimit ?? '—'} €` : `📌 ${a.amount} €`}
                                 </span>
                                 <span className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif' }}>{a.availableFrom}</span>
-                                <span className="text-[12px] font-medium px-2 py-0.5 rounded-full inline-block self-center" style={{ background: '#FFF8E1', color: '#F57F17', border: '1px solid #FFD54F', fontFamily: 'Roboto, sans-serif' }}>
+                                <span className="text-[11px] font-medium px-2 py-0.5 rounded-full inline-block self-center whitespace-nowrap" style={{ background: '#FFF8E1', color: '#F57F17', border: '1px solid #FFD54F', fontFamily: 'Roboto, sans-serif', width: 'fit-content' }}>
                                   ⏳ Ausstehend
                                 </span>
                               </div>
