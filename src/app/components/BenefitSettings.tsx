@@ -462,7 +462,7 @@ export function BenefitSettings({
                   Passt für jeden Essenstyp
                 </h2>
                 <p className="text-[13px] text-[#666666] mb-6" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-                  Egal was für ein Essenstyp deine Mitarbeitenden sind, der Zuschuss zum Mittagessen passt zu jedem Lifestyle und jeder Essgewohnheit.
+                  Egal, was für ein Essenstyp deine Mitarbeitenden sind, der Zuschuss zum Mittagessen passt zu jedem Lifestyle und jeder Essgewohnheit.
                 </p>
                 <div className="grid grid-cols-3 gap-5">
                   {[
@@ -1177,7 +1177,7 @@ export function BenefitSettings({
                   <p className="text-[15px] text-[#9E9E9E] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
                     {essenBudgetType === 'dynamic'
                       ? 'Riso berechnet das Budget automatisch aus Tagessatz und Arbeitstagen. Der Tagessatz erhöht sich jährlich. Mit dem Budgettyp Auto nutzt du immer das gesetzliche Maximum für deine Mitarbeitenden.'
-                      : 'Du gibst einen festen Betrag pro Monat vor. Der bleibt so bis du ihn änderst (unabhängig von gesetzlichen oder jährlichen Änderungen).'}
+                      : 'Du gibst einen festen Betrag pro Monat vor. Der bleibt so, bis du ihn änderst (unabhängig von gesetzlichen oder jährlichen Änderungen).'}
                   </p>
                 </div>
                 {essenBudgetType === 'dynamic' ? (
