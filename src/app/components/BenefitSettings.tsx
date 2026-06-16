@@ -147,6 +147,16 @@ export function BenefitSettings({
       numValue = parseFloat(assignAmount.replace(',', '.'));
       if (!assignAmount.trim() || isNaN(numValue)) { setAssignError('Betrag ist erforderlich'); return; }
       if (numValue <= 0) { setAssignError('Betrag muss größer als 0 sein'); return; }
+      if (assignLocationId && assignLocationId !== 'all') {
+        const loc = locations.find(l => l.id === assignLocationId);
+        if (loc) {
+          const locMax = parseFloat(loc.limit.replace('€/Monat', '').replace(',', '.').trim());
+          if (!isNaN(locMax) && numValue > locMax) {
+            setAssignError(`Budget überschreitet das Standort-Budget (max. ${loc.limit})`);
+            return;
+          }
+        }
+      }
     }
     if (!assignLocationId || !assignEmployee || !assignMonth) return;
 
@@ -396,7 +406,7 @@ export function BenefitSettings({
                   Das Belegprinzip
                 </h2>
                 <p className="text-[13px] text-[#666666] mb-8" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-                  So einfach funktioniert der Benefit Mittagessen: Beleg einreichen, Riso prüft automatisch, Erstattung kommt mit der nächsten Gehaltsabrechnung.
+                  So einfach funktioniert der Benefit Mittagessen: Beleg einreichen, Riso prüft, Erstattung kommt mit der nächsten Gehaltsabrechnung.
                 </p>
                 <div className="flex items-center gap-3">
                   {[

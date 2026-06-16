@@ -34,7 +34,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'mittagessen': {
     category: 'cash',
     name: 'Mittagessen',
-    description: 'Mit dem Benefit Mittagessen erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird über die Riso-App geprüft und der Betrag wird mit der nächsten Gehaltsabrechnung erstattet. Das Maximum liegt bei bis zu 115 € im Monat — 7,67 € pro Arbeitstag.',
+    description: 'Mit dem Benefit Mittagessen erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird über die Riso-App geprüft und der Betrag wird mit der nächsten Gehaltsabrechnung erstattet. Das Maximum liegt bei bis zu 115,05 € im Monat — 7,67 € pro Arbeitstag.',
     taxInfo: {
       steuer: 'Effektiv 5 bis 7 % Pauschalsteuer',
       sv: 'Sozialversicherungsfrei',
