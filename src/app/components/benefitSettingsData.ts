@@ -62,7 +62,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'commuting': {
     category: 'cash',
     name: 'Fahrkostenzuschuss',
-    description: 'Mit dem Fahrtkostenzuschuss unterstützt du deine Mitarbeiter auf dem Weg zur Arbeit — egal ob Auto, Fahrrad oder zu Fuß. Der Betrag berechnet sich aus Entfernung und Arbeitstagen: 0,38 € pro Kilometer (ab dem 1. Kilometer, einheitlicher Satz seit 01.01.2026). Hinweis: nicht kombinierbar mit dem ÖPNV-Ticket — pro Mitarbeiter eine Option wählen.',
+    description: 'Mit dem Fahrtkostenzuschuss unterstützt du deine Mitarbeiter auf dem Weg zur Arbeit — egal ob Auto, Fahrrad oder zu Fuß. Der Betrag berechnet sich automatisch aus Entfernung und Arbeitstagen: 0,38 € pro Kilometer (ab dem 1. Kilometer, einheitlicher Satz seit 01.01.2026). Hinweis: nicht kombinierbar mit dem ÖPNV-Ticket — pro Mitarbeiter eine Option wählen.',
     taxInfo: {
       steuer: '15 % Pauschalsteuer wird vom Arbeitgeber übernommen',
       sv: 'Sozialversicherungsfrei',
@@ -130,7 +130,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'bav': {
     category: 'insurance',
     name: 'BAV',
-    description: 'Mit der Betrieblichen Altersvorsorge unterstützt du deine Mitarbeiter beim Aufbau ihrer Rente — mit einem monatlichen Zuschuss direkt in ihren Versicherungsvertrag. Als Arbeitgeber bist du gesetzlich zu mindestens 15% Zuschuss verpflichtet. Riso übernimmt die Abwicklung und leitet die Beiträge weiter.',
+    description: 'Mit der Betrieblichen Altersvorsorge unterstützt du deine Mitarbeiter beim Aufbau ihrer Rente — mit einem monatlichen Zuschuss direkt in ihren Versicherungsvertrag. Als Arbeitgeber bist du gesetzlich zu mindestens 15% Zuschuss verpflichtet. Riso übernimmt die Abwicklung und leitet die Beiträge automatisch weiter.',
     taxInfo: {
       steuer: 'Steuerfrei bis zu 4 % der Beitragsbemessungsgrenze',
       sv: 'Sozialversicherungsfrei bis zu 4 % der Beitragsbemessungsgrenze',
