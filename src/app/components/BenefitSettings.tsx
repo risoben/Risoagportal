@@ -96,7 +96,7 @@ export function BenefitSettings({
     ? [
         { icon: '💶', title: '115,05 € / Monat steuerfrei', text: 'Bis zu 1.380 € im Jahr — 7,67 € pro Arbeitstag als gesetzliches Maximum' },
         { icon: '🧾', title: 'Jeder Lebensmittelbeleg gilt', text: 'Gekauft, gekocht oder bestellt — Restaurant, Supermarkt, Lieferdienst' },
-        { icon: '💰', title: 'Direkt aufs Konto', text: 'Bargelderstattung per Gehaltsabrechnung — kein Gutschein, kein Umweg' },
+        { icon: '💰', title: 'Direkt aufs Konto', text: 'Kostenerstattung per Gehaltsabrechnung — einfach und ohne Umweg' },
       ]
     : [];
 
@@ -205,7 +205,7 @@ export function BenefitSettings({
             ? { ...loc, limit: `${newAmount}€/Monat`, budgetType: 'dynamic', enabled: true }
             : loc
         ));
-        setSavedConfirm(`${editingLocation.name}: Änderung gespeichert — wird zum 1. nächsten Monat wirksam.`);
+        setSavedConfirm(`${editingLocation.name}: Änderung gespeichert — wird ab dem 1. des nächsten Monats wirksam.`);
       }
     } else {
       if (!limitValue.trim()) { setLimitError('Feld erforderlich'); return; }
@@ -218,7 +218,7 @@ export function BenefitSettings({
             ? { ...loc, limit: `${limitValue}€/Monat`, budgetType: essenBudgetType, enabled: true }
             : loc
         ));
-        setSavedConfirm(`${editingLocation.name}: Änderung gespeichert — wird zum 1. nächsten Monat wirksam.`);
+        setSavedConfirm(`${editingLocation.name}: Änderung gespeichert — wird ab dem 1. des nächsten Monats wirksam.`);
       }
     }
     setShowLimitModal(false);
@@ -280,7 +280,7 @@ export function BenefitSettings({
               <StatusBadge status={isActive ? 'Aktiv' : 'Inaktiv'} type={isActive ? 'success' : 'inactive'} />
             </div>
             <p className="text-[15px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Status-Änderung gilt ab 1. nächsten Monat
+              Status-Änderung gilt ab dem 1. des nächsten Monats
             </p>
           </div>
         </div>
@@ -295,7 +295,7 @@ export function BenefitSettings({
             //    Vorschläge aus dem Feedback-Gespräch: "Benefit Verwaltung" / "Benefit einrichten" / "Benefits verwalten"
             { id: 'bearbeitung' as const, label: 'Benefit verwalten' },
             { id: 'info' as const, label: 'Info' },
-            { id: 'faqs' as const, label: 'FAQs' },
+            { id: 'faqs' as const, label: 'FAQ' },
           ]).map((tab) => (
             <button
               key={tab.id}
@@ -319,7 +319,7 @@ export function BenefitSettings({
             {/* 1. Was ist der Benefit? */}
             <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
               <h2 className="text-[17px] font-bold text-[#273A5F] mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Was ist {benefitName}?
+                Was ist der Benefit {benefitName}?
               </h2>
               <p className="text-[14px] text-[#333333] mb-4" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
                 {benefitDescription}
@@ -350,9 +350,9 @@ export function BenefitSettings({
                     </p>
                     <div className="flex flex-col gap-3">
                       {[
-                        { step: '1', title: 'Standort & Budget', text: 'Standorte aktivieren, Budget per Auto oder Fix festlegen' },
-                        { step: '2', title: 'Mitarbeiter zuweisen', text: 'Benefit den richtigen Mitarbeitern zuweisen' },
-                        { step: '3', title: 'Fertig', text: 'Riso übernimmt Prüfung & Abrechnung automatisch' },
+                        { step: '1', title: 'Standort & Budget', text: 'Standorte aktivieren und Budget automatisch berechnen lassen' },
+                        { step: '2', title: 'Mitarbeiter zuweisen', text: 'Den Benefit den richtigen Mitarbeitern zuweisen — erst dann haben sie Zugriff' },
+                        { step: '3', title: 'Fertig', text: 'Riso übernimmt Belegprüfung und monatliche Berichte' },
                       ].map(({ step, title, text }) => (
                         <div key={step} className="flex items-start gap-3 bg-[#F0F4FF] border border-[#C7D7F9] rounded-lg p-3">
                           <span className="flex items-center justify-center rounded-full bg-[#0F429F] text-white text-[15px] font-bold flex-shrink-0 mt-0.5" style={{ width: '20px', height: '20px' }}>{step}</span>
@@ -372,8 +372,8 @@ export function BenefitSettings({
                     <div className="flex flex-col gap-3">
                       {[
                         { step: '1', title: 'Essen kaufen', text: 'Restaurant, Supermarkt, Lieferdienst — beliebig' },
-                        { step: '2', title: 'Beleg in App hochladen', text: 'In der Riso App fotografieren & einreichen' },
-                        { step: '3', title: 'Geld erhalten', text: 'Bis 115 € / Monat steuerfrei aufs Konto' },
+                        { step: '2', title: 'Beleg in der Riso-App hochladen', text: 'In der Riso-App fotografieren & einreichen' },
+                        { step: '3', title: 'Geld erhalten', text: 'Bis zu 115 € / Monat steuerfrei aufs Konto' },
                       ].map(({ step, title, text }) => (
                         <div key={step} className="flex items-start gap-3 bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-3">
                           <span className="flex items-center justify-center rounded-full bg-[#273A5F] text-white text-[15px] font-bold flex-shrink-0 mt-0.5" style={{ width: '20px', height: '20px' }}>{step}</span>
@@ -396,12 +396,12 @@ export function BenefitSettings({
                   Das Belegprinzip
                 </h2>
                 <p className="text-[13px] text-[#666666] mb-8" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-                  Mitarbeiter reichen ihre Essensbelege direkt über die App ein — der Betrag wird automatisch geprüft und mit dem nächsten Gehalt erstattet. Kein Gutschein, kein Umweg.
+                  So einfach funktioniert der Benefit Mittagessen: Beleg einreichen, Riso prüft automatisch, Erstattung kommt mit der nächsten Gehaltsabrechnung.
                 </p>
                 <div className="flex items-center gap-3">
                   {[
                     { icon: '/assets/essen-icons/belegprinzip/beleg-kaufen.svg', label: 'Essen kaufen', sub: 'Restaurant, Supermarkt, Lieferdienst' },
-                    { icon: '/assets/essen-icons/belegprinzip/app-hochladen.svg', label: 'In App hochladen', sub: 'Foto machen & einreichen' },
+                    { icon: '/assets/essen-icons/belegprinzip/app-hochladen.svg', label: 'In der Riso-App hochladen', sub: 'Foto machen & einreichen' },
                     { icon: '/assets/essen-icons/belegprinzip/riso-prueft.svg', label: 'Riso prüft', sub: 'Automatisch & regelkonform' },
                     { icon: '/assets/essen-icons/belegprinzip/erstattung.svg', label: 'Erstattung', sub: 'Direkt aufs Konto mit Gehalt' },
                   ].map((s, i, arr) => (
@@ -432,9 +432,9 @@ export function BenefitSettings({
                 </h2>
                 <div className="grid grid-cols-3 gap-5">
                   {[
-                    { title: 'Bis zu 50% niedrigere Lohnnebenkosten', text: 'Der Mittagessen-Zuschuss reduziert die Lohnnebenkosten gegenüber einer klassischen Gehaltserhöhung erheblich.' },
+                    { title: 'Bis zu 50% niedrigere Lohnnebenkosten', text: 'Der Benefit Mittagessen reduziert die Lohnnebenkosten gegenüber einer klassischen Gehaltserhöhung erheblich.' },
                     { title: 'Talentbindung & -gewinnung', text: 'Attraktive Benefits helfen, Mitarbeiter zu halten und neue im Wettbewerb um Fachkräfte zu gewinnen.' },
-                    { title: 'Einfache digitale Umsetzung', text: 'Einmal einrichten — Riso übernimmt Belegprüfung, Abrechnung und Reporting automatisch.' },
+                    { title: 'Einfache digitale Umsetzung', text: 'Einmal einrichten — Riso übernimmt Belegprüfung, Dokumentation und monatliche Berichte.' },
                   ].map(({ title, text }) => (
                     <div key={title} className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-5">
                       <p className="text-[16px] font-bold text-[#273A5F] mb-2" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.3' }}>{title}</p>
@@ -452,7 +452,7 @@ export function BenefitSettings({
                   Passt für jeden Essenstyp
                 </h2>
                 <p className="text-[13px] text-[#666666] mb-6" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-                  Egal was für ein Essenstyp deine Mitarbeitenden sind — der Mittagessen-Zuschuss passt zu jedem Lifestyle und jeder Essensgewohnheit.
+                  Egal was für ein Essenstyp deine Mitarbeitenden sind, der Zuschuss zum Mittagessen passt zu jedem Lifestyle und jeder Essgewohnheit.
                 </p>
                 <div className="grid grid-cols-3 gap-5">
                   {[
@@ -461,7 +461,6 @@ export function BenefitSettings({
                     { img: '/assets/essen-icons/healthy.png', title: 'Healthy Hero', text: 'Vegan, bio, glutenfrei — Lebensmittel aus dem Supermarkt sind selbstverständlich dabei.' },
                     { img: '/assets/essen-icons/bäcker.png', title: 'Bäcker oder Imbiss', text: 'Auch Belege vom Bäcker, Metzger oder Imbiss um die Ecke werden akzeptiert.' },
                     { img: '/assets/essen-icons/fitness.png', title: 'Fitness-Typ', text: 'Protein-Riegel, Proteinshakes und Sportlernahrung zählen ebenfalls als Beleg.' },
-                    { img: '/assets/essen-icons/vegan.png', title: 'Flexibler Esser', text: 'Arbeitet zu ungewöhnlichen Zeiten? Das Zeitfenster (11–16 Uhr) gilt auch im Home-Office.' },
                   ].map(({ img, title, text }) => (
                     <div key={title} className="bg-white border border-[#E0E0E0] rounded-xl p-5 flex flex-col">
                       <div className="flex justify-center mb-4">
@@ -538,7 +537,7 @@ export function BenefitSettings({
                 Standorte
               </h2>
               <p className="text-[14px] text-[#666666] mb-5" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                Verfügbarkeit und Budget pro Standort an einer Stelle festlegen.
+                Verfügbarkeit und Budget pro Standort hier festlegen:
               </p>
 
               {/* Table Header */}
@@ -643,7 +642,7 @@ export function BenefitSettings({
               {savedConfirm && (
                 <div className="mt-4 flex items-center gap-3 bg-[#E8F5E9] border border-[#A5D6A7] rounded-lg px-4 py-3">
                   <span className="text-[#2E7D32] text-[17px]">✅ {savedConfirm}</span>
-                  <span className="text-[#666666] text-[15px] ml-auto">Änderung wird geloggt und zum 1. nächsten Monats aktiviert.</span>
+                  <span className="text-[#666666] text-[15px] ml-auto">Änderung gilt ab dem 1. des nächsten Monats.</span>
                 </div>
               )}
 
@@ -819,6 +818,31 @@ export function BenefitSettings({
                       </select>
                     </div>
                   </div>
+
+                  {/* Budget-Vorschau — zeigt was konkret zugewiesen wird */}
+                  {isEssen && assignLocationId && (
+                    <div className="bg-[#F0F4FF] border border-[#C7D7F9] rounded-lg px-4 py-3">
+                      <p className="text-[14px] font-medium text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                        Zugewiesenes Budget:{' '}
+                        {assignBudgetType === 'dynamic' ? (
+                          isAllLocations ? (
+                            <strong>Standortabhängig (🔄 Auto je Standort)</strong>
+                          ) : (
+                            <strong>
+                              {(() => {
+                                const loc = locations.find(l => l.id === assignLocationId);
+                                if (!loc) return '—';
+                                if (loc.budgetType === 'dynamic') return `🔄 ${loc.limit} (Auto)`;
+                                return `🔄 ${loc.limit}`;
+                              })()}
+                            </strong>
+                          )
+                        ) : (
+                          assignAmount ? <strong>📌 {assignAmount} €/Monat (Fix)</strong> : <span className="text-[#9E9E9E]">Betrag eingeben</span>
+                        )}
+                      </p>
+                    </div>
+                  )}
 
                   <div className="flex justify-end pt-1">
                     <button
@@ -1012,49 +1036,100 @@ export function BenefitSettings({
           </>
         )}
 
-        {/* 📌 PHASE 2 (Philipp-Feedback 2026-06-08): FAQs hier sind nur ein Platzhalter.
-            Geplant: FAQ-Inhalte zentral in Zoho Desk pflegen (getaggt nach Zielgruppe + Benefit + Kanal),
-            dynamisches Laden statt hartcodierter Einträge — Machbarkeit mit Nalini/Skiy31 klären. */}
         {activeTab === 'faqs' && (
-          <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
-            <h2 className="text-[17px] font-bold text-[#273A5F] mb-3" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Häufige Fragen
-            </h2>
-            <div className="space-y-3">
-              {isEssen && (
-                <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4">
-                  <p className="text-[14px] font-medium text-[#273A5F] mb-1.5" style={{ fontFamily: 'Roboto, sans-serif' }}>
-                    Wie hoch ist das gesetzliche Tageslimit für den Essensbenefit?
-                  </p>
-                  <p className="text-[14px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-                    Der Mittagessen-Zuschuss ist steuerfrei bis zu 7,67 € pro Arbeitstag — das entspricht bis zu 115 € im Monat.
-                  </p>
-                </div>
-              )}
+          <>
+            {/* FAQ — Artikel aus Zoho Desk (Kategorie: Über den Essenszuschuss) */}
+            <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-[17px] font-bold text-[#273A5F]" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  FAQ
+                </h2>
+                <span className="flex items-center gap-1.5 text-[12px] text-[#666666] bg-[#F9FAFB] border border-[#E0E0E0] rounded-full px-3 py-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                  <span className="w-2 h-2 rounded-full bg-[#4CAF50] inline-block flex-shrink-0" />
+                  Live aus hilfe.riso-app.de
+                </span>
+              </div>
+              <div className="divide-y divide-[#E0E0E0]">
+                {[
+                  {
+                    title: 'Essenszuschuss mit Riso',
+                    summary: 'Mit dem Essenszuschuss bekommst du bis zu 7,67 € pro Arbeitstag für dein Mittagessen erstattet — ob im Restaurant, aus dem Supermarkt oder per Lieferdienst. Belege hochladen, fertig.',
+                    url: 'https://hilfe.riso-app.de/portal/de/kb/articles/essenszuschuss-mit-riso',
+                  },
+                  {
+                    title: 'Essenszuschuss im Home-Office nutzen',
+                    summary: 'Du arbeitest von zuhause aus? Der Essenszuschuss funktioniert auch im Home-Office — genauso wie im Büro. Beleg hochladen, fertig.',
+                    url: 'https://hilfe.riso-app.de/portal/de/kb/articles/mittagessenzuschuss-im-home-office-nutzen',
+                  },
+                  {
+                    title: 'Essenszuschuss: Das Wichtigste in Kürze',
+                    summary: 'Der Staat fördert das arbeitstägliche Mittagessen mit bis zu 7,67 € pro Tag, an maximal 15 Tagen im Monat. Das ergibt bis zu 115 € pro Monat — steuerfrei und direkt erstattet.',
+                    url: 'https://hilfe.riso-app.de/portal/de/kb/articles/essenszuschuss-das-wichtigste-in-kürze',
+                  },
+                  {
+                    title: 'Essenszuschuss: Im Detail',
+                    summary: 'Schritt-für-Schritt: Wie Mitarbeitende einen Beleg einreichen, was akzeptiert wird und wie die Erstattung funktioniert — egal ob Restaurant, Supermarkt oder Lieferdienst.',
+                    url: 'https://hilfe.riso-app.de/portal/de/kb/articles/essenszuschuss-im-detail',
+                  },
+                  {
+                    title: 'Voraussetzungen für den Essenszuschuss',
+                    summary: 'Damit Mitarbeitende den vollen Essenszuschuss nutzen können, müssen einige grundlegende Voraussetzungen erfüllt sein — hier findest du sie im Überblick.',
+                    url: 'https://hilfe.riso-app.de/portal/de/kb/articles/vorraussetzungen-für-den-essenszuschuss',
+                  },
+                  {
+                    title: 'Regeln zur Nutzung des Essenszuschusses',
+                    summary: 'Für die Nutzung des Essenszuschusses gelten einige klare Regeln — damit alles korrekt, fair und reibungslos läuft.',
+                    url: 'https://hilfe.riso-app.de/portal/de/kb/articles/regeln-zur-nutzung-des-essenszuschusses',
+                  },
+                ].map(({ title, summary, url }) => (
+                  <div key={title} className="py-4 first:pt-0 last:pb-0">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[14px] font-medium text-[#273A5F] mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
+                          {title}
+                        </p>
+                        <p className="text-[13px] text-[#666666]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.5' }}>
+                          {summary}
+                        </p>
+                      </div>
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-shrink-0 text-[13px] text-[#0F429F] hover:underline whitespace-nowrap"
+                        style={{ fontFamily: 'Roboto, sans-serif' }}
+                      >
+                        Artikel lesen →
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
 
-        {activeTab === 'faqs' && isEssen && (
-          <div className="rounded-xl p-6 mb-6" style={{ background: '#E3F2FD', border: '1px solid #90CAF9' }}>
-            <div className="flex items-start justify-between gap-6">
-              <div className="flex-1">
-                <h2 className="text-[17px] font-bold text-[#273A5F] mb-2">Beratung anfragen</h2>
-                <p className="text-[14px] text-[#273A5F]" style={{ lineHeight: '1.6' }}>
-                  Du möchtest das Mittagessen einrichten oder hast Fragen zur Umsetzung? Unser Team begleitet dich durch den gesamten Prozess — von der Standort-Konfiguration bis zur Abrechnung.
-                </p>
+            {/* Beratung anfragen */}
+            {isEssen && (
+              <div className="rounded-xl p-6 mb-6" style={{ background: '#E3F2FD', border: '1px solid #90CAF9' }}>
+                <div className="flex items-start justify-between gap-6">
+                  <div className="flex-1">
+                    <h2 className="text-[17px] font-bold text-[#273A5F] mb-2">Beratung anfragen</h2>
+                    <p className="text-[14px] text-[#273A5F]" style={{ lineHeight: '1.6' }}>
+                      Du möchtest den Benefit Mittagessen einrichten oder hast Fragen zur Umsetzung? Unser Team begleitet dich durch den gesamten Prozess — von der Standort-Konfiguration bis zu den monatlichen Berichten.
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <button
+                      onClick={() => window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'kontakt' } }))}
+                      className="px-6 py-3 bg-[#0F429F] text-white font-medium text-[14px] rounded-full hover:bg-[#246AFF] transition whitespace-nowrap"
+                      style={{ borderRadius: '24px' }}
+                    >
+                      Beratung anfragen →
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className="flex-shrink-0">
-                <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'kontakt' } }))}
-                  className="px-6 py-3 bg-[#0F429F] text-white font-medium text-[14px] rounded-full hover:bg-[#246AFF] transition whitespace-nowrap"
-                  style={{ borderRadius: '24px' }}
-                >
-                  Beratung anfragen →
-                </button>
-              </div>
-            </div>
-          </div>
+            )}
+          </>
         )}
       </div>
 
@@ -1091,8 +1166,8 @@ export function BenefitSettings({
                   </div>
                   <p className="text-[15px] text-[#9E9E9E] mt-1" style={{ fontFamily: 'Roboto, sans-serif' }}>
                     {essenBudgetType === 'dynamic'
-                      ? 'Riso berechnet das Budget automatisch aus Tagessatz und Arbeitstagen — passt sich jedes Jahr von selbst an'
-                      : 'Du gibst einen festen Betrag pro Monat vor — der bleibt so, bis du ihn änderst'}
+                      ? 'Riso berechnet das Budget automatisch aus Tagessatz und Arbeitstagen. Der Tagessatz erhöht sich jährlich. Mit dem Budgettyp Auto nutzt du immer das gesetzliche Maximum für deine Mitarbeitenden.'
+                      : 'Du gibst einen festen Betrag pro Monat vor. Der bleibt so bis du ihn änderst (unabhängig von gesetzlichen oder jährlichen Änderungen).'}
                   </p>
                 </div>
                 {essenBudgetType === 'dynamic' ? (
@@ -1203,7 +1278,7 @@ export function BenefitSettings({
             )}
 
             <p className="text-[14px] text-[#666666] mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
-              Änderung gilt ab 1. nächsten Monat.
+              Änderung gilt ab dem 1. des nächsten Monats.
             </p>
 
             <div className="flex gap-3 justify-end">

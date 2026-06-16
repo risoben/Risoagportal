@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riso Benefit Icons — Paletten-Vergleich</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        h1 {
+            text-align: center;
+            color: #1a202c;
+            margin-bottom: 12px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+        }
+
+        .palette-section { margin-bottom: 50px; }
+
+        .palette-header {
+            background: white;
+            border-radius: 12px 12px 0 0;
+            padding: 20px;
+            border-bottom: 3px solid #e2e8f0;
+        }
+
+        .palette-header h2 { font-size: 22px; color: #1a202c; margin: 0 0 4px 0; }
+        .palette-header p { font-size: 13px; color: #718096; }
+
+        .category {
+            background: white;
+            padding: 28px;
+        }
+
+        .category:last-child {
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .category h3 {
+            font-size: 16px;
+            color: #1a202c;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+        }
+
+        .icon-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .icon-card img { width: 56px; height: 56px; }
+
+        .icon-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #2d3748;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .icon-color {
+            font-size: 10px;
+            color: #a0aec0;
+            font-family: monospace;
+        }
+
+        /* Group icons section */
+        .groups-section {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .groups-section h2 {
+            font-size: 22px;
+            color: #1a202c;
+            margin-bottom: 6px;
+        }
+
+        .groups-section > p {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 24px;
+        }
+
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .group-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 24px;
+            border-radius: 12px;
+            background: #f8f9fa;
+        }
+
+        .group-card img { width: 72px; height: 72px; }
+
+        .group-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a202c;
+            text-align: center;
+        }
+
+        .group-desc {
+            font-size: 12px;
+            color: #718096;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .group-color {
+            font-size: 11px;
+            color: #a0aec0;
+            font-family: monospace;
+        }
+
+        .comparison-note {
+            background: #fffaf0;
+            border-left: 4px solid #ff8a00;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #744210;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Riso Benefit Icons — Paletten-Vergleich</h1>
+        <p class="subtitle">Echte Icons mit neuen Farben — Option 1 vs. Option 2 + Gruppen-Icons</p>
+
+        <!-- GROUP ICONS v1 (zu dick) -->
+        <div class="groups-section">
+            <h2>🗂️ Gruppen-Icons v1 <span style="font-size:13px; color:#a0aec0; font-weight:400;">(erste Version — Linien zu dick)</span></h2>
+            <p>Gleicher Riso-Stil wie Einzel-Icons (64×64, Kreis-Hintergrund + weißes Icon)</p>
+            <div class="groups-grid">
+                <div class="group-card">
+                    <img src="icon-previews/groups/Cash-Benefits-Group.svg" alt="Cash-Benefits">
+                    <div class="group-name">Cash-Benefits</div>
+                    <div class="group-desc">Wallet-Icon (bestehendes Design, neue Farbe)</div>
+                    <div class="group-color">#FF8C00</div>
+                </div>
+                <div class="group-card">
+                    <img src="icon-previews/groups/Gutschein-Benefits-Group.svg" alt="Gutschein-Benefits">
+                    <div class="group-name">Gutschein-Benefits</div>
+                    <div class="group-desc">Geschenkbox-Icon — zu ähnlich zu Geburtstag</div>
+                    <div class="group-color">#9D4EDD</div>
+                </div>
+                <div class="group-card">
+                    <img src="icon-previews/groups/Versicherung-Benefits-Group.svg" alt="Versicherungs-Benefits">
+                    <div class="group-name">Versicherungs-Benefits</div>
+                    <div class="group-desc">Schild-Icon (neu)</div>
+                    <div class="group-color">#2AC567</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GROUP ICONS v2 (dünne Linien wie Riso-Icons) -->
+        <div class="groups-section">
+            <h2>🗂️ Gruppen-Icons v2 <span style="font-size:13px; color:#a0aec0; font-weight:400;">(dünne Linien — wie die echten Riso-Icons)</span></h2>
+            <p>Cash & Versicherung überarbeitet (dünnere Linien) · Gutschein: 3 neue Alternativen statt Geschenkbox</p>
+            <div class="groups-grid">
+                <div class="group-card">
+                    <img src="icon-previews/groups-v2/Cash-Benefits-Group.svg" alt="Cash-Benefits">
+                    <div class="group-name">Cash-Benefits</div>
+                    <div class="group-desc">Wallet-Icon — dünne Linien</div>
+                    <div class="group-color">#FF8C00</div>
+                </div>
+                <div class="group-card">
+                    <img src="icon-previews/groups-v2/Versicherung-Benefits-Group.svg" alt="Versicherungs-Benefits">
+                    <div class="group-name">Versicherungs-Benefits</div>
+                    <div class="group-desc">Schild-Icon — dünne Linien</div>
+                    <div class="group-color">#2AC567</div>
+                </div>
+            </div>
+            <h3 style="margin-top:24px; margin-bottom:16px; font-size:15px; color:#1a202c;">🎁 Gutschein-Benefits — Alternativen zur Auswahl</h3>
+            <div class="groups-grid">
+                <div class="group-card">
+                    <img src="icon-previews/groups-v2/Gutschein-Alt1-Ticket.svg" alt="Gutschein Alt 1 — Ticket">
+                    <div class="group-name">Alt 1: Ticket/Coupon</div>
+                    <div class="group-desc">Klassisches Gutschein-Ticket mit Perforation + Stern</div>
+                    <div class="group-color">#9D4EDD</div>
+                </div>
+                <div class="group-card">
+                    <img src="icon-previews/groups-v2/Gutschein-Alt2-Card-Percent.svg" alt="Gutschein Alt 2 — Karte mit %">
+                    <div class="group-name">Alt 2: Karte mit %</div>
+                    <div class="group-desc">Rabatt-Karte mit Prozentzeichen</div>
+                    <div class="group-color">#9D4EDD</div>
+                </div>
+                <div class="group-card">
+                    <img src="icon-previews/groups-v2/Gutschein-Alt3-Card-Barcode.svg" alt="Gutschein Alt 3 — Karte mit Code">
+                    <div class="group-name">Alt 3: Karte mit Code</div>
+                    <div class="group-desc">Gutschein-Karte mit Barcode/Code (passt zu App-Gutscheinen)</div>
+                    <div class="group-color">#9D4EDD</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 1 -->
+        <div class="palette-section">
+            <div class="palette-header">
+                <h2>Option 1: Gelb → Orange → Rot (3 Abstufungen)</h2>
+                <p>Commuting & ÖPNV teilen sich eine Farbe — einfacher, ruhiger</p>
+            </div>
+
+            <div class="category">
+                <h3>💰 Cash-Benefits</h3>
+                <div class="icons-grid">
+                    <div class="icon-card">
+                        <img src="icon-previews/option1/Kindergarten.svg" alt="Kindergarten">
+                        <div class="icon-name">Kindergarten</div>
+                        <div class="icon-color">#FFD700</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option1/Internet.svg" alt="Internet">
+                        <div class="icon-name">Internet</div>
+                        <div class="icon-color">#FFA500</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option1/Commuting.svg" alt="Commuting">
+                        <div class="icon-name">Fahrkosten</div>
+                        <div class="icon-color">#FF8C00</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option1/OEPNV.svg" alt="ÖPNV">
+                        <div class="icon-name">ÖPNV</div>
+                        <div class="icon-color">#FF8C00</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option1/Erholung.svg" alt="Erholung">
+                        <div class="icon-name">Erholung</div>
+                        <div class="icon-color">#FF6347</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option1/Mittagessen.svg" alt="Mittagessen">
+                        <div class="icon-name">Mittagessen</div>
+                        <div class="icon-color">#FF4500</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option1/Danke-Bonus.svg" alt="Danke-Bonus">
+                        <div class="icon-name">Danke-Bonus</div>
+                        <div class="icon-color">#DC143C</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>🎁 Gutschein-Benefits</h3>
+                <div class="icons-grid">
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/Geburtstag.svg" alt="Geburtstag">
+                        <div class="icon-name">Geburtstag</div>
+                        <div class="icon-color">#9D4EDD</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/Sachbezug.svg" alt="Sachbezug">
+                        <div class="icon-name">Sachbezug</div>
+                        <div class="icon-color">#FF006E</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>🛡️ Versicherungs-Benefits</h3>
+                <div class="icons-grid">
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/BKV.svg" alt="BKV">
+                        <div class="icon-name">BKV</div>
+                        <div class="icon-color">#218A7E</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/BAV.svg" alt="BAV">
+                        <div class="icon-name">BAV</div>
+                        <div class="icon-color">#3AC16F</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 2 -->
+        <div class="palette-section">
+            <div class="palette-header">
+                <h2>Option 2: Gelb → Orange → Rot (6 Abstufungen)</h2>
+                <p>Jeder Cash-Benefit hat seine eigene Farbe — maximale Unterscheidung</p>
+            </div>
+
+            <div class="category">
+                <h3>💰 Cash-Benefits</h3>
+                <div class="icons-grid">
+                    <div class="icon-card">
+                        <img src="icon-previews/option2/Kindergarten.svg" alt="Kindergarten">
+                        <div class="icon-name">Kindergarten</div>
+                        <div class="icon-color">#FFD700</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option2/Internet.svg" alt="Internet">
+                        <div class="icon-name">Internet</div>
+                        <div class="icon-color">#FFC700</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option2/Commuting.svg" alt="Commuting">
+                        <div class="icon-name">Fahrkosten</div>
+                        <div class="icon-color">#FFA500</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option2/OEPNV.svg" alt="ÖPNV">
+                        <div class="icon-name">ÖPNV</div>
+                        <div class="icon-color">#FF8C00</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option2/Erholung.svg" alt="Erholung">
+                        <div class="icon-name">Erholung</div>
+                        <div class="icon-color">#FF6347</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option2/Mittagessen.svg" alt="Mittagessen">
+                        <div class="icon-name">Mittagessen</div>
+                        <div class="icon-color">#FF4500</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/option2/Danke-Bonus.svg" alt="Danke-Bonus">
+                        <div class="icon-name">Danke-Bonus</div>
+                        <div class="icon-color">#DC143C</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>🎁 Gutschein-Benefits</h3>
+                <div class="icons-grid">
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/Geburtstag.svg" alt="Geburtstag">
+                        <div class="icon-name">Geburtstag</div>
+                        <div class="icon-color">#9D4EDD</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/Sachbezug.svg" alt="Sachbezug">
+                        <div class="icon-name">Sachbezug</div>
+                        <div class="icon-color">#FF006E</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>🛡️ Versicherungs-Benefits</h3>
+                <div class="icons-grid">
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/BKV.svg" alt="BKV">
+                        <div class="icon-name">BKV</div>
+                        <div class="icon-color">#218A7E</div>
+                    </div>
+                    <div class="icon-card">
+                        <img src="icon-previews/shared/BAV.svg" alt="BAV">
+                        <div class="icon-name">BAV</div>
+                        <div class="icon-color">#3AC16F</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-note">
+                <strong>Unterschied zu Option 1:</strong> Commuting & ÖPNV haben hier unterschiedliche Farben (#FFA500 vs #FF8C00) statt einer gemeinsamen — insgesamt 6 statt 5 unterschiedliche Töne in Cash-Benefits.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,6 +3,13 @@ import { Users, FileText, FileSpreadsheet, Download, Eye, Euro, Edit2 } from 'lu
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { BenefitIconComponent } from './BenefitIconComponent';
 import { StatusBadge } from './Table';
+import { mockEmployees } from './employeesData';
+import { mockReports } from './reportsData';
+
+const monthNames = [
+  'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+  'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember',
+];
 
 // TODO: Replace this mock data with a real API call.
 // Endpoint: GET /api/v1/portal/dashboard
@@ -25,58 +32,9 @@ const generateBudgetData = () => {
 
 const budgetData = generateBudgetData();
 
-// Employee data with longer names for testing ellipsis
-const employees = [
-  {
-    id: 1,
-    name: 'Anna Smith',
-    nr: '001',
-    abteilung: 'Vertrieb',
-    status: 'Aktiv',
-    budget: '€1.000',
-  },
-  {
-    id: 2,
-    name: 'Max Müller',
-    nr: '002',
-    abteilung: 'IT',
-    status: 'Aktiv',
-    budget: '€950',
-  },
-  {
-    id: 3,
-    name: 'Kim S.',
-    nr: '003',
-    abteilung: 'HR',
-    status: 'Aktiv',
-    budget: '€1.100',
-  },
-  {
-    id: 4,
-    name: 'Sarah Weber',
-    nr: '004',
-    abteilung: 'Marketing',
-    status: 'Aktiv',
-    budget: '€875',
-  },
-  {
-    id: 5,
-    name: 'Thomas Becker',
-    nr: '005',
-    abteilung: 'Finanzen',
-    status: 'Aktiv',
-    budget: '€1.200',
-  },
-];
-
-// Reports data with long filenames for testing ellipsis
-const reports = [
-  { id: '1', date: '01.04.', month: 'April', createdDate: '01.04.2026', version: 'v2.3', fileType: 'PDF', fileName: 'Monatsbericht April' },
-  { id: '2', date: '31.03.', month: 'März', createdDate: '31.03.2026', version: 'v2.2', fileType: 'Excel', fileName: 'Quartalsübersicht Q1' },
-  { id: '3', date: '28.02.', month: 'Februar', createdDate: '28.02.2026', version: 'v2.1', fileType: 'PDF', fileName: 'Monatsbericht Februar' },
-  { id: '4', date: '31.01.', month: 'Januar', createdDate: '31.01.2026', version: 'v2.0', fileType: 'Excel', fileName: 'Jahresübersicht 2025' },
-  { id: '5', date: '15.01.', month: 'Januar', createdDate: '15.01.2026', version: 'v1.9', fileType: 'PDF', fileName: 'Mitarbeiter-Export 2025' },
-];
+// Vorschau auf der Übersichtsseite — gleiche Quelle wie "Mitarbeiter" und "Reports"
+const employees = mockEmployees.slice(0, 5);
+const reports = mockReports.slice(0, 5);
 
 export function Dashboard() {
 
@@ -84,11 +42,11 @@ export function Dashboard() {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: page } }));
   };
 
-  const handleEmployeeEdit = (employeeId: number) => {
+  const handleEmployeeEdit = (employeeId: string) => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'mitarbeiter-edit' } }));
   };
 
-  const handleEmployeeDetails = (employeeId: number) => {
+  const handleEmployeeDetails = (employeeId: string) => {
     window.dispatchEvent(new CustomEvent('sidebar-navigate', { detail: { itemId: 'mitarbeiter-edit' } }));
   };
 
@@ -290,11 +248,11 @@ export function Dashboard() {
                   const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px' };
                   return (
                     <React.Fragment key={employee.id}>
-                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.nr}</div>
+                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.personnelNumber}</div>
                       <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.name}</div>
-                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.abteilung}</div>
-                      <div style={c}><StatusBadge status={employee.status} type={employee.status === 'Aktiv' ? 'success' : 'inactive'} /></div>
-                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.budget}</div>
+                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{employee.department}</div>
+                      <div style={c}><StatusBadge status={employee.status === 'aktiv' ? 'Aktiv' : 'Inaktiv'} type={employee.status === 'aktiv' ? 'success' : 'inactive'} /></div>
+                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">€{employee.budgetMonth.toLocaleString('de-DE')}</div>
                       <div style={{ ...c, gap: '8px', flexShrink: 0 }}>
                         <button onClick={(e) => { e.stopPropagation(); handleEmployeeDetails(employee.id); }} className="bg-[#0F429F] text-white px-3 h-8 rounded-full text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1 whitespace-nowrap">
                           <Eye size={14} />Details
@@ -338,8 +296,8 @@ export function Dashboard() {
           {/* Table */}
           <div className="px-4 md:px-6 lg:px-8 py-6">
             <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.7fr) minmax(0,0.7fr) minmax(0,1.5fr) minmax(0,0.6fr) minmax(0,0.7fr) minmax(0,1.2fr) minmax(210px,1.5fr)', minWidth: '900px' }}>
-                {['Datum','Monat','Erstellungsdatum','Version','Dateityp','Dateiname','Aktionen'].map(h => (
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,0.5fr) minmax(0,0.8fr) minmax(0,1.4fr) minmax(0,0.6fr) minmax(0,1.4fr) minmax(220px,1.5fr)', minWidth: '800px' }}>
+                {['Jahr','Monat','Erstellungsdatum','Version','Dateiname','Aktionen'].map(h => (
                   <div key={h} className="text-white font-bold text-xs uppercase tracking-wide" style={{ background: '#273A5F', height: '48px', display: 'flex', alignItems: 'center', padding: '0 24px' }}>{h}</div>
                 ))}
                 {reports.map((report, index) => {
@@ -347,21 +305,19 @@ export function Dashboard() {
                   const c: React.CSSProperties = { background: bg, borderBottom: '1px solid #E5E7EB', height: '56px', display: 'flex', alignItems: 'center', padding: '0 24px' };
                   return (
                     <React.Fragment key={report.id}>
-                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.date}</div>
-                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.month}</div>
+                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.year}</div>
+                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{monthNames[report.month - 1]}</div>
                       <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.createdDate}</div>
                       <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000]">{report.version}</div>
-                      <div style={{ ...c, gap: '6px' }}>
+                      <div style={{ ...c, gap: '8px', overflow: 'hidden' }}>
                         {report.fileType === 'PDF' ? (
                           <FileText className="w-4 h-4 text-red-500 flex-shrink-0" />
                         ) : (
                           <FileSpreadsheet className="w-4 h-4 text-green-600 flex-shrink-0" />
                         )}
-                        <span className="text-sm text-[#000000]">{report.fileType}</span>
+                        <span className="text-sm text-[#000000] truncate" title={report.fileName}>{report.fileName}</span>
                       </div>
-                      <div style={{ ...c, overflow: 'hidden' }} className="text-sm text-[#000000] truncate" title={report.fileName}>{report.fileName}</div>
                       <div style={{ ...c, gap: '6px', flexShrink: 0 }}>
-                        <button className="bg-[#0F429F] text-white px-3 h-8 rounded-full text-sm hover:bg-[#0d3680] transition-colors flex items-center gap-1 whitespace-nowrap"><Eye size={14} />Ansehen</button>
                         <button className="bg-red-500 text-white px-3 h-8 rounded-full text-sm hover:bg-red-600 transition-colors flex items-center gap-1 whitespace-nowrap"><FileText size={14} />PDF</button>
                         <button className="bg-green-600 text-white px-3 h-8 rounded-full text-sm hover:bg-green-700 transition-colors flex items-center gap-1 whitespace-nowrap"><FileSpreadsheet size={14} />Excel</button>
                       </div>

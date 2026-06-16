@@ -34,9 +34,9 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'mittagessen': {
     category: 'cash',
     name: 'Mittagessen',
-    description: 'Mit dem Mittagessen-Benefit erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird automatisch über die Riso App geprüft, und der Betrag landet mit dem nächsten Gehalt auf dem Konto. Das Maximum liegt bei 7,67 € pro Arbeitstag — bis zu 115 € im Monat.',
+    description: 'Mit dem Benefit Mittagessen erstattest du deinen Mitarbeitern ihre Mahlzeiten am Arbeitstag — ob Restaurant, Supermarkt oder Lieferdienst. Jeder Beleg wird über die Riso-App geprüft und der Betrag wird mit der nächsten Gehaltsabrechnung erstattet. Das Maximum liegt bei bis zu 115 € im Monat — 7,67 € pro Arbeitstag.',
     taxInfo: {
-      steuer: '25 % Pauschalsteuer auf 4,57 € pro Mahlzeit',
+      steuer: 'Effektiv 5 bis 7 % Pauschalsteuer',
       sv: 'Sozialversicherungsfrei',
     },
   },
@@ -44,7 +44,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     category: 'cash',
     maxBudgetPerEmployee: 50,
     name: 'Internetzuschuss',
-    description: 'Mit dem Internetzuschuss übernimmst du die privaten Internetkosten deiner Mitarbeiter — bei jedem Anbieter, egal ob DSL, Glasfaser oder Mobilfunk. Deine Mitarbeiter reichen ihre monatliche Rechnung in der Riso App ein und bekommen bis zu 50€ direkt ausgezahlt. Ein unkomplizierter Benefit, der jeden Monat spürbar ist.',
+    description: 'Mit dem Internetzuschuss übernimmst du die privaten Internetkosten deiner Mitarbeiter — bei jedem Anbieter, egal ob DSL, Glasfaser oder Mobilfunk. Deine Mitarbeiter reichen ihre monatliche Rechnung in der Riso-App ein und bekommen bis zu 50€ direkt ausgezahlt. Ein unkomplizierter Benefit, der jeden Monat spürbar ist.',
     taxInfo: {
       steuer: 'Steuerfrei bis 50 €/Monat',
       sv: 'Sozialversicherungsfrei',
@@ -53,7 +53,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'kindergarten': {
     category: 'cash',
     name: 'Kindergartenzuschuss',
-    description: 'Mit dem Kindergartenzuschuss übernimmst du die Betreuungskosten deiner Mitarbeiter mit Kindern — Kita, Krippe, Tagesmutter oder Kindergarten, alles möglich. Es gibt keinen Höchstbetrag: du erstattest die tatsächlichen Kosten, solange das Kind noch nicht schulpflichtig ist. Mitarbeiter reichen ihre monatliche Betreuungsrechnung einfach in der Riso App ein.',
+    description: 'Mit dem Kindergartenzuschuss übernimmst du die Betreuungskosten deiner Mitarbeiter mit Kindern — Kita, Krippe, Tagesmutter oder Kindergarten, alles möglich. Es gibt keinen Höchstbetrag: du erstattest die tatsächlichen Kosten, solange das Kind noch nicht schulpflichtig ist. Mitarbeiter reichen ihre monatliche Betreuungsrechnung einfach in der Riso-App ein.',
     taxInfo: {
       steuer: 'Steuerfrei — kein Höchstbetrag',
       sv: 'Sozialversicherungsfrei',
@@ -72,7 +72,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     category: 'cash',
     isYearlyBudget: true,
     name: 'Erholungsbeihilfe',
-    description: 'Mit der Erholungsbeihilfe schenkst du deinen Mitarbeitern einmal im Jahr einen Urlaubszuschuss — bis zu 156€ pro Mitarbeiter, plus 104€ für den Ehepartner und 52€ pro Kind. Deine Mitarbeiter reichen einen Urlaubsnachweis in der Riso App ein und bekommen den Betrag mit dem nächsten Gehalt. Einmal im Jahr, minimaler Aufwand, maximale Wirkung.',
+    description: 'Mit der Erholungsbeihilfe schenkst du deinen Mitarbeitern einmal im Jahr einen Urlaubszuschuss — bis zu 156€ pro Mitarbeiter, plus 104€ für den Ehepartner und 52€ pro Kind. Deine Mitarbeiter reichen einen Urlaubsnachweis in der Riso-App ein und bekommen den Betrag mit dem nächsten Gehalt. Einmal im Jahr, minimaler Aufwand, maximale Wirkung.',
     taxInfo: {
       steuer: '25 % Pauschalsteuer wird vom Arbeitgeber übernommen',
       sv: 'Sozialversicherungsfrei',
@@ -91,7 +91,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'danke-bonus': {
     category: 'cash',
     name: 'Danke-Bonus',
-    description: 'Mit dem Danke-Bonus kannst du außergewöhnliche Leistungen gezielt anerkennen — flexibel, individuell, wann immer du willst. Du legst Betrag und Anlass selbst fest, Riso schaltet den Gutschein direkt in der Riso App des Mitarbeiters frei. Kein fixer Rhythmus, kein Bürokratieaufwand — nur echte Wertschätzung, wenn sie verdient ist.',
+    description: 'Mit dem Danke-Bonus kannst du außergewöhnliche Leistungen gezielt anerkennen — flexibel, individuell, wann immer du willst. Du legst Betrag und Anlass selbst fest, Riso schaltet den Gutschein direkt in der Riso-App des Mitarbeiters frei. Kein fixer Rhythmus, kein Bürokratieaufwand — nur echte Wertschätzung, wenn sie verdient ist.',
     taxInfo: {
       steuer: '30 % Pauschalsteuer wird vom Arbeitgeber übernommen',
       sv: 'Sozialversicherungspflichtig',
@@ -111,7 +111,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'oepnv': {
     category: 'cash',
     name: 'ÖPNV-Ticket',
-    description: 'Mit dem ÖPNV-Ticket übernimmst du die Kosten für Bus und Bahn deiner Mitarbeiter — ganz oder anteilig, ohne Höchstbetrag. Ideal für das Deutschlandticket: du legst einen festen Monatsbetrag fest, deine Mitarbeiter reichen ihr Ticket in der Riso App ein. Hinweis: nicht kombinierbar mit dem Fahrtkostenzuschuss — pro Mitarbeiter eine Option wählen.',
+    description: 'Mit dem ÖPNV-Ticket übernimmst du die Kosten für Bus und Bahn deiner Mitarbeiter — ganz oder anteilig, ohne Höchstbetrag. Ideal für das Deutschlandticket: du legst einen festen Monatsbetrag fest, deine Mitarbeiter reichen ihr Ticket in der Riso-App ein. Hinweis: nicht kombinierbar mit dem Fahrtkostenzuschuss — pro Mitarbeiter eine Option wählen.',
     taxInfo: {
       steuer: 'Steuerfrei — kein Höchstbetrag',
       sv: 'Sozialversicherungsfrei',
