@@ -152,7 +152,7 @@ export function BenefitSettings({
         if (loc) {
           const locMax = parseFloat(loc.limit.replace('€/Monat', '').replace(',', '.').trim());
           if (!isNaN(locMax) && numValue > locMax) {
-            setAssignError(`Budget überschreitet das Standort-Budget (max. ${loc.limit})`);
+            setAssignError('Budget überschreitet das Standortbudget.');
             return;
           }
         }
@@ -360,7 +360,7 @@ export function BenefitSettings({
                     </p>
                     <div className="flex flex-col gap-3">
                       {[
-                        { step: '1', title: 'Standort & Budget', text: 'Standorte aktivieren und Budget automatisch berechnen lassen' },
+                        { step: '1', title: 'Standort & Budget', text: 'Standorte aktivieren und Budget festlegen' },
                         { step: '2', title: 'Mitarbeiter zuweisen', text: 'Den Benefit den richtigen Mitarbeitern zuweisen — erst dann haben sie Zugriff' },
                         { step: '3', title: 'Fertig', text: 'Riso übernimmt Belegprüfung und monatliche Berichte' },
                       ].map(({ step, title, text }) => (
@@ -383,7 +383,7 @@ export function BenefitSettings({
                       {[
                         { step: '1', title: 'Essen kaufen', text: 'Restaurant, Supermarkt, Lieferdienst — beliebig' },
                         { step: '2', title: 'Beleg in der Riso-App hochladen', text: 'In der Riso-App fotografieren & einreichen' },
-                        { step: '3', title: 'Geld erhalten', text: 'Bis zu 115 € / Monat steuerfrei aufs Konto' },
+                        { step: '3', title: 'Geld erhalten', text: 'Bis zu 115,05 € / Monat steuerfrei aufs Konto' },
                       ].map(({ step, title, text }) => (
                         <div key={step} className="flex items-start gap-3 bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-3">
                           <span className="flex items-center justify-center rounded-full bg-[#273A5F] text-white text-[15px] font-bold flex-shrink-0 mt-0.5" style={{ width: '20px', height: '20px' }}>{step}</span>
@@ -412,7 +412,7 @@ export function BenefitSettings({
                   {[
                     { icon: '/assets/essen-icons/belegprinzip/beleg-kaufen.svg', label: 'Essen kaufen', sub: 'Restaurant, Supermarkt, Lieferdienst' },
                     { icon: '/assets/essen-icons/belegprinzip/app-hochladen.svg', label: 'In der Riso-App hochladen', sub: 'Foto machen & einreichen' },
-                    { icon: '/assets/essen-icons/belegprinzip/riso-prueft.svg', label: 'Riso prüft', sub: 'Automatisch & regelkonform' },
+                    { icon: '/assets/essen-icons/belegprinzip/riso-prueft.svg', label: 'Riso prüft', sub: 'Regelkonform' },
                     { icon: '/assets/essen-icons/belegprinzip/erstattung.svg', label: 'Erstattung', sub: 'Direkt aufs Konto mit Gehalt' },
                   ].map((s, i, arr) => (
                     <div key={s.label} className="flex items-center gap-3 flex-1">
@@ -1073,7 +1073,7 @@ export function BenefitSettings({
                   },
                   {
                     title: 'Essenszuschuss: Das Wichtigste in Kürze',
-                    summary: 'Der Staat fördert das arbeitstägliche Mittagessen mit bis zu 7,67 € pro Tag, an maximal 15 Tagen im Monat. Das ergibt bis zu 115 € pro Monat — steuerfrei und direkt erstattet.',
+                    summary: 'Der Staat fördert das arbeitstägliche Mittagessen mit bis zu 7,67 € pro Tag, an maximal 15 Tagen im Monat. Das ergibt bis zu 115,05 € pro Monat — steuerfrei und direkt erstattet.',
                     url: 'https://hilfe.riso-app.de/portal/de/kb/articles/essenszuschuss-das-wichtigste-in-kürze',
                   },
                   {
