@@ -62,7 +62,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'commuting': {
     category: 'cash',
     name: 'Fahrkostenzuschuss',
-    description: 'Mit dem Fahrtkostenzuschuss unterstützt du deine Mitarbeiter auf dem Weg zur Arbeit — egal ob Auto, Fahrrad oder zu Fuß. Der Betrag berechnet sich automatisch aus Entfernung und Arbeitstagen: 0,38 € pro Kilometer (ab dem 1. Kilometer, einheitlicher Satz seit 01.01.2026). Hinweis: nicht kombinierbar mit dem ÖPNV-Ticket — pro Mitarbeiter eine Option wählen.',
+    description: 'Mit dem Fahrtkostenzuschuss unterstützt du deine Mitarbeiter auf dem Weg zur Arbeit — egal ob Auto, Fahrrad oder zu Fuß. Der Betrag berechnet sich aus Entfernung und Arbeitstagen: 0,38 € pro Kilometer (ab dem 1. Kilometer, einheitlicher Satz seit 01.01.2026). Hinweis: nicht kombinierbar mit dem ÖPNV-Ticket — pro Mitarbeiter eine Option wählen.',
     taxInfo: {
       steuer: '15 % Pauschalsteuer wird vom Arbeitgeber übernommen',
       sv: 'Sozialversicherungsfrei',
@@ -82,7 +82,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     category: 'voucher',
     maxBudgetPerEmployee: 50,
     name: 'Sachbezug',
-    description: 'Mit dem Sachbezug bekommt jeder Mitarbeiter monatlich einen Gutschein bis zu 50€ — aus unserem Partnernetzwerk mit einer großen Auswahl an Shops, Restaurants und Freizeitangeboten. Wählt ein Mitarbeiter nichts aus, greift automatisch sein hinterlegter Standard-Gutschein — so verfällt kein Budget. Kein Beleg, kein Aufwand, jeden Monat ein sichtbarer Benefit.',
+    description: 'Mit dem Sachbezug bekommt jeder Mitarbeiter monatlich einen Gutschein bis zu 50€ — aus unserem Partnernetzwerk mit einer großen Auswahl an Shops, Restaurants und Freizeitangeboten. Wählt ein Mitarbeiter nichts aus, greift sein hinterlegter Standard-Gutschein — so verfällt kein Budget. Kein Beleg, kein Aufwand, jeden Monat ein sichtbarer Benefit.',
     taxInfo: {
       steuer: 'Steuerfrei bis 50 €/Monat',
       sv: 'Sozialversicherungsfrei',
@@ -102,7 +102,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     isYearlyBudget: true,
     maxBudgetPerEmployee: 60,
     name: 'Geburtstagsgutschein',
-    description: 'Mit dem Geburtstagsgutschein überraschst du jeden Mitarbeiter automatisch im Monat seines Geburtstags mit einem Gutschein bis zu 60€. Riso schaltet den Gutschein ohne dein Zutun frei — du musst nichts planen, nichts manuell auslösen. Ein kleines Zeichen, das ankommt, und das kein einziges Mal vergessen wird.',
+    description: 'Mit dem Geburtstagsgutschein überraschst du jeden Mitarbeiter im Monat seines Geburtstags mit einem Gutschein bis zu 60€. Riso schaltet den Gutschein ohne dein Zutun frei — du musst nichts planen, nichts manuell auslösen. Ein kleines Zeichen, das ankommt und das kein einziges Mal vergessen wird.',
     taxInfo: {
       steuer: '25 % Pauschalsteuer wird vom Arbeitgeber übernommen',
       sv: 'Sozialversicherungsfrei',
@@ -130,7 +130,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
   'bav': {
     category: 'insurance',
     name: 'BAV',
-    description: 'Mit der Betrieblichen Altersvorsorge unterstützt du deine Mitarbeiter beim Aufbau ihrer Rente — mit einem monatlichen Zuschuss direkt in ihren Versicherungsvertrag. Als Arbeitgeber bist du gesetzlich zu mindestens 15% Zuschuss verpflichtet. Riso übernimmt die Abwicklung und leitet die Beiträge automatisch weiter.',
+    description: 'Mit der Betrieblichen Altersvorsorge unterstützt du deine Mitarbeiter beim Aufbau ihrer Rente — mit einem monatlichen Zuschuss direkt in ihren Versicherungsvertrag. Als Arbeitgeber bist du gesetzlich zu mindestens 15% Zuschuss verpflichtet. Riso übernimmt die Abwicklung und leitet die Beiträge weiter.',
     taxInfo: {
       steuer: 'Steuerfrei bis zu 4 % der Beitragsbemessungsgrenze',
       sv: 'Sozialversicherungsfrei bis zu 4 % der Beitragsbemessungsgrenze',
