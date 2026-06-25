@@ -61,10 +61,10 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
 
   // Locations
   const [locations, setLocations] = useState<Location[]>([
-    { id: '1', name: 'München', limit: '10€/Monat', employeeCount: 34, enabled: isEditMode },
-    { id: '2', name: 'Heidelsheim', limit: '10€/Monat', employeeCount: 15, enabled: isEditMode },
-    { id: '3', name: 'Berlin', limit: '8€/Monat', employeeCount: 8, enabled: isEditMode },
-    { id: '4', name: 'Varnheim', limit: '10€/Monat', employeeCount: 5, enabled: false },
+    { id: '1', name: 'München', limit: '10 €/Monat', employeeCount: 34, enabled: isEditMode },
+    { id: '2', name: 'Heidelsheim', limit: '10 €/Monat', employeeCount: 15, enabled: isEditMode },
+    { id: '3', name: 'Berlin', limit: '8 €/Monat', employeeCount: 8, enabled: isEditMode },
+    { id: '4', name: 'Varnheim', limit: '10 €/Monat', employeeCount: 5, enabled: false },
   ]);
 
   // Usage Statistics
@@ -154,7 +154,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
           <AlertCircle className="text-[#F44336] mt-0.5" size={20} />
           <div className="flex-1">
             <p className="text-[#D32F2F] font-medium text-[14px]">Fehler beim Speichern</p>
-            <p className="text-[#D32F2F] text-[13px]">Bitte versuchen Sie es später erneut.</p>
+            <p className="text-[#D32F2F] text-[13px]">Bitte versuche es später erneut.</p>
           </div>
           <button onClick={() => setHasErrors(false)} className="text-[#D32F2F]">
             <X size={20} />
@@ -591,7 +591,7 @@ export function BenefitFormComplete({ mode = 'Create', benefitId }: BenefitFormC
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
             <h3 className="text-[#273A5F] text-[18px] mb-4">
-              Budget bearbeiten — {basicInfo.name} — {editingLocation.name}
+              Budget bearbeiten, {basicInfo.name}, {editingLocation.name}
             </h3>
 
             <div className="mb-4">

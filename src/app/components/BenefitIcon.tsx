@@ -21,14 +21,17 @@ type BenefitIconProps = {
 // Mapping between benefit names and image assets
 const benefitIconMap: Record<string, string> = {
   'Mittagessen': mittagessen,
-  '50€-Sachbezug': sachbezug,
+  '50 €-Sachbezug': sachbezug,
   'Sachbezug': sachbezug,
   'Danke-Bonus': dankeBonus,
   'Internetzuschuss': internet,
   'Kindergartenzuschuss': kindergarten,
+  'Geburtstag': geburtstag,
   'Geburtstagsgutschein': geburtstag,
   'Erholungsbeihilfe': erholung,
+  'Erholung': erholung,
   'Fahrtkostenzuschuss': commuting,
+  'Fahrtkosten': commuting,
   'ÖPNV-Ticket-Zuschuss': oepnv,
   'BKV': bkv,
   'BKV (Betriebliche Krankenversicherung)': bkv,

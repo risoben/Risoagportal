@@ -9,17 +9,17 @@ type BenefitType = {
 };
 
 const benefitTypes: BenefitType[] = [
-  { id: 'mittagessen', name: 'Mittagessen', description: 'Bis 100€/Monat' },
-  { id: 'sachbezug', name: 'Sachbezug', description: 'Bis 50€/Monat' },
-  { id: 'danke-bonus', name: 'Danke-Bonus', description: 'Cash Benefit - Variable Prämie' },
-  { id: 'internet', name: 'Internet', description: 'Bis 50€/Monat' },
+  { id: 'mittagessen', name: 'Mittagessen', description: 'Bis 100 €/Monat' },
+  { id: 'sachbezug', name: 'Sachbezug', description: 'Bis 50 €/Monat' },
+  { id: 'danke-bonus', name: 'Danke-Bonus', description: 'Gutschein - Variable Prämie' },
+  { id: 'internet', name: 'Internet', description: 'Bis 50 €/Monat' },
   { id: 'kindergarten', name: 'Kindergarten', description: 'Variable Zuschuss' },
   { id: 'geburtstag', name: 'Geburtstag', description: 'Einmaliger Gutschein' },
-  { id: 'erholung', name: 'Erholung', description: 'Bis 156€/Jahr (jährliches Budget)' },
+  { id: 'erholung', name: 'Erholung', description: 'Bis 156 €/Jahr (jährliches Budget)' },
   { id: 'commuting', name: 'Fahrkostenzuschuss', description: 'Fahrtkostenzuschuss' },
   { id: 'oepnv', name: 'ÖPNV', description: 'Ticket-Zuschuss' },
-  { id: 'bkv', name: 'BKV', description: 'Bis 80€/Monat' },
-  { id: 'bav', name: 'BAV', description: 'Bis 150€/Monat' },
+  { id: 'bkv', name: 'BKV', description: 'Bis 80 €/Monat' },
+  { id: 'bav', name: 'BAV', description: 'Bis 150 €/Monat' },
 ];
 
 type Location = {
@@ -90,7 +90,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
 
   const handleNextToLimits = () => {
     if (selectedLocations.size === 0) {
-      alert('Bitte wählen Sie mindestens einen Standort aus');
+      alert('Bitte wähle mindestens einen Standort aus');
       return;
     }
     setStep(3);
@@ -109,7 +109,7 @@ export function BenefitAddLocation({ onClose, editMode = false, benefitId, initi
       for (const locationId of Array.from(selectedLocations)) {
         const limit = limits[locationId];
         if (!limit || parseFloat(limit) <= 0) {
-          alert('Bitte geben Sie für alle Standorte ein gültiges Budget ein');
+          alert('Bitte gib für alle Standorte ein gültiges Budget ein');
           return;
         }
       }

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="E-Bike Icon">
+  <defs>
+    <radialGradient id="orangeGlow" cx="50%" cy="46%" r="62%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="58%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </radialGradient>
+    <style>
+      .line{fill:none;stroke:#fff;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+      .thin{fill:none;stroke:#fff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <circle cx="512" cy="512" r="512" fill="url(#orangeGlow)"/>
+
+  <!-- wheels -->
+  <circle class="line" cx="260" cy="580" r="146"/>
+  <circle class="line" cx="770" cy="580" r="146"/>
+
+  <!-- bike frame -->
+  <g class="line">
+    <path d="M260 580L390 370"/>
+    <path d="M390 370L452 580"/>
+    <path d="M452 580L650 370"/>
+    <path d="M650 370L770 580"/>
+    <path d="M390 370H650"/>
+    <path d="M260 580L452 580"/>
+    <path d="M452 580L386 370"/>
+    <circle cx="465" cy="596" r="44"/>
+    <path d="M465 596l40 49"/>
+    <path d="M497 665h49"/>
+  </g>
+
+  <!-- saddle and handlebar -->
+  <g class="line">
+    <path d="M300 293c36 0 58 15 92 15h47"/>
+    <path d="M390 370l-37-82"/>
+    <path d="M650 370l-31-76"/>
+    <path d="M619 294h84c31 0 50 23 50 51 0 28-21 51-51 51h-28"/>
+  </g>
+
+  <!-- battery -->
+  <g class="line" transform="rotate(-50 545 512)">
+    <rect x="494" y="448" width="126" height="61" rx="18"/>
+    <path d="M620 468h18"/>
+    <path d="M551 462l-17 31h25l-16 30"/>
+  </g>
+
+  <!-- coins beside the bike -->
+  <g class="thin">
+    <ellipse cx="632" cy="685" rx="58" ry="24"/>
+    <path d="M574 685v75c0 13 26 24 58 24s58-11 58-24v-75"/>
+    <path d="M574 722c0 13 26 24 58 24s58-11 58-24"/>
+    <path d="M574 759c0 13 26 24 58 24s58-11 58-24"/>
+
+    <ellipse cx="726" cy="742" rx="45" ry="22"/>
+    <path d="M681 742v34c0 12 20 22 45 22s45-10 45-22v-34"/>
+  </g>
+</svg>

@@ -8,6 +8,11 @@ export type Employee = {
   budgetYear: number;
   entryDate: string;
   location: string;
+  // Profilfelder — von Benefits genutzt (Erholung: married/children · Geburtstag: birthday · Kindergarten: children).
+  // Werden später aus der API befüllt (GET /api/v1/portal/employees). birthday: DD.MM. ohne Jahr (Datenschutz).
+  married?: boolean;
+  children?: number;
+  birthday?: string;
   benefits: { benefitId: string; name: string; limit: string; period: 'Monat' | 'Jahr' }[];
 };
 
@@ -25,10 +30,13 @@ export const mockEmployees: Employee[] = [
     budgetYear: 3000,
     entryDate: '01.01.2026',
     location: 'Heddesheim',
+    married: true,
+    children: 2,
+    birthday: '14.03.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
-      { benefitId: 'erholungsbeihilfe', name: 'Erholungsbeihilfe', limit: '156€', period: 'Jahr' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50 €', period: 'Monat' },
+      { benefitId: 'erholungsbeihilfe', name: 'Erholungsbeihilfe', limit: '156 €', period: 'Jahr' },
     ],
   },
   {
@@ -41,9 +49,12 @@ export const mockEmployees: Employee[] = [
     budgetYear: 2160,
     entryDate: '15.03.2025',
     location: 'Mannheim',
+    married: false,
+    children: 0,
+    birthday: '22.07.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '130€', period: 'Monat' },
-      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '130 €', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50 €-Sachbezug', limit: '50 €', period: 'Monat' },
     ],
   },
   {
@@ -56,6 +67,9 @@ export const mockEmployees: Employee[] = [
     budgetYear: 0,
     entryDate: '10.06.2024',
     location: 'Berlin Tech GmbH',
+    married: true,
+    children: 1,
+    birthday: '05.11.',
     benefits: [],
   },
   {
@@ -68,11 +82,14 @@ export const mockEmployees: Employee[] = [
     budgetYear: 3840,
     entryDate: '20.02.2026',
     location: 'Heddesheim',
+    married: false,
+    children: 0,
+    birthday: '20.02.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
-      { benefitId: 'oepnv', name: 'ÖPNV-Ticket-Zuschuss', limit: '70€', period: 'Monat' },
-      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50 €', period: 'Monat' },
+      { benefitId: 'oepnv', name: 'ÖPNV', limit: '70 €', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50 €-Sachbezug', limit: '50 €', period: 'Monat' },
     ],
   },
   {
@@ -85,9 +102,12 @@ export const mockEmployees: Employee[] = [
     budgetYear: 2400,
     entryDate: '05.11.2025',
     location: 'München',
+    married: true,
+    children: 3,
+    birthday: '30.09.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50 €-Sachbezug', limit: '50 €', period: 'Monat' },
     ],
   },
   {
@@ -100,10 +120,13 @@ export const mockEmployees: Employee[] = [
     budgetYear: 3360,
     entryDate: '12.08.2025',
     location: 'Heddesheim',
+    married: true,
+    children: 1,
+    birthday: '12.05.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
-      { benefitId: 'fahrtkosten', name: 'Fahrtkostenzuschuss', limit: '80€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50 €', period: 'Monat' },
+      { benefitId: 'fahrtkosten', name: 'Fahrtkostenzuschuss', limit: '80 €', period: 'Monat' },
     ],
   },
   {
@@ -116,9 +139,12 @@ export const mockEmployees: Employee[] = [
     budgetYear: 2760,
     entryDate: '18.04.2026',
     location: 'Mannheim',
+    married: false,
+    children: 0,
+    birthday: '18.04.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'oepnv', name: 'ÖPNV-Ticket-Zuschuss', limit: '80€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'oepnv', name: 'ÖPNV', limit: '80 €', period: 'Monat' },
     ],
   },
   {
@@ -131,9 +157,12 @@ export const mockEmployees: Employee[] = [
     budgetYear: 2400,
     entryDate: '22.09.2025',
     location: 'München',
+    married: true,
+    children: 2,
+    birthday: '22.09.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50 €-Sachbezug', limit: '50 €', period: 'Monat' },
     ],
   },
   {
@@ -146,11 +175,14 @@ export const mockEmployees: Employee[] = [
     budgetYear: 3600,
     entryDate: '30.01.2026',
     location: 'Berlin Tech GmbH',
+    married: false,
+    children: 1,
+    birthday: '30.01.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
-      { benefitId: 'sachbezug', name: '50€-Sachbezug', limit: '50€', period: 'Monat' },
-      { benefitId: 'bkv', name: 'BKV', limit: '50€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50 €', period: 'Monat' },
+      { benefitId: 'sachbezug', name: '50 €-Sachbezug', limit: '50 €', period: 'Monat' },
+      { benefitId: 'bkv', name: 'BKV', limit: '50 €', period: 'Monat' },
     ],
   },
   {
@@ -163,10 +195,13 @@ export const mockEmployees: Employee[] = [
     budgetYear: 3120,
     entryDate: '14.07.2025',
     location: 'Heddesheim',
+    married: true,
+    children: 2,
+    birthday: '14.07.',
     benefits: [
-      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150€', period: 'Monat' },
-      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50€', period: 'Monat' },
-      { benefitId: 'kindergarten', name: 'Kindergartenzuschuss', limit: '60€', period: 'Monat' },
+      { benefitId: 'mittagessen', name: 'Mittagessen', limit: '150 €', period: 'Monat' },
+      { benefitId: 'internetzuschuss', name: 'Internetzuschuss', limit: '50 €', period: 'Monat' },
+      { benefitId: 'kindergarten', name: 'Kindergartenzuschuss', limit: '60 €', period: 'Monat' },
     ],
   },
 ];

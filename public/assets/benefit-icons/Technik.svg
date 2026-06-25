@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Technik Icon">
+  <defs>
+    <radialGradient id="orangeGlow" cx="50%" cy="46%" r="62%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="58%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </radialGradient>
+    <style>
+      .line{fill:none;stroke:#fff;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+      .thin{fill:none;stroke:#fff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <circle cx="512" cy="512" r="512" fill="url(#orangeGlow)"/>
+
+  <!-- chip pins -->
+  <g class="line">
+    <path d="M334 377H260"/>
+    <circle cx="235" cy="377" r="25"/>
+    <path d="M334 500H260"/>
+    <circle cx="235" cy="500" r="25"/>
+    <path d="M334 623H260"/>
+    <circle cx="235" cy="623" r="25"/>
+
+    <path d="M690 377H764"/>
+    <circle cx="789" cy="377" r="25"/>
+    <path d="M690 500H764"/>
+    <circle cx="789" cy="500" r="25"/>
+    <path d="M690 623H764"/>
+    <circle cx="789" cy="623" r="25"/>
+
+    <path d="M410 332V258"/>
+    <circle cx="410" cy="233" r="25"/>
+    <path d="M512 332V258"/>
+    <circle cx="512" cy="233" r="25"/>
+    <path d="M614 332V258"/>
+    <circle cx="614" cy="233" r="25"/>
+
+    <path d="M410 690V764"/>
+    <circle cx="410" cy="789" r="25"/>
+    <path d="M512 690V764"/>
+    <circle cx="512" cy="789" r="25"/>
+  </g>
+
+  <!-- main processor -->
+  <rect class="line" x="334" y="332" width="356" height="358" rx="44"/>
+  <rect class="line" x="420" y="421" width="184" height="178" rx="26"/>
+
+  <!-- coin / data stack -->
+  <g class="thin">
+    <ellipse cx="682" cy="656" rx="100" ry="43"/>
+    <path d="M582 656v122c0 24 45 43 100 43s100-19 100-43V656"/>
+    <path d="M582 716c0 24 45 43 100 43s100-19 100-43"/>
+    <path d="M582 776c0 24 45 43 100 43s100-19 100-43"/>
+  </g>
+</svg>

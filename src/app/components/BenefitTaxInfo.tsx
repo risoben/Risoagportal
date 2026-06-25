@@ -6,6 +6,7 @@ interface BenefitTaxInfoProps {
 export function BenefitTaxInfo({ steuer, sv }: BenefitTaxInfoProps) {
   const svLower = sv.toLowerCase();
   const svFrei = svLower.startsWith('sv-frei') || svLower.startsWith('sozialversicherungsfrei');
+  const steuerFrei = steuer.toLowerCase().includes('steuerfrei');
   // Korrekte Lohnsteuer-Terminologie: "Sozialversicherungsfrei/-pflichtig" → "Abgabenfrei/-pflichtig"
   const svLabel = sv
     .replace(/Sozialversicherungsfrei/i, 'Abgabenfrei')
@@ -22,9 +23,26 @@ export function BenefitTaxInfo({ steuer, sv }: BenefitTaxInfoProps) {
           <p className="text-[16px] font-bold text-[#273A5F] uppercase tracking-wide mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>
             Steuer
           </p>
-          <p className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
-            {steuer}
-          </p>
+          {steuerFrei ? (
+            <span
+              className="inline-flex items-center gap-1.5 text-[13px] font-medium px-3 py-1 rounded-full"
+              style={{
+                background: '#E8F5E9',
+                color: '#2E7D32',
+                border: '1px solid #A5D6A7',
+                fontFamily: 'Roboto, sans-serif',
+              }}
+            >
+              Steuerfrei
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+          ) : (
+            <p className="text-[13px] text-[#333333]" style={{ fontFamily: 'Roboto, sans-serif', lineHeight: '1.6' }}>
+              {steuer}
+            </p>
+          )}
         </div>
         <div className="bg-[#F9FAFB] border border-[#E0E0E0] rounded-lg p-4">
           <p className="text-[16px] font-bold text-[#273A5F] uppercase tracking-wide mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>

@@ -18,7 +18,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'mittagessen',
     name: 'Mittagessen',
-    limit: '100€/Monat',
+    limit: '100 €/Monat',
     status: 'active',
     locations: ['München', 'Heddesheim'],
     description: 'Täglicher Zuschuss für Mittagessen in der Kantine oder bei Restaurants.',
@@ -26,7 +26,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'internet',
     name: 'Internet',
-    limit: '50€/Monat',
+    limit: '50 €/Monat',
     status: 'active',
     locations: ['München'],
     description: 'Monatlicher Zuschuss für Internetkosten im Home Office.',
@@ -34,15 +34,15 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'kindergarten',
     name: 'Kindergarten',
-    limit: '150€/Monat',
+    limit: '150 €/Monat',
     status: 'inactive',
     locations: ['München', 'Berlin', 'Heddesheim'],
     description: 'Zuschuss für Kindergartenkosten.',
   },
   {
     id: 'commuting',
-    name: 'Fahrkostenzuschuss',
-    limit: '80€/Monat',
+    name: 'Fahrtkosten',
+    limit: '80 €/Monat',
     status: 'active',
     locations: ['München', 'Viernheim'],
     description: 'Zuschuss für Fahrtkosten zwischen Wohnung und Arbeitsplatz.',
@@ -50,7 +50,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'erholung',
     name: 'Erholung',
-    limit: '156€/Jahr',
+    limit: '156 €/Jahr',
     status: 'active',
     locations: ['München', 'Heddesheim', 'Berlin'],
     description: 'Jährlicher Zuschuss für Erholung und Entspannung.',
@@ -58,7 +58,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'sachbezug',
     name: 'Sachbezug',
-    limit: '50€/Monat',
+    limit: '50 €/Monat',
     status: 'active',
     locations: ['Alle'],
     description: 'Sachlicher Zuschuss für Arbeitsmittel.',
@@ -66,7 +66,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'danke-bonus',
     name: 'Danke-Bonus',
-    limit: '100€/Monat',
+    limit: '100 €/Monat',
     status: 'active',
     locations: ['Alle'],
     description: 'Variable Prämie für besondere Leistungen.',
@@ -74,7 +74,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'geburtstag',
     name: 'Geburtstag',
-    limit: '50€',
+    limit: '50 €',
     status: 'active',
     locations: ['Alle'],
     description: 'Gutschein zum Geburtstag.',
@@ -82,7 +82,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'oepnv',
     name: 'ÖPNV',
-    limit: '70€/Monat',
+    limit: '70 €/Monat',
     status: 'active',
     locations: ['München', 'Berlin'],
     description: 'Zuschuss für öffentliche Verkehrsmittel.',
@@ -90,7 +90,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'bkv',
     name: 'BKV',
-    limit: '80€/Monat',
+    limit: '80 €/Monat',
     status: 'inactive',
     locations: ['Alle'],
     description: 'Betriebliche Krankenversicherung.',
@@ -98,7 +98,7 @@ const managedBenefits: ManagedBenefit[] = [
   {
     id: 'bav',
     name: 'BAV',
-    limit: '150€/Monat',
+    limit: '150 €/Monat',
     status: 'active',
     locations: ['Alle'],
     description: 'Betriebliche Altersvorsorge.',
@@ -128,7 +128,7 @@ export function BenefitsManagement() {
       'commuting': 'cash',
       'erholung': 'cash',
       'sachbezug': 'other',
-      'danke-bonus': 'cash',
+      'danke-bonus': 'other',
       'geburtstag': 'other',
       'oepnv': 'cash',
       'bkv': 'insurance',

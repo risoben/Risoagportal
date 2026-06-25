@@ -17,10 +17,10 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     headline: 'Für jeden Lifestyle und jede Essensgewohnheit geeignet.',
     what: 'Finanzielle Unterstützung für deine Mittagspause oder Mahlzeiten am Arbeitsplatz.',
     vorteile: [
-      'Bis 7,67€ pro Tag',
+      'Bis 7,67 € pro Tag',
       'Steuerfreier Zuschuss',
       'Einfach Kassenbon hochladen',
-      'Monatlich bis zu 153€',
+      'Monatlich bis zu 115,05 €',
     ],
     howItWorks: [
       'Beleg speichern',
@@ -31,9 +31,9 @@ const benefitInfoData: Record<string, BenefitInfo> = {
   internetzuschuss: {
     id: 'internetzuschuss',    name: 'Internetzuschuss',
     headline: 'In jede Situation anwendbar und bei jedem Anbieter möglich.',
-    what: 'Zuschuss zu deinen Internet- und Mobilfunkkosten — egal ob Zuhause oder unterwegs.',
+    what: 'Zuschuss zu deinen Internet- und Mobilfunkkosten, egal ob Zuhause oder unterwegs.',
     vorteile: [
-      'Bis 50€ pro Monat',
+      'Bis 50 € pro Monat',
       'Steuerfreier Zuschuss',
       'Bei jedem Anbieter nutzbar',
       'Flexibel einsetzbar',
@@ -48,7 +48,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     headline: 'Für Urlaubswünsche und Erholungsbedürfnisse.',
     what: 'Finanzielle Unterstützung für deinen wohlverdienten Urlaub.',
     vorteile: [
-      'Bis 156€ pro Jahr',
+      'Bis 156 € pro Jahr',
       'Für Hotelaufenthalte und Reisen',
       'Steuerfreier Zuschuss',
       'Auch für Familie (Ehepartner, Kinder)',
@@ -87,14 +87,14 @@ const benefitInfoData: Record<string, BenefitInfo> = {
       'Belege hochladen',
       'Monatlich erstattet',
     ],
-    wichtig: 'Entweder-oder mit ÖPNV-Ticket — du wählst eine Option',
+    wichtig: 'Entweder-oder mit ÖPNV, du wählst eine Option',
   },
   oepnv: {
-    id: 'oepnv',    name: 'ÖPNV-Ticket-Zuschuss',
+    id: 'oepnv',    name: 'ÖPNV',
     headline: 'Deutschlandticket und weitere ÖPNV Fahrten.',
     what: 'Zuschuss für deine umweltfreundliche Anreise mit öffentlichen Verkehrsmitteln.',
     vorteile: [
-      'Bis zu 100€ pro Monat',
+      'Kein Höchstbetrag',
       'Steuerfreier Zuschuss',
       'Nachhaltig und entspannt',
       'Deutschlandticket möglich',
@@ -103,14 +103,14 @@ const benefitInfoData: Record<string, BenefitInfo> = {
       'ÖPNV-Ticket hochladen',
       'Automatisch erstattet',
     ],
-    wichtig: 'Entweder-oder mit Fahrtkostenzuschuss — du wählst eine Option',
+    wichtig: 'Entweder-oder mit Fahrtkostenzuschuss, du wählst eine Option',
   },
   sachbezug: {
-    id: 'sachbezug',    name: '50€-Sachbezug',
+    id: 'sachbezug',    name: '50 €-Sachbezug',
     headline: 'Gutscheine jeden Monat. Große Auswahl an Partnern.',
     what: 'Monatliche Gutschein-Auswahl für Shopping, Freizeit und mehr.',
     vorteile: [
-      '50€ pro Monat',
+      '50 € pro Monat',
       'Große Partner-Auswahl',
       'Steuerfreier Zuschuss',
       'Jederzeit nutzbar',
@@ -122,9 +122,9 @@ const benefitInfoData: Record<string, BenefitInfo> = {
     ],
   },
   geburtstag: {
-    id: 'geburtstag',    name: 'Geburtstagsgutschein / Jubiläum',
+    id: 'geburtstag',    name: 'Geburtstag',
     headline: 'Ein besonderer Tag, ein besonderes Dankeschön.',
-    what: 'Spezielle Gutscheine zu deinem Geburtstag und Jubiläum — ein persönliches Dankeschön.',
+    what: 'Spezielle Gutscheine zu deinem Geburtstag und Jubiläum, ein persönliches Dankeschön.',
     vorteile: [
       'Besondere Anerkennung',
       'Zu besonderen Anlässen',
@@ -170,7 +170,7 @@ const benefitInfoData: Record<string, BenefitInfo> = {
   bav: {
     id: 'bav',    name: 'BAV (Betriebliche Altersvorsorge)',
     headline: 'Finanzielle Sicherheit für die Zeit nach dem Arbeitsleben.',
-    what: 'Zusätzliche Altersvorsorge über deinen Arbeitgeber — für einen sorgenfreien Ruhestand.',
+    what: 'Zusätzliche Altersvorsorge über deinen Arbeitgeber, für mehr Sicherheit im Ruhestand.',
     vorteile: [
       'Aufbau zusätzlicher Rente',
       'Steuerfreier Zuschuss',

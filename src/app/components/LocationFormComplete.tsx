@@ -156,7 +156,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
       'commuting': 'cash',
       'erholung': 'cash',
       'sachbezug': 'other',
-      'danke-bonus': 'cash',
+      'danke-bonus': 'other',
       'geburtstag': 'other',
       'oepnv': 'cash',
       'bkv': 'insurance',
@@ -501,7 +501,7 @@ export function LocationFormComplete({ mode = 'Create', locationId }: LocationFo
                           <div className="group relative cursor-help">
                             <Info size={16} className="text-[#0F429F]" />
                             <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-[#273A5F] text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
-                              Jahresbudget — nicht Monatsbudget (max. 156€/Jahr)
+                              Jahresbudget — nicht Monatsbudget (max. 156 €/Jahr)
                             </div>
                           </div>
                         )}

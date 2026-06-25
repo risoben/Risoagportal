@@ -18,15 +18,15 @@ const mockBenefits: Benefit[] = [
     id: 'mittagessen',
     icon: '🍽️',
     name: 'Mittagessen',
-    limitDescription: '7,67€ pro Tag',
-    monthlyEquivalent: '(~153€/Monat)',
+    limitDescription: '7,67 € pro Tag',
+    monthlyEquivalent: '(115,05 €/Monat)',
     status: 'aktiv',
   },
   {
     id: 'sachbezug',
     icon: '🎁',
-    name: '50€-Sachbezug',
-    limitDescription: '50€ pro Monat',
+    name: '50 €-Sachbezug',
+    limitDescription: '50 € pro Monat',
     monthlyEquivalent: '',
     status: 'aktiv',
   },
@@ -34,7 +34,7 @@ const mockBenefits: Benefit[] = [
     id: 'danke',
     icon: '🙏',
     name: 'Danke-Bonus',
-    limitDescription: 'Variabel',
+    limitDescription: 'bis zu 10.000 € / Jahr',
     monthlyEquivalent: '(Anerkennung)',
     status: 'aktiv',
   },
@@ -50,7 +50,7 @@ const mockBenefits: Benefit[] = [
     id: 'internetzuschuss',
     icon: '📡',
     name: 'Internetzuschuss',
-    limitDescription: '50€ pro Monat',
+    limitDescription: '50 € pro Monat',
     monthlyEquivalent: '',
     status: 'aktiv',
   },
@@ -65,7 +65,7 @@ const mockBenefits: Benefit[] = [
   {
     id: 'geburtstag',
     icon: '🎂',
-    name: 'Geburtstagsgutschein',
+    name: 'Geburtstag',
     limitDescription: 'Variabel',
     monthlyEquivalent: '(pro Anlass)',
     status: 'aktiv',
@@ -81,15 +81,15 @@ const mockBenefits: Benefit[] = [
   {
     id: 'erholungsbeihilfe',
     icon: '🏖️',
-    name: 'Erholungsbeihilfe',
-    limitDescription: '156€ pro Jahr',
-    monthlyEquivalent: '(~13€/Monat)',
+    name: 'Erholung',
+    limitDescription: '156 € pro Jahr',
+    monthlyEquivalent: '(~13 €/Monat)',
     status: 'aktiv',
   },
   {
     id: 'fahrtkosten',
     icon: '🚗',
-    name: 'Fahrtkostenzuschuss',
+    name: 'Fahrtkosten',
     limitDescription: 'Flexibel',
     monthlyEquivalent: '(exklusiv mit ÖPNV)',
     status: 'aktiv',
@@ -97,8 +97,8 @@ const mockBenefits: Benefit[] = [
   {
     id: 'oepnv',
     icon: '🚌',
-    name: 'ÖPNV-Ticket-Zuschuss',
-    limitDescription: '50-100€/Monat',
+    name: 'ÖPNV',
+    limitDescription: '50-100 €/Monat',
     monthlyEquivalent: '(exklusiv mit Fahrtkosten)',
     status: 'aktiv',
   },
@@ -280,7 +280,7 @@ export function BenefitsOverviewSimple() {
           <div className="text-center py-12">
             <p className="text-[#666666] text-lg mb-4">Keine Benefits gefunden</p>
             <p className="text-[#999999] text-sm">
-              Passen Sie Ihre Suche oder Filter an, um Benefits anzuzeigen.
+              Passe deine Suche oder Filter an, um Benefits anzuzeigen.
             </p>
           </div>
         )}

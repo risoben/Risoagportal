@@ -61,7 +61,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
     if (maxBudget && n > maxBudget) { setBudgetError(`Überschreitet das Maximum (${maxBudget} €/Monat)`); return; }
     if (editingLoc) {
       setLocations(prev => prev.map(l => l.id === editingLoc.id ? { ...l, budgetPerEmployee: n } : l));
-      setSavedConfirm(`${editingLoc.name}: Budget gespeichert — gilt ab 1. nächsten Monat.`);
+      setSavedConfirm(`${editingLoc.name}: Budget gespeichert, gilt ab 1. nächsten Monat.`);
       setTimeout(() => setSavedConfirm(null), 4000);
     }
     setShowBudgetModal(false);
@@ -127,7 +127,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
         <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 mb-6">
           <h2 className="text-[18px] font-bold text-[#273A5F] mb-2">Budget pro Standort</h2>
           <p className="text-[13px] text-[#666666] mb-4">
-            Monatlicher Fixbetrag pro Mitarbeiter — gilt ab 1. nächsten Monat nach Änderung.
+            Monatlicher Fixbetrag pro Mitarbeiter, gilt ab 1. nächsten Monat nach Änderung.
           </p>
 
           <div
@@ -241,7 +241,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-md w-full" style={{ fontFamily: 'Roboto, sans-serif' }}>
             <h3 className="text-[18px] font-bold text-[#273A5F] mb-4">
-              Budget bearbeiten — {editingLoc.name}
+              Budget bearbeiten, {editingLoc.name}
             </h3>
             <div className="mb-4">
               <label className="block text-[13px] font-medium text-[#273A5F] mb-2">
@@ -264,7 +264,7 @@ export function BenefitStandardSettings({ benefitId }: BenefitStandardSettingsPr
               {budgetError && <p className="text-[12px] text-[#F44336] mt-1">{budgetError}</p>}
             </div>
             <p className="text-[12px] text-[#666666] mb-6">
-              Änderung gilt ab 1. nächsten Monat — wartet auf Riso-Genehmigung.
+              Änderung gilt ab 1. nächsten Monat, wartet auf Riso-Genehmigung.
             </p>
             <div className="flex gap-3 justify-end">
               <button

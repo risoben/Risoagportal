@@ -59,7 +59,7 @@ const mockBenefits: BenefitWithCategory[] = [
   // Gutschein-Benefits
   {
     id: 'commuting',
-    name: 'Fahrkostenzuschuss',
+    name: 'Fahrtkosten',
     status: 'active',
     employeeCount: 856,
     totalBudget: 3000,
@@ -397,7 +397,7 @@ export function BenefitsOverview() {
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-[#E5E7EB]">
               <h2 className="text-[#273A5F] font-bold text-xl">
-                Mitarbeiter hinzufügen — {selectedBenefit.name}
+                Mitarbeiter hinzufügen, {selectedBenefit.name}
               </h2>
               <button
                 onClick={() => setShowAddEmployeeModal(false)} className="text-[#6B7280] hover:text-[#273A5F] transition"

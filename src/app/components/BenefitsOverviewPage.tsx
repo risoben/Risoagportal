@@ -27,7 +27,7 @@ const mockBenefits: Benefit[] = [
   {
     id: 'mittagessen',
     group: 'Cash Benefits',    name: 'Mittagessen',
-    description: 'bis 7,67€/Tag',
+    description: 'bis 7,67 €/Tag',
     employees: 45,
     budgetMonth: 1250,
     usedMonth: 850,
@@ -38,7 +38,7 @@ const mockBenefits: Benefit[] = [
   {
     id: 'internetzuschuss',
     group: 'Cash Benefits',    name: 'Internetzuschuss',
-    description: 'bis 50€/Monat',
+    description: 'bis 50 €/Monat',
     employees: 38,
     budgetMonth: 950,
     usedMonth: 720,
@@ -48,8 +48,8 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'erholungsbeihilfe',
-    group: 'Cash Benefits',    name: 'Erholungsbeihilfe',
-    description: 'bis 156€/Jahr',
+    group: 'Cash Benefits',    name: 'Erholung',
+    description: 'bis 156 €/Jahr',
     employees: 28,
     budgetMonth: 650,
     usedMonth: 455,
@@ -70,7 +70,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'fahrtkosten',
-    group: 'Cash Benefits',    name: 'Fahrtkostenzuschuss',
+    group: 'Cash Benefits',    name: 'Fahrtkosten',
     description: 'exklusiv',
     employees: 34,
     budgetMonth: 1150,
@@ -81,7 +81,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'oepnv',
-    group: 'Cash Benefits',    name: 'ÖPNV-Ticket-Zuschuss',
+    group: 'Cash Benefits',    name: 'ÖPNV',
     description: 'exklusiv',
     employees: 52,
     budgetMonth: 2100,
@@ -93,7 +93,7 @@ const mockBenefits: Benefit[] = [
   // GRUPPE 2 — Sachbezüge
   {
     id: 'sachbezug',
-    group: 'Sachbezüge',    name: '50€-Sachbezug',
+    group: 'Sachbezüge',    name: '50 €-Sachbezug',
     description: 'monatlich',
     employees: 67,
     budgetMonth: 3350,
@@ -104,7 +104,7 @@ const mockBenefits: Benefit[] = [
   },
   {
     id: 'geburtstag',
-    group: 'Sachbezüge',    name: 'Geburtstagsgutschein',
+    group: 'Sachbezüge',    name: 'Geburtstag',
     description: 'Jubiläum',
     employees: 8,
     budgetMonth: 400,
@@ -222,7 +222,7 @@ export function BenefitsOverviewPage() {
           <div key={group} className="mb-8 last:mb-0">
             {/* Group Header */}
             <h2 className="text-[#000000] font-bold text-[18px] mb-4">
-              {group === 'Cash Benefits' ? 'GRUPPE 1 — Cash Benefits (Beleg-Erstattung)' : 'GRUPPE 2 — Sachbezüge (Gutschein)'}
+              {group === 'Cash Benefits' ? 'GRUPPE 1, Cash Benefits (Beleg-Erstattung)' : 'GRUPPE 2, Sachbezüge (Gutschein)'}
             </h2>
 
             {/* Benefits Table */}
@@ -325,7 +325,7 @@ export function BenefitsOverviewPage() {
           <div className="text-center py-12">
             <p className="text-[#666666] text-lg mb-4">Keine Benefits gefunden</p>
             <p className="text-[#999999] text-sm">
-              Passen Sie Ihre Filter an, um Benefits anzuzeigen.
+              Passe deine Filter an, um Benefits anzuzeigen.
             </p>
           </div>
         )}

@@ -24,89 +24,89 @@ const benefits: Benefit[] = [
   {
     id: 'mittagessen',
     name: 'Mittagessen',
-    description: 'bis 115€ / Monat',
-    limit: 'bis 115€ / Monat',
+    description: 'bis 115 € / Monat',
+    limit: 'bis 115 € / Monat',
     active: true,
     locations: ['München', 'Heddesheim'],
-    details: 'Erstattet deinen Mitarbeitern Mahlzeiten am Arbeitstag — täglich, flexibel, steuerfrei.'
+    details: 'Erstattet deinen Mitarbeitern Mahlzeiten am Arbeitstag, täglich, flexibel, steuerfrei.'
   },
   {
     id: 'internet',
-    name: 'Internetzuschuss',
-    description: 'bis 50€ / Monat',
-    limit: 'bis 50€ / Monat',
+    name: 'Internet',
+    description: 'bis 50 € / Monat',
+    limit: 'bis 50 € / Monat',
     active: true,
     locations: ['München', 'Berlin', 'Heddesheim'],
-    details: 'Du übernimmst die privaten Internetkosten deiner Mitarbeiter — monatlich, unkompliziert.'
+    details: 'Du übernimmst die privaten Internetkosten deiner Mitarbeiter, monatlich, unkompliziert.'
   },
   {
     id: 'kindergarten',
-    name: 'Kindergartenzuschuss',
+    name: 'Kindergarten',
     description: 'Tatsächliche Betreuungskosten',
     limit: 'Tatsächliche Betreuungskosten',
     active: false,
     locations: ['München'],
-    details: 'Übernahme der Kita-Kosten deiner Mitarbeiter — unbegrenzt, bis zur Einschulung.'
+    details: 'Übernahme der Kita-Kosten deiner Mitarbeiter, unbegrenzt, bis zur Einschulung.'
   },
   {
     id: 'commuting',
-    name: 'Fahrkostenzuschuss',
-    description: 'ab 0,38€ pro Kilometer',
-    limit: 'ab 0,38€ pro Kilometer',
+    name: 'Fahrtkosten',
+    description: 'ab 0,38 € pro Kilometer',
+    limit: 'ab 0,38 € pro Kilometer',
     active: true,
     locations: ['München', 'Heddesheim'],
-    details: 'Erstattung des Arbeitswegs — abhängig von Entfernung und Arbeitstagen.'
+    details: 'Erstattung des Arbeitswegs, abhängig von Entfernung und Arbeitstagen.'
   },
   {
     id: 'erholung',
-    name: 'Erholungsbeihilfe',
-    description: 'ab 156€ / Jahr',
-    limit: 'ab 156€ / Jahr',
+    name: 'Erholung',
+    description: 'ab 156 € / Jahr',
+    limit: 'ab 156 € / Jahr',
     active: true,
     locations: ['München', 'Berlin', 'Heddesheim'],
-    details: 'Jährlicher Urlaubszuschuss für Mitarbeiter und Familie — einmal im Jahr.'
+    details: 'Jährlicher Urlaubszuschuss für Mitarbeiter und Familie, einmal im Jahr.'
   },
   {
     id: 'sachbezug',
     name: 'Sachbezug',
-    description: 'bis 50€ / Monat',
-    limit: 'bis 50€ / Monat',
+    description: 'bis 50 € / Monat',
+    limit: 'bis 50 € / Monat',
     active: true,
     locations: ['München', 'Berlin'],
-    details: 'Monatlicher Gutschein aus unserem Partnernetzwerk — deine Mitarbeiter wählen selbst.'
+    details: 'Monatlicher Gutschein aus unserem Partnernetzwerk, deine Mitarbeiter wählen selbst.'
   },
   {
     id: 'danke-bonus',
     name: 'Danke-Bonus',
-    description: 'Variable Prämie',
-    limit: 'Variable Prämie',
+    description: 'bis zu 10.000 € / Jahr',
+    limit: 'bis zu 10.000 € / Jahr',
     active: true,
     locations: ['München'],
-    details: 'Flexibler Einmal-Bonus für besondere Leistungen — du entscheidest wann und wie viel.'
+    details: 'Flexibler Einmal-Bonus für besondere Leistungen, du entscheidest wann und wie viel.'
   },
   {
     id: 'geburtstag',
-    name: 'Geburtstagsgutschein',
-    description: 'bis zu 60€ / Jahr',
-    limit: 'bis zu 60€ / Jahr',
+    name: 'Geburtstag',
+    description: 'bis zu 60 € / Jahr',
+    limit: 'bis zu 60 € / Jahr',
     active: true,
     locations: ['München', 'Heddesheim'],
-    details: 'Automatischer Gutschein im Geburtstagsmonat — persönliche Wertschätzung ohne Aufwand.'
+    details: 'Automatischer Gutschein im Geburtstagsmonat, persönliche Wertschätzung ohne Aufwand.'
   },
   {
     id: 'oepnv',
-    name: 'ÖPNV-Ticket',
+    name: 'ÖPNV',
     description: 'kein gesetzliches Maximum',
     limit: 'kein gesetzliches Maximum',
     active: false,
     locations: ['Berlin'],
-    details: 'Du übernimmst das Ticket für Bus und Bahn — vollständig steuerfrei, kein Höchstbetrag.'
+    details: 'Du übernimmst das Ticket für Bus und Bahn, vollständig steuerfrei, kein Höchstbetrag.'
   },
   {
     id: 'bkv',
     name: 'BKV',
-    description: 'bis 1.000€ / Jahr',
-    limit: 'bis 1.000€ / Jahr',
+    description: 'bis 1.000 € / Jahr',
+    limit: 'bis 1.000 € / Jahr',
     active: true,
     locations: ['München'],
     details: 'Private Zusatzkrankenversicherung direkt durch dich als Arbeitgeber bezahlt.'
@@ -114,11 +114,11 @@ const benefits: Benefit[] = [
   {
     id: 'bav',
     name: 'BAV',
-    description: 'bis 676€ / Monat',
-    limit: 'bis 676€ / Monat',
+    description: 'bis 676 € / Monat',
+    limit: 'bis 676 € / Monat',
     active: false,
     locations: ['München', 'Berlin'],
-    details: 'Betriebliche Altersvorsorge für deine Mitarbeiter — monatlicher Zuschuss direkt in ihren Versicherungsvertrag, steuerlich begünstigt, von Riso vollständig abgewickelt.'
+    details: 'Betriebliche Altersvorsorge für deine Mitarbeiter, monatlicher Zuschuss direkt in ihren Versicherungsvertrag, steuerlich begünstigt, von Riso vollständig abgewickelt.'
   }
 ];
 
@@ -130,7 +130,7 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
     id: 'cash',
     name: 'Cash Benefits',
     icon: '/assets/group-icons/cash-benefits.svg',
-    benefitIds: ['mittagessen', 'internet', 'kindergarten', 'commuting', 'erholung', 'danke-bonus', 'oepnv'],
+    benefitIds: ['mittagessen', 'internet', 'kindergarten', 'commuting', 'erholung', 'oepnv'],
     intro: [
       'Prinzip: Beleg einreichen, Geld zurückbekommen.',
       'Dazu zählen z. B. Mittagessen, Internet, Fahrtkosten und Erholung.',
@@ -145,10 +145,10 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
     id: 'gutschein',
     name: 'Gutschein Benefits',
     icon: '/assets/group-icons/gutschein-benefits.svg',
-    benefitIds: ['sachbezug', 'geburtstag'],
+    benefitIds: ['sachbezug', 'geburtstag', 'danke-bonus'],
     intro: [
       'Prinzip: Gutschein erhalten, bei Partnern einlösen.',
-      'Dazu zählen der monatliche Sachbezug und der Geburtstagsgutschein.',
+      'Dazu zählen der monatliche Sachbezug, der Geburtstag und der Danke-Bonus.',
     ],
     highlights: [
       'Bis zu 50 €/Monat + 60 € zum Geburtstag steuerfrei',
@@ -159,7 +159,7 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
   {
     id: 'versicherung',
     name: 'Versicherungs Benefits',
-    icon: '/assets/group-icons/versicherung-benefits.png',
+    icon: '/assets/group-icons/versicherung-benefits.svg',
     benefitIds: ['bkv', 'bav'],
     intro: [
       'Prinzip: Arbeitgeber zahlt, Mitarbeiter sind abgesichert.',

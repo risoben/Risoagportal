@@ -391,7 +391,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                   </div>
                 </div>
                 <p className="text-[#666666] text-[12px] mb-1">Gesamtbudget</p>
-                <p className="text-[#273A5F] font-bold text-[24px]">4.200€</p>
+                <p className="text-[#273A5F] font-bold text-[24px]">4.200 €</p>
               </div>
 
               <div className="bg-white border border-[#E0E0E0] rounded-lg p-6">
@@ -401,7 +401,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                   </div>
                 </div>
                 <p className="text-[#666666] text-[12px] mb-1">Genutzt (diese Monat)</p>
-                <p className="text-[#273A5F] font-bold text-[24px]">3.100€</p>
+                <p className="text-[#273A5F] font-bold text-[24px]">3.100 €</p>
               </div>
 
               <div className="bg-white border border-[#E0E0E0] rounded-lg p-6">
@@ -411,7 +411,7 @@ export function LocationDetails({ locationId, locationName }: LocationDetailsPro
                   </div>
                 </div>
                 <p className="text-[#666666] text-[12px] mb-1">Übrig</p>
-                <p className="text-[#273A5F] font-bold text-[24px]">1.100€</p>
+                <p className="text-[#273A5F] font-bold text-[24px]">1.100 €</p>
               </div>
 
               <div className="bg-white border border-[#E0E0E0] rounded-lg p-6">

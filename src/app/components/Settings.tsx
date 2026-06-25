@@ -526,9 +526,9 @@ export function Settings() {
                         onChange={(e) => setBenefits({ ...benefits, geburtstagsgutschein: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
-                        <BenefitIcon benefitName="Geburtstagsgutschein" size={24} />
+                        <BenefitIcon benefitName="Geburtstag" size={24} />
                       </span>
-                      <span className="text-xs text-[#333333]">Geburtstagsgutschein</span>
+                      <span className="text-xs text-[#333333]">Geburtstag</span>
                     </label>
                     <label className="flex items-center cursor-pointer">
                       <input
@@ -570,9 +570,9 @@ export function Settings() {
                         onChange={(e) => setBenefits({ ...benefits, oepnvTicketZuschuss: e.target.checked })} className="w-4 h-4 rounded text-[#0F429F] border-gray-300 focus:ring-[#0F429F]"
                       />
                       <span className="ml-2 mr-1.5">
-                        <BenefitIcon benefitName="ÖPNV-Ticket-Zuschuss" size={24} />
+                        <BenefitIcon benefitName="ÖPNV" size={24} />
                       </span>
-                      <span className="text-xs text-[#333333]">ÖPNV-Ticket-Zuschuss</span>
+                      <span className="text-xs text-[#333333]">ÖPNV</span>
                     </label>
                   </div>
                 </div>

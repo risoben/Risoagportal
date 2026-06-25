@@ -71,19 +71,19 @@ export function LocationCreate() {
     const newErrors: FormErrors = {};
 
     if (!formData.locationName.trim()) {
-      newErrors.locationName = 'Bitte geben Sie einen Namen ein';
+      newErrors.locationName = 'Bitte gib einen Namen ein';
     }
 
     if (!formData.company.trim()) {
-      newErrors.company = 'Bitte geben Sie einen Firmennamen ein';
+      newErrors.company = 'Bitte gib einen Firmennamen ein';
     }
 
     if (!formData.address.trim()) {
-      newErrors.address = 'Bitte geben Sie eine Adresse ein';
+      newErrors.address = 'Bitte gib eine Adresse ein';
     }
 
     if (!formData.type) {
-      newErrors.type = 'Bitte wählen Sie einen Typ aus';
+      newErrors.type = 'Bitte wähle einen Typ aus';
     }
 
     setErrors(newErrors);

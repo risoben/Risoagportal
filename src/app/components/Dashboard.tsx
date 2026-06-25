@@ -121,7 +121,7 @@ export function Dashboard() {
             </div>
             <div style={{ paddingLeft: '96px' }}>
               <p className="text-[#666666] text-[14px] font-medium mb-1" style={{ fontFamily: 'Roboto, sans-serif' }}>Gesamtbudget</p>
-              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>1.250.000€</p>
+              <p className="text-[#273A5F] font-bold text-[32px]" style={{ fontFamily: 'Roboto, sans-serif' }}>1.250.000 €</p>
             </div>
           </button>
 

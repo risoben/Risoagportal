@@ -84,10 +84,10 @@ const mockLocations: Location[] = [
 ];
 
 const mockLocationBenefits: LocationBenefit[] = [
-  { id: '1', name: 'Mittagessen', limit: '7€/Tag', active: true },
-  { id: '2', name: 'Internetzuschuss', limit: '50€/Monat', active: true },
-  { id: '3', name: 'Mobilität', limit: '100€/Monat', active: true },
-  { id: '4', name: 'Urban Sports Club', limit: '30€/Monat', active: false },
+  { id: '1', name: 'Mittagessen', limit: '7 €/Tag', active: true },
+  { id: '2', name: 'Internetzuschuss', limit: '50 €/Monat', active: true },
+  { id: '3', name: 'Mobilität', limit: '100 €/Monat', active: true },
+  { id: '4', name: 'Urban Sports Club', limit: '30 €/Monat', active: false },
 ];
 
 const mockLocationEmployees: LocationEmployee[] = [

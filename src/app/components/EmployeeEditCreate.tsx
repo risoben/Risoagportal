@@ -61,8 +61,8 @@ export function EmployeeEditCreate({ editMode = false, employeeId }: EmployeeEdi
 
   const benefitCategories: Record<string, string> = {
     'Mittagessen': 'Cash-Benefits', 'Internet': 'Cash-Benefits', 'Kindergarten': 'Cash-Benefits',
-    'Fahrkostenzuschuss': 'Cash-Benefits', 'Erholung': 'Cash-Benefits', 'Danke-Bonus': 'Cash-Benefits', 'ÖPNV': 'Cash-Benefits',
-    'Sachbezug': 'Gutschein-Benefits', 'Geburtstag': 'Gutschein-Benefits',
+    'Fahrkostenzuschuss': 'Cash-Benefits', 'Erholung': 'Cash-Benefits', 'ÖPNV': 'Cash-Benefits',
+    'Sachbezug': 'Gutschein-Benefits', 'Geburtstag': 'Gutschein-Benefits', 'Danke-Bonus': 'Gutschein-Benefits',
     'BKV': 'Versicherungs-Benefits', 'BAV': 'Versicherungs-Benefits',
   };
 

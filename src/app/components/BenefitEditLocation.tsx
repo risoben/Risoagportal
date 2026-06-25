@@ -104,7 +104,7 @@ export function BenefitEditLocation() {
           </div>
           <div>
             <label className="text-[#999999] text-xs mb-1 block">Beschreibung</label>
-            <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Gesetzliches Tagesmaximum: 7,67€/Tag</p>
+            <p className="text-[#666666] text-sm overflow-hidden" style={{ minWidth: 0 }}>Gesetzliches Tagesmaximum: 7,67 €/Tag</p>
           </div>
         </div>
 
@@ -132,7 +132,7 @@ export function BenefitEditLocation() {
               </span>
             </div>
             <p className="text-[#666666] text-xs mt-2">
-              Basierend auf Tagesmaximum 7,67€ (max. ~153€/Monat)
+              Basierend auf Tagesmaximum 7,67 € × 15 Tage (max. 115,05 €/Monat)
             </p>
           </div>
         </div>
