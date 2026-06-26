@@ -21,7 +21,7 @@ const managedBenefits: ManagedBenefit[] = [
     limit: '100 €/Monat',
     status: 'active',
     locations: ['München', 'Heddesheim'],
-    description: 'Täglicher Zuschuss für Mittagessen in der Kantine oder bei Restaurants.',
+    description: 'Täglicher Zuschuss fürs Mittagessen – Restaurant, Supermarkt oder Lieferdienst.',
   },
   {
     id: 'internet',

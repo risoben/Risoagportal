@@ -152,8 +152,8 @@ const GROUPS: { id: GroupId; name: string; icon: string; benefitIds: string[]; i
     ],
     highlights: [
       'Bis zu 50 €/Monat + 60 € zum Geburtstag steuerfrei',
-      'Auswahl bei vielen Partnern wie Amazon, Rewe, Tankstellen etc.',
-      'Beliebt: Rewe, dm, Amazon, Tanken, Zalando',
+      'Große Auswahl im Riso-Partnernetzwerk',
+      'Über 70 Partner: Shopping, Tanken, Freizeit und mehr',
     ],
   },
   {

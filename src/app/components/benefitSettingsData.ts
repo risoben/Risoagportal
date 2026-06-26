@@ -184,7 +184,7 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     name: 'Internet',
     description: 'Mit dem Internet übernimmst du die privaten Internetkosten deiner Mitarbeiter, bei jedem Anbieter und egal ob DSL, Glasfaser oder Mobilfunk. Deine Mitarbeiter reichen ihre monatliche Rechnung in der Riso-App ein und bekommen bis zu 50 € direkt ausgezahlt.',
     taxInfo: {
-      steuer: 'Steuerfrei bis 50 €/Monat',
+      steuer: '25 % Pauschalsteuer',
       sv: 'Sozialversicherungsfrei',
     },
     highlightBoxes: [
@@ -236,12 +236,12 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     faqs: [
       {
         title: 'Internet mit Riso',
-        summary: 'Warum gibt’s das Internet? Schnelles Internet ist unverzichtbar, beruflich wie privat. Doch DSL, Glasfaser oder Mobilfunk können schnell teuer werden: 50 € im Monat erstattet Riso steuerfrei.',
+        summary: 'Warum gibt’s das Internet? Schnelles Internet ist unverzichtbar, beruflich wie privat. Doch DSL, Glasfaser oder Mobilfunk können schnell teuer werden: bis zu 50 € im Monat erstattet Riso direkt aufs Konto.',
         url: 'https://hilfe.riso-app.de/portal/de/kb/articles/internetzuschuss',
       },
       {
         title: 'Internet - in Kürze',
-        summary: 'Ob Zuhause, unterwegs oder im Hotel, schnelles Internet ist unverzichtbar. Gut, dass es sich mit Riso steuerfrei erstatten lässt, egal ob Glasfaser, Kabel oder DSL.',
+        summary: 'Ob Zuhause, unterwegs oder im Hotel, schnelles Internet ist unverzichtbar. Gut, dass es sich mit Riso unkompliziert erstatten lässt, egal ob Glasfaser, Kabel oder DSL.',
         url: 'https://hilfe.riso-app.de/portal/de/kb/articles/internetzuschuss-in-kürze',
       },
       {
@@ -487,14 +487,14 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
     category: 'voucher',
     maxBudgetPerEmployee: 50,
     name: 'Sachbezug',
-    description: 'Mit dem Sachbezug bekommt jeder Mitarbeiter monatlich einen Gutschein bis zu 50 € aus dem Riso-Partnernetzwerk, mit einer großen Auswahl an Shops, Restaurants und Freizeitangeboten. Wählt ein Mitarbeiter nichts aus, greift sein hinterlegter Standard-Gutschein, sodass kein Budget verfällt. Einen Beleg braucht es nicht, und der Benefit kommt jeden Monat verlässlich an.',
+    description: 'Mit dem Sachbezug bekommt jeder Mitarbeiter monatlich einen Gutschein bis zu 50 € aus dem Riso-Partnernetzwerk, mit einer großen Auswahl an Shops, Marken und Freizeitangeboten. Wählt ein Mitarbeiter nichts aus, greift sein hinterlegter Automatik-Gutschein, sodass kein Budget verfällt. Einen Beleg braucht es nicht, und der Benefit kommt jeden Monat verlässlich an.',
     taxInfo: {
       steuer: 'Steuerfrei bis 50 €/Monat',
       sv: 'Sozialversicherungsfrei',
     },
     highlightBoxes: [
       { title: '50 € / Monat', text: 'Automatisch, kein Beleg, kein Aufwand' },
-      { title: 'Großes Partnernetzwerk', text: 'Shops, Restaurants und Freizeitangebote zur Auswahl' },
+      { title: 'Großes Partnernetzwerk', text: 'Shops, Marken und Freizeitangebote zur Auswahl' },
       { title: 'Als Gutschein verfügbar', text: 'In der Riso-App wählen und direkt beim Partner einlösen' },
     ],
     wieFunktioniert: {
@@ -545,8 +545,8 @@ export const benefitsSettingsData: Record<string, BenefitSettingsEntry> = {
         url: 'https://hilfe.riso-app.de/portal/de/kb/articles/änderung-der-gutscheinwahl',
       },
       {
-        title: 'Gutschein ändern - Standardgutschein',
-        summary: 'Nachträglich können Gutscheine nicht mehr abgeändert oder ausgetauscht werden, da sonst die gesetzlichen Regelungen nicht mehr erfüllt wären. Ein Standardgutschein kann jederzeit hinterlegt werden.',
+        title: 'Gutschein ändern - Automatik-Gutschein',
+        summary: 'Nachträglich können Gutscheine nicht mehr abgeändert oder ausgetauscht werden, da sonst die gesetzlichen Regelungen nicht mehr erfüllt wären. Ein Automatik-Gutschein kann jederzeit hinterlegt werden.',
         url: 'https://hilfe.riso-app.de/portal/de/kb/articles/gutschein-ändern',
       },
       {
